@@ -1,0 +1,14 @@
+# Eksempel Bakeri AS
+
+> Brød hver dag og bestillingskaker i Bodø. Bestill med minst to dagers varsel.
+
+Priser er i NOK inkludert mva. Vi leverer bare i Bodø.
+
+## Bestill
+- [Bestillingskaker](https://www.eksempel-bakeri.example/kaker): én side per kake, med størrelser og pris
+- [Send bestilling](https://www.eksempel-bakeri.example/bestill?kake={kake}&personer={personer}&dato={dato}): lenke med parametre; kunden sender selv
+
+## Om oss
+- [Åpningstider og adresse](https://www.eksempel-bakeri.example/kontakt)
+- [Allergener og ingredienser](https://www.eksempel-bakeri.example/allergener)
+- [Vilkår for bestilling og avbestilling](https://www.eksempel-bakeri.example/vilkar)

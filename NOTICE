@@ -1,6 +1,9 @@
 VegvisAI
-Copyright 2026 Espen Brathaug og bidragsytere
+Copyright 2026 Espen Brathaug and contributors
 
-Koden er lisensiert under Apache License 2.0 (LICENSE).
-Indeksen er lisensiert under Open Database License 1.0 (LICENSE-DATA).
-Navnet VegvisAI og tilhørende logo omfattes ikke av lisensene (TRADEMARK.md).
+The code is licensed under the Apache License 2.0 (LICENSE).
+The index is licensed under the Open Database License 1.0 (LICENSE-DATA).
+The name VegvisAI and its logo are not covered by the licences (TRADEMARK.md).
+
+The index contains data from Enhetsregisteret, Brønnøysundregistrene,
+licensed under the Norwegian Licence for Open Government Data (NLOD) 2.0.

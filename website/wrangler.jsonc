@@ -1,0 +1,10 @@
+{
+  // VegvisAI landing page and docs (P36). Test address on Espen's private domain until launch.
+  // Access is restricted with Cloudflare Access (email login); see README.md.
+  "name": "vegvis-site",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": false,
+  "routes": [{ "pattern": "vegvis.gixer77.com", "custom_domain": true }],
+  "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  "observability": { "enabled": false }
+}

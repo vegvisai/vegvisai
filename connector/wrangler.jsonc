@@ -1,0 +1,20 @@
+{
+  // Testplattform v0 (P35). Statiske veiviser-sider + veiviser-connector (MCP) på /mcp.
+  "name": "veiviser-test",
+  "main": "src/index.js",
+  "compatibility_date": "2026-09-01",
+  "workers_dev": true,
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    "run_worker_first": ["/mcp", "/mcp/*", "/api/*", "/robots.txt", "/sitemap.xml"]
+  },
+  // Rate-limit (P39 trinn 3). Tellevindu 60 s. Se src/grense.js.
+  "ratelimits": [
+    { "name": "GRENSE_SJEKK_KLIENT", "namespace_id": "1001", "simple": { "limit": 6, "period": 60 } },
+    { "name": "GRENSE_SJEKK_MAL", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } },
+    { "name": "GRENSE_OPPSLAG_KLIENT", "namespace_id": "1003", "simple": { "limit": 30, "period": 60 } }
+  ],
+  // Ingen logging av forespørsler: vi lagrer ingen personopplysninger.
+  "observability": { "enabled": false }
+}

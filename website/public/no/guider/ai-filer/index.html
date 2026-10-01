@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>llms.txt og ai-catalog.json · Guider · VegvisAI</title>
+<meta name="description" content="De to små filene som lar AI-agenter og åpne veivisere finne bedriften din: hva som skal stå i llms.txt og ai-catalog.json, med eksempler.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="/docs/ai-files/"><link rel="alternate" hreflang="nb" href="/no/guider/ai-filer/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Hopp til innholdet</a>
+<header class="top">
+<div class="wrap">
+<nav class="nav" aria-label="Hovedmeny">
+<a class="brand" href="/no/" aria-label="VegvisAI"><svg viewBox="0 0 64 64" aria-hidden="true">
+<path d="M6 22 L22 54 L42 20" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#FFFFFF"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#0E1424"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#0E1424"/>
+</svg><span aria-hidden="true">egvisAI</span></a>
+<div class="links">
+<a href="/no/#how">Slik virker det</a>
+<a href="/no/guider/">Guider</a>
+<a href="/no/bakgrunn/">Bakgrunn</a>
+<a href="/no/eierskap/">Eierskap</a>
+<a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="/docs/ai-files/" hreflang="en" lang="en">English</a>
+</div>
+</nav>
+<p class="eyebrow nameline">Vegvis · /ˈʋeːɡˌʋiːs/ · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.</p>
+</div>
+</header>
+<main id="main">
+<div class="wrap docs"><nav class="docnav" aria-label="Guider"><p class="eyebrow">Guider</p><ul><li><a href="/no/guider/">Oversikt</a></li><li><a href="/no/guider/kom-i-gang/">Kom i gang</a></li><li><a href="/no/guider/ai-lesbar-nettside/">AI-lesbar nettside</a></li><li><a href="/no/guider/ai-filer/" aria-current="page">llms.txt og ai-catalog.json</a></li><li><a href="/no/guider/mcp/">Din egen AI-tjeneste (MCP)</a></li><li><a href="/no/guider/utviklere/">For utviklere</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Kode og maler på GitHub</a></p></nav><article class="prose"><p class="eyebrow">Nivå 2</p>
+<h1>llms.txt og ai-catalog.json</h1>
+<p class="lead">To små filer som lar agenter og åpne veivisere finne deg og forstå hva du tilbyr. Har du laget et AI-visittkort, har du allerede begge.</p>
+
+<h2><code>/llms.txt</code>: en oversikt for språkmodeller</h2>
+<p>Ren Markdown i roten av nettsiden din: hvem du er, hva du gjør og ikke gjør, priser, kontakt og lenker til de viktigste sidene dine. Hold det kort og saklig. Eksempel for det oppdiktede Eksempel Bakeri AS:</p>
+<pre><code># Eksempel Bakeri AS
+
+&gt; Bakeri i Bodø med brød, boller og kaker på bestilling.
+
+Område: Bodø. Åpningstider: mandag–lørdag 07:00–16:00. Priser i NOK inkludert mva.
+
+## Dette gjør vi
+- Kaker på bestilling
+- Brød og boller
+
+## Dette gjør vi ikke
+- Bryllupskaker over 100 personer
+
+## Priser
+- Bursdagskake, 12 personer: 595
+
+## Kontakt
+- [Send forespørsel](https://eksempelbakeri.no/kontakt/)</code></pre>
+
+<h2><code>/.well-known/ai-catalog.json</code>: en katalog for agenter</h2>
+<p>En JSON-fil i det åpne AI Catalog-formatet som lister oppføringene dine: visittkortsiden, og etter hvert tjenester eller AI-verktøy. Utvidelsen <code>ai.vegvis.local/v1</code> legger til lokale fakta som veivisere bruker til å finne riktig bedrift: tjenester, område, språk og hvordan du kontaktes.</p>
+<pre><code>{
+  "specVersion": "1.0",
+  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempelbakeri.no" },
+  "entries": [{
+    "identifier": "urn:air:eksempelbakeri.no:web:visittkort",
+    "type": "text/html",
+    "url": "https://eksempelbakeri.no/",
+    "description": "Bakeri i Bodø med brød, boller og kaker på bestilling.",
+    "extensions": {
+      "ai.vegvis.local/v1": {
+        "services": ["Kaker på bestilling", "Brød og boller"],
+        "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"] },
+        "languages": ["nb", "en"],
+        "actions": { "contact": "https://eksempelbakeri.no/kontakt/" },
+        "llms_txt": "https://eksempelbakeri.no/llms.txt"
+      }
+    }
+  }]
+}</code></pre>
+
+<h3>Feltene i <code>ai.vegvis.local/v1</code></h3>
+<table>
+<thead><tr><th>Felt</th><th>Hva</th></tr></thead>
+<tbody>
+<tr><td><code>services</code></td><td>Hva du tilbyr, i korte stikkord</td></tr>
+<tr><td><code>area.type</code></td><td><code>physical</code> (kundene kommer til deg), <code>at-customer</code> (du drar til dem) eller <code>digital</code></td></tr>
+<tr><td><code>area.names</code>, <code>area.municipality_numbers</code></td><td>Hvor du holder til. Kommunenummer gjør treffene presise</td></tr>
+<tr><td><code>area.delivery_countries</code></td><td>Land du leverer til, hvis noen</td></tr>
+<tr><td><code>languages</code></td><td>Språk du betjener kunder på</td></tr>
+<tr><td><code>actions</code></td><td>Kontaktside, e-post og telefon. Senere: lenker for bestilling og booking</td></tr>
+<tr><td><code>llms_txt</code></td><td>Hvor <code>llms.txt</code>-filen din ligger</td></tr>
+</tbody>
+</table>
+<div class="note"><p>Formatene er utkast og kommer til å endre seg. Agenter leser dem med romslighet, og generatoren og ferdigheten oppdateres når formatene endres.</p></div>
+
+<p>Neste, bare hvis det lønner seg: <a href="/no/guider/mcp/">din egen AI-tjeneste med MCP</a>.</p>
+</article></div>
+</main>
+<footer>
+<div class="wrap row">
+<p><span class="preview">Teknisk forhåndsvisning</span> Ikke lansert. Eksemplene er oppdiktet.</p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (privat til lansering) · Kode: Apache 2.0 · Indeks: ODbL · <a href="/docs/ai-files/" hreflang="en" lang="en">English</a></p>
+</div>
+</footer>
+</body>
+</html>

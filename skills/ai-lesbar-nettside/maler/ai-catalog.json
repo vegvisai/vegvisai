@@ -1,0 +1,23 @@
+{
+  "specVersion": "1.0",
+  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempel-bakeri.example" },
+  "entries": [
+    {
+      "identifier": "urn:air:eksempel-bakeri.example:web:bestill",
+      "type": "text/html",
+      "url": "https://www.eksempel-bakeri.example/",
+      "tags": ["bakeri", "kaker", "brød"],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "services": ["bestillingskaker", "brød og boller"],
+          "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"], "delivery_countries": ["NO"] },
+          "languages": ["nb", "en"],
+          "actions": {
+            "order": "https://www.eksempel-bakeri.example/bestill?kake={kake}&personer={personer}&dato={dato}"
+          },
+          "llms_txt": "https://www.eksempel-bakeri.example/llms.txt"
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+<!-- title: llms.txt and ai-catalog.json · Guides · VegvisAI | description: The two small files that let AI agents and open guides find your business: what goes in llms.txt and ai-catalog.json, with examples. -->
+<p class="eyebrow">Level 2</p>
+<h1>llms.txt and ai-catalog.json</h1>
+<p class="lead">Two small files that let agents and open guides find you and understand what you offer. If you made an AI business card, you already have both.</p>
+
+<h2><code>/llms.txt</code>: an overview for language models</h2>
+<p>Plain Markdown at the root of your site: who you are, what you do and don't do, prices, contact, and links to your most important pages. Keep it short and factual. Example for the fictional Eksempel Bakeri AS, in the business's own language:</p>
+<pre><code># Eksempel Bakeri AS
+
+&gt; Bakeri i Bodø med brød, boller og kaker på bestilling.
+
+Område: Bodø. Åpningstider: mandag–lørdag 07:00–16:00. Priser i NOK inkludert mva.
+
+## Dette gjør vi
+- Kaker på bestilling
+- Brød og boller
+
+## Dette gjør vi ikke
+- Bryllupskaker over 100 personer
+
+## Priser
+- Bursdagskake, 12 personer: 595
+
+## Kontakt
+- [Send forespørsel](https://eksempelbakeri.no/kontakt/)</code></pre>
+
+<h2><code>/.well-known/ai-catalog.json</code>: a catalog for agents</h2>
+<p>A JSON file in the open AI Catalog format that lists your entries: the business card page, and later services or AI tools. The extension <code>ai.vegvis.local/v1</code> adds local facts that guides use for matching: services, area, languages and how to make contact.</p>
+<pre><code>{
+  "specVersion": "1.0",
+  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempelbakeri.no" },
+  "entries": [{
+    "identifier": "urn:air:eksempelbakeri.no:web:visittkort",
+    "type": "text/html",
+    "url": "https://eksempelbakeri.no/",
+    "description": "Bakeri i Bodø med brød, boller og kaker på bestilling.",
+    "extensions": {
+      "ai.vegvis.local/v1": {
+        "services": ["Kaker på bestilling", "Brød og boller"],
+        "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"] },
+        "languages": ["nb", "en"],
+        "actions": { "contact": "https://eksempelbakeri.no/kontakt/" },
+        "llms_txt": "https://eksempelbakeri.no/llms.txt"
+      }
+    }
+  }]
+}</code></pre>
+
+<h3>The fields in <code>ai.vegvis.local/v1</code></h3>
+<table>
+<thead><tr><th>Field</th><th>What</th></tr></thead>
+<tbody>
+<tr><td><code>services</code></td><td>What you offer, in short phrases</td></tr>
+<tr><td><code>area.type</code></td><td><code>physical</code> (customers come to you), <code>at-customer</code> (you go to them) or <code>digital</code></td></tr>
+<tr><td><code>area.names</code>, <code>area.municipality_numbers</code></td><td>Where you work. In Norway, municipality numbers make matching precise</td></tr>
+<tr><td><code>area.delivery_countries</code></td><td>Countries you deliver to, if any</td></tr>
+<tr><td><code>languages</code></td><td>Languages you serve customers in</td></tr>
+<tr><td><code>actions</code></td><td>Contact page, email and phone. Later: order and booking links</td></tr>
+<tr><td><code>llms_txt</code></td><td>Where your <code>llms.txt</code> is</td></tr>
+</tbody>
+</table>
+<div class="note"><p>The formats are drafts and will change. Agents read them tolerantly, and the generator and the skill are updated when they do.</p></div>
+
+<p>Next, only if it pays off: <a href="/docs/mcp/">your own AI service with MCP</a>.</p>

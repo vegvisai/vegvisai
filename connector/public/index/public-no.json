@@ -1,0 +1,5192 @@
+{
+ "name": "VegvisAI open index: public services in Norway",
+ "licence": "ODbL-1.0",
+ "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
+ "country": "NO",
+ "updated": "2026-10-01",
+ "notice": "Unofficial listing, not made by the organisations. Links only: public services are free, are never ranked against businesses, and no payment passes through the index.",
+ "sources": [
+  {
+   "name": "Enhetsregisteret, Brønnøysundregistrene",
+   "licence": "NLOD 2.0",
+   "url": "https://data.brreg.no/enhetsregisteret/oppslag/enheter",
+   "used_for": "municipalities"
+  },
+  {
+   "name": "The agencies' own websites",
+   "used_for": "state agencies and 19 municipal websites, checked by hand"
+  }
+ ],
+ "topics": [
+  "business",
+  "consumer",
+  "education",
+  "emergency",
+  "environment",
+  "family",
+  "finance",
+  "food",
+  "general",
+  "government",
+  "health",
+  "housing",
+  "immigration",
+  "legal",
+  "municipality",
+  "police",
+  "privacy",
+  "statistics",
+  "tax",
+  "transport",
+  "welfare",
+  "work"
+ ],
+ "entries": [
+  {
+   "id": "norge",
+   "name": "Norge.no",
+   "url": "https://www.norge.no/",
+   "topics": [
+    "general"
+   ],
+   "what": "Overview of public services in Norway and which agency handles what",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "regjeringen",
+   "name": "Regjeringen.no",
+   "url": "https://www.regjeringen.no/",
+   "topics": [
+    "government"
+   ],
+   "what": "The Norwegian government and ministries: policy, consultations and official documents",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "nav",
+   "name": "NAV",
+   "url": "https://www.nav.no/",
+   "topics": [
+    "work",
+    "welfare",
+    "family"
+   ],
+   "what": "Labour and welfare: unemployment benefit, sick pay, pensions, parental benefit and job seeking",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "nav-arbeidsgiver",
+   "name": "NAV for arbeidsgivere",
+   "url": "https://www.nav.no/arbeidsgiver",
+   "topics": [
+    "business",
+    "work"
+   ],
+   "what": "NAV services for employers: recruiting, sick leave follow-up and refunds",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "skatteetaten",
+   "name": "Skatteetaten",
+   "url": "https://www.skatteetaten.no/",
+   "topics": [
+    "tax",
+    "general"
+   ],
+   "what": "Norwegian Tax Administration: tax returns, tax cards, the National Population Register and moving address",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "skatteetaten-bedrift",
+   "name": "Skatteetaten for bedrifter",
+   "url": "https://www.skatteetaten.no/bedrift-og-organisasjon/",
+   "topics": [
+    "business",
+    "tax"
+   ],
+   "what": "Tax, VAT and reporting for businesses and organisations",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn",
+   "name": "Altinn",
+   "url": "https://www.altinn.no/",
+   "topics": [
+    "business",
+    "general"
+   ],
+   "what": "Digital forms and messages between people, businesses and the public sector",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-starte",
+   "name": "Altinn: starte og drive bedrift",
+   "url": "https://www.altinn.no/starte-og-drive/",
+   "topics": [
+    "business"
+   ],
+   "what": "Guidance on starting and running a business in Norway",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "brreg",
+   "name": "Brønnøysundregistrene",
+   "url": "https://www.brreg.no/",
+   "topics": [
+    "business",
+    "consumer"
+   ],
+   "what": "Check whether a Norwegian business is registered, bankrupt or being wound up; register a business",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "patentstyret",
+   "name": "Patentstyret",
+   "url": "https://www.patentstyret.no/",
+   "topics": [
+    "business"
+   ],
+   "what": "Norwegian Industrial Property Office: trademarks, patents and designs",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "toll",
+   "name": "Tolletaten",
+   "url": "https://www.toll.no/",
+   "topics": [
+    "business",
+    "consumer",
+    "tax"
+   ],
+   "what": "Norwegian Customs: importing and exporting goods, customs duty and travel allowances",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "anskaffelser",
+   "name": "Anskaffelser.no",
+   "url": "https://www.anskaffelser.no/",
+   "topics": [
+    "business"
+   ],
+   "what": "Guidance on public procurement for buyers and suppliers",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "forbrukerradet",
+   "name": "Forbrukerrådet",
+   "url": "https://www.forbrukerradet.no/",
+   "topics": [
+    "consumer"
+   ],
+   "what": "Norwegian Consumer Council: free guidance and help with complaints against businesses",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "forbrukertilsynet",
+   "name": "Forbrukertilsynet",
+   "url": "https://www.forbrukertilsynet.no/",
+   "topics": [
+    "consumer"
+   ],
+   "what": "Norwegian Consumer Authority: supervises marketing and contract terms",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "forbrukerklageutvalget",
+   "name": "Forbrukerklageutvalget",
+   "url": "https://www.forbrukertilsynet.no/forbrukerklageutvalget",
+   "topics": [
+    "consumer",
+    "legal"
+   ],
+   "what": "Consumer Disputes Commission: decides disputes between consumers and businesses",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "forbrukereuropa",
+   "name": "Forbruker Europa",
+   "url": "https://www.forbrukereuropa.no/",
+   "topics": [
+    "consumer"
+   ],
+   "what": "European Consumer Centre Norway: help with purchases from businesses in other EU/EEA countries",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "husleietvistutvalget",
+   "name": "Husleietvistutvalget",
+   "url": "https://www.husleietvistutvalget.no/",
+   "topics": [
+    "housing",
+    "legal"
+   ],
+   "what": "Rent Disputes Tribunal: resolves disputes between tenants and landlords",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "lovdata",
+   "name": "Lovdata",
+   "url": "https://lovdata.no/",
+   "topics": [
+    "legal"
+   ],
+   "what": "Norwegian laws and regulations, free to read",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "domstol",
+   "name": "Domstol.no",
+   "url": "https://www.domstol.no/",
+   "topics": [
+    "legal"
+   ],
+   "what": "Norwegian courts and conciliation boards: cases, deadlines and how to proceed",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "sivilrett",
+   "name": "Statens sivilrettsforvaltning",
+   "url": "https://www.sivilrett.no/",
+   "topics": [
+    "legal",
+    "family"
+   ],
+   "what": "Norwegian Civil Affairs Authority: free legal aid, guardianship and family law",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "politiet",
+   "name": "Politiet",
+   "url": "https://www.politiet.no/",
+   "topics": [
+    "police",
+    "general"
+   ],
+   "what": "Norwegian Police: report crime, passports and ID cards, lost property, firearms licences",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "udi",
+   "name": "UDI",
+   "url": "https://www.udi.no/",
+   "topics": [
+    "immigration"
+   ],
+   "what": "Norwegian Directorate of Immigration: residence permits, visas and citizenship",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "helsenorge",
+   "name": "Helsenorge",
+   "url": "https://www.helsenorge.no/",
+   "topics": [
+    "health"
+   ],
+   "what": "Public health portal: GP, prescriptions, health records, patient rights and treatment choices",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "fhi",
+   "name": "Folkehelseinstituttet",
+   "url": "https://www.fhi.no/",
+   "topics": [
+    "health"
+   ],
+   "what": "Norwegian Institute of Public Health: vaccines, infection control and health statistics",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "helsedirektoratet",
+   "name": "Helsedirektoratet",
+   "url": "https://www.helsedirektoratet.no/",
+   "topics": [
+    "health"
+   ],
+   "what": "Norwegian Directorate of Health: guidelines, health rights and the national health register overview",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "lanekassen",
+   "name": "Lånekassen",
+   "url": "https://lanekassen.no/",
+   "topics": [
+    "education"
+   ],
+   "what": "Norwegian State Educational Loan Fund: student loans and grants",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "samordnaopptak",
+   "name": "Samordna opptak",
+   "url": "https://www.samordnaopptak.no/",
+   "topics": [
+    "education"
+   ],
+   "what": "Coordinated admission to universities and university colleges",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "utdanning",
+   "name": "Utdanning.no",
+   "url": "https://www.utdanning.no/",
+   "topics": [
+    "education",
+    "work"
+   ],
+   "what": "Overview of education programmes and occupations in Norway",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "husbanken",
+   "name": "Husbanken",
+   "url": "https://www.husbanken.no/",
+   "topics": [
+    "housing",
+    "welfare"
+   ],
+   "what": "Norwegian State Housing Bank: housing allowance and start-up loans",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "kartverket",
+   "name": "Kartverket",
+   "url": "https://www.kartverket.no/",
+   "topics": [
+    "housing"
+   ],
+   "what": "Norwegian Mapping Authority: maps, property register and land registration",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "vegvesen",
+   "name": "Statens vegvesen",
+   "url": "https://www.vegvesen.no/",
+   "topics": [
+    "transport"
+   ],
+   "what": "Norwegian Public Roads Administration: driving licences, vehicle registration, inspections and road traffic information",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "sdir",
+   "name": "Sjøfartsdirektoratet",
+   "url": "https://www.sdir.no/",
+   "topics": [
+    "transport"
+   ],
+   "what": "Norwegian Maritime Authority: boats, ships, seafarers and safety at sea",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "luftfartstilsynet",
+   "name": "Luftfartstilsynet",
+   "url": "https://www.luftfartstilsynet.no/",
+   "topics": [
+    "transport"
+   ],
+   "what": "Civil Aviation Authority: aviation rules, including drones",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "mattilsynet",
+   "name": "Mattilsynet",
+   "url": "https://www.mattilsynet.no/",
+   "topics": [
+    "food",
+    "consumer"
+   ],
+   "what": "Norwegian Food Safety Authority: food safety, animal welfare, plant health and drinking water",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "miljodirektoratet",
+   "name": "Miljødirektoratet",
+   "url": "https://www.miljodirektoratet.no/",
+   "topics": [
+    "environment"
+   ],
+   "what": "Norwegian Environment Agency: pollution, waste, nature and hunting and fishing",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "arbeidstilsynet",
+   "name": "Arbeidstilsynet",
+   "url": "https://www.arbeidstilsynet.no/",
+   "topics": [
+    "work",
+    "business"
+   ],
+   "what": "Norwegian Labour Inspection Authority: working conditions, working hours, pay and employment contracts",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "datatilsynet",
+   "name": "Datatilsynet",
+   "url": "https://www.datatilsynet.no/",
+   "topics": [
+    "privacy",
+    "consumer",
+    "business"
+   ],
+   "what": "Norwegian Data Protection Authority: privacy rights and GDPR",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "finanstilsynet",
+   "name": "Finanstilsynet",
+   "url": "https://www.finanstilsynet.no/",
+   "topics": [
+    "finance",
+    "consumer"
+   ],
+   "what": "Financial Supervisory Authority: check whether a bank, lender or investment firm is licensed",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "konkurransetilsynet",
+   "name": "Konkurransetilsynet",
+   "url": "https://www.konkurransetilsynet.no/",
+   "topics": [
+    "business",
+    "consumer"
+   ],
+   "what": "Norwegian Competition Authority: competition rules and price cooperation",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "nkom",
+   "name": "Nkom",
+   "url": "https://www.nkom.no/",
+   "topics": [
+    "consumer"
+   ],
+   "what": "Norwegian Communications Authority: telecom, broadband and postal services",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "dsb",
+   "name": "DSB",
+   "url": "https://www.dsb.no/",
+   "topics": [
+    "emergency"
+   ],
+   "what": "Directorate for Civil Protection: emergency preparedness, fire safety and electrical safety",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "bufdir",
+   "name": "Bufdir",
+   "url": "https://bufdir.no/",
+   "topics": [
+    "family"
+   ],
+   "what": "Norwegian Directorate for Children, Youth and Family Affairs: family counselling, adoption and child welfare",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "ssb",
+   "name": "Statistisk sentralbyrå",
+   "url": "https://www.ssb.no/",
+   "topics": [
+    "statistics"
+   ],
+   "what": "Statistics Norway: official statistics",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "valg",
+   "name": "Valg.no",
+   "url": "https://www.valg.no/",
+   "topics": [
+    "government"
+   ],
+   "what": "Elections in Norway: how, when and where to vote",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "kommune-1820",
+   "name": "Alstahaug kommune",
+   "url": "https://www.alstahaug.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1820",
+   "org_number": "938712441",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5601",
+   "name": "Alta kommune",
+   "url": "https://www.alta.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5601",
+   "org_number": "944588132",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3428",
+   "name": "Alvdal kommune",
+   "url": "https://www.alvdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3428",
+   "org_number": "939984194",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4631",
+   "name": "Alver kommune",
+   "url": "https://www.alver.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4631",
+   "org_number": "920290922",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1871",
+   "name": "Andøy kommune",
+   "url": "https://www.andoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1871",
+   "org_number": "945624809",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3124",
+   "name": "Aremark kommune",
+   "url": "https://www.aremark.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3124",
+   "org_number": "940875560",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4203",
+   "name": "Arendal kommune",
+   "url": "https://www.arendal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4203",
+   "org_number": "940493021",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3203",
+   "name": "Asker kommune",
+   "url": "https://www.asker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3203",
+   "org_number": "920125298",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4645",
+   "name": "Askvoll kommune",
+   "url": "https://www.askvoll.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4645",
+   "org_number": "964968330",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4627",
+   "name": "Askøy kommune",
+   "url": "https://www.askoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4627",
+   "org_number": "964338442",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1547",
+   "name": "Aukra kommune",
+   "url": "https://www.aukra.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1547",
+   "org_number": "964981337",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1576",
+   "name": "Aure kommune",
+   "url": "https://www.aure.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1576",
+   "org_number": "988913898",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-4641",
+   "name": "Aurland kommune",
+   "url": "https://www.aurland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4641",
+   "org_number": "964968063",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3226",
+   "name": "Aurskog-Høland kommune",
+   "url": "https://www.ahk.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3226",
+   "org_number": "948164256",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4625",
+   "name": "Austevoll kommune",
+   "url": "https://www.austevoll.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4625",
+   "org_number": "941139787",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4632",
+   "name": "Austrheim kommune",
+   "url": "https://www.austrheim.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4632",
+   "org_number": "948350823",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1554",
+   "name": "Averøy kommune",
+   "url": "https://www.averoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1554",
+   "org_number": "962378064",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5532",
+   "name": "Balsfjord kommune",
+   "url": "https://www.balsfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5532",
+   "org_number": "940208580",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4012",
+   "name": "Bamble kommune",
+   "url": "https://www.bamble.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4012",
+   "org_number": "940244145",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5520",
+   "name": "Bardu kommune",
+   "url": "https://www.bardu.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5520",
+   "org_number": "864993982",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1839",
+   "name": "Beiarn kommune",
+   "url": "https://www.beiarn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1839",
+   "org_number": "961147867",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4601",
+   "name": "Bergen kommune",
+   "url": "https://www.bergen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4601",
+   "org_number": "964338531",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5630",
+   "name": "Berlevåg kommune",
+   "url": "https://www.berlevag.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5630",
+   "org_number": "962388108",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1811",
+   "name": "Bindal kommune",
+   "url": "https://www.bindal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1811",
+   "org_number": "964983380",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4216",
+   "name": "Birkenes kommune",
+   "url": "https://www.birkenes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4216",
+   "org_number": "964965870",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1114",
+   "name": "Bjerkreim kommune",
+   "url": "https://www.bjerkreim.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1114",
+   "org_number": "970490361",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4624",
+   "name": "Bjørnafjorden kommune",
+   "url": "https://www.bjornafjorden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4624",
+   "org_number": "844458312",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1804",
+   "name": "Bodø kommune",
+   "url": "https://www.bodo.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1804",
+   "org_number": "972418013",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1145",
+   "name": "Bokn kommune",
+   "url": "https://www.bokn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1145",
+   "org_number": "964979723",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4648",
+   "name": "Bremanger kommune",
+   "url": "https://www.bremanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4648",
+   "org_number": "959318166",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1813",
+   "name": "Brønnøy kommune",
+   "url": "https://www.bronnoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1813",
+   "org_number": "964983291",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4220",
+   "name": "Bygland kommune",
+   "url": "https://www.bygland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4220",
+   "org_number": "964966397",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4222",
+   "name": "Bykle kommune",
+   "url": "https://www.bykle.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4222",
+   "org_number": "958814968",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5632",
+   "name": "Båtsfjord kommune",
+   "url": "https://www.batsfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5632",
+   "org_number": "938795592",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3201",
+   "name": "Bærum kommune",
+   "url": "https://www.baerum.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3201",
+   "org_number": "935478715",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1867",
+   "name": "Bø kommune",
+   "url": "https://www.boe.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1867",
+   "org_number": "945452676",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4613",
+   "name": "Bømlo kommune",
+   "url": "https://www.bomlo.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4613",
+   "org_number": "834210622",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5628",
+   "name": "Deanu gielda / Tana kommune",
+   "url": "https://www.tana.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5628",
+   "org_number": "943505527",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5512",
+   "name": "Dielddanuori suohkan - Tjeldsund kommune",
+   "url": "https://www.tjeldsund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5512",
+   "org_number": "959469326",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3431",
+   "name": "Dovre kommune",
+   "url": "https://www.dovre.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3431",
+   "org_number": "939849831",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3301",
+   "name": "Drammen kommune",
+   "url": "https://www.drammen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3301",
+   "org_number": "921234554",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4016",
+   "name": "Drangedal kommune",
+   "url": "https://www.drangedal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4016",
+   "org_number": "933277461",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5528",
+   "name": "Dyrøy kommune",
+   "url": "https://www.dyroy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5528",
+   "org_number": "864994032",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1827",
+   "name": "Dønna kommune",
+   "url": "https://www.donna.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1827",
+   "org_number": "945114878",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4619",
+   "name": "Eidfjord kommune",
+   "url": "https://www.eidfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4619",
+   "org_number": "944227121",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3416",
+   "name": "Eidskog kommune",
+   "url": "https://www.eidskog.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3416",
+   "org_number": "964948054",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3240",
+   "name": "Eidsvoll kommune",
+   "url": "https://www.eidsvoll.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3240",
+   "org_number": "964950113",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1101",
+   "name": "Eigersund kommune",
+   "url": "https://www.eigersund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1101",
+   "org_number": "944496394",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3420",
+   "name": "Elverum kommune",
+   "url": "https://www.elverum.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3420",
+   "org_number": "952857991",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3220",
+   "name": "Enebakk kommune",
+   "url": "https://www.enebakk.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3220",
+   "org_number": "964949581",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3425",
+   "name": "Engerdal kommune",
+   "url": "https://www.engerdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3425",
+   "org_number": "964948976",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4611",
+   "name": "Etne kommune",
+   "url": "https://www.etne.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4611",
+   "org_number": "959435375",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3450",
+   "name": "Etnedal kommune",
+   "url": "https://www.etnedal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3450",
+   "org_number": "933038173",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1853",
+   "name": "Evenes kommune / Evenássi suohkan",
+   "url": "https://www.evenes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1853",
+   "org_number": "940642140",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4219",
+   "name": "Evje Og Hornnes kommune",
+   "url": "https://www.e-h.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4219",
+   "org_number": "964966109",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4206",
+   "name": "Farsund kommune",
+   "url": "https://www.farsund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4206",
+   "org_number": "964083266",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1841",
+   "name": "Fauske kommune",
+   "url": "https://www.fauske.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1841",
+   "org_number": "972418021",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4633",
+   "name": "Fedje kommune",
+   "url": "https://www.fedje.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4633",
+   "org_number": "944041036",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4615",
+   "name": "Fitjar kommune",
+   "url": "https://www.fitjar.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4615",
+   "org_number": "944073310",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4646",
+   "name": "Fjaler kommune",
+   "url": "https://www.fjaler.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4646",
+   "org_number": "864968422",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1578",
+   "name": "Fjord kommune",
+   "url": "https://www.fjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1578",
+   "org_number": "921891687",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1859",
+   "name": "Flakstad kommune",
+   "url": "https://www.flakstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1859",
+   "org_number": "863320852",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5049",
+   "name": "Flatanger kommune",
+   "url": "https://www.flatanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5049",
+   "org_number": "845153272",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4207",
+   "name": "Flekkefjord kommune",
+   "url": "https://www.flekkefjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4207",
+   "org_number": "964967369",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3334",
+   "name": "Flesberg kommune",
+   "url": "https://www.flesberg.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3334",
+   "org_number": "940898862",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3320",
+   "name": "Flå kommune",
+   "url": "https://www.flaa.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3320",
+   "org_number": "964951462",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3429",
+   "name": "Folldal kommune",
+   "url": "https://www.folldal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3429",
+   "org_number": "939885684",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3107",
+   "name": "Fredrikstad kommune",
+   "url": "https://www.fredrikstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3107",
+   "org_number": "940039541",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3214",
+   "name": "Frogn kommune",
+   "url": "https://www.frogn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3214",
+   "org_number": "963999089",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4214",
+   "name": "Froland kommune",
+   "url": "https://www.froland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4214",
+   "org_number": "946439045",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5036",
+   "name": "Frosta kommune",
+   "url": "https://www.frosta.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5036",
+   "org_number": "944482253",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5014",
+   "name": "Frøya kommune",
+   "url": "https://www.froya.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5014",
+   "org_number": "964982597",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4032",
+   "name": "Fyresdal kommune",
+   "url": "https://www.fyresdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4032",
+   "org_number": "939772766",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3911",
+   "name": "Færder kommune",
+   "url": "https://www.faerder.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3911",
+   "org_number": "817263992",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-5540",
+   "name": "Gaivuona suohkan Kåfjord kommune Kaivuonon Komuuni",
+   "url": "https://www.kafjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5540",
+   "org_number": "940363586",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5626",
+   "name": "Gamvik kommune",
+   "url": "https://www.gamvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5626",
+   "org_number": "934266811",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3441",
+   "name": "Gausdal kommune",
+   "url": "https://www.gausdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3441",
+   "org_number": "961381274",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1838",
+   "name": "Gildeskål kommune",
+   "url": "https://www.gildeskal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1838",
+   "org_number": "845901422",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1532",
+   "name": "Giske kommune",
+   "url": "https://www.giske.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1532",
+   "org_number": "964980721",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1557",
+   "name": "Gjemnes kommune",
+   "url": "https://www.gjemnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1557",
+   "org_number": "964981426",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3230",
+   "name": "Gjerdrum kommune",
+   "url": "https://www.gjerdrum.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3230",
+   "org_number": "864949762",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4211",
+   "name": "Gjerstad kommune",
+   "url": "https://www.gjerstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4211",
+   "org_number": "964964998",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1122",
+   "name": "Gjesdal kommune",
+   "url": "https://www.gjesdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1122",
+   "org_number": "964978573",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3407",
+   "name": "Gjøvik kommune",
+   "url": "https://www.gjovik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3407",
+   "org_number": "940155223",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4650",
+   "name": "Gloppen kommune",
+   "url": "https://www.gloppen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4650",
+   "org_number": "964969124",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3324",
+   "name": "Gol kommune",
+   "url": "https://www.gol.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3324",
+   "org_number": "964952612",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3446",
+   "name": "Gran kommune",
+   "url": "https://www.gran.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3446",
+   "org_number": "961381541",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1825",
+   "name": "Grane kommune",
+   "url": "https://www.grane.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1825",
+   "org_number": "940643112",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5516",
+   "name": "Gratangen kommune",
+   "url": "https://www.gratangen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5516",
+   "org_number": "959469415",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4202",
+   "name": "Grimstad kommune",
+   "url": "https://www.grimstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4202",
+   "org_number": "864964702",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5045",
+   "name": "Grong kommune",
+   "url": "https://www.grong.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5045",
+   "org_number": "940010853",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3417",
+   "name": "Grue kommune",
+   "url": "https://www.grue.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3417",
+   "org_number": "964948143",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4635",
+   "name": "Gulen kommune",
+   "url": "https://www.gulen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4635",
+   "org_number": "938497524",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5612",
+   "name": "Guovdageainnu suohkan / Kautokeino kommune",
+   "url": "https://www.kautokeino.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5612",
+   "org_number": "945475056",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1866",
+   "name": "Hadsel kommune",
+   "url": "https://www.hadsel.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1866",
+   "org_number": "958501420",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3101",
+   "name": "Halden kommune",
+   "url": "https://www.halden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3101",
+   "org_number": "959159092",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3403",
+   "name": "Hamar kommune",
+   "url": "https://www.hamar.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3403",
+   "org_number": "970540008",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1875",
+   "name": "Hamarøy kommune",
+   "url": "https://www.hamaroy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1875",
+   "org_number": "970542507",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5603",
+   "name": "Hammerfest kommune",
+   "url": "https://www.hammerfest.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5603",
+   "org_number": "921770669",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1580",
+   "name": "Haram kommune",
+   "url": "https://haram.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1580",
+   "org_number": "829912252",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1517",
+   "name": "Hareid kommune",
+   "url": "https://www.hareid.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1517",
+   "org_number": "964979278",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5503",
+   "name": "Harstad kommune / Hársttáid suohkan",
+   "url": "https://www.harstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5503",
+   "org_number": "972417971",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5616",
+   "name": "Hasvik kommune",
+   "url": "https://www.hasvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5616",
+   "org_number": "964830711",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1826",
+   "name": "Hattfjelldal kommune",
+   "url": "https://www.hattfjelldal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1826",
+   "org_number": "944716904",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1106",
+   "name": "Haugesund kommune",
+   "url": "https://www.haugesund.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1106",
+   "org_number": "944073787",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5055",
+   "name": "Heim kommune",
+   "url": "https://heim.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5055",
+   "org_number": "920920004",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1832",
+   "name": "Hemnes kommune",
+   "url": "https://www.hemnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1832",
+   "org_number": "846316442",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3326",
+   "name": "Hemsedal kommune",
+   "url": "https://www.hemsedal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3326",
+   "org_number": "964952701",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1515",
+   "name": "Herøy kommune",
+   "url": "https://www.heroy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1515",
+   "org_number": "964978840",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1818",
+   "name": "Herøy kommune",
+   "url": "https://www.heroy-no.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1818",
+   "org_number": "872417982",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5056",
+   "name": "Hitra kommune",
+   "url": "https://www.hitra.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5056",
+   "org_number": "938772924",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4024",
+   "name": "Hjartdal kommune",
+   "url": "https://www.hjartdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4024",
+   "org_number": "964963649",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1133",
+   "name": "Hjelmeland kommune",
+   "url": "https://www.hjelmeland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1133",
+   "org_number": "864979092",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3330",
+   "name": "Hol kommune",
+   "url": "https://www.hol.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3330",
+   "org_number": "944889116",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3310",
+   "name": "Hole kommune",
+   "url": "https://www.hole.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3310",
+   "org_number": "960010833",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3903",
+   "name": "Holmestrand kommune",
+   "url": "https://www.holmestrand.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3903",
+   "org_number": "917151229",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5026",
+   "name": "Holtålen kommune",
+   "url": "https://www.holtalen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5026",
+   "org_number": "937697767",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3901",
+   "name": "Horten kommune",
+   "url": "https://www.horten.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3901",
+   "org_number": "964951284",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3242",
+   "name": "Hurdal kommune",
+   "url": "https://www.hurdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3242",
+   "org_number": "939780777",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1579",
+   "name": "Hustadvika kommune",
+   "url": "https://www.hustadvika.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1579",
+   "org_number": "921133642",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-3110",
+   "name": "Hvaler kommune",
+   "url": "https://www.hvaler.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3110",
+   "org_number": "964947082",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4637",
+   "name": "Hyllestad kommune",
+   "url": "https://www.hyllestad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4637",
+   "org_number": "964967547",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1119",
+   "name": "Hå kommune",
+   "url": "https://www.ha.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1119",
+   "org_number": "964969590",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4226",
+   "name": "Hægebostad kommune",
+   "url": "https://www.haegebostad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4226",
+   "org_number": "964963916",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4638",
+   "name": "Høyanger kommune",
+   "url": "https://www.hoyanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4638",
+   "org_number": "944439838",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5046",
+   "name": "Høylandet kommune",
+   "url": "https://www.hoylandet.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5046",
+   "org_number": "959220476",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5514",
+   "name": "Ibestad kommune",
+   "url": "https://www.ibestad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5514",
+   "org_number": "959469792",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5053",
+   "name": "Inderøy kommune",
+   "url": "https://www.inderoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5053",
+   "org_number": "997391853",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5054",
+   "name": "Indre Fosen kommune",
+   "url": "https://www.indrefosen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5054",
+   "org_number": "944305483",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3118",
+   "name": "Indre Østfold kommune",
+   "url": "https://www.io.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3118",
+   "org_number": "920123899",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4218",
+   "name": "Iveland kommune",
+   "url": "https://www.iveland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4218",
+   "org_number": "864966012",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3236",
+   "name": "Jevnaker kommune",
+   "url": "https://www.jevnaker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3236",
+   "org_number": "961381363",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5610",
+   "name": "Karasjoga gielda / Karasjok kommune",
+   "url": "https://www.karasjok.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5610",
+   "org_number": "963376030",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5534",
+   "name": "Karlsøy kommune",
+   "url": "https://www.karlsoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5534",
+   "org_number": "940330408",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1149",
+   "name": "Karmøy kommune",
+   "url": "https://www.karmoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1149",
+   "org_number": "940791901",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4602",
+   "name": "Kinn kommune",
+   "url": "https://kinn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4602",
+   "org_number": "820956532",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1120",
+   "name": "Klepp kommune",
+   "url": "https://www.klepp.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1120",
+   "org_number": "864969682",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3303",
+   "name": "Kongsberg kommune",
+   "url": "https://www.kongsberg.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3303",
+   "org_number": "942402465",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3401",
+   "name": "Kongsvinger kommune",
+   "url": "https://www.kongsvinger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3401",
+   "org_number": "944117784",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4014",
+   "name": "Kragerø kommune",
+   "url": "https://www.kragero.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4014",
+   "org_number": "963946902",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4204",
+   "name": "Kristiansand kommune",
+   "url": "https://kristiansand.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4204",
+   "org_number": "820852982",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1505",
+   "name": "Kristiansund kommune",
+   "url": "https://www.kristiansund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1505",
+   "org_number": "991891919",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3318",
+   "name": "Krødsherad kommune",
+   "url": "https://www.krodsherad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3318",
+   "org_number": "964962855",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4622",
+   "name": "Kvam herad",
+   "url": "https://www.kvam.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4622",
+   "org_number": "944233199",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4227",
+   "name": "Kvinesdal kommune",
+   "url": "https://www.kvinesdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4227",
+   "org_number": "964964076",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4617",
+   "name": "Kvinnherad kommune",
+   "url": "https://www.kvinnherad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4617",
+   "org_number": "964967636",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4028",
+   "name": "Kviteseid kommune",
+   "url": "https://www.kviteseid.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4028",
+   "org_number": "964963827",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1144",
+   "name": "Kvitsøy kommune",
+   "url": "https://www.kvitsoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1144",
+   "org_number": "964979634",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5510",
+   "name": "Kvæfjord kommune",
+   "url": "https://www.kvafjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5510",
+   "org_number": "972417998",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5546",
+   "name": "Kvænangen kommune",
+   "url": "https://www.kvanangen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5546",
+   "org_number": "940331102",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3909",
+   "name": "Larvik kommune",
+   "url": "https://www.larvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3909",
+   "org_number": "918082956",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5518",
+   "name": "Lavangen kommune Loabága suohkan",
+   "url": "https://www.lavangen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5518",
+   "org_number": "959469881",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5624",
+   "name": "Lebesby kommune",
+   "url": "https://www.lebesby.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5624",
+   "org_number": "940400392",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1822",
+   "name": "Leirfjord kommune",
+   "url": "https://www.leirfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1822",
+   "org_number": "945034572",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5052",
+   "name": "Leka kommune",
+   "url": "https://www.leka.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5052",
+   "org_number": "944484574",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3432",
+   "name": "Lesja kommune",
+   "url": "https://www.lesja.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3432",
+   "org_number": "964949204",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5037",
+   "name": "Levanger kommune",
+   "url": "https://www.levanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5037",
+   "org_number": "938587051",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3312",
+   "name": "Lier kommune",
+   "url": "https://www.lier.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3312",
+   "org_number": "857566122",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5042",
+   "name": "Lierne kommune",
+   "url": "https://www.lierne.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5042",
+   "org_number": "972417963",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3405",
+   "name": "Lillehammer kommune",
+   "url": "https://www.lillehammer.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3405",
+   "org_number": "945578564",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4215",
+   "name": "Lillesand kommune",
+   "url": "https://www.lillesand.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4215",
+   "org_number": "964965404",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3205",
+   "name": "Lillestrøm kommune",
+   "url": "https://www.lillestrom.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3205",
+   "org_number": "820710592",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-4205",
+   "name": "Lindesnes kommune",
+   "url": "https://www.lindesnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4205",
+   "org_number": "921060440",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3434",
+   "name": "Lom kommune",
+   "url": "https://lom.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3434",
+   "org_number": "959377677",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5614",
+   "name": "Loppa kommune",
+   "url": "https://www.loppa.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5614",
+   "org_number": "963063237",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1112",
+   "name": "Lund kommune",
+   "url": "https://www.lund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1112",
+   "org_number": "964966486",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3234",
+   "name": "Lunner kommune",
+   "url": "https://www.lunner.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3234",
+   "org_number": "961381452",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1834",
+   "name": "Lurøy kommune",
+   "url": "https://www.luroy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1834",
+   "org_number": "940667852",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4644",
+   "name": "Luster kommune",
+   "url": "https://www.luster.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4644",
+   "org_number": "964968241",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4225",
+   "name": "Lyngdal kommune",
+   "url": "https://www.lyngdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4225",
+   "org_number": "922421498",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-5536",
+   "name": "Lyngen kommune Ivgu suohkan Yykeän Kunta",
+   "url": "https://www.lyngen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5536",
+   "org_number": "840014932",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4642",
+   "name": "Lærdal kommune",
+   "url": "https://www.laerdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4642",
+   "org_number": "954681890",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1851",
+   "name": "Lødingen kommune",
+   "url": "https://www.lodingen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1851",
+   "org_number": "945468661",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3222",
+   "name": "Lørenskog kommune",
+   "url": "https://www.lorenskog.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3222",
+   "org_number": "842566142",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3412",
+   "name": "Løten kommune",
+   "url": "https://www.loten.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3412",
+   "org_number": "964950679",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5031",
+   "name": "Malvik kommune",
+   "url": "https://www.malvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5031",
+   "org_number": "971035560",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3122",
+   "name": "Marker kommune",
+   "url": "https://www.marker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3122",
+   "org_number": "964944334",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4634",
+   "name": "Masfjorden kommune",
+   "url": "https://www.masfjorden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4634",
+   "org_number": "945627913",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5028",
+   "name": "Melhus kommune",
+   "url": "https://www.melhus.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5028",
+   "org_number": "938726027",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1837",
+   "name": "Meløy kommune",
+   "url": "https://www.meloy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1837",
+   "org_number": "970189866",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5034",
+   "name": "Meråker kommune",
+   "url": "https://www.meraker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5034",
+   "org_number": "835231712",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4020",
+   "name": "Midt-Telemark kommune",
+   "url": "https://www.midt-telemark.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4020",
+   "org_number": "920297293",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-5027",
+   "name": "Midtre Gauldal kommune",
+   "url": "https://www.mgk.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5027",
+   "org_number": "970187715",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4629",
+   "name": "Modalen kommune",
+   "url": "https://www.modalen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4629",
+   "org_number": "964969302",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3316",
+   "name": "Modum kommune",
+   "url": "https://www.modum.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3316",
+   "org_number": "970491589",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1506",
+   "name": "Molde kommune",
+   "url": "https://www.molde.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1506",
+   "org_number": "921221967",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1874",
+   "name": "Moskenes kommune",
+   "url": "https://www.moskenes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1874",
+   "org_number": "945962151",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3103",
+   "name": "Moss kommune",
+   "url": "https://www.moss.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3103",
+   "org_number": "920817521",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5524",
+   "name": "Målselv kommune",
+   "url": "https://www.malselv.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5524",
+   "org_number": "972418005",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5618",
+   "name": "Måsøy kommune",
+   "url": "https://www.masoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5618",
+   "org_number": "941087957",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5007",
+   "name": "Namsos kommune",
+   "url": "https://www.namsos.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5007",
+   "org_number": "942875967",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5044",
+   "name": "Namsskogan kommune",
+   "url": "https://www.namsskogan.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5044",
+   "org_number": "864982212",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3238",
+   "name": "Nannestad kommune",
+   "url": "https://www.nannestad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3238",
+   "org_number": "964950202",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1806",
+   "name": "Narvik kommune",
+   "url": "https://www.narvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1806",
+   "org_number": "959469059",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3228",
+   "name": "Nes kommune",
+   "url": "https://www.nes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3228",
+   "org_number": "938679088",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3322",
+   "name": "Nesbyen kommune",
+   "url": "https://www.nesbyen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3322",
+   "org_number": "964951640",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1828",
+   "name": "Nesna kommune",
+   "url": "https://www.nesna.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1828",
+   "org_number": "939600515",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3212",
+   "name": "Nesodden kommune",
+   "url": "https://www.nesodden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3212",
+   "org_number": "944383565",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4030",
+   "name": "Nissedal kommune",
+   "url": "https://www.nissedal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4030",
+   "org_number": "964964343",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3232",
+   "name": "Nittedal kommune",
+   "url": "https://www.nittedal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3232",
+   "org_number": "971643870",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4018",
+   "name": "Nome kommune",
+   "url": "https://www.nome.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4018",
+   "org_number": "964963371",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3451",
+   "name": "Nord-Aurdal kommune",
+   "url": "https://www.nord-aurdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3451",
+   "org_number": "961381908",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3436",
+   "name": "Nord-Fron kommune",
+   "url": "https://www.nord-fron.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3436",
+   "org_number": "839893132",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3414",
+   "name": "Nord-Odal kommune",
+   "url": "https://www.nord-odal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3414",
+   "org_number": "964950768",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5620",
+   "name": "Nordkapp kommune",
+   "url": "https://www.nordkapp.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5620",
+   "org_number": "938469415",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3207",
+   "name": "Nordre Follo kommune",
+   "url": "https://www.nordrefollo.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3207",
+   "org_number": "922092648",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-3448",
+   "name": "Nordre Land kommune",
+   "url": "https://www.nordre-land.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3448",
+   "org_number": "861381722",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5544",
+   "name": "Nordreisa kommune",
+   "url": "https://www.nordreisa.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5544",
+   "org_number": "943350833",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3338",
+   "name": "Nore Og Uvdal kommune",
+   "url": "https://www.nore-og-uvdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3338",
+   "org_number": "964950946",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4005",
+   "name": "Notodden kommune",
+   "url": "https://www.notodden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4005",
+   "org_number": "938583986",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5060",
+   "name": "Nærøysund kommune",
+   "url": "https://www.naroysund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5060",
+   "org_number": "921785410",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5021",
+   "name": "Oppdal kommune",
+   "url": "https://www.oppdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5021",
+   "org_number": "964983003",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5059",
+   "name": "Orkland kommune",
+   "url": "https://orkland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5059",
+   "org_number": "921233418",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3430",
+   "name": "Os kommune",
+   "url": "https://os.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3430",
+   "org_number": "943464723",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5020",
+   "name": "Osen kommune",
+   "url": "https://www.osen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5020",
+   "org_number": "944350675",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-0301",
+   "name": "Oslo kommune",
+   "url": "https://www.oslo.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "0301",
+   "org_number": "958935420",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4630",
+   "name": "Osterøy kommune",
+   "url": "https://www.osteroy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4630",
+   "org_number": "864338712",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5047",
+   "name": "Overhalla kommune",
+   "url": "https://www.overhalla.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5047",
+   "org_number": "939896600",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5622",
+   "name": "Porsanger kommune",
+   "url": "https://www.porsanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5622",
+   "org_number": "959411735",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4001",
+   "name": "Porsgrunn kommune",
+   "url": "https://www.porsgrunn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4001",
+   "org_number": "939991034",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3120",
+   "name": "Rakkestad kommune",
+   "url": "https://www.rakkestad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3120",
+   "org_number": "945372281",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1833",
+   "name": "Rana kommune",
+   "url": "https://www.rana.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1833",
+   "org_number": "872418032",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1127",
+   "name": "Randaberg kommune",
+   "url": "https://www.randaberg.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1127",
+   "org_number": "934945514",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1539",
+   "name": "Rauma kommune",
+   "url": "https://www.rauma.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1539",
+   "org_number": "864980902",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3424",
+   "name": "Rendalen kommune",
+   "url": "https://www.rendalen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3424",
+   "org_number": "940028515",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5022",
+   "name": "Rennebu kommune",
+   "url": "https://www.rennebu.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5022",
+   "org_number": "940083672",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5061",
+   "name": "Rindal kommune",
+   "url": "https://www.rindal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5061",
+   "org_number": "940138051",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3439",
+   "name": "Ringebu kommune",
+   "url": "https://www.ringebu.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3439",
+   "org_number": "939864970",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3305",
+   "name": "Ringerike kommune",
+   "url": "https://www.ringerike.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3305",
+   "org_number": "940100925",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3411",
+   "name": "Ringsaker kommune",
+   "url": "https://www.ringsaker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3411",
+   "org_number": "864950582",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4201",
+   "name": "Risør kommune",
+   "url": "https://www.risor.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4201",
+   "org_number": "964977402",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3336",
+   "name": "Rollag kommune",
+   "url": "https://www.rollag.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3336",
+   "org_number": "964963282",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3112",
+   "name": "Råde kommune",
+   "url": "https://www.rade.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3112",
+   "org_number": "940802652",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3224",
+   "name": "Rælingen kommune",
+   "url": "https://www.ralingen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3224",
+   "org_number": "952540556",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1836",
+   "name": "Rødøy kommune",
+   "url": "https://www.rodoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1836",
+   "org_number": "945717173",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5025",
+   "name": "Røros kommune",
+   "url": "https://www.roros.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5025",
+   "org_number": "939898743",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1856",
+   "name": "Røst kommune",
+   "url": "https://www.rost.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1856",
+   "org_number": "945037687",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5043",
+   "name": "Røyrvik kommune",
+   "url": "https://www.royrvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5043",
+   "org_number": "964982120",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5522",
+   "name": "Salangen kommune",
+   "url": "https://www.salangen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5522",
+   "org_number": "961416388",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1840",
+   "name": "Saltdal kommune",
+   "url": "https://www.saltdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1840",
+   "org_number": "972417734",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4623",
+   "name": "Samnanger kommune",
+   "url": "https://www.samnanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4623",
+   "org_number": "964968985",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1514",
+   "name": "Sande kommune",
+   "url": "https://www.sande.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1514",
+   "org_number": "822534422",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3907",
+   "name": "Sandefjord kommune",
+   "url": "https://www.sandefjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3907",
+   "org_number": "916882807",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1108",
+   "name": "Sandnes kommune",
+   "url": "https://www.sandnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1108",
+   "org_number": "964965137",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3105",
+   "name": "Sarpsborg kommune",
+   "url": "https://www.sarpsborg.com/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3105",
+   "org_number": "938801363",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1135",
+   "name": "Sauda kommune",
+   "url": "https://www.sauda.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1135",
+   "org_number": "964979367",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3437",
+   "name": "Sel kommune",
+   "url": "https://www.sel.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3437",
+   "org_number": "939617671",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5032",
+   "name": "Selbu kommune",
+   "url": "https://www.selbu.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5032",
+   "org_number": "971197609",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4022",
+   "name": "Seljord kommune",
+   "url": "https://www.seljord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4022",
+   "org_number": "964963738",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5530",
+   "name": "Senja kommune",
+   "url": "https://www.senja.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5530",
+   "org_number": "921369417",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-3332",
+   "name": "Sigdal kommune",
+   "url": "https://www.sigdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3332",
+   "org_number": "964962766",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4010",
+   "name": "Siljan kommune",
+   "url": "https://www.siljan.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4010",
+   "org_number": "864953042",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4228",
+   "name": "Sirdal kommune",
+   "url": "https://www.sirdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4228",
+   "org_number": "964964165",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5029",
+   "name": "Skaun kommune",
+   "url": "https://www.skaun.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5029",
+   "org_number": "939865942",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4003",
+   "name": "Skien kommune",
+   "url": "https://www.skien.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4003",
+   "org_number": "938759839",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3116",
+   "name": "Skiptvet kommune",
+   "url": "https://www.skiptvet.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3116",
+   "org_number": "941962726",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5542",
+   "name": "Skjervøy kommune",
+   "url": "https://www.skjervoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5542",
+   "org_number": "941812716",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3433",
+   "name": "Skjåk kommune",
+   "url": "https://www.skjaak.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3433",
+   "org_number": "961381096",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1573",
+   "name": "Smøla kommune",
+   "url": "https://www.smola.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1573",
+   "org_number": "945012986",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5041",
+   "name": "Snåsa kommune",
+   "url": "https://www.snasa.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5041",
+   "org_number": "964982031",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4640",
+   "name": "Sogndal kommune",
+   "url": "https://www.sogndal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4640",
+   "org_number": "922121893",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1111",
+   "name": "Sokndal kommune",
+   "url": "https://www.sokndal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1111",
+   "org_number": "964965692",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1124",
+   "name": "Sola kommune",
+   "url": "https://www.sola.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1124",
+   "org_number": "948243113",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4636",
+   "name": "Solund kommune",
+   "url": "https://www.solund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4636",
+   "org_number": "964967458",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1870",
+   "name": "Sortland kommune / Suorttá Souhkan",
+   "url": "https://www.sortland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1870",
+   "org_number": "847737492",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4649",
+   "name": "Stad kommune",
+   "url": "https://www.stad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4649",
+   "org_number": "921060157",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3413",
+   "name": "Stange kommune",
+   "url": "https://www.stange.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3413",
+   "org_number": "970169717",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1103",
+   "name": "Stavanger kommune",
+   "url": "https://www.stavanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1103",
+   "org_number": "964965226",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1848",
+   "name": "Steigen kommune",
+   "url": "https://www.steigen.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1848",
+   "org_number": "962299385",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5006",
+   "name": "Steinkjer kommune",
+   "url": "https://www.steinkjer.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5006",
+   "org_number": "840029212",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5035",
+   "name": "Stjørdal kommune",
+   "url": "https://www.stjordal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5035",
+   "org_number": "939958851",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3423",
+   "name": "Stor-Elvdal kommune",
+   "url": "https://www.stor-elvdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3423",
+   "org_number": "964948887",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4614",
+   "name": "Stord kommune",
+   "url": "https://www.stord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4614",
+   "org_number": "939866914",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5538",
+   "name": "Storfjord kommune",
+   "url": "https://www.storfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5538",
+   "org_number": "964994129",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1130",
+   "name": "Strand kommune",
+   "url": "https://www.strand.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1130",
+   "org_number": "964978751",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1525",
+   "name": "Stranda kommune",
+   "url": "https://www.stranda.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1525",
+   "org_number": "964980098",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4651",
+   "name": "Stryn kommune",
+   "url": "https://www.stryn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4651",
+   "org_number": "963989202",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1531",
+   "name": "Sula kommune",
+   "url": "https://www.sula.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1531",
+   "org_number": "964980543",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1134",
+   "name": "Suldal kommune",
+   "url": "https://suldal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1134",
+   "org_number": "964979189",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1563",
+   "name": "Sunndal kommune",
+   "url": "https://www.sunndal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1563",
+   "org_number": "964981604",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4647",
+   "name": "Sunnfjord kommune",
+   "url": "https://www.sunnfjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4647",
+   "org_number": "921244207",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1566",
+   "name": "Surnadal kommune",
+   "url": "https://www.surnadal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1566",
+   "org_number": "964981892",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4612",
+   "name": "Sveio kommune",
+   "url": "https://www.sveio.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4612",
+   "org_number": "864967272",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1528",
+   "name": "Sykkylven kommune",
+   "url": "https://www.sykkylven.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1528",
+   "org_number": "964980365",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1812",
+   "name": "Sømna kommune",
+   "url": "https://www.somna.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1812",
+   "org_number": "944810277",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3447",
+   "name": "Søndre Land kommune",
+   "url": "https://www.sondre-land.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3447",
+   "org_number": "961381630",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3449",
+   "name": "Sør-Aurdal kommune",
+   "url": "https://www.sor-aurdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3449",
+   "org_number": "961381819",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3438",
+   "name": "Sør-Fron kommune",
+   "url": "https://www.sor-fron.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3438",
+   "org_number": "941827195",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3415",
+   "name": "Sør-Odal kommune",
+   "url": "https://www.sor-odal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3415",
+   "org_number": "964947716",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5605",
+   "name": "Sør-Varanger kommune",
+   "url": "https://www.sor-varanger.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5605",
+   "org_number": "942110286",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1845",
+   "name": "Sørfold kommune",
+   "url": "https://www.sorfold.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1845",
+   "org_number": "972417750",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5526",
+   "name": "Sørreisa kommune",
+   "url": "https://www.sorreisa.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5526",
+   "org_number": "940755603",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1121",
+   "name": "Time kommune",
+   "url": "https://www.time.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1121",
+   "org_number": "859223672",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1560",
+   "name": "Tingvoll kommune",
+   "url": "https://www.tingvoll.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1560",
+   "org_number": "964981515",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4026",
+   "name": "Tinn kommune",
+   "url": "https://www.tinn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4026",
+   "org_number": "864963552",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4034",
+   "name": "Tokke kommune",
+   "url": "https://www.tokke.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4034",
+   "org_number": "964964521",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3426",
+   "name": "Tolga kommune",
+   "url": "https://www.tolga.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3426",
+   "org_number": "940192404",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5501",
+   "name": "Tromsø kommune",
+   "url": "https://www.tromso.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5501",
+   "org_number": "940101808",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5001",
+   "name": "Trondheim kommune",
+   "url": "https://www.trondheim.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5001",
+   "org_number": "942110464",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3421",
+   "name": "Trysil kommune",
+   "url": "https://www.trysil.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3421",
+   "org_number": "864948502",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1835",
+   "name": "Træna kommune",
+   "url": "https://www.trana.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1835",
+   "org_number": "940192692",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4213",
+   "name": "Tvedestrand kommune",
+   "url": "https://www.tvedestrand.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4213",
+   "org_number": "964965781",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5033",
+   "name": "Tydal kommune",
+   "url": "https://www.tydal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5033",
+   "org_number": "864983472",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3427",
+   "name": "Tynset kommune",
+   "url": "https://www.tynset.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3427",
+   "org_number": "940837685",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4616",
+   "name": "Tysnes kommune",
+   "url": "https://www.tysnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4616",
+   "org_number": "959412340",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1146",
+   "name": "Tysvær kommune",
+   "url": "https://www.tysver.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1146",
+   "org_number": "964979812",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3905",
+   "name": "Tønsberg kommune",
+   "url": "https://tonsberg.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3905",
+   "org_number": "921383681",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3209",
+   "name": "Ullensaker kommune",
+   "url": "https://www.ullensaker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3209",
+   "org_number": "933649768",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4618",
+   "name": "Ullensvang kommune",
+   "url": "https://www.ullensvang.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4618",
+   "org_number": "920500633",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1516",
+   "name": "Ulstein kommune",
+   "url": "https://www.ulstein.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1516",
+   "org_number": "964979456",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4620",
+   "name": "Ulvik herad",
+   "url": "https://www.ulvik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4620",
+   "org_number": "971159928",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5636",
+   "name": "Unjargga gielda / Nesseby kommune",
+   "url": "https://www.nesseby.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5636",
+   "org_number": "839953062",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1151",
+   "name": "Utsira kommune",
+   "url": "https://www.utsira.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1151",
+   "org_number": "964979901",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5607",
+   "name": "Vadsø kommune",
+   "url": "https://www.vadso.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5607",
+   "org_number": "964993602",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4628",
+   "name": "Vaksdal kommune",
+   "url": "https://www.vaksdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4628",
+   "org_number": "961821967",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4221",
+   "name": "Valle kommune",
+   "url": "https://www.valle.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4221",
+   "org_number": "964966575",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3454",
+   "name": "Vang kommune",
+   "url": "https://www.vang.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3454",
+   "org_number": "961382246",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1511",
+   "name": "Vanylven kommune",
+   "url": "https://www.vanylven.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1511",
+   "org_number": "964978662",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5634",
+   "name": "Vardø kommune",
+   "url": "https://www.vardo.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5634",
+   "org_number": "972418048",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1824",
+   "name": "Vefsn kommune",
+   "url": "https://www.vefsn.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1824",
+   "org_number": "844824122",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1815",
+   "name": "Vega kommune",
+   "url": "https://www.vega.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1815",
+   "org_number": "941017975",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4212",
+   "name": "Vegårshei kommune",
+   "url": "https://www.vegarshei.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4212",
+   "org_number": "964965048",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4223",
+   "name": "Vennesla kommune",
+   "url": "https://www.vennesla.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4223",
+   "org_number": "936846777",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5038",
+   "name": "Verdal kommune",
+   "url": "https://www.verdal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5038",
+   "org_number": "938587418",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3216",
+   "name": "Vestby kommune",
+   "url": "https://www.vestby.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3216",
+   "org_number": "943485437",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1535",
+   "name": "Vestnes kommune",
+   "url": "https://www.vestnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1535",
+   "org_number": "939901965",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3452",
+   "name": "Vestre Slidre kommune",
+   "url": "https://www.vestre-slidre.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3452",
+   "org_number": "961382157",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3443",
+   "name": "Vestre Toten kommune",
+   "url": "https://www.vestre-toten.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3443",
+   "org_number": "971028300",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1860",
+   "name": "Vestvågøy kommune",
+   "url": "https://www.vestvagoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1860",
+   "org_number": "942570619",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1816",
+   "name": "Vevelstad kommune",
+   "url": "https://www.vevelstad.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1816",
+   "org_number": "940651034",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4639",
+   "name": "Vik kommune",
+   "url": "https://www.vik.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4639",
+   "org_number": "937498764",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1160",
+   "name": "Vindafjord kommune",
+   "url": "https://www.vindafjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1160",
+   "org_number": "988893226",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-4036",
+   "name": "Vinje kommune",
+   "url": "https://www.vinje.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4036",
+   "org_number": "964964610",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1577",
+   "name": "Volda kommune",
+   "url": "https://www.volda.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1577",
+   "org_number": "939760946",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4621",
+   "name": "Voss herad",
+   "url": "https://www.voss.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4621",
+   "org_number": "960510542",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1865",
+   "name": "Vågan kommune",
+   "url": "https://www.vagan.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1865",
+   "org_number": "938644500",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3435",
+   "name": "Vågå kommune",
+   "url": "https://www.vaga.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3435",
+   "org_number": "939607706",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3114",
+   "name": "Våler kommune",
+   "url": "https://www.valer.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3114",
+   "org_number": "959272581",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3419",
+   "name": "Våler kommune",
+   "url": "https://www.vaaler-he.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3419",
+   "org_number": "871034222",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1857",
+   "name": "Værøy kommune",
+   "url": "https://www.varoy.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1857",
+   "org_number": "964994307",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5058",
+   "name": "Åfjord kommune",
+   "url": "https://www.afjord.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5058",
+   "org_number": "921875533",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-3328",
+   "name": "Ål kommune",
+   "url": "https://www.aal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3328",
+   "org_number": "864952992",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1508",
+   "name": "Ålesund kommune",
+   "url": "https://www.alesund.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1508",
+   "org_number": "929911709",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-4217",
+   "name": "Åmli kommune",
+   "url": "https://www.amli.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4217",
+   "org_number": "864965962",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3422",
+   "name": "Åmot kommune",
+   "url": "https://www.amot.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3422",
+   "org_number": "940152496",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4643",
+   "name": "Årdal kommune",
+   "url": "https://www.ardal.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4643",
+   "org_number": "954679721",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3218",
+   "name": "Ås kommune",
+   "url": "https://www.as.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3218",
+   "org_number": "964948798",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4224",
+   "name": "Åseral kommune",
+   "url": "https://www.aseral.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4224",
+   "org_number": "964966842",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3418",
+   "name": "Åsnes kommune",
+   "url": "https://www.asnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3418",
+   "org_number": "964948232",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-1868",
+   "name": "Øksnes kommune",
+   "url": "https://www.oksnes.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1868",
+   "org_number": "845152012",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-5057",
+   "name": "Ørland kommune",
+   "url": "https://www.orland.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "5057",
+   "org_number": "921806027",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-1520",
+   "name": "Ørsta kommune",
+   "url": "https://www.orsta.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "1520",
+   "org_number": "939461450",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3442",
+   "name": "Østre Toten kommune",
+   "url": "https://www.ostre-toten.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3442",
+   "org_number": "964949859",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3314",
+   "name": "Øvre Eiker kommune",
+   "url": "https://www.ovre-eiker.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3314",
+   "org_number": "954597482",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-3440",
+   "name": "Øyer kommune",
+   "url": "https://www.oyer.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3440",
+   "org_number": "961381185",
+   "source": "Enhetsregisteret"
+  },
+  {
+   "id": "kommune-4626",
+   "name": "Øygarden kommune",
+   "url": "https://www.oygarden.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "4626",
+   "org_number": "922530890",
+   "source": "Enhetsregisteret; website checked by hand"
+  },
+  {
+   "id": "kommune-3453",
+   "name": "Øystre Slidre kommune",
+   "url": "https://www.oystre-slidre.kommune.no/",
+   "level": "municipality",
+   "topics": [
+    "municipality"
+   ],
+   "what": "Municipal services: kindergarten, school, building permits, waste collection, water and sewage, health and care services, and local contact information",
+   "municipality_number": "3453",
+   "org_number": "961382068",
+   "source": "Enhetsregisteret"
+  }
+ ]
+}

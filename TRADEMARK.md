@@ -1,18 +1,18 @@
-# Varemerkepolicy (utkast)
+# Trademark policy (draft)
 
-Koden og indeksen er åpne. Navnet er det ikke.
+The code and the index are open. The name is not.
 
-**Du kan**
+**You may**
 
-- forke, endre og drifte koden og indeksen etter lisensene (Apache 2.0 og ODbL)
-- skrive at noe er «basert på VegvisAI» eller «kompatibelt med VegvisAI», så lenge det er sant
+- fork, change and run the code and the index under the licences (Apache 2.0 and ODbL)
+- say that something is «based on VegvisAI» or «compatible with VegvisAI», as long as it is true
 
-**Du kan ikke**
+**You may not**
 
-- kalle en fork, tjeneste eller et produkt VegvisAI, eller bruke et navn eller en logo som lett forveksles med det
-- gi inntrykk av at du er VegvisAI, er godkjent av oss eller samarbeider med oss når du ikke gjør det
-- bruke navnet til å selge rangering, verifisering eller tilgang
+- call a fork, service or product VegvisAI, or use a name or logo that is easily confused with it
+- give the impression that you are VegvisAI, are approved by us or work with us when you do not
+- use the name to sell ranking, verification or access
 
-Navnet eies i dag av Espen Brathaug privat og overføres til selskapet bak VegvisAI når det opprettes. Varemerkesøknad sendes før lansering. Spørsmål om bruk av navnet: [kontakt].
+The name is owned today by Espen Brathaug privately and will be transferred to the company behind VegvisAI when it is founded. A trademark application will be filed before launch. Questions about using the name: [contact].
 
-*Utkast 01.10.2026. Vurderes med juridisk-vurdering før repoet åpnes.*
+*Draft 2026-10-01, translated 2026-10-02. To be reviewed with juridisk-vurdering before the repository opens.*

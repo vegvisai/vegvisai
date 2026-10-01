@@ -1,0 +1,16 @@
+# Veiviser (teknisk test)
+
+> Teknisk test av en åpen veiviser som gjør bedrifter synlige og forståelige for AI-assistenter. Ikke en lansering. Bedriften i eksemplet er oppdiktet.
+
+## Connector (MCP)
+- [Veiviser-connector](/mcp): Streamable HTTP, bare lesing. Verktøy: find_business, check_business, find_public_help, ai_check
+
+## Åpen indeks (ODbL)
+- [Offentlige tjenester i Norge](/index/public-no.json): statlige etater etter tema og nettsidene til alle 357 kommuner. Bare lenker.
+
+## Verktøy for bedrifter
+- [AI-sjekk](/sjekk/): hvordan ser et nettsted ut for AI-assistenter? API: /api/sjekk?url=…
+- [Lag et AI-lesbart visittkort](/lag/): skjema som lager visittkort, llms.txt og ai-catalog.json i nettleseren
+
+## Eksempel
+- [Eksempel Bakeri AS (oppdiktet)](/eksempel/): AI-lesbart visittkort, nivå 0

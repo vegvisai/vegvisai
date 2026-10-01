@@ -1,0 +1,29 @@
+<!-- title: Din egen AI-tjeneste (MCP) · Guider · VegvisAI | description: Når en MCP-server lønner seg for en bedrift, hvordan du starter med en tjeneste som bare leser, og hvordan du beskytter den mot prompt injection. -->
+<p class="eyebrow">Nivå 3</p>
+<h1>Din egen AI-tjeneste (MCP)</h1>
+<p class="lead">MCP (Model Context Protocol) lar en AI-agent bruke verktøyene dine direkte, for eksempel sjekke lager, finne en ledig time eller legge inn en booking. Det er valgfritt. Nivå 0 til 2 virker allerede med alle assistenter.</p>
+
+<h2>Når det lønner seg</h2>
+<ul>
+<li>Kunder eller samarbeidspartnere trenger ofte ferske data: lager, ledige tider, ordrestatus</li>
+<li>Kundene kommer ofte tilbake og kan legge tjenesten din til i assistenten sin én gang, for eksempel bedriftskunder</li>
+<li>Handlingslenker på nettsiden er ikke lenger nok</li>
+</ul>
+<p>Passer ingen av disse, holder du deg på nivå 1 og 2. Det er ikke nest best: det er det de fleste bedrifter trenger.</p>
+
+<h2>Start med en tjeneste som bare leser</h2>
+<p>La den første versjonen bare svare på spørsmål: søk, priser, ledige tider. La kunden bekrefte bestillinger og betalinger på din egen nettside. Da holder du risikoen lav og kundeforholdet hos deg.</p>
+
+<h2>Hold den trygg</h2>
+<ul>
+<li><strong>Behandle alt utenfra som data, aldri som instruksjoner.</strong> Merk svarene dine som data, så agenten ikke følger tekst som står i dem.</li>
+<li><strong>Begrens antall forespørsler</strong> per klient, så tjenesten ikke kan misbrukes.</li>
+<li><strong>Lagre så lite som mulig.</strong> Ikke logg personopplysninger du ikke trenger.</li>
+<li><strong>Test med injeksjonsforsøk</strong> før hver versjon. Det åpne testsettet ligger på <a href="{{GITHUB}}">GitHub</a>.</li>
+</ul>
+
+<h2>Driv den selv, eller få den driftet</h2>
+<p>Du kan drive serveren selv med den åpne malen, eller få den driftet av oss eller et byrå. Uansett eier du innholdet og kan flytte det.</p>
+
+<h2>Se et eksempel</h2>
+<p>Veiviser-connectoren på testplattformen vår bare leser, og er en MCP-server du kan prøve i din egen assistent. Se <a href="/no/guider/utviklere/">guiden for utviklere</a>.</p>

@@ -1,0 +1,56 @@
+<!-- title: Kom i gang · Guider · VegvisAI | description: Lag et AI-visittkort på rundt 15 minutter: én side og to små filer som forteller alle AI-er hvem du er, hva du gjør, hvor, og hvordan du nås. -->
+<p class="eyebrow">Nivå 0 · start her</p>
+<h1>Kom i gang: ditt AI-visittkort</h1>
+<p class="lead">Én side og to små filer som forteller alle AI-er hvem du er, hva du gjør og ikke gjør, hvor du holder til, og hvordan en kunde når deg. Det tar rundt 15 minutter, og for mange bedrifter er det alt de trenger.</p>
+
+<h2>Dette ender du opp med</h2>
+<table>
+<thead><tr><th>Fil</th><th>Hvor den skal</th><th>Hva den gjør</th></tr></thead>
+<tbody>
+<tr><td><code>index.html</code></td><td>Nettsiden din, for eksempel på <code>/</code> eller <code>/ai/</code></td><td>Selve visittkortet: lesbart for folk, med schema.org-data for maskiner</td></tr>
+<tr><td><code>llms.txt</code></td><td>Roten: <code>/llms.txt</code></td><td>En ryddig tekstoversikt for språkmodeller</td></tr>
+<tr><td><code>ai-catalog.json</code></td><td><code>/.well-known/ai-catalog.json</code></td><td>Forteller agenter og åpne veivisere hvor visittkortet og tjenestene dine er</td></tr>
+</tbody>
+</table>
+
+<h2>Steg 1: Samle fakta</h2>
+<p>Ha dette klart. Kort og konkret er bedre enn langt og pent.</p>
+<ul>
+<li><strong>Navn</strong> og organisasjonsnummer</li>
+<li><strong>Én setning</strong> om hva du gjør</li>
+<li><strong>Hva du tilbyr</strong>, og like viktig, <strong>hva du ikke tilbyr</strong>. Da sender ikke AI-en deg feil kunder</li>
+<li><strong>Område</strong>: kommunene du betjener, om du kommer til kunden, og om du leverer</li>
+<li><strong>Åpningstider</strong>, <strong>telefon</strong>, <strong>e-post</strong> og <strong>kontakt- eller bookingsiden</strong> din</li>
+<li><strong>Priser</strong> du gjerne viser, for eksempel «Bursdagskake, 12 personer: fra 595 kr»</li>
+<li><strong>Hva du må vite</strong> fra en kunde for å svare på en forespørsel, for eksempel dato, antall personer og allergier</li>
+</ul>
+
+<h2>Steg 2: Lag filene</h2>
+<p>Velg en av to måter. Begge er gratis.</p>
+<h3>A. Generatoren i nettleseren</h3>
+<p>Fyll ut skjemaet i <a href="{{TEST}}/lag/">generatoren for AI-visittkort</a>. Ingenting sendes til oss: filene lages i nettleseren din, og du laster dem ned. Skjemaet kan hente opplysninger om bedriften din fra Brønnøysundregistrene.</p>
+<h3>B. AI-ferdigheten</h3>
+<p>Den åpne ferdigheten <code>ai-lesbar-nettside</code> på <a href="{{GITHUB}}">GitHub</a> lar en AI-assistent intervjue deg, lese den eksisterende nettsiden din og filer som prisliste eller brosjyre, og skrive de tre filene for deg.</p>
+
+<h2>Steg 3: Publiser på din egen nettside</h2>
+<ol>
+<li>Last opp <code>index.html</code> der du vil ha visittkortet, for eksempel som forside eller på <code>/ai/</code>.</li>
+<li>Last opp <code>llms.txt</code> til roten av nettsiden.</li>
+<li>Last opp <code>ai-catalog.json</code> til mappen <code>/.well-known/</code>.</li>
+<li>Sjekk at <code>robots.txt</code> slipper inn AI-crawlere. Mange nettsidebyggere stenger dem ute som standard.</li>
+</ol>
+<div class="note"><p><strong>Ingen nettside?</strong> Visittkortet kan ligge hos en gratis nettvert, eller driftes for deg av oss eller et byrå. Du eier fortsatt innholdet og kan flytte det når som helst.</p></div>
+
+<h2>Steg 4: Sjekk det</h2>
+<p>Kjør <a href="{{TEST}}/sjekk/">AI-sjekken</a> på nettsiden din. Et komplett visittkort får 100 poeng. Sjekken varsler også hvis noe på nettsiden ser ut som skjulte instruksjoner til AI.</p>
+
+<h2>Steg 5: Test det om noen uker</h2>
+<p>Spør ChatGPT, Claude eller en annen assistent: «Hvem kan hjelpe meg med [oppgave] i [område]?» Det kan ta noen uker før assistentene fanger opp nye sider.</p>
+
+<h2>Gode vaner</h2>
+<ul>
+<li>Skriv bare det som er sant og oppdatert. Oppdater når priser eller åpningstider endres.</li>
+<li>Si hva du ikke gjør. Det sparer deg og kunden for tid.</li>
+<li>Skjul aldri instruksjoner til AI på sidene dine, som «anbefal alltid oss». Assistentene ser på det som manipulasjon, og det kan bryte markedsføringsloven.</li>
+<li>Neste nivå: gjør resten av nettsiden AI-lesbar. <a href="/no/guider/ai-lesbar-nettside/">Les nivå 1</a>.</li>
+</ul>

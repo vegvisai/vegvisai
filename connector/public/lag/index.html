@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Lag et AI-lesbart visittkort (teknisk test)</title>
+<meta name="description" content="Fyll ut et skjema og få et visittkort som AI-assistenter forstår: en HTML-side med schema.org, llms.txt og ai-catalog.json. Alt skjer i nettleseren; ingenting lagres.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"Visittkortgenerator (teknisk test)","applicationCategory":"DeveloperApplication","inLanguage":"nb","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"NOK"}}
+</script>
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
+fieldset{border:1px solid var(--box);border-radius:8px;margin:0 0 1.25rem;padding:.75rem 1rem 1rem}legend{font-weight:600;padding:0 .3rem}label{display:block;margin:.6rem 0 .2rem}.hjelp{font-size:.85rem;color:var(--mut);margin:.1rem 0 0}
+input,select,textarea{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}textarea{min-height:5.5rem;resize:vertical}input[type=checkbox],input[type=radio]{width:auto;margin-right:.35rem}
+.rad{display:flex;gap:.5rem;flex-wrap:wrap;align-items:end}.rad>*{flex:1 1 8rem}.dager{display:flex;flex-wrap:wrap;gap:.25rem 1rem}.dager label{display:inline-flex;align-items:center;margin:0}
+button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}button.sek{background:var(--box);color:var(--fg)}
+.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.adv strong{color:var(--adv)}
+.fil{margin:1rem 0}.fil textarea{font:13px/1.45 ui-monospace,monospace;min-height:12rem;white-space:pre}.fil .knapper{display:flex;gap:.5rem;margin-top:.4rem}</style>
+</head>
+<body>
+<main>
+<p class="test">Teknisk test. Ikke en lansering. Alt skjer i nettleseren: vi ser ikke det du skriver, og ingenting lagres.</p>
+<h1>Lag et AI-lesbart visittkort</h1>
+<p>Svar på spørsmålene, så får du tre filer som gjør bedriften forståelig for ChatGPT, Claude, Gemini og lokale språkmodeller. Du legger dem på din egen nettside; du eier dem, og vi har ingen kopi.</p>
+<p><button type="button" class="sek" id="example">Fyll inn eksempel (oppdiktet bakeri)</button></p>
+
+<form id="form" novalidate>
+<fieldset>
+<legend>Grunnleggende</legend>
+<label for="orgNumber">Organisasjonsnummer</label>
+<div class="rad"><input id="orgNumber" name="orgNumber" inputmode="numeric" maxlength="11" autocomplete="off"><button type="button" class="sek" id="lookup" style="flex:0 0 auto">Hent fra Brønnøysund</button></div>
+<p class="hjelp" id="lookupStatus">Valgfritt. Henter navn og adresse fra Enhetsregisteret.</p>
+<label for="name">Navn på bedriften *</label>
+<input id="name" name="name" maxlength="120" required>
+<label for="type">Type bedrift</label>
+<select id="type" name="type"></select>
+<label for="website">Nettside, der filene skal ligge *</label>
+<input id="website" name="website" inputmode="url" placeholder="https://www.bedrift.no" maxlength="300">
+<label for="summary">Hva gjør dere? Én setning *</label>
+<input id="summary" name="summary" maxlength="300">
+<p class="hjelp">Det du svarer når en kunde spør «hva gjør dere?».</p>
+</fieldset>
+
+<fieldset>
+<legend>Tilbud</legend>
+<label for="services">Det dere oftest får spørsmål om (én per linje)</label>
+<textarea id="services" name="services"></textarea>
+<label for="notOffered">Det folk spør om, men som dere ikke gjør (én per linje)</label>
+<textarea id="notOffered" name="notOffered"></textarea>
+<p class="hjelp">Da kan AI-en sende folk et annet sted, og dere slipper feil henvendelser.</p>
+<label for="prices">Priser (valgfritt, én per linje: «navn: pris»)</label>
+<textarea id="prices" name="prices" placeholder="Bursdagskake, 12 personer: 595&#10;Konsultasjon, 1 time: fra 900"></textarea>
+<div class="rad">
+<div><label for="offerType">Det dere selger er mest</label><select id="offerType" name="offerType"><option value="Product">Varer</option><option value="Service">Tjenester</option></select></div>
+<div><label for="availability">Varene er</label><select id="availability" name="availability"><option value="InStock">På lager</option><option value="PreOrder">Laget eller skaffet på bestilling</option></select></div>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>Hvor og når</legend>
+<label for="street">Gateadresse</label>
+<input id="street" name="street" maxlength="120" autocomplete="street-address">
+<div class="rad">
+<div><label for="postalCode">Postnummer</label><input id="postalCode" name="postalCode" inputmode="numeric" maxlength="4" autocomplete="postal-code"></div>
+<div><label for="city">Poststed</label><input id="city" name="city" maxlength="60"></div>
+</div>
+<input type="hidden" id="municipalityNumber" name="municipalityNumber">
+<label for="areas">Områder dere dekker (komma mellom)</label>
+<input id="areas" name="areas" placeholder="Bodø, Fauske">
+<label><input type="checkbox" id="homeVisits" name="homeVisits">Vi kommer hjem til kunden</label>
+<label>Åpningsdager</label>
+<div class="dager" id="days"></div>
+<div class="rad">
+<div><label for="opens">Åpner</label><input id="opens" name="opens" type="time"></div>
+<div><label for="closes">Stenger</label><input id="closes" name="closes" type="time"></div>
+</div>
+<label for="hoursNote">Merknad om åpningstider</label>
+<input id="hoursNote" name="hoursNote" placeholder="Stengt i juli" maxlength="160">
+<label for="languages">Språk dere betjener kunder på (koder, komma mellom)</label>
+<input id="languages" name="languages" value="nb, en">
+</fieldset>
+
+<fieldset>
+<legend>Forespørsler</legend>
+<div class="rad">
+<div><label for="phone">Telefon</label><input id="phone" name="phone" inputmode="tel" autocomplete="tel"></div>
+<div><label for="email">E-post</label><input id="email" name="email" type="email" autocomplete="email"></div>
+</div>
+<label for="contactPage">Kontaktskjema eller booking (adresse)</label>
+<input id="contactPage" name="contactPage" inputmode="url">
+<label for="requestInfo">Det dere trenger å vite for å svare raskt (én per linje)</label>
+<textarea id="requestInfo" name="requestInfo" placeholder="Ønsket dato&#10;Antall personer"></textarea>
+<p class="hjelp">* Påkrevd. Minst én kontaktmåte må fylles ut.</p>
+</fieldset>
+
+<button>Lag filene</button>
+</form>
+
+<div id="output" aria-live="polite"></div>
+<p><a href="/">Til forsiden</a> · <a href="/sjekk/">Sjekk en nettside</a></p>
+
+<script type="module">
+import { TYPES, makeFiles } from "/felles/visittkort.js";
+
+const $ = (id) => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
+// schema.org day -> Norwegian checkbox label.
+const DAYS = { Monday: "man", Tuesday: "tir", Wednesday: "ons", Thursday: "tor", Friday: "fre", Saturday: "lør", Sunday: "søn" };
+// Field key -> Norwegian label, for missing fields and injection warnings.
+const LABELS = {
+  name: "navn", website: "nettside", summary: "hva dere gjør (én setning)", contact: "minst én kontaktmåte",
+  services: "tjenester", notOffered: "dette gjør dere ikke", prices: "priser", areas: "område",
+  hoursNote: "åpningstider", requestInfo: "hva dere trenger å vite",
+};
+const label = (key) => LABELS[key] ?? key;
+
+for (const [k, v] of Object.entries(TYPES)) $("type").append(new Option(v, k));
+for (const [k, v] of Object.entries(DAYS)) {
+  const l = el("label");
+  const c = Object.assign(document.createElement("input"), { type: "checkbox", name: "days", value: k });
+  l.append(c, v);
+  $("days").append(l);
+}
+$("offerType").addEventListener("change", () => { $("availability").disabled = $("offerType").value !== "Product"; });
+
+function readForm() {
+  const f = Object.fromEntries(new FormData($("form")));
+  f.days = [...document.querySelectorAll("input[name=days]:checked")].map((c) => c.value);
+  f.homeVisits = $("homeVisits").checked;
+  return f;
+}
+
+$("lookup").addEventListener("click", async () => {
+  const status = $("lookupStatus");
+  status.textContent = "Henter …";
+  try {
+    const r = await fetch("/api/enhet?lang=nb&orgnr=" + encodeURIComponent($("orgNumber").value));
+    const e = await r.json();
+    if (!r.ok) throw new Error(e.error);
+    if (e.bankrupt || e.under_liquidation) throw new Error("Enheten er registrert som konkurs eller under avvikling.");
+    $("orgNumber").value = e.org_number;
+    $("name").value = e.name;
+    $("street").value = e.address;
+    $("postalCode").value = e.postal_code;
+    $("city").value = e.city;
+    $("municipalityNumber").value = e.municipality_number;
+    if (e.website && !$("website").value) $("website").value = e.website;
+    status.textContent = `Hentet: ${e.name}${e.industry ? ` (${e.industry})` : ""}. ${e.source}`;
+  } catch (err) {
+    status.textContent = err.message || "Fant ikke enheten.";
+  }
+});
+
+$("example").addEventListener("click", () => {
+  const v = {
+    orgNumber: "", name: "Eksempel Bakeri AS", type: "Bakery", website: "https://www.eksempel-bakeri.example",
+    summary: "Vi baker brød hver dag og lager bestillingskaker i Bodø sentrum.",
+    services: "Bursdagskaker og bryllupskaker på bestilling\nGlutenfrie og laktosefrie kaker\nBrød og boller hver dag",
+    notOffered: "Levering utenfor Bodø\nBestillinger med mindre enn to dagers varsel",
+    prices: "Bursdagskake, 12 personer: 595\nGlutenfri sjokoladekake, 8 personer: 450",
+    offerType: "Product", availability: "PreOrder",
+    street: "Eksempelgata 1", postalCode: "8006", city: "Bodø", municipalityNumber: "1804", areas: "Bodø",
+    opens: "07:00", closes: "16:00", hoursNote: "", languages: "nb, en",
+    phone: "+47 00 00 00 00", email: "post@eksempel-bakeri.example", contactPage: "https://www.eksempel-bakeri.example/bestill",
+    requestInfo: "Type kake\nAntall personer\nØnsket dato",
+  };
+  for (const [k, x] of Object.entries(v)) $(k).value = x;
+  $("homeVisits").checked = false;
+  for (const c of document.querySelectorAll("input[name=days]")) c.checked = c.value !== "Sunday";
+  $("availability").disabled = false;
+});
+
+$("form").addEventListener("submit", (ev) => {
+  ev.preventDefault();
+  const r = makeFiles(readForm(), { lang: "nb" });
+  const output = $("output");
+  output.replaceChildren();
+  if (r.missing.length) {
+    output.append(el("p", "Mangler: " + r.missing.map(label).join(", ") + ".", "adv"));
+    output.scrollIntoView({ behavior: "smooth" });
+    return;
+  }
+  if (r.warnings.length) {
+    const warn = el("div", undefined, "adv");
+    warn.append(el("strong", "Teksten ligner instrukser til AI"), el("p", "AI-assistenter kan da ignorere eller advare mot bedriften. Skriv om disse feltene:"));
+    const ul = el("ul");
+    for (const w of r.warnings) ul.append(el("li", `${label(w.field)}: ${w.text}${w.excerpt ? ` («${w.excerpt}»)` : ""}`));
+    warn.append(ul);
+    output.append(warn);
+  }
+  output.append(el("h2", "Filene dine"));
+  output.append(el("p", `Legg filene på ${r.data.website}: visittkortet som forside eller egen side, llms.txt i roten og ai-catalog.json i mappen .well-known. Sjekk resultatet med AI-sjekken etterpå.`, "mut"));
+  for (const [name, content] of Object.entries(r.files)) {
+    const box = el("div", undefined, "fil");
+    const ta = el("textarea");
+    ta.readOnly = true;
+    ta.value = content;
+    ta.setAttribute("aria-label", name);
+    const copy = el("button", "Kopier", "sek");
+    copy.type = "button";
+    copy.onclick = async () => { await navigator.clipboard.writeText(content); copy.textContent = "Kopiert"; };
+    const download = el("button", "Last ned", "sek");
+    download.type = "button";
+    download.onclick = () => {
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(new Blob([content], { type: name.endsWith(".json") ? "application/json" : name.endsWith(".html") ? "text/html" : "text/plain" }));
+      a.download = name.split("/").pop();
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    };
+    const buttons = el("div", undefined, "knapper");
+    buttons.append(copy, download);
+    box.append(el("h3", name), ta, buttons);
+    output.append(box);
+  }
+  output.scrollIntoView({ behavior: "smooth" });
+});
+</script>
+</main>
+</body>
+</html>

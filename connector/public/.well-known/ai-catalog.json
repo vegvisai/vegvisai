@@ -1,0 +1,64 @@
+{
+  "specVersion": "1.0",
+  "host": {
+    "displayName": "VegvisAI guide (technical test)",
+    "identifier": "veiviser-test"
+  },
+  "entries": [
+    {
+      "identifier": "urn:air:veiviser-test:mcp:veiviser",
+      "type": "application/mcp",
+      "url": "/mcp",
+      "description": "Guide connector, read-only: find a business (test), Norwegian business lookup in Brønnøysund, public help, AI check of a website.",
+      "tags": [
+        "guide",
+        "norway"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:data:public-no",
+      "type": "application/json",
+      "url": "/index/public-no.json",
+      "description": "Open index (ODbL) of public services in Norway: state agencies by topic and the websites of all 357 municipalities. Links only.",
+      "tags": [
+        "index",
+        "public-services",
+        "norway"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:web:sjekk",
+      "type": "text/html",
+      "url": "/sjekk/",
+      "description": "AI check: how does a website look to AI assistants? (Norwegian page)",
+      "tags": [
+        "ai-check",
+        "tool"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:web:lag",
+      "type": "text/html",
+      "url": "/lag/",
+      "description": "Make an AI-readable business card in the browser (Norwegian page).",
+      "tags": [
+        "business-card",
+        "tool"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:web:eksempel",
+      "type": "text/html",
+      "url": "/eksempel/",
+      "tags": [
+        "example",
+        "business-card"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:llms",
+      "type": "text/plain",
+      "url": "/llms.txt"
+    }
+  ]
+}

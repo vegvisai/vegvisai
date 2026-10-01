@@ -1,0 +1,26 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Bursdagskake, 12 personer",
+  "sku": "KAKE-BURSDAG-12",
+  "category": "Kaker > Bestillingskaker",
+  "description": "Sjokoladekake med smørkrem. Kan lages glutenfri eller laktosefri.",
+  "brand": { "@type": "Brand", "name": "Eksempel Bakeri" },
+  "offers": {
+    "@type": "Offer",
+    "price": "595.00",
+    "priceCurrency": "NOK",
+    "availability": "https://schema.org/PreOrder",
+    "seller": { "@id": "https://www.eksempel-bakeri.example/#bedrift" },
+    "areaServed": { "@type": "City", "name": "Bodø" }
+  },
+  "potentialAction": {
+    "@type": "OrderAction",
+    "name": "Bestill kaken",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.eksempel-bakeri.example/bestill?kake=bursdag-12&dato={dato}&tekst={tekst}",
+      "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
+    }
+  }
+}

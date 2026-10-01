@@ -1,0 +1,39 @@
+<!-- title: AI-lesbar nettside · Guider · VegvisAI | description: En sjekkliste for å gjøre hele nettsiden lesbar for AI-assistenter: crawlere, nettstedskart, titler, schema.org, handlingslenker, tydelige vilkår og ingen skjulte instruksjoner. -->
+<p class="eyebrow">Nivå 1</p>
+<h1>Gjør nettsiden din AI-lesbar</h1>
+<p class="lead">En AI-lesbar nettside virker med alle assistenter i dag, uten at kunden må installere noe. Den er grunnmuren for alt annet, og gir mest verdi for minst innsats.</p>
+
+<h2>Sjekklisten</h2>
+<table>
+<thead><tr><th>#</th><th>Gjør dette</th><th>Hvorfor</th><th>I AI-sjekken</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Slipp inn AI-crawlere via <code>robots.txt</code></td><td>Ellers ser de ingenting</td><td>Ja</td></tr>
+<tr><td>2</td><td>Ha et nettstedskart (sitemap) med riktige <code>lastmod</code>-datoer</td><td>Viser hva som er nytt</td><td>Ja</td></tr>
+<tr><td>3</td><td>Gi hver side sin egen tittel og beskrivelse</td><td>AI-en forstår siden uten å lese alt</td><td>Ja</td></tr>
+<tr><td>4</td><td>Beskriv bedriften, produktene, tjenestene og prisene med schema.org</td><td>Gjør pris, vilkår og tilgjengelighet entydige</td><td>Ja</td></tr>
+<tr><td>5</td><td>Legg innholdet i HTML-en, ikke bare i JavaScript</td><td>Mange agenter kjører ikke JavaScript</td><td>Delvis</td></tr>
+<tr><td>6</td><td>Én side per ting kundene spør om</td><td>AI-en kan vise til en presis side, ikke forsiden</td><td>Kommer</td></tr>
+<tr><td>7</td><td>Handlingslenker med parametere (se under)</td><td>Lar AI-en forberede en bestilling eller booking uten MCP</td><td>Kommer</td></tr>
+<tr><td>8</td><td>Vis vilkårene: pris, levering, retur, avbestilling, åpningstider</td><td>AI-en svarer riktig i stedet for å gjette</td><td>Kommer</td></tr>
+<tr><td>9</td><td>Skriv alt som vanlig synlig tekst, uten skjulte instruksjoner til AI</td><td>Skjulte instruksjoner ser ut som manipulasjon</td><td>Ja</td></tr>
+</tbody>
+</table>
+
+<h2>Handlingslenker: la AI-en forberede neste steg</h2>
+<p>En agent kan lage en lenke som åpner et ferdig utfylt skjema på nettsiden din. Kunden klikker og bekrefter, og ingen data går via oss. Eksempler:</p>
+<pre><code>eksempelbakeri.no/bestill?produkt=bursdagskake&amp;dato=2026-10-03&amp;antall=12&amp;uten=notter
+eksempelbakeri.no/sok?kategori=kaker&amp;uten=notter</code></pre>
+<p>Beskriv lenkemønsteret på siden, og i schema.org med <code>potentialAction</code> (for eksempel <code>OrderAction</code> eller <code>ReserveAction</code> med en <code>EntryPoint</code> og <code>urlTemplate</code>). Da vet agentene hvordan de skal lage den.</p>
+
+<h2>Produkter og tjenester som krever valg</h2>
+<p>For ting som krever valg, vilkår eller vurdering, som kaker på bestilling, forsikring, reiser eller produkter for bedriftsmarkedet:</p>
+<ul>
+<li><strong>Beslutningssider:</strong> «slik velger du», med kriterier og konsekvenser</li>
+<li><strong>Oversiktstabeller:</strong> for eksempel hvilke kaker som finnes uten nøtter, gluten eller laktose</li>
+<li><strong>Priser som tabeller eller regler,</strong> ikke bare i en priskalkulator laget med JavaScript</li>
+<li><strong>Hvem tjenesten er for:</strong> område, leveringstid og begrensninger</li>
+<li><strong>Vanlige spørsmål</strong> merket med <code>FAQPage</code></li>
+<li><strong>En ren tekstversjon</strong> av viktige sider, oppført i <code>llms.txt</code></li>
+</ul>
+
+<p>Neste: <a href="/no/guider/ai-filer/">publiser llms.txt og ai-catalog.json</a>.</p>

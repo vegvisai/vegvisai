@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>(Oppdiktet) Send bestilling til Eksempel Bakeri AS</title>
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}</style>
+</head>
+<body>
+<main>
+<p class="test"><strong>Test:</strong> Eksempel Bakeri AS er oppdiktet. Ingenting sendes, og ingenting lagres.</p>
+<h1>Bestilling (forhåndsutfylt)</h1>
+<p>Slik ville en AI-assistent fylt ut forespørselen. Hos en ekte bedrift ville du selv kontrollert og sendt den.</p>
+<dl id="felt" class="boks"></dl>
+<p><a href="/eksempel/">Tilbake til visittkortet</a></p>
+<script>
+const p=new URLSearchParams(location.search),dl=document.getElementById("felt");
+for(const k of ["emne","kake","personer","dato","beskrivelse"]){const dt=document.createElement("dt");dt.textContent=k;const dd=document.createElement("dd");dd.textContent=p.get(k)||"(tomt)";dl.append(dt,dd);}
+</script>
+</main>
+</body>
+</html>

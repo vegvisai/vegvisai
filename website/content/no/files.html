@@ -1,0 +1,64 @@
+<!-- title: llms.txt og ai-catalog.json · Guider · VegvisAI | description: De to små filene som lar AI-agenter og åpne veivisere finne bedriften din: hva som skal stå i llms.txt og ai-catalog.json, med eksempler. -->
+<p class="eyebrow">Nivå 2</p>
+<h1>llms.txt og ai-catalog.json</h1>
+<p class="lead">To små filer som lar agenter og åpne veivisere finne deg og forstå hva du tilbyr. Har du laget et AI-visittkort, har du allerede begge.</p>
+
+<h2><code>/llms.txt</code>: en oversikt for språkmodeller</h2>
+<p>Ren Markdown i roten av nettsiden din: hvem du er, hva du gjør og ikke gjør, priser, kontakt og lenker til de viktigste sidene dine. Hold det kort og saklig. Eksempel for det oppdiktede Eksempel Bakeri AS:</p>
+<pre><code># Eksempel Bakeri AS
+
+&gt; Bakeri i Bodø med brød, boller og kaker på bestilling.
+
+Område: Bodø. Åpningstider: mandag–lørdag 07:00–16:00. Priser i NOK inkludert mva.
+
+## Dette gjør vi
+- Kaker på bestilling
+- Brød og boller
+
+## Dette gjør vi ikke
+- Bryllupskaker over 100 personer
+
+## Priser
+- Bursdagskake, 12 personer: 595
+
+## Kontakt
+- [Send forespørsel](https://eksempelbakeri.no/kontakt/)</code></pre>
+
+<h2><code>/.well-known/ai-catalog.json</code>: en katalog for agenter</h2>
+<p>En JSON-fil i det åpne AI Catalog-formatet som lister oppføringene dine: visittkortsiden, og etter hvert tjenester eller AI-verktøy. Utvidelsen <code>ai.vegvis.local/v1</code> legger til lokale fakta som veivisere bruker til å finne riktig bedrift: tjenester, område, språk og hvordan du kontaktes.</p>
+<pre><code>{
+  "specVersion": "1.0",
+  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempelbakeri.no" },
+  "entries": [{
+    "identifier": "urn:air:eksempelbakeri.no:web:visittkort",
+    "type": "text/html",
+    "url": "https://eksempelbakeri.no/",
+    "description": "Bakeri i Bodø med brød, boller og kaker på bestilling.",
+    "extensions": {
+      "ai.vegvis.local/v1": {
+        "services": ["Kaker på bestilling", "Brød og boller"],
+        "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"] },
+        "languages": ["nb", "en"],
+        "actions": { "contact": "https://eksempelbakeri.no/kontakt/" },
+        "llms_txt": "https://eksempelbakeri.no/llms.txt"
+      }
+    }
+  }]
+}</code></pre>
+
+<h3>Feltene i <code>ai.vegvis.local/v1</code></h3>
+<table>
+<thead><tr><th>Felt</th><th>Hva</th></tr></thead>
+<tbody>
+<tr><td><code>services</code></td><td>Hva du tilbyr, i korte stikkord</td></tr>
+<tr><td><code>area.type</code></td><td><code>physical</code> (kundene kommer til deg), <code>at-customer</code> (du drar til dem) eller <code>digital</code></td></tr>
+<tr><td><code>area.names</code>, <code>area.municipality_numbers</code></td><td>Hvor du holder til. Kommunenummer gjør treffene presise</td></tr>
+<tr><td><code>area.delivery_countries</code></td><td>Land du leverer til, hvis noen</td></tr>
+<tr><td><code>languages</code></td><td>Språk du betjener kunder på</td></tr>
+<tr><td><code>actions</code></td><td>Kontaktside, e-post og telefon. Senere: lenker for bestilling og booking</td></tr>
+<tr><td><code>llms_txt</code></td><td>Hvor <code>llms.txt</code>-filen din ligger</td></tr>
+</tbody>
+</table>
+<div class="note"><p>Formatene er utkast og kommer til å endre seg. Agenter leser dem med romslighet, og generatoren og ferdigheten oppdateres når formatene endres.</p></div>
+
+<p>Neste, bare hvis det lønner seg: <a href="/no/guider/mcp/">din egen AI-tjeneste med MCP</a>.</p>

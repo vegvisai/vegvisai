@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eksempel Bakeri AS: kaker og brød i Bodø</title>
+<meta name="description" content="Eksempel Bakeri AS baker brød og bestillingskaker i Bodø. Send forespørsel med type kake, antall personer og dato.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Bakery",
+  "@id": "https://www.eksempel-bakeri.example/#bedrift",
+  "name": "Eksempel Bakeri AS",
+  "description": "Baker brød og bestillingskaker.",
+  "url": "https://www.eksempel-bakeri.example",
+  "telephone": "+47 00 00 00 00",
+  "address": { "@type": "PostalAddress", "streetAddress": "Eksempelgata 1", "postalCode": "8006", "addressLocality": "Bodø", "addressCountry": "NO" },
+  "areaServed": { "@type": "City", "name": "Bodø" },
+  "availableLanguage": ["nb", "en"],
+  "openingHoursSpecification": [ { "@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"], "opens": "07:00", "closes": "16:00" } ],
+  "makesOffer": [
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Bursdagskake, 12 personer" }, "price": "595.00", "priceCurrency": "NOK", "availability": "https://schema.org/PreOrder" },
+    { "@type": "Offer", "itemOffered": { "@type": "Product", "name": "Glutenfri sjokoladekake, 8 personer" }, "price": "450.00", "priceCurrency": "NOK", "availability": "https://schema.org/PreOrder" }
+  ],
+  "potentialAction": {
+    "@type": "OrderAction",
+    "name": "Send kakebestilling",
+    "target": { "@type": "EntryPoint", "urlTemplate": "https://www.eksempel-bakeri.example/bestill?emne={emne}&kake={kake}&personer={personer}&dato={dato}&beskrivelse={beskrivelse}" }
+  }
+}
+</script>
+</head>
+<body>
+<main>
+
+<h1>Eksempel Bakeri AS</h1>
+<p>Vi baker brød hver dag og lager bestillingskaker. Butikk i Bodø sentrum.</p>
+<h2>Dette lager vi</h2>
+<ul><li>Bursdagskaker og bryllupskaker på bestilling</li><li>Glutenfrie og laktosefrie kaker</li><li>Brød og boller hver dag</li></ul>
+<h2>Dette gjør vi ikke</h2>
+<ul><li>Levering utenfor Bodø</li><li>Bestillinger med mindre enn to dagers varsel</li></ul>
+<h2>Priser</h2>
+<p>Bursdagskake for 12 personer: 595 kr. Glutenfri sjokoladekake for 8 personer: 450 kr.</p>
+<h2>Send bestilling</h2>
+<p>Oppgi type kake, antall personer og dato, så svarer vi innen én arbeidsdag. <a href="/bestill">Send forespørsel</a>.</p>
+<p>Lenken kan fylles ut på forhånd: <code>/bestill?emne=…&amp;kake=…&amp;personer=…&amp;dato=…&amp;beskrivelse=…</code></p>
+<h2>Åpningstider og adresse</h2>
+<p>Mandag–lørdag 07–16. Eksempelgata 1, 8006 Bodø.</p>
+
+</main>
+</body>
+</html>

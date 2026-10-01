@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 64" role="img" aria-label="VegvisAI"><title>VegvisAI</title><g>
+<path d="M6 22 L22 54 L42 20" stroke="#1B45E0" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#1B45E0" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#0E1424" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#0E1424"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#FFFFFF"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#FFFFFF"/>
+</g><text x="76" y="45" font-family="Space Grotesk, IBM Plex Sans, Arial, sans-serif" font-size="40" font-weight="700" letter-spacing="-1.2" fill="#0E1424">VegvisAI</text></svg>

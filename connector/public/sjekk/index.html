@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>AI-sjekk: hvordan ser nettstedet ut for AI? (teknisk test)</title>
+<meta name="description" content="Gratis sjekk av hvordan et nettsted ser ut for AI-assistenter: robots.txt, sitemap, schema.org, llms.txt, ai-catalog.json og tekst som ligner prompt-injeksjon.">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"AI-sjekk (teknisk test)","applicationCategory":"DeveloperApplication","inLanguage":"nb","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"NOK"}}
+</script>
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
+form{display:flex;gap:.5rem;flex-wrap:wrap}#url{flex:1 1 16rem;font:inherit;padding:.5rem .7rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg);min-width:0}button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}button:disabled{opacity:.6;cursor:wait}
+.poeng{font-size:3rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.adv strong{color:var(--adv)}
+table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto}th,td{text-align:left;padding:.35rem .5rem;border-bottom:1px solid var(--box);vertical-align:top}td{word-break:break-word}</style>
+</head>
+<body>
+<main>
+<p class="test">Teknisk test. Ikke en lansering.</p>
+<h1>AI-sjekk</h1>
+<p>Hvordan ser nettstedet ut for ChatGPT, Claude, Gemini og lokale språkmodeller? Sjekken leser bare offentlige filer, slik en søkemotor gjør, og respekterer <code>robots.txt</code>.</p>
+<form id="skjema">
+<label for="url" class="mut" style="flex-basis:100%">Nettadresse</label>
+<input id="url" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.bedrift.no" required>
+<button id="knapp">Sjekk</button>
+</form>
+<p id="status" class="mut" aria-live="polite"></p>
+<div id="resultat"></div>
+
+<h2>Hva sjekken ser på</h2>
+<table>
+<tr><th>Sjekk</th><th>Poeng</th></tr>
+<tr><td><code>robots.txt</code> blokkerer ingen av de vanlige AI-robotene</td><td>20</td></tr>
+<tr><td>Sitemap finnes, og høyst halvparten av sidene er datert mer enn to år tilbake</td><td>10 + 10</td></tr>
+<tr><td>Hver side har egen tittel; alle sider har meta-beskrivelse</td><td>10 + 5</td></tr>
+<tr><td>Bedriften er beskrevet med schema.org (Organization, LocalBusiness e.l.)</td><td>10</td></tr>
+<tr><td>Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)</td><td>25</td></tr>
+<tr><td><code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code></td><td>5 + 5</td></tr>
+</table>
+<p class="mut">Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. I tillegg ser sjekken etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene.</p>
+<p class="mut">Vi lagrer ikke adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.</p>
+<p><a href="/">Til forsiden</a> · <a href="/lag/">Lag et AI-lesbart visittkort</a></p>
+
+<script>
+// Shows the AI check for the Norwegian page: asks the API for Norwegian texts (lang=nb).
+const $ = (id) => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
+const yesNo = (b) => (b ? "ja" : "nei");
+
+$("skjema").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const url = $("url").value.trim();
+  $("knapp").disabled = true;
+  $("resultat").replaceChildren();
+  $("status").textContent = "Sjekker … dette tar 5–15 sekunder, fordi vi venter litt mellom hver forespørsel til nettstedet.";
+  try {
+    const res = await fetch("/api/sjekk?lang=nb&url=" + encodeURIComponent(url));
+    const r = await res.json();
+    if (!res.ok) throw new Error(r.error || "Sjekken feilet.");
+    show(r);
+    $("status").textContent = "";
+  } catch (e) {
+    $("status").textContent = e.message;
+  } finally {
+    $("knapp").disabled = false;
+  }
+});
+
+function show(r) {
+  const out = $("resultat");
+  const top = el("div", undefined, "boks");
+  top.append(el("div", String(r.score), "poeng"), el("div", "av 100 for " + r.site, "mut"));
+  out.append(top);
+
+  if (r.injection.length) {
+    const warn = el("div", undefined, "adv");
+    warn.append(el("strong", "Mulig prompt-injeksjon"), el("p", "Tekst på nettstedet ligner instrukser til AI-assistenter. Den vises her som sitat og blir ikke fulgt."));
+    const ul = el("ul");
+    for (const f of r.injection) ul.append(el("li", `${f.source}: ${f.text}${f.excerpt ? ` («${f.excerpt}»)` : ""}`));
+    warn.append(ul);
+    out.append(warn);
+  }
+
+  out.append(el("h2", "Tiltak"));
+  const ol = el("ol");
+  for (const a of r.actions) ol.append(el("li", a));
+  out.append(r.actions.length ? ol : el("p", "Ingen åpenbare tiltak."));
+
+  out.append(el("h2", "Funn"));
+  const table = el("table");
+  const row = (a, b) => { const tr = el("tr"); tr.append(el("td", a), el("td", b)); table.append(tr); };
+  row("robots.txt", (r.robots.exists ? "finnes" : "mangler") + "; blokkerte AI-roboter: " + (r.robots.blocked.join(", ") || "ingen"));
+  row("Sitemap", r.sitemap.url_count + " adresser");
+  row("llms.txt", yesNo(r.ai_files["llms.txt"]));
+  row("ai-catalog.json", yesNo(r.ai_files["ai-catalog.json"]) + " (gyldig: " + yesNo(r.ai_files["ai-catalog.json valid"]) + ")");
+  out.append(table);
+
+  out.append(el("h2", "Stikkprøver"));
+  const sample = el("table");
+  const head = el("tr");
+  for (const h of ["Side", "Status", "Tittel", "Strukturerte data"]) head.append(el("th", h));
+  sample.append(head);
+  for (const p of r.pages) {
+    const tr = el("tr");
+    tr.append(el("td", p.url), el("td", p.skipped ? "hoppet over" : String(p.status)), el("td", p.skipped || p.title || "(ingen)"), el("td", (p.jsonld_types || []).join(", ") || "ingen"));
+    sample.append(tr);
+  }
+  out.append(sample);
+  out.append(el("p", `Tidspunkt: ${r.time}. Stikkprøve, ikke en fullstendig gjennomgang.`, "mut"));
+}
+
+const preset = new URLSearchParams(location.search).get("url");
+if (preset) { $("url").value = preset; $("skjema").requestSubmit(); }
+</script>
+</main>
+</body>
+</html>

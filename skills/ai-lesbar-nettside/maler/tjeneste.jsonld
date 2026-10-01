@@ -1,0 +1,24 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Bestillingskaker til selskap",
+  "serviceType": "Kakebestilling",
+  "provider": { "@id": "https://www.eksempel-bakeri.example/#bedrift" },
+  "areaServed": { "@type": "City", "name": "Bodø" },
+  "offers": {
+    "@type": "Offer",
+    "description": "Pris per kake etter størrelse; minst to dagers varsel",
+    "price": "450.00",
+    "priceCurrency": "NOK"
+  },
+  "termsOfService": "https://www.eksempel-bakeri.example/vilkar",
+  "potentialAction": {
+    "@type": "OrderAction",
+    "name": "Send kakebestilling",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": "https://www.eksempel-bakeri.example/bestill?kake={kake}&personer={personer}&dato={dato}",
+      "actionPlatform": ["https://schema.org/DesktopWebPlatform", "https://schema.org/MobileWebPlatform"]
+    }
+  }
+}

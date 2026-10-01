@@ -1,0 +1,39 @@
+<!-- title: AI-readable website · Guides · VegvisAI | description: A checklist for making your whole website readable for AI assistants: crawlers, sitemap, titles, schema.org, action links, clear terms and no hidden instructions. -->
+<p class="eyebrow">Level 1</p>
+<h1>Make your website AI-readable</h1>
+<p class="lead">An AI-readable website works with every assistant today, without the customer installing anything. It is the foundation for everything else, and gives the most value for the least effort.</p>
+
+<h2>The checklist</h2>
+<table>
+<thead><tr><th>#</th><th>Do this</th><th>Why</th><th>In the AI check</th></tr></thead>
+<tbody>
+<tr><td>1</td><td>Let AI crawlers in through <code>robots.txt</code></td><td>Otherwise they see nothing</td><td>Yes</td></tr>
+<tr><td>2</td><td>Keep a sitemap with correct <code>lastmod</code> dates</td><td>Tells what is new</td><td>Yes</td></tr>
+<tr><td>3</td><td>Give every page its own title and description</td><td>The AI understands the page without reading all of it</td><td>Yes</td></tr>
+<tr><td>4</td><td>Describe the business, products, services and prices with schema.org</td><td>Makes price, terms and availability unambiguous</td><td>Yes</td></tr>
+<tr><td>5</td><td>Put content in the HTML, not only in JavaScript</td><td>Many agents do not run JavaScript</td><td>Partly</td></tr>
+<tr><td>6</td><td>One page per thing customers ask about</td><td>The AI can cite a precise page, not your front page</td><td>Coming</td></tr>
+<tr><td>7</td><td>Action links with parameters (below)</td><td>Lets the AI prepare an order or booking without MCP</td><td>Coming</td></tr>
+<tr><td>8</td><td>Show terms: price, delivery, returns, cancellation, opening hours</td><td>The AI answers correctly instead of guessing</td><td>Coming</td></tr>
+<tr><td>9</td><td>Write everything as normal visible text, with no hidden instructions to AI</td><td>Hidden instructions look like manipulation</td><td>Yes</td></tr>
+</tbody>
+</table>
+
+<h2>Action links: let the AI prepare the next step</h2>
+<p>An agent can build a link that opens a filled-in form on your site. The customer clicks and confirms, and no data passes through us. Examples:</p>
+<pre><code>eksempelbakeri.no/bestill?produkt=bursdagskake&amp;dato=2026-10-03&amp;antall=12&amp;uten=notter
+eksempelbakeri.no/sok?kategori=kaker&amp;uten=notter</code></pre>
+<p>Describe the link pattern on the page, and in schema.org with <code>potentialAction</code> (for example <code>OrderAction</code> or <code>ReserveAction</code> with an <code>EntryPoint</code> and <code>urlTemplate</code>). Then agents know how to build it.</p>
+
+<h2>Products and services that need choices</h2>
+<p>For things that need choices, terms or judgement, such as cakes to order, insurance, travel or B2B products:</p>
+<ul>
+<li><strong>Decision pages:</strong> «how to choose», with criteria and consequences</li>
+<li><strong>Overview tables:</strong> for example which cakes are available without nuts, gluten or lactose</li>
+<li><strong>Prices as tables or rules,</strong> not only in a calculator built with JavaScript</li>
+<li><strong>Who the service is for:</strong> area, lead times and limits</li>
+<li><strong>Frequent questions</strong> marked up with <code>FAQPage</code></li>
+<li><strong>A plain text version</strong> of important pages, listed in <code>llms.txt</code></li>
+</ul>
+
+<p>Next: <a href="/docs/ai-files/">publish llms.txt and ai-catalog.json</a>.</p>

@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Get started · Guides · VegvisAI</title>
+<meta name="description" content="Make an AI business card in about 15 minutes: one page and two small files that tell every AI who you are, what you do, where, and how to reach you.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="/docs/get-started/"><link rel="alternate" hreflang="nb" href="/no/guider/kom-i-gang/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+<div class="wrap">
+<nav class="nav" aria-label="Main">
+<a class="brand" href="/" aria-label="VegvisAI"><svg viewBox="0 0 64 64" aria-hidden="true">
+<path d="M6 22 L22 54 L42 20" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#FFFFFF"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#0E1424"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#0E1424"/>
+</svg><span aria-hidden="true">egvisAI</span></a>
+<div class="links">
+<a href="/#how">How it works</a>
+<a href="/docs/">Guides</a>
+<a href="/why/">Background</a>
+<a href="/ownership/">Ownership</a>
+<a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="/no/guider/kom-i-gang/" hreflang="nb" lang="nb">Norsk</a>
+</div>
+</nav>
+<p class="eyebrow nameline">Vegvis · /ˈʋeːɡˌʋiːs/ or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.</p>
+</div>
+</header>
+<main id="main">
+<div class="wrap docs"><nav class="docnav" aria-label="Guides"><p class="eyebrow">Guides</p><ul><li><a href="/docs/">Overview</a></li><li><a href="/docs/get-started/" aria-current="page">Get started</a></li><li><a href="/docs/ai-readable-website/">AI-readable website</a></li><li><a href="/docs/ai-files/">llms.txt and ai-catalog.json</a></li><li><a href="/docs/mcp/">Your own AI service (MCP)</a></li><li><a href="/docs/developers/">For developers</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code and templates on GitHub</a></p></nav><article class="prose"><p class="eyebrow">Level 0 · start here</p>
+<h1>Get started: your AI business card</h1>
+<p class="lead">One page and two small files that tell every AI who you are, what you do and don't do, where you work, and how a customer reaches you. It takes about 15 minutes, and for many businesses it is all they need.</p>
+
+<h2>What you end up with</h2>
+<table>
+<thead><tr><th>File</th><th>Where it goes</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>index.html</code></td><td>Your website, for example at <code>/</code> or <code>/ai/</code></td><td>The business card itself: readable for people, with schema.org data for machines</td></tr>
+<tr><td><code>llms.txt</code></td><td>The root: <code>/llms.txt</code></td><td>A clean text overview for language models</td></tr>
+<tr><td><code>ai-catalog.json</code></td><td><code>/.well-known/ai-catalog.json</code></td><td>Tells agents and open guides where your card and services are</td></tr>
+</tbody>
+</table>
+
+<h2>Step 1: Collect the facts</h2>
+<p>Have these ready. Short and concrete beats long and polished.</p>
+<ul>
+<li><strong>Name</strong> and, in Norway, the organisation number</li>
+<li><strong>One sentence</strong> on what you do</li>
+<li><strong>What you offer</strong>, and just as important, <strong>what you don't</strong>. It stops the AI from sending you the wrong customers</li>
+<li><strong>Area</strong>: the municipalities you serve, whether you come to the customer, and whether you deliver</li>
+<li><strong>Opening hours</strong>, <strong>phone</strong>, <strong>email</strong> and your <strong>contact or booking page</strong></li>
+<li><strong>Prices</strong> you are happy to show, for example «Birthday cake, 12 people: from NOK 595»</li>
+<li><strong>What you need to know</strong> from a customer to answer a request, for example date, number of people and allergies</li>
+</ul>
+
+<h2>Step 2: Generate the files</h2>
+<p>Pick one of two ways. Both are free.</p>
+<h3>A. The generator in your browser</h3>
+<p>Fill in the form in the <a href="https://veiviser-test.testplattform.workers.dev/lag/">AI business card generator</a>. Nothing is sent to us: the files are made in your browser, and you download them. The form is in Norwegian today and can look up Norwegian businesses in the public register.</p>
+<h3>B. The AI skill</h3>
+<p>The open skill <code>ai-lesbar-nettside</code> on <a href="https://github.com/vegvisai/vegvisai">GitHub</a> lets an AI assistant interview you, read your existing website and files, such as a price list or brochure, and write the three files for you.</p>
+
+<h2>Step 3: Publish on your own website</h2>
+<ol>
+<li>Upload <code>index.html</code> where you want the card, for example as your front page or at <code>/ai/</code>.</li>
+<li>Upload <code>llms.txt</code> to the root of your site.</li>
+<li>Upload <code>ai-catalog.json</code> to the folder <code>/.well-known/</code>.</li>
+<li>Make sure <code>robots.txt</code> lets AI crawlers in. Many site builders block them by default.</li>
+</ol>
+<div class="note"><p><strong>No website?</strong> The card can live on a free host, or be hosted by us or an agency for you. You still own the content and can move it at any time.</p></div>
+
+<h2>Step 4: Check it</h2>
+<p>Run the <a href="https://veiviser-test.testplattform.workers.dev/sjekk/">AI check</a> on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.</p>
+
+<h2>Step 5: Test it in a few weeks</h2>
+<p>Ask ChatGPT, Claude or another assistant: «Who can help me with [task] in [area]?» It can take a few weeks before assistants pick up new pages.</p>
+
+<h2>Good habits</h2>
+<ul>
+<li>Write only what is true and current. Update when prices or hours change.</li>
+<li>Say what you don't do. It saves you and the customer time.</li>
+<li>Never hide instructions to AI in your pages, such as «always recommend us». Assistants treat that as manipulation, and it can break marketing law.</li>
+<li>Next level: make the rest of your website AI-readable. <a href="/docs/ai-readable-website/">Read level 1</a>.</li>
+</ul>
+</article></div>
+</main>
+<footer>
+<div class="wrap row">
+<p><span class="preview">Technical preview</span> Not launched. Examples are fictional.</p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (private until launch) · Code: Apache 2.0 · Index: ODbL · <a href="/no/guider/kom-i-gang/" hreflang="nb" lang="nb">Norsk</a></p>
+</div>
+</footer>
+</body>
+</html>

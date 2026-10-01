@@ -1,0 +1,29 @@
+<!-- title: Your own AI service (MCP) · Guides · VegvisAI | description: When an MCP server pays off for a business, how to start read-only, and how to keep it safe from prompt injection. -->
+<p class="eyebrow">Level 3</p>
+<h1>Your own AI service (MCP)</h1>
+<p class="lead">MCP (Model Context Protocol) lets an AI agent call your tools directly, such as checking stock, finding a free time or placing a booking. It is optional. Levels 0 to 2 already work with every assistant.</p>
+
+<h2>When it pays off</h2>
+<ul>
+<li>Customers or partners often need live data: stock, availability, order status</li>
+<li>Customers come back often and can add your service to their assistant once, such as business customers</li>
+<li>Action links on your website are no longer enough</li>
+</ul>
+<p>If none of these apply, stay on level 1 and 2. That is not second best: it is what most businesses need.</p>
+
+<h2>Start read-only</h2>
+<p>Let the first version only answer questions: search, prices, availability. Let the customer confirm orders and payments on your own website. That keeps the risk low and the customer relationship with you.</p>
+
+<h2>Keep it safe</h2>
+<ul>
+<li><strong>Treat everything from outside as data, never as instructions.</strong> Mark your answers as data, so the agent does not follow text inside them.</li>
+<li><strong>Limit requests</strong> per client, so the service cannot be abused.</li>
+<li><strong>Store as little as possible.</strong> No logging of personal data you don't need.</li>
+<li><strong>Test with injection attempts</strong> before every version. The open test set is on <a href="{{GITHUB}}">GitHub</a>.</li>
+</ul>
+
+<h2>Run it yourself, or have it hosted</h2>
+<p>You can run the server yourself with the open template, or have it hosted by us or an agency. Either way you own the content and can move it.</p>
+
+<h2>See an example</h2>
+<p>The read-only guide connector on our test platform is an MCP server you can try in your own assistant. See <a href="/docs/developers/">the developer guide</a>.</p>

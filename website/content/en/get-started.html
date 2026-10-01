@@ -1,0 +1,56 @@
+<!-- title: Get started · Guides · VegvisAI | description: Make an AI business card in about 15 minutes: one page and two small files that tell every AI who you are, what you do, where, and how to reach you. -->
+<p class="eyebrow">Level 0 · start here</p>
+<h1>Get started: your AI business card</h1>
+<p class="lead">One page and two small files that tell every AI who you are, what you do and don't do, where you work, and how a customer reaches you. It takes about 15 minutes, and for many businesses it is all they need.</p>
+
+<h2>What you end up with</h2>
+<table>
+<thead><tr><th>File</th><th>Where it goes</th><th>What it does</th></tr></thead>
+<tbody>
+<tr><td><code>index.html</code></td><td>Your website, for example at <code>/</code> or <code>/ai/</code></td><td>The business card itself: readable for people, with schema.org data for machines</td></tr>
+<tr><td><code>llms.txt</code></td><td>The root: <code>/llms.txt</code></td><td>A clean text overview for language models</td></tr>
+<tr><td><code>ai-catalog.json</code></td><td><code>/.well-known/ai-catalog.json</code></td><td>Tells agents and open guides where your card and services are</td></tr>
+</tbody>
+</table>
+
+<h2>Step 1: Collect the facts</h2>
+<p>Have these ready. Short and concrete beats long and polished.</p>
+<ul>
+<li><strong>Name</strong> and, in Norway, the organisation number</li>
+<li><strong>One sentence</strong> on what you do</li>
+<li><strong>What you offer</strong>, and just as important, <strong>what you don't</strong>. It stops the AI from sending you the wrong customers</li>
+<li><strong>Area</strong>: the municipalities you serve, whether you come to the customer, and whether you deliver</li>
+<li><strong>Opening hours</strong>, <strong>phone</strong>, <strong>email</strong> and your <strong>contact or booking page</strong></li>
+<li><strong>Prices</strong> you are happy to show, for example «Birthday cake, 12 people: from NOK 595»</li>
+<li><strong>What you need to know</strong> from a customer to answer a request, for example date, number of people and allergies</li>
+</ul>
+
+<h2>Step 2: Generate the files</h2>
+<p>Pick one of two ways. Both are free.</p>
+<h3>A. The generator in your browser</h3>
+<p>Fill in the form in the <a href="{{TEST}}/lag/">AI business card generator</a>. Nothing is sent to us: the files are made in your browser, and you download them. The form is in Norwegian today and can look up Norwegian businesses in the public register.</p>
+<h3>B. The AI skill</h3>
+<p>The open skill <code>ai-lesbar-nettside</code> on <a href="{{GITHUB}}">GitHub</a> lets an AI assistant interview you, read your existing website and files, such as a price list or brochure, and write the three files for you.</p>
+
+<h2>Step 3: Publish on your own website</h2>
+<ol>
+<li>Upload <code>index.html</code> where you want the card, for example as your front page or at <code>/ai/</code>.</li>
+<li>Upload <code>llms.txt</code> to the root of your site.</li>
+<li>Upload <code>ai-catalog.json</code> to the folder <code>/.well-known/</code>.</li>
+<li>Make sure <code>robots.txt</code> lets AI crawlers in. Many site builders block them by default.</li>
+</ol>
+<div class="note"><p><strong>No website?</strong> The card can live on a free host, or be hosted by us or an agency for you. You still own the content and can move it at any time.</p></div>
+
+<h2>Step 4: Check it</h2>
+<p>Run the <a href="{{TEST}}/sjekk/">AI check</a> on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.</p>
+
+<h2>Step 5: Test it in a few weeks</h2>
+<p>Ask ChatGPT, Claude or another assistant: «Who can help me with [task] in [area]?» It can take a few weeks before assistants pick up new pages.</p>
+
+<h2>Good habits</h2>
+<ul>
+<li>Write only what is true and current. Update when prices or hours change.</li>
+<li>Say what you don't do. It saves you and the customer time.</li>
+<li>Never hide instructions to AI in your pages, such as «always recommend us». Assistants treat that as manipulation, and it can break marketing law.</li>
+<li>Next level: make the rest of your website AI-readable. <a href="/docs/ai-readable-website/">Read level 1</a>.</li>
+</ul>

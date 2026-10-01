@@ -43,7 +43,7 @@
 <tr><td><code>find_business</code></td><td><code>need</code>, <code>postal_code</code></td><td>Finner bedrifter for et behov. Testversjonen har ett oppdiktet bakeri</td></tr>
 <tr><td><code>check_business</code></td><td><code>org_number</code> eller <code>name</code></td><td>Slår opp en norsk bedrift i det offentlige registeret (Brønnøysund)</td></tr>
 <tr><td><code>find_public_help</code></td><td><code>topic</code> (f.eks. consumer, health, tax, all) og/eller <code>municipality</code></td><td>Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 44 statlige etater og alle 357 kommuner</td></tr>
-<tr><td><code>ai_check</code></td><td><code>url</code></td><td>Sjekker hvordan en nettside ser ut for AI-assistenter. Poengsum av 100 med forbedringer</td></tr>
+<tr><td><code>ai_check</code></td><td><code>url</code>, valgfri <code>profile</code>: business, government, organisation</td><td>Sjekker hvordan en nettside ser ut for AI-assistenter, med målestokken som passer: bedrift, offentlig virksomhet eller organisasjon (NGO, parti, forening). Poengsum av 100, poeng per sjekk og forbedringer. Et nettsted som ikke svarer, får ingen poengsum</td></tr>
 </tbody>
 </table>
 <p>Legg den til i Claude som egendefinert connector, i ChatGPT i utviklermodus, eller i en hvilken som helst MCP-klient. Instruksjonene i connectoren ber agenten spørre om sted i stedet for å gjette, og svare på brukerens språk.</p>

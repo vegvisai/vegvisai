@@ -43,7 +43,7 @@
 <tr><td><code>find_business</code></td><td><code>need</code>, <code>postal_code</code></td><td>Finds businesses for a need. The test version has one fictional bakery</td></tr>
 <tr><td><code>check_business</code></td><td><code>org_number</code> or <code>name</code></td><td>Looks up a Norwegian business in the public register (Brønnøysund)</td></tr>
 <tr><td><code>find_public_help</code></td><td><code>topic</code> (e.g. consumer, health, tax, all) and/or <code>municipality</code></td><td>Links to free public services in Norway from the open index: 44 state agencies and all 357 municipalities</td></tr>
-<tr><td><code>ai_check</code></td><td><code>url</code></td><td>Checks how a website looks to AI assistants. Score out of 100 with fixes</td></tr>
+<tr><td><code>ai_check</code></td><td><code>url</code>, optional <code>profile</code>: business, government, organisation</td><td>Checks how a website looks to AI assistants, by the yardstick that fits: business, public body or organisation (NGO, party, association). Score out of 100, points per check and fixes. A site that does not answer gets no score</td></tr>
 </tbody>
 </table>
 <p>Add it to Claude as a custom connector, to ChatGPT in developer mode, or to any MCP client. The connector's instructions tell the agent to ask for the location instead of guessing, and to answer in the user's language.</p>

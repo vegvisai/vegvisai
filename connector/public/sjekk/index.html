@@ -10,7 +10,7 @@
 {"@context":"https://schema.org","@type":"WebApplication","name":"AI-sjekk (teknisk test)","applicationCategory":"DeveloperApplication","inLanguage":"nb","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"NOK"}}
 </script>
 <style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
-form{display:flex;gap:.5rem;flex-wrap:wrap}#url{flex:1 1 16rem;font:inherit;padding:.5rem .7rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg);min-width:0}button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}button:disabled{opacity:.6;cursor:wait}
+form{display:flex;gap:.5rem;flex-wrap:wrap}select{font:inherit;padding:.5rem .4rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg);max-width:100%}#url{flex:1 1 16rem;font:inherit;padding:.5rem .7rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg);min-width:0}button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}button:disabled{opacity:.6;cursor:wait}
 .poeng{font-size:3rem;font-weight:700;line-height:1;font-variant-numeric:tabular-nums}.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.adv strong{color:var(--adv)}
 table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow-x:auto}th,td{text-align:left;padding:.35rem .5rem;border-bottom:1px solid var(--box);vertical-align:top}td{word-break:break-word}</style>
 </head>
@@ -22,22 +22,30 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow
 <form id="skjema">
 <label for="url" class="mut" style="flex-basis:100%">Nettadresse</label>
 <input id="url" name="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.bedrift.no" required>
+<select id="profil" aria-label="Målestokk">
+<option value="">Målestokk: finn selv</option>
+<option value="business">Bedrift</option>
+<option value="government">Offentlig virksomhet</option>
+<option value="organisation">Organisasjon (NGO, parti, forening)</option>
+</select>
 <button id="knapp">Sjekk</button>
 </form>
 <p id="status" class="mut" aria-live="polite"></p>
 <div id="resultat"></div>
 
 <h2>Hva sjekken ser på</h2>
+<p>Sjekken har tre målestokker: <strong>bedrift</strong>, <strong>offentlig virksomhet</strong> og <strong>organisasjon</strong> (NGO, parti, forening). Det meste er likt for alle; bare innholdsdelen er forskjellig. Målestokken finnes ut fra schema.org på sidene, domenet (for eksempel <code>kommune.no</code>) eller den åpne indeksen over offentlige tjenester. Du kan også velge selv.</p>
 <table>
-<tr><th>Sjekk</th><th>Poeng</th></tr>
-<tr><td><code>robots.txt</code> blokkerer ingen av de vanlige AI-robotene</td><td>20</td></tr>
-<tr><td>Sitemap finnes, og høyst halvparten av sidene er datert mer enn to år tilbake</td><td>10 + 10</td></tr>
-<tr><td>Hver side har egen tittel; alle sider har meta-beskrivelse</td><td>10 + 5</td></tr>
-<tr><td>Bedriften er beskrevet med schema.org (Organization, LocalBusiness e.l.)</td><td>10</td></tr>
-<tr><td>Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)</td><td>25</td></tr>
-<tr><td><code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code></td><td>5 + 5</td></tr>
+<tr><th>Sjekk</th><th>Gjelder</th><th>Poeng</th></tr>
+<tr><td><code>robots.txt</code> blokkerer ingen av de vanlige AI-robotene</td><td>Alle</td><td>20</td></tr>
+<tr><td>Sitemap finnes, og høyst halvparten av sidene er datert mer enn to år tilbake</td><td>Alle</td><td>10 + 10</td></tr>
+<tr><td>Hver side har egen tittel; alle sider har meta-beskrivelse</td><td>Alle</td><td>10 + 5</td></tr>
+<tr><td>Virksomheten er beskrevet med schema.org (Organization, LocalBusiness, GovernmentOrganization, NGO e.l.)</td><td>Alle</td><td>10</td></tr>
+<tr><td>Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)</td><td>Bedrift</td><td>25</td></tr>
+<tr><td>Innholdssider er merket med type (Article, WebPage, Service, Event e.l.) og dato (publisert eller endret)</td><td>Offentlig, organisasjon</td><td>25</td></tr>
+<tr><td><code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code></td><td>Alle</td><td>5 + 5</td></tr>
 </table>
-<p class="mut">Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. I tillegg ser sjekken etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene.</p>
+<p class="mut">Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. Svarer ikke forsiden, gis ingen poeng: da er nettstedet ikke målt. Sjekken ser også etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene. Noen få nullbredde-tegn, som ofte kommer fra kopiering, regnes som lav risiko.</p>
 <p class="mut">Vi lagrer ikke adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.</p>
 <p><a href="/">Til forsiden</a> · <a href="/lag/">Lag et AI-lesbart visittkort</a></p>
 
@@ -54,7 +62,7 @@ $("skjema").addEventListener("submit", async (ev) => {
   $("resultat").replaceChildren();
   $("status").textContent = "Sjekker … dette tar 5–15 sekunder, fordi vi venter litt mellom hver forespørsel til nettstedet.";
   try {
-    const res = await fetch("/api/sjekk?lang=nb&url=" + encodeURIComponent(url));
+    const res = await fetch("/api/sjekk?lang=nb&url=" + encodeURIComponent(url) + "&profile=" + encodeURIComponent($("profil").value));
     const r = await res.json();
     if (!res.ok) throw new Error(r.error || "Sjekken feilet.");
     show(r);
@@ -66,19 +74,43 @@ $("skjema").addEventListener("submit", async (ev) => {
   }
 });
 
+const PROFILE = { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, parti, forening)" };
+const SOURCE = { param: "valgt", schema: "funnet fra schema.org", domain: "funnet fra domenet", index: "funnet i den åpne indeksen", default: "standard" };
+const CHECK = {
+  ai_access: "AI-roboter har tilgang", sitemap: "Sitemap", fresh_sitemap: "Oppdatert sitemap", titles: "Egne titler",
+  descriptions: "Meta-beskrivelser", identity: "Beskrevet med schema.org", offers: "Produkter og tjenester med pris",
+  dated_content: "Innhold med type og dato", llms_txt: "llms.txt", ai_catalog: "ai-catalog.json",
+};
+
 function show(r) {
   const out = $("resultat");
   const top = el("div", undefined, "boks");
-  top.append(el("div", String(r.score), "poeng"), el("div", "av 100 for " + r.site, "mut"));
+  if (r.score === null) top.append(el("div", "Ikke målt", "poeng"), el("div", r.site, "mut"));
+  else top.append(el("div", String(r.score), "poeng"), el("div", "av 100 for " + r.site, "mut"));
+  top.append(el("div", `Målestokk: ${PROFILE[r.profile]} (${SOURCE[r.profile_source]})`, "mut"));
   out.append(top);
 
-  if (r.injection.length) {
+  const high = r.injection.filter((f) => f.severity !== "low");
+  const low = r.injection.filter((f) => f.severity === "low");
+  if (high.length) {
     const warn = el("div", undefined, "adv");
     warn.append(el("strong", "Mulig prompt-injeksjon"), el("p", "Tekst på nettstedet ligner instrukser til AI-assistenter. Den vises her som sitat og blir ikke fulgt."));
     const ul = el("ul");
-    for (const f of r.injection) ul.append(el("li", `${f.source}: ${f.text}${f.excerpt ? ` («${f.excerpt}»)` : ""}`));
+    for (const f of high) ul.append(el("li", `${f.source}: ${f.text}${f.excerpt ? ` («${f.excerpt}»)` : ""}`));
     warn.append(ul);
     out.append(warn);
+  }
+  for (const f of low) out.append(el("p", `Lav risiko: ${f.source} ${f.text}.`, "mut"));
+
+  if (r.breakdown && r.breakdown.length) {
+    out.append(el("h2", "Poeng per sjekk"));
+    const pts = el("table");
+    for (const b of r.breakdown) {
+      const tr = el("tr");
+      tr.append(el("td", CHECK[b.id] || b.id), el("td", b.max ? `${b.points} av ${b.max}` : "gjelder ikke"));
+      pts.append(tr);
+    }
+    out.append(pts);
   }
 
   out.append(el("h2", "Tiltak"));

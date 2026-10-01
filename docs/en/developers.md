@@ -52,7 +52,7 @@ https://veiviser-test.testplattform.workers.dev/mcp
 | `find_business` | `need`, `postal_code` | Finds businesses for a need. The test version has one fictional bakery |
 | `check_business` | `org_number` or `name` | Looks up a Norwegian business in the public register (Brønnøysund) |
 | `find_public_help` | `topic` (e.g. consumer, health, tax, all) and/or `municipality` | Links to free public services in Norway from the open index: 44 state agencies and all 357 municipalities |
-| `ai_check` | `url` | Checks how a website looks to AI assistants. Score out of 100 with fixes |
+| `ai_check` | `url`, optional `profile`: business, government, organisation | Checks how a website looks to AI assistants, by the yardstick that fits: business, public body or organisation (NGO, party, association). Score out of 100, points per check and fixes. A site that does not answer gets no score |
 
 Add it to Claude as a custom connector, to ChatGPT in developer mode, or to any MCP client. The connector's instructions tell the agent to ask for the location instead of guessing, and to answer in the user's language.
 

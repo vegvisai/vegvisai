@@ -52,7 +52,7 @@ https://veiviser-test.testplattform.workers.dev/mcp
 | `find_business` | `need`, `postal_code` | Finner bedrifter for et behov. Testversjonen har ett oppdiktet bakeri |
 | `check_business` | `org_number` eller `name` | Slår opp en norsk bedrift i det offentlige registeret (Brønnøysund) |
 | `find_public_help` | `topic` (f.eks. consumer, health, tax, all) og/eller `municipality` | Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 44 statlige etater og alle 357 kommuner |
-| `ai_check` | `url` | Sjekker hvordan en nettside ser ut for AI-assistenter. Poengsum av 100 med forbedringer |
+| `ai_check` | `url`, valgfri `profile`: business, government, organisation | Sjekker hvordan en nettside ser ut for AI-assistenter, med målestokken som passer: bedrift, offentlig virksomhet eller organisasjon (NGO, parti, forening). Poengsum av 100, poeng per sjekk og forbedringer. Et nettsted som ikke svarer, får ingen poengsum |
 
 Legg den til i Claude som egendefinert connector, i ChatGPT i utviklermodus, eller i en hvilken som helst MCP-klient. Instruksjonene i connectoren ber agenten spørre om sted i stedet for å gjette, og svare på brukerens språk.
 

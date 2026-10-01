@@ -91,3 +91,64 @@ test("safe address rejects internal targets, with messages in both languages", (
     assert.equal(e.text("nb"), "Adressen må være et offentlig domene.");
   }
 });
+
+// ---------- Yardsticks (business, government, organisation) and fair measuring ----------
+
+const page = (title, jsonld = "", body = "") =>
+  `<html><head><title>${title}</title><meta name="description" content="${title}">` +
+  (jsonld ? `<script type="application/ld+json">${JSON.stringify(jsonld)}</script>` : "") +
+  `</head><body>${body}</body></html>`;
+
+const orgSite = (type, extra = {}) => ({
+  "/robots.txt": `User-agent: *\nAllow: /\nSitemap: ${ROOT}/sitemap.xml\n`,
+  "/sitemap.xml": `<urlset><url><loc>${ROOT}/a</loc><lastmod>2026-09-01</lastmod></url><url><loc>${ROOT}/b</loc><lastmod>2026-09-02</lastmod></url></urlset>`,
+  "/": page("Home", { "@context": "https://schema.org", "@type": type, name: "Example" }),
+  "/a": page("Policy on schools", { "@type": "Article", headline: "Schools", datePublished: "2026-09-01" }, "Budget 12 mrd. kr to schools"),
+  "/b": page("About us", "", "Membership 300 kr a year"),
+  ...extra,
+});
+
+test("a front page that does not answer gives no score, not a low score", async () => {
+  const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: async () => { throw new Error("connection refused"); } });
+  assert.equal(r.score, null);
+  assert.match(r.actions[0], /could not be measured/);
+  assert.match(asText(r), /Score: not measured/);
+});
+
+test("the yardstick is detected from schema.org, the domain or the open index, and can be chosen", async () => {
+  const gov = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("GovernmentOrganization")) });
+  assert.deepEqual([gov.profile, gov.profile_source], ["government", "schema"]);
+  const party = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("PoliticalParty")) });
+  assert.deepEqual([party.profile, party.profile_source], ["organisation", "schema"]);
+  const town = await aiCheck("https://www.bodo.kommune.no", { pauseMs: 0, fetchFn: makeFetch({ "/": page("Bodø kommune") }) });
+  assert.deepEqual([town.profile, town.profile_source], ["government", "domain"]);
+  const indexed = await aiCheck("https://www.nav.no", { pauseMs: 0, publicHosts: new Set(["nav.no"]), fetchFn: makeFetch({ "/": page("NAV") }) });
+  assert.deepEqual([indexed.profile, indexed.profile_source], ["government", "index"]);
+  const chosen = await aiCheck(ROOT, { pauseMs: 0, profile: "organisation", fetchFn: makeFetch(goodSite) });
+  assert.deepEqual([chosen.profile, chosen.profile_source], ["organisation", "param"]);
+});
+
+test("an organisation is not marked down for amounts in kroner, but for undated, untyped content", async () => {
+  const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("NGO")) });
+  assert.equal(r.profile, "organisation");
+  assert.equal(r.breakdown.find((b) => b.id === "offers"), undefined);
+  assert.deepEqual(r.breakdown.find((b) => b.id === "dated_content"), { id: "dated_content", points: 13, max: 25 });
+  assert.ok(r.actions.some((a) => a.includes("1 of 2 pages lack it")), JSON.stringify(r.actions));
+  assert.ok(!r.actions.some((a) => a.includes("Prices appear as plain text")));
+  assert.match(asText(r), /dated_content 13\/25/);
+});
+
+test("the same site measured as a business is marked down for prices as plain text", async () => {
+  const r = await aiCheck(ROOT, { pauseMs: 0, profile: "business", fetchFn: makeFetch(orgSite("NGO")) });
+  assert.deepEqual(r.breakdown.find((b) => b.id === "offers"), { id: "offers", points: 0, max: 25 });
+});
+
+test("a few zero-width characters are low risk; tag characters are not", async () => {
+  const zw = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ ...goodSite, "/llms.txt": llms + "\nGod skole​​ for alle.\n" }) });
+  const f = zw.injection.find((x) => x.source === "llms.txt");
+  assert.equal(f.severity, "low");
+  assert.ok(!zw.actions[0].includes("instructions to AI"));
+  assert.ok(zw.actions.some((a) => a.includes("zero-width")));
+  const tag = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ ...goodSite, "/llms.txt": llms + "\nKaker\u{E0041}\u{E0042}\n" }) });
+  assert.equal(tag.injection.find((x) => x.source === "llms.txt").severity, "high");
+});

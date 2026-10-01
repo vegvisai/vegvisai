@@ -35,6 +35,14 @@ const INVISIBLE_TEXT = {
   en: (n) => `contains ${n} invisible characters that can hide text`,
   nb: (n) => `inneholder ${n} usynlige tegn som kan skjule tekst`,
 };
+const ZERO_WIDTH_TEXT = {
+  en: (n) => `contains ${n} zero-width characters, probably from copy and paste (low risk)`,
+  nb: (n) => `inneholder ${n} nullbredde-tegn, trolig fra kopiering (lav risiko)`,
+};
+// Zero-width spaces and joiners often come from copy and paste. A few of them alone are low risk;
+// direction controls, tag characters or many zero-width characters together can hide text.
+const ZERO_WIDTH = /[\u200B-\u200D\u2060\uFEFF]/g;
+const ZERO_WIDTH_LIMIT = 10;
 
 const language = (lang) => (lang === "nb" ? "nb" : "en");
 
@@ -42,17 +50,20 @@ export function invisibleChars(text) {
   return (String(text ?? "").match(INVISIBLE) || []).length;
 }
 
-// Returns findings: [{ id, text, excerpt }]. An empty list means no known patterns.
+// Returns findings: [{ id, severity, text, excerpt }]. severity is "high" or "low"; an empty list means no known patterns.
 export function findInstructions(text, lang = "en") {
   const l = language(lang);
   const s = String(text ?? "");
   const findings = [];
   const n = invisibleChars(s);
-  if (n) findings.push({ id: "invisible-chars", text: INVISIBLE_TEXT[l](n), excerpt: "" });
+  const zeroWidth = (s.match(ZERO_WIDTH) || []).length;
+  if (n && (n > zeroWidth || zeroWidth >= ZERO_WIDTH_LIMIT))
+    findings.push({ id: "invisible-chars", severity: "high", text: INVISIBLE_TEXT[l](n), excerpt: "" });
+  else if (n) findings.push({ id: "zero-width-chars", severity: "low", text: ZERO_WIDTH_TEXT[l](n), excerpt: "" });
   const visible = s.replace(INVISIBLE, "");
   for (const p of PATTERNS) {
     const m = p.re.exec(visible);
-    if (m) findings.push({ id: p.id, text: p.text[l], excerpt: excerpt(visible, m.index, m[0].length) });
+    if (m) findings.push({ id: p.id, severity: "high", text: p.text[l], excerpt: excerpt(visible, m.index, m[0].length) });
   }
   return findings;
 }

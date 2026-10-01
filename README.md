@@ -24,6 +24,10 @@ The business card always lives on the business's own domain. The index only hold
 | [`tools/ai-check/`](tools/ai-check/) | Test set for prompt injection, used by the AI check | Apache 2.0 |
 | [`website/`](website/) | Landing page and guides as a website | Apache 2.0 |
 
+## Join the dugnad
+
+Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work, they won't need to. Templates, checks, index data, integrations and guides are all open for pull requests: see [CONTRIBUTING.md](CONTRIBUTING.md).
+
 ## Principles
 
 - Open to every business, industry and AI agent.

@@ -45,6 +45,37 @@
 <h1>The open guide for agents</h1>
 <p class="lead">Everything is built on open standards and open licences. Any agent can read the guide on the same terms, and anyone can run their own copy.</p>
 
+<h2 id="join">Build it with us: a dugnad for the open AI web</h2>
+<p>In Norway, a <em>dugnad</em> is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road, and nobody charges a toll. That is what we are building: an open road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.</p>
+<p>Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work for them, they won't need to. Every pull request can help thousands of businesses get found on fair terms, and help people get honest answers from their own AI.</p>
+<h3>Why it is worth your time</h3>
+<ul>
+<li><strong>Fair by design.</strong> Ranking, verification and access can never be bought. Your work can never be turned into a toll booth.</li>
+<li><strong>Open for good.</strong> Code under Apache 2.0, the index under ODbL, and a neutral owner with locked principles as the goal. If we ever become a gatekeeper, fork us.</li>
+<li><strong>Every agent.</strong> ChatGPT, Claude, Gemini and the model on your own laptop read the same index on the same terms.</li>
+<li><strong>Small steps, real reach.</strong> One good template, one rule in the AI check or one public service in the index is used by every business and every agent from the day it is merged.</li>
+</ul>
+<h3>Where you can help</h3>
+<table>
+<thead><tr><th>Area</th><th>Examples</th></tr></thead>
+<tbody>
+<tr><td>Templates and the skill</td><td>schema.org templates for new kinds of business, better interview questions, more languages</td></tr>
+<tr><td>The AI check</td><td>New checks, fewer false alarms, clearer advice, more cases in the injection test set</td></tr>
+<tr><td>The open index</td><td>More public services, county authorities, other countries, data quality</td></tr>
+<tr><td>The connector (MCP)</td><td>Tests with more agents and local models, new read-only tools</td></tr>
+<tr><td>Integrations</td><td>Plug-ins that publish the AI business card from WordPress, Wix, Shopify and other website builders</td></tr>
+<tr><td>Guides</td><td>Plainer language, examples, translations</td></tr>
+<tr><td>Security</td><td>Prompt-injection patterns, reviews and responsible disclosure</td></tr>
+</tbody>
+</table>
+<h3>How to join</h3>
+<ol>
+<li>Read the principles on <a href="/ownership/">the ownership page</a>. Changes that let anyone buy ranking, lock in data or favour one AI vendor will not be merged.</li>
+<li>Open an issue with your idea, or pick one marked <code>good first issue</code>.</li>
+<li>Send a pull request. Code is contributed under Apache 2.0 and index data under ODbL: the same terms everyone gets.</li>
+</ol>
+<p>The repository opens at launch. Until then, write to [contact address] if you want to join early.</p>
+
 <h2>The guide connector (test)</h2>
 <p>A read-only MCP server using Streamable HTTP. No sign-up, no key.</p>
 <pre><code>https://veiviser-test.testplattform.workers.dev/mcp</code></pre>
@@ -53,7 +84,7 @@
 <tbody>
 <tr><td><code>find_business</code></td><td><code>need</code>, <code>postal_code</code></td><td>Finds businesses for a need. The test version has one fictional bakery</td></tr>
 <tr><td><code>check_business</code></td><td><code>org_number</code> or <code>name</code></td><td>Looks up a Norwegian business in the public register (Brønnøysund)</td></tr>
-<tr><td><code>find_public_help</code></td><td><code>topic</code>: business, consumer, all</td><td>Links to free public services in Norway</td></tr>
+<tr><td><code>find_public_help</code></td><td><code>topic</code> (e.g. consumer, health, tax, all) and/or <code>municipality</code></td><td>Links to free public services in Norway from the open index: 44 state agencies and all 357 municipalities</td></tr>
 <tr><td><code>ai_check</code></td><td><code>url</code></td><td>Checks how a website looks to AI assistants. Score out of 100 with fixes</td></tr>
 </tbody>
 </table>

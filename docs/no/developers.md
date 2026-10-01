@@ -6,6 +6,39 @@ For utviklere og AI-agenter
 
 Alt bygger på åpne standarder og åpne lisenser. Alle agenter kan lese veiviseren på samme vilkår, og alle kan drive sin egen kopi.
 
+## Bygg det med oss: dugnad for det åpne AI-nettet
+
+På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.
+
+De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre nettsiden AI-lesbar. Med åpne maler, en gratis AI-sjekk og en skill som gjør jobben for dem, trenger de ikke det. Hver pull request kan hjelpe tusenvis av bedrifter å bli funnet på rettferdige vilkår, og hjelpe folk å få ærlige svar fra sin egen AI.
+
+### Hvorfor det er verdt tiden din
+
+- **Rettferdig fra bunnen.** Rangering, verifisering og tilgang kan aldri kjøpes. Arbeidet ditt kan aldri bli en bomstasjon.
+- **Åpent for godt.** Koden under Apache 2.0, indeksen under ODbL, og målet er en nøytral eier med låste prinsipper. Blir vi noen gang en portvakt, fork oss.
+- **Alle agenter.** ChatGPT, Claude, Gemini og modellen på din egen laptop leser den samme indeksen på de samme vilkårene.
+- **Små steg, stor rekkevidde.** Én god mal, én regel i AI-sjekken eller én offentlig tjeneste i indeksen brukes av alle bedrifter og alle agenter fra dagen den flettes inn.
+
+### Hvor du kan bidra
+
+| Område | Eksempler |
+| --- | --- |
+| Maler og skillen | schema.org-maler for nye typer bedrifter, bedre intervjuspørsmål, flere språk |
+| AI-sjekken | Nye kontroller, færre falske alarmer, tydeligere råd, flere tilfeller i testsettet for injeksjon |
+| Den åpne indeksen | Flere offentlige tjenester, fylkeskommuner, andre land, datakvalitet |
+| Connectoren (MCP) | Tester med flere agenter og lokale modeller, nye verktøy som bare leser |
+| Integrasjoner | Utvidelser som publiserer AI-visittkortet fra WordPress, Wix, Shopify og andre nettstedsbyggere |
+| Guider | Enklere språk, eksempler, oversettelser |
+| Sikkerhet | Mønstre for prompt-injeksjon, gjennomganger og ansvarlig varsling |
+
+### Slik blir du med
+
+1. Les prinsippene på [eierskapssiden](ownership.md). Endringer som lar noen kjøpe rangering, låse inne data eller favorisere én AI-leverandør blir ikke flettet inn.
+2. Lag en issue med ideen din, eller ta en som er merket `good first issue`.
+3. Send en pull request. Kode bidras under Apache 2.0 og indeksdata under ODbL: de samme vilkårene alle får.
+
+Repoet åpnes ved lansering. Til da kan du skrive til [kontaktadresse] hvis du vil være med tidlig.
+
 ## Veiviser-connectoren (test)
 
 En MCP-server som bare leser, med Streamable HTTP. Ingen registrering, ingen nøkkel.
@@ -18,7 +51,7 @@ https://veiviser-test.testplattform.workers.dev/mcp
 | --- | --- | --- |
 | `find_business` | `need`, `postal_code` | Finner bedrifter for et behov. Testversjonen har ett oppdiktet bakeri |
 | `check_business` | `org_number` eller `name` | Slår opp en norsk bedrift i det offentlige registeret (Brønnøysund) |
-| `find_public_help` | `topic`: business, consumer, all | Lenker til gratis offentlige tjenester i Norge |
+| `find_public_help` | `topic` (f.eks. consumer, health, tax, all) og/eller `municipality` | Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 44 statlige etater og alle 357 kommuner |
 | `ai_check` | `url` | Sjekker hvordan en nettside ser ut for AI-assistenter. Poengsum av 100 med forbedringer |
 
 Legg den til i Claude som egendefinert connector, i ChatGPT i utviklermodus, eller i en hvilken som helst MCP-klient. Instruksjonene i connectoren ber agenten spørre om sted i stedet for å gjette, og svare på brukerens språk.

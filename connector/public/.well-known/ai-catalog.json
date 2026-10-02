@@ -9,7 +9,7 @@
       "identifier": "urn:air:veiviser-test:mcp:veiviser",
       "type": "application/mcp",
       "url": "/mcp",
-      "description": "Guide connector, read-only: find a business (test), Norwegian business lookup in Brønnøysund, public help, AI check of a website.",
+      "description": "Guide connector, read-only: find a business (test), Norwegian business lookup in Brønnøysund, public help, political parties, AI check of a website.",
       "tags": [
         "guide",
         "norway"
@@ -23,6 +23,17 @@
       "tags": [
         "index",
         "public-services",
+        "norway"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:data:parties-no",
+      "type": "application/json",
+      "url": "/index/parties-no.json",
+      "description": "Open index (ODbL) of political parties in Norway: links to the parties' own pages and programmes, alphabetical, never ranked. Not complete yet.",
+      "tags": [
+        "index",
+        "politics",
         "norway"
       ]
     },

@@ -102,5 +102,5 @@ test("MCP tools without network access do not count against the limits", async (
 test("tools/list exposes the English tool names", async () => {
   const body = JSON.stringify({ jsonrpc: "2.0", id: 2, method: "tools/list" });
   const j = await (await worker.fetch(request("/mcp", undefined, { method: "POST", headers: { "Content-Type": "application/json" }, body }), makeEnv())).json();
-  assert.deepEqual(j.result.tools.map((t) => t.name), ["find_public_help", "check_business", "find_business", "ai_check"]);
+  assert.deepEqual(j.result.tools.map((t) => t.name), ["find_public_help", "find_political_party", "check_business", "find_business", "ai_check"]);
 });

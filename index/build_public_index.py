@@ -3,7 +3,9 @@
 
 Combines the hand-curated list of state agencies (agencies-no.json) with every
 municipality from Enhetsregisteret (Brønnøysundregistrene, NLOD licence), and
-fills in websites the register lacks from municipality-websites-no.json. The
+fills in websites the register lacks from municipality-websites-no.json. Also checks and
+copies the hand-curated list of political parties (parties-no.json, P45), which is kept
+apart from public services. The
 index holds links only: no payments, no ranking against businesses.
 
 Output: connector/public/index/public-no.json, served by the test
@@ -68,6 +70,18 @@ def municipalities() -> list[dict]:
     return sorted(out, key=lambda m: m["name"])
 
 
+def copy_parties() -> None:
+    """Checks the hand-curated party list and writes it next to the public index."""
+    parties = json.loads((HERE / "parties-no.json").read_text())
+    names = [e["name"] for e in parties["entries"]]
+    assert names == sorted(names), "parties must be in alphabetical order (never ranked)"
+    for e in parties["entries"]:
+        assert e["url"].startswith("https://") and re.fullmatch(r"\d{9}", e["org_number"]), e["name"]
+    parties["updated"] = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    (OUT.parent / "parties-no.json").write_text(json.dumps(parties, ensure_ascii=False, indent=1) + "\n")
+    print(f"Wrote {OUT.parent / 'parties-no.json'}: {len(names)} parties ({', '.join(names)})")
+
+
 def main() -> None:
     agencies = [{**a, "level": "state", "source": "VegvisAI, checked by hand"}
                 for a in json.loads((HERE / "agencies-no.json").read_text())]
@@ -92,6 +106,7 @@ def main() -> None:
     OUT.write_text(json.dumps(index, ensure_ascii=False, indent=1) + "\n")
     missing = sum(1 for m in towns if not m["url"])
     print(f"Wrote {OUT}: {len(agencies)} agencies, {len(towns)} municipalities ({missing} without a website)")
+    copy_parties()
 
 
 if __name__ == "__main__":

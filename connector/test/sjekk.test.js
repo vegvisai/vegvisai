@@ -119,7 +119,9 @@ test("the yardstick is detected from schema.org, the domain or the open index, a
   const gov = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("GovernmentOrganization")) });
   assert.deepEqual([gov.profile, gov.profile_source], ["government", "schema"]);
   const party = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("PoliticalParty")) });
-  assert.deepEqual([party.profile, party.profile_source], ["organisation", "schema"]);
+  assert.deepEqual([party.profile, party.profile_source], ["party", "schema"]);
+  const listed = await aiCheck("https://hoyre.no", { pauseMs: 0, partyHosts: new Set(["hoyre.no"]), fetchFn: makeFetch({ "/": page("Høyre") }) });
+  assert.deepEqual([listed.profile, listed.profile_source], ["party", "index"]);
   const town = await aiCheck("https://www.bodo.kommune.no", { pauseMs: 0, fetchFn: makeFetch({ "/": page("Bodø kommune") }) });
   assert.deepEqual([town.profile, town.profile_source], ["government", "domain"]);
   const indexed = await aiCheck("https://www.nav.no", { pauseMs: 0, publicHosts: new Set(["nav.no"]), fetchFn: makeFetch({ "/": page("NAV") }) });
@@ -132,10 +134,10 @@ test("an organisation is not marked down for amounts in kroner, but for undated,
   const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(orgSite("NGO")) });
   assert.equal(r.profile, "organisation");
   assert.equal(r.breakdown.find((b) => b.id === "offers"), undefined);
-  assert.deepEqual(r.breakdown.find((b) => b.id === "dated_content"), { id: "dated_content", points: 13, max: 25 });
+  assert.deepEqual(r.breakdown.find((b) => b.id === "dated_content"), { id: "dated_content", points: 8, max: 15 });
   assert.ok(r.actions.some((a) => a.includes("1 of 2 pages lack it")), JSON.stringify(r.actions));
   assert.ok(!r.actions.some((a) => a.includes("Prices appear as plain text")));
-  assert.match(asText(r), /dated_content 13\/25/);
+  assert.match(asText(r), /dated_content 8\/15/);
 });
 
 test("the same site measured as a business is marked down for prices as plain text", async () => {
@@ -151,4 +153,32 @@ test("a few zero-width characters are low risk; tag characters are not", async (
   assert.ok(zw.actions.some((a) => a.includes("zero-width")));
   const tag = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ ...goodSite, "/llms.txt": llms + "\nKaker\u{E0041}\u{E0042}\n" }) });
   assert.equal(tag.injection.find((x) => x.source === "llms.txt").severity, "high");
+});
+
+test("a party is measured on its key pages: programme, policy, people and contact", async () => {
+  const front = `<html lang="nb"><head><title>Partiet</title><meta name="description" content="x"></head><body><h1>Partiet</h1>
+    <a href="/politikk/">Vår politikk</a> <a href="/program/">Partiprogram 2025–2029</a> <a href="/kontakt/">Kontakt oss</a>
+    <link rel="alternate" type="application/rss+xml" href="/feed/"><p>${"Tekst om partiet. ".repeat(30)}</p></body></html>`;
+  const r = await aiCheck(ROOT, { pauseMs: 0, profile: "party", fetchFn: makeFetch({ "/": front }) });
+  assert.deepEqual(r.key_pages, { programme: true, policy: true, people: false, contact: true });
+  assert.deepEqual(r.breakdown.find((b) => b.id === "key_pages"), { id: "key_pages", points: 8, max: 10 });
+  assert.ok(r.actions.some((a) => a.includes("elected representatives")));
+  assert.deepEqual(r.open.feeds, [`${ROOT}/feed/`]);
+  assert.match(asText(r), /Open for AI: news feeds \(RSS\/Atom\)/);
+});
+
+test("pages that need JavaScript to show text, or lack language and headings, are marked down", async () => {
+  const shell = `<html><head><title>App</title><meta name="description" content="x"></head><body><div id="root"></div><script src="/app.js"></script></body></html>`;
+  const r = await aiCheck(ROOT, { pauseMs: 0, profile: "government", fetchFn: makeFetch({ "/": shell }) });
+  const b = Object.fromEntries(r.breakdown.map((x) => [x.id, x.points]));
+  assert.deepEqual([b.readable_html, b.language, b.headings], [0, 0, 0]);
+  assert.ok(r.actions.some((a) => a.includes("without JavaScript")));
+});
+
+test("machine interfaces are listed: MCP, OpenAPI, llms-full.txt, search action and datasets", async () => {
+  const front = page("Etaten", [{ "@context": "https://schema.org", "@type": "GovernmentOrganization", name: "Etaten",
+    potentialAction: { "@type": "SearchAction", target: `${ROOT}/sok?q={q}`, "query-input": "required name=q" } }, { "@type": "Dataset", name: "Data" }]);
+  const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ "/": front, "/llms-full.txt": "# Full\ntext", "/.well-known/mcp.json": "{}", "/openapi.json": "{\"openapi\":\"3.1.0\"}" }) });
+  assert.equal(r.profile, "government");
+  assert.deepEqual([r.open.llms_full, r.open.mcp, r.open.openapi, r.open.search, r.open.datasets], [true, true, true, true, true]);
 });

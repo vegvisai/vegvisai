@@ -50,6 +50,7 @@ https://veiviser-test.testplattform.workers.dev/mcp
 | Tool | Arguments | What it does |
 | --- | --- | --- |
 | `find_business` | `need`, `postal_code` | Finds businesses for a need. The test version has one fictional bakery |
+| `find_political_party` | `name` (optional) | Links to Norwegian political parties' own pages and programmes, alphabetical and never ranked. The list is not complete yet |
 | `check_business` | `org_number` or `name` | Looks up a Norwegian business in the public register (Brønnøysund) |
 | `find_public_help` | `topic` (e.g. consumer, health, tax, all) and/or `municipality` | Links to free public services in Norway from the open index: 44 state agencies and all 357 municipalities |
 | `ai_check` | `url`, optional `profile`: business, government, organisation | Checks how a website looks to AI assistants, by the yardstick that fits: business, public body or organisation (NGO, party, association). Score out of 100, points per check and fixes. A site that does not answer gets no score |

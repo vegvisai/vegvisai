@@ -26,7 +26,8 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow
 <option value="">Målestokk: finn selv</option>
 <option value="business">Bedrift</option>
 <option value="government">Offentlig virksomhet</option>
-<option value="organisation">Organisasjon (NGO, parti, forening)</option>
+<option value="organisation">Organisasjon (NGO, forening)</option>
+<option value="party">Politisk parti</option>
 </select>
 <button id="knapp">Sjekk</button>
 </form>
@@ -34,18 +35,21 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow
 <div id="resultat"></div>
 
 <h2>Hva sjekken ser på</h2>
-<p>Sjekken har tre målestokker: <strong>bedrift</strong>, <strong>offentlig virksomhet</strong> og <strong>organisasjon</strong> (NGO, parti, forening). Det meste er likt for alle; bare innholdsdelen er forskjellig. Målestokken finnes ut fra schema.org på sidene, domenet (for eksempel <code>kommune.no</code>) eller den åpne indeksen over offentlige tjenester. Du kan også velge selv.</p>
+<p>Sjekken har fire målestokker: <strong>bedrift</strong>, <strong>offentlig virksomhet</strong>, <strong>organisasjon</strong> (NGO, forening) og <strong>politisk parti</strong>. Det meste er likt for alle; bare innholdsdelen er forskjellig. Målestokken finnes ut fra schema.org på sidene, domenet (for eksempel <code>kommune.no</code>) eller den åpne indeksen over offentlige tjenester. Du kan også velge selv.</p>
 <table>
 <tr><th>Sjekk</th><th>Gjelder</th><th>Poeng</th></tr>
 <tr><td><code>robots.txt</code> blokkerer ingen av de vanlige AI-robotene</td><td>Alle</td><td>20</td></tr>
 <tr><td>Sitemap finnes, og høyst halvparten av sidene er datert mer enn to år tilbake</td><td>Alle</td><td>10 + 10</td></tr>
 <tr><td>Hver side har egen tittel; alle sider har meta-beskrivelse</td><td>Alle</td><td>10 + 5</td></tr>
-<tr><td>Virksomheten er beskrevet med schema.org (Organization, LocalBusiness, GovernmentOrganization, NGO e.l.)</td><td>Alle</td><td>10</td></tr>
+<tr><td>Virksomheten er beskrevet med schema.org (Organization, LocalBusiness, GovernmentOrganization, NGO, PoliticalParty e.l.)</td><td>Alle</td><td>10</td></tr>
+<tr><td>Sidene viser minst 300 tegn tekst uten JavaScript; språk er oppgitt; hver side har en hovedoverskrift</td><td>Alle</td><td>10 + 5 + 5</td></tr>
 <tr><td>Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)</td><td>Bedrift</td><td>25</td></tr>
-<tr><td>Innholdssider er merket med type (Article, WebPage, Service, Event e.l.) og dato (publisert eller endret)</td><td>Offentlig, organisasjon</td><td>25</td></tr>
+<tr><td>Innholdssider er merket med type (Article, WebPage, Service, Event e.l.) og dato (publisert eller endret)</td><td>Offentlig, organisasjon, parti</td><td>15</td></tr>
+<tr><td>Forsiden lenker til nøkkelsidene: tjenester, kontakt og om oss (offentlig); arbeid, medlemskap, kontakt og om oss (organisasjon); partiprogram, politikk, folkevalgte og kontakt (parti)</td><td>Offentlig, organisasjon, parti</td><td>10</td></tr>
 <tr><td><code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code></td><td>Alle</td><td>5 + 5</td></tr>
 </table>
 <p class="mut">Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. Svarer ikke forsiden, gis ingen poeng: da er nettstedet ikke målt. Sjekken ser også etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene. Noen få nullbredde-tegn, som ofte kommer fra kopiering, regnes som lav risiko.</p>
+<p class="mut">Sjekken lister også hva nettstedet har åpent for AI utover sidene: nyhetsstrømmer, kalender, søk og handlinger i schema.org, åpne data, OpenAPI og MCP. Dette gir ikke poeng ennå.</p>
 <p class="mut">Vi lagrer ikke adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.</p>
 <p><a href="/">Til forsiden</a> · <a href="/lag/">Lag et AI-lesbart visittkort</a></p>
 
@@ -74,12 +78,15 @@ $("skjema").addEventListener("submit", async (ev) => {
   }
 });
 
-const PROFILE = { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, parti, forening)" };
+const PROFILE = { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, forening)", party: "politisk parti" };
+const KEY = { services: "Tjenester og skjema", contact: "Kontakt", about: "Om oss", work: "Hva de arbeider med", join: "Medlemskap eller støtte", programme: "Partiprogram", policy: "Politikk og standpunkter", people: "Folkevalgte og ledelse" };
+const OPEN = { llms_txt: "llms.txt", llms_full: "llms-full.txt", ai_catalog: "ai-catalog.json", mcp: "MCP-server", openapi: "OpenAPI", feeds: "Nyhetsstrømmer (RSS/Atom)", calendar: "Kalender (iCal)", actions: "Handlinger i schema.org", datasets: "Åpne data (Dataset)", search: "Søk for agenter" };
 const SOURCE = { param: "valgt", schema: "funnet fra schema.org", domain: "funnet fra domenet", index: "funnet i den åpne indeksen", default: "standard" };
 const CHECK = {
   ai_access: "AI-roboter har tilgang", sitemap: "Sitemap", fresh_sitemap: "Oppdatert sitemap", titles: "Egne titler",
   descriptions: "Meta-beskrivelser", identity: "Beskrevet med schema.org", offers: "Produkter og tjenester med pris",
-  dated_content: "Innhold med type og dato", llms_txt: "llms.txt", ai_catalog: "ai-catalog.json",
+  dated_content: "Innhold med type og dato", key_pages: "Nøkkelsider lenket fra forsiden", readable_html: "Lesbar uten JavaScript",
+  language: "Språk oppgitt", headings: "Hovedoverskrift", llms_txt: "llms.txt", ai_catalog: "ai-catalog.json",
 };
 
 function show(r) {
@@ -111,6 +118,25 @@ function show(r) {
       pts.append(tr);
     }
     out.append(pts);
+  }
+
+  if (r.key_pages) {
+    out.append(el("h2", "Nøkkelsider fra forsiden"));
+    const kp = el("table");
+    for (const [k, v] of Object.entries(r.key_pages)) { const tr = el("tr"); tr.append(el("td", KEY[k] || k), el("td", v ? "funnet" : "ikke funnet")); kp.append(tr); }
+    out.append(kp);
+  }
+  if (r.open) {
+    out.append(el("h2", "Åpent for AI"));
+    const op = el("table");
+    for (const [k, n] of Object.entries(OPEN)) {
+      const v = r.open[k];
+      const tr = el("tr");
+      tr.append(el("td", n), el("td", Array.isArray(v) ? (v.length ? v.join(", ") : "nei") : yesNo(v)));
+      op.append(tr);
+    }
+    out.append(op);
+    out.append(el("p", "Dette er det en AI-agent kan bruke direkte, utover å lese nettsidene. Det gir ikke poeng ennå, men viser hva som er mulig.", "mut"));
   }
 
   out.append(el("h2", "Tiltak"));

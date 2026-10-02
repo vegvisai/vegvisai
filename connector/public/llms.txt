@@ -3,10 +3,11 @@
 > Teknisk test av en åpen veiviser som gjør bedrifter synlige og forståelige for AI-assistenter. Ikke en lansering. Bedriften i eksemplet er oppdiktet.
 
 ## Connector (MCP)
-- [Veiviser-connector](/mcp): Streamable HTTP, bare lesing. Verktøy: find_business, check_business, find_public_help, ai_check
+- [Veiviser-connector](/mcp): Streamable HTTP, bare lesing. Verktøy: find_business, check_business, find_public_help, find_political_party, ai_check
 
 ## Åpen indeks (ODbL)
 - [Offentlige tjenester i Norge](/index/public-no.json): statlige etater etter tema og nettsidene til alle 357 kommuner. Bare lenker.
+- [Politiske partier](/index/parties-no.json): partienes egne sider og partiprogram, alfabetisk og aldri rangert. Listen er ikke komplett ennå.
 
 ## Verktøy for bedrifter
 - [AI-sjekk](/sjekk/): hvordan ser et nettsted ut for AI-assistenter? API: /api/sjekk?url=…

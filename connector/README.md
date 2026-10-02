@@ -4,9 +4,9 @@ The guide on Cloudflare Workers: web pages for businesses, the AI check, the AI 
 
 - Test address: https://veiviser-test.testplattform.workers.dev (all pages `noindex` while we test)
 - MCP: `POST /mcp` (Streamable HTTP, stateless JSON-RPC, no login)
-- Tools: `find_business` (test data: one fictional bakery), `check_business` (Enhetsregisteret), `find_public_help` (the open index of public services, by topic or municipality), `ai_check` (how a website looks to AI, score out of 100 by the yardstick that fits: business, government or organisation)
+- Tools: `find_business` (test data: one fictional bakery), `check_business` (Enhetsregisteret), `find_public_help` (the open index of public services, by topic or municipality), `find_political_party` (the parties' own pages and programmes, alphabetical, never ranked), `ai_check` (how a website looks to AI, score out of 100 by the yardstick that fits: business, government, organisation or party, plus what the site has open for AI)
 - API: `GET /api/sjekk?url=…` (AI check as JSON), `GET /api/enhet?orgnr=…` (register lookup for the generator form)
-- Open index: `/index/public-no.json` (ODbL), built with `python3 index/build_public_index.py`
+- Open index: `/index/public-no.json` and `/index/parties-no.json` (ODbL), built with `python3 index/build_public_index.py`
 - Pages: `/sjekk/` (AI check), `/lag/` (business card generator, runs in the browser), `/eksempel/` (fictional «Eksempel Bakeri AS»). The pages are in Norwegian.
 
 Protection against prompt injection is built in from the start: content from businesses, websites and registers is marked as data and sanitised, and the AI check warns about hidden instructions. Rate limits per client and per checked website.

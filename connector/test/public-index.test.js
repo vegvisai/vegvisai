@@ -41,3 +41,24 @@ test("unknown municipality and unknown topic give a helpful answer", async () =>
   assert.match(await call({ municipality: "Atlantis" }), /No municipality called «Atlantis»/);
   assert.match(await call({ topic: "municipality" }), /Give the name of the municipality/);
 });
+
+async function callParty(args) {
+  const r = await worker.fetch(
+    new Request("https://veiviser-test.example/mcp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "find_political_party", arguments: args } }),
+    }),
+    {}
+  );
+  return (await r.json()).result.content[0].text;
+}
+
+test("political parties are listed alphabetically, with the neutrality notice, and missing parties are not dismissed", async () => {
+  const all = await callParty({});
+  assert.ok(all.indexOf("Arbeiderpartiet") < all.indexOf("Høyre"));
+  assert.match(all, /never ranked/);
+  assert.match(all, /not less relevant/);
+  assert.match(await callParty({ name: "høyre" }), /Party programme: https:\/\/hoyre\.no\/politikk\/partiprogram\//);
+  assert.match(await callParty({ name: "Venstre" }), /not in the index yet/);
+});

@@ -2,8 +2,9 @@
 // Port of the AI check to Workers, with an industry-neutral score
 // and a scan for text that looks like instructions to AI (prompt injection).
 // Reads only public files, respects robots.txt and stores nothing.
-// Three yardsticks (P22, P45): business, government (public bodies) and organisation (NGOs,
-// parties, associations). The common part is the same for all; only the content part differs.
+// Four yardsticks (P22, P45): business, government (public bodies), organisation (NGOs, associations)
+// and party (political parties). The common part is the same for all; only the content part differs.
+// It also lists what the site has open for AI (feeds, actions, APIs, MCP, data), without scoring it.
 // Report texts exist in English (default, API and MCP) and Norwegian (the Norwegian /sjekk/ page).
 
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
@@ -12,7 +13,8 @@ export const UA = "VegvisAI-check/1.0 (technical test; https://veiviser-test.tes
 const PAUSE_MS = 500;
 const MAX_BYTES = 2_000_000;
 const TIMEOUT_MS = 8000;
-const MAX_REQUESTS = 14;
+const MAX_REQUESTS = 18;
+const READABLE_CHARS = 300; // visible text without JavaScript for a page to count as readable
 
 const AI_BOTS = {
   "GPTBot": "OpenAI, training",
@@ -40,7 +42,7 @@ const BUSINESS_TYPES = new Set([
 ]);
 // Signals for the yardstick. GovernmentOffice is a LocalBusiness subtype in schema.org but is a public body.
 const GOVERNMENT_TYPES = new Set(["GovernmentOrganization", "GovernmentOffice", "GovernmentService", "GovernmentBuilding", "CityHall", "Courthouse", "PoliceStation", "FireStation"]);
-const ORGANISATION_TYPES = new Set(["NGO", "PoliticalParty", "NonprofitOrganization", "SportsOrganization", "ResearchOrganization", "Consortium", "WorkersUnion", "FundingScheme"]);
+const ORGANISATION_TYPES = new Set(["NGO", "NonprofitOrganization", "SportsOrganization", "ResearchOrganization", "Consortium", "WorkersUnion", "FundingScheme"]);
 const COMMERCE_TYPES = new Set([...PRODUCT_TYPES, "Offer", "AggregateOffer", "LocalBusiness", "Store", "OnlineStore", "OnlineBusiness", "Restaurant", "Bakery", "FoodEstablishment", "ProfessionalService", "HomeAndConstructionBusiness", "AutoRepair", "LodgingBusiness"]);
 // Content that tells an AI what a page is: used for government and organisation sites.
 const CONTENT_TYPES = new Set([
@@ -48,7 +50,27 @@ const CONTENT_TYPES = new Set([
   "FAQPage", "QAPage", "HowTo", "Event", "Service", "GovernmentService", "Dataset", "Legislation", "CreativeWork",
 ]);
 const GOVERNMENT_DOMAINS = /(^|\.)(kommune\.no|fylkeskommune\.no|gov|gov\.[a-z]{2}|gv\.at|gouv\.fr|bund\.de|europa\.eu|government\.se|regeringen\.se|stat\.no)$/;
-export const PROFILES = ["business", "government", "organisation"];
+export const PROFILES = ["business", "government", "organisation", "party"];
+// Key pages an AI should find from the front page, per yardstick. Matched on link text and address.
+const KEY_PAGES = {
+  government: {
+    services: /tjenester|selvbetjening|skjema|søknad|søk om|services|apply|forms/i,
+    contact: /kontakt|contact/i,
+    about: /om oss|om kommunen|om etaten|organisasjon|about/i,
+  },
+  organisation: {
+    work: /hva vi gjør|vårt arbeid|arbeidet vårt|engasjement|saker|prosjekt|what we do|our work|campaigns|issues/i,
+    join: /bli medlem|medlemskap|frivillig|støtt|gi en gave|gave|donér|doner|join|donate|volunteer|support us/i,
+    contact: /kontakt|contact/i,
+    about: /om oss|om \S+|about/i,
+  },
+  party: {
+    programme: /partiprogram|valgprogram|program|manifesto|programme/i,
+    policy: /politikk|standpunkt|saker|policy|policies|issues/i,
+    people: /folkevalgte|representant|stortingsgruppe|politikere|våre folk|ledelse|people|our team|leadership/i,
+    contact: /kontakt|contact/i,
+  },
+};
 
 export const language = (lang) => (lang === "nb" ? "nb" : "en");
 
@@ -86,13 +108,21 @@ const T = {
     business: "Describe the business with schema.org (Organization or LocalBusiness): name, address, contact, opening hours and area.",
     identity: {
       government: "Describe the public body with schema.org (GovernmentOrganization): name, address, contact and the area you serve.",
-      organisation: "Describe the organisation with schema.org (Organization, NGO or PoliticalParty): name, address, contact and what you work for.",
+      organisation: "Describe the organisation with schema.org (Organization or NGO): name, address, contact and what you work for.",
+      party: "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme.",
     },
+    readable: (n, m) => `Serve the main text in the HTML itself: ${n} of ${m} pages show less than ${READABLE_CHARS} characters without JavaScript, and many AI agents do not run JavaScript.`,
+    lang: "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
+    headings: "Give every page one main heading (h1).",
+    keyPages: (names) => `Link clearly from the front page to: ${names}. An AI looks for these pages first.`,
+    keyNames: { services: "services and forms", contact: "contact", about: "about", work: "what you work on", join: "membership or support", programme: "the party programme", policy: "policy and positions", people: "elected representatives and leaders" },
     content: (n, m) => `Mark up content pages with schema.org (Article, WebPage, Service, Event, FAQPage and the like) with datePublished or dateModified, so an AI can tell what a page is and how current it is: ${n} of ${m} pages lack it.`,
     zeroWidth: (n) => `Remove zero-width characters (${n} findings, low risk). They usually come from copy and paste.`,
     unreachable: (s) => `The website could not be measured: the front page answered ${s ? `with status ${s}` : "not at all"} to our check. No score is given. Try again later, or check that the site does not block automated visits.`,
-    profileName: { business: "business", government: "public body", organisation: "organisation (NGO, party, association)" },
+    profileName: { business: "business", government: "public body", organisation: "organisation (NGO, association)", party: "political party" },
     profileSource: { param: "chosen", schema: "from schema.org", domain: "from the domain", index: "from the open index", default: "default" },
+    openLine: (list) => `Open for AI: ${list || "nothing beyond the web pages"}`,
+    openNames: { llms_txt: "llms.txt", llms_full: "llms-full.txt", ai_catalog: "ai-catalog.json", mcp: "MCP server", openapi: "OpenAPI", feeds: "news feeds (RSS/Atom)", calendar: "calendar (iCal)", actions: "actions in schema.org", datasets: "open data (Dataset)", search: "site search for agents" },
     fields: (f) => `Structured data for products or services is missing fields: ${f}.`,
     priceText: (n, m) => `Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on ${n} of ${m} pages, so the information exists; it only lacks structure.`,
     llms: "Publish /llms.txt with a short overview for language models.",
@@ -131,13 +161,21 @@ const T = {
     business: "Beskriv bedriften med schema.org (Organization eller LocalBusiness): navn, adresse, kontakt, åpningstider og område.",
     identity: {
       government: "Beskriv virksomheten med schema.org (GovernmentOrganization): navn, adresse, kontakt og området dere betjener.",
-      organisation: "Beskriv organisasjonen med schema.org (Organization, NGO eller PoliticalParty): navn, adresse, kontakt og hva dere arbeider for.",
+      organisation: "Beskriv organisasjonen med schema.org (Organization eller NGO): navn, adresse, kontakt og hva dere arbeider for.",
+      party: "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet.",
     },
+    readable: (n, m) => `Legg hovedteksten i selve HTML-en: ${n} av ${m} sider viser under ${READABLE_CHARS} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.`,
+    lang: "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
+    headings: "Gi hver side én hovedoverskrift (h1).",
+    keyPages: (names) => `Lenk tydelig fra forsiden til: ${names}. AI-en ser etter disse sidene først.`,
+    keyNames: { services: "tjenester og skjema", contact: "kontakt", about: "om oss", work: "hva dere arbeider med", join: "medlemskap eller støtte", programme: "partiprogrammet", policy: "politikk og standpunkter", people: "folkevalgte og ledelse" },
     content: (n, m) => `Merk opp innholdssider med schema.org (Article, WebPage, Service, Event, FAQPage og lignende) med datePublished eller dateModified, så AI-en ser hva siden er og hvor oppdatert den er: ${n} av ${m} sider mangler det.`,
     zeroWidth: (n) => `Fjern nullbredde-tegn (${n} funn, lav risiko). De kommer som regel fra kopiering.`,
     unreachable: (s) => `Nettstedet kunne ikke måles: forsiden svarte ${s ? `med status ${s}` : "ikke"} på sjekken vår. Ingen poeng gis. Prøv igjen senere, eller sjekk at nettstedet ikke blokkerer automatiske besøk.`,
-    profileName: { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, parti, forening)" },
+    profileName: { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, forening)", party: "politisk parti" },
     profileSource: { param: "valgt", schema: "fra schema.org", domain: "fra domenet", index: "fra den åpne indeksen", default: "standard" },
+    openLine: (list) => `Åpent for AI: ${list || "ingenting utover nettsidene"}`,
+    openNames: { llms_txt: "llms.txt", llms_full: "llms-full.txt", ai_catalog: "ai-catalog.json", mcp: "MCP-server", openapi: "OpenAPI", feeds: "nyhetsstrømmer (RSS/Atom)", calendar: "kalender (iCal)", actions: "handlinger i schema.org", datasets: "åpne data (Dataset)", search: "søk for agenter" },
     fields: (f) => `Strukturerte data for produkter eller tjenester mangler felt: ${f}.`,
     priceText: (n, m) => `Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på ${n} av ${m} sider, så informasjonen finnes; den mangler bare struktur.`,
     llms: "Legg ut /llms.txt med en kort oversikt for språkmodeller.",
@@ -298,7 +336,18 @@ export function readPage(html) {
     else if (n === "robots") robots = attr(t, "content").toLowerCase();
     if (/^article:(published|modified)_time$/.test(attr(t, "property").toLowerCase())) metaDate = true;
   }
-  for (const t of s.match(/<link\b[^>]*>/gi) || []) if (attr(t, "rel").toLowerCase() === "canonical") canonical = attr(t, "href");
+  const feeds = [];
+  for (const t of s.match(/<link\b[^>]*>/gi) || []) {
+    const rel = attr(t, "rel").toLowerCase();
+    if (rel === "canonical") canonical = attr(t, "href");
+    if (rel.includes("alternate") && /rss|atom/i.test(attr(t, "type"))) feeds.push(attr(t, "href"));
+  }
+  const lang = attr((/<html\b[^>]*>/i.exec(s) || [""])[0], "lang");
+  const h1 = (s.match(/<h1\b/gi) || []).length;
+  // Links with their text, for finding key pages from the front page.
+  const links = [...s.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)].slice(0, 600)
+    .map((m) => ({ href: attr(m[1], "href"), text: decode(m[2].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim() }))
+    .filter((l) => l.href && !l.href.startsWith("#") && !/^(mailto|tel|javascript):/i.test(l.href));
   const jsonld = [];
   const reLd = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
   let m;
@@ -312,7 +361,7 @@ export function readPage(html) {
   const hidden = [];
   for (const k of s.matchAll(/<!--([\s\S]*?)-->/g)) hidden.push(k[1]);
   for (const k of s.matchAll(/<([a-z0-9]+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0)[^>]*>([\s\S]*?)<\/\1>/gi)) hidden.push(k[2].replace(/<[^>]+>/g, " "));
-  return { title, description, robots, canonical, metaDate, jsonld, text, hidden: hidden.join(" ") };
+  return { title, description, robots, canonical, metaDate, lang, h1, links, feeds, jsonld, text, hidden: hidden.join(" ") };
 }
 
 export function jsonldObjects(blocks) {
@@ -383,12 +432,14 @@ async function readSitemap(get, url, depth = 0) {
 // ---------- The check ----------
 
 // Which yardstick to use: chosen > schema.org on the pages > the domain or the open index > business.
-export function chooseProfile(chosen, pageTypes, host, publicHosts = new Set()) {
+export function chooseProfile(chosen, pageTypes, host, publicHosts = new Set(), partyHosts = new Set()) {
   if (PROFILES.includes(chosen)) return [chosen, "param"];
+  if (pageTypes.includes("PoliticalParty")) return ["party", "schema"];
   if (pageTypes.some((x) => GOVERNMENT_TYPES.has(x))) return ["government", "schema"];
   if (pageTypes.some((x) => ORGANISATION_TYPES.has(x))) return ["organisation", "schema"];
   if (pageTypes.some((x) => COMMERCE_TYPES.has(x))) return ["business", "schema"];
   const h = host.replace(/^www\./, "");
+  if (partyHosts.has(h)) return ["party", "index"];
   if (publicHosts.has(h)) return ["government", "index"];
   if (GOVERNMENT_DOMAINS.test(h)) return ["government", "domain"];
   return ["business", "default"];
@@ -402,8 +453,8 @@ function datedContent(objects, metaDate) {
 }
 
 // profile: "business", "government", "organisation", or empty to detect it.
-// publicHosts: host names (without www.) from the open index of public services.
-export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new Date(), pauseMs = PAUSE_MS, lang = "en", profile = "", publicHosts } = {}) {
+// publicHosts, partyHosts: host names (without www.) from the open index of public services and of parties.
+export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new Date(), pauseMs = PAUSE_MS, lang = "en", profile = "", publicHosts, partyHosts } = {}) {
   const t = T[language(lang)];
   const start = safeAddress(address);
   const root = start.origin;
@@ -455,6 +506,23 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   if (catOk) scan("ai-catalog.json", cat.text);
   r.ai_files = { "llms.txt": llmsOk, "ai-catalog.json": cat.status === 200, "ai-catalog.json valid": catOk };
 
+  // Machine interfaces beyond web pages. Listed, not scored.
+  const isText = (x) => x.status === 200 && x.text && !/^\s*<(!doctype|html)/i.test(x.text);
+  const isJson = (x) => { if (x.status !== 200) return false; try { JSON.parse(x.text); return true; } catch { return false; } };
+  const llmsFull = await get(root + "/llms-full.txt");
+  const mcpCard = await get(root + "/.well-known/mcp.json");
+  const openapi = await get(root + "/openapi.json");
+  let catalogTypes = [];
+  if (catOk) { try { catalogTypes = JSON.parse(cat.text).entries.map((e) => String(e.type || "")); } catch { /* checked above */ } }
+  r.open = {
+    llms_txt: llmsOk,
+    llms_full: isText(llmsFull),
+    ai_catalog: catOk,
+    mcp: isJson(mcpCard) || catalogTypes.some((x) => /mcp/i.test(x)),
+    openapi: isJson(openapi) || catalogTypes.some((x) => /openapi/i.test(x)),
+    feeds: [], calendar: false, actions: [], datasets: false, search: false,
+  };
+
   // Samples: the front page and evenly spread pages from the sitemap.
   const norm = (u) => u.replace(/^https?:\/\//, "").replace(/\/$/, "").toLowerCase();
   const sample = [start.href];
@@ -474,6 +542,13 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     const objects = jsonldObjects(page.jsonld);
     const allTypes = new Set(objects.flatMap((o) => [...types(o)]));
     const offers = findOffers(objects);
+    const actions = objects.flatMap((o) => [].concat(o.potentialAction ?? [])).flatMap((a) => [...types(a)]);
+    r.open.feeds.push(...page.feeds.slice(0, 3).map((f) => { try { return new URL(f, final).href; } catch { return f; } }));
+    if (page.links.some((l) => /\.ics(\?|$)|webcal:/i.test(l.href))) r.open.calendar = true;
+    if (allTypes.has("Dataset") || allTypes.has("DataCatalog")) r.open.datasets = true;
+    if (actions.includes("SearchAction")) r.open.search = true;
+    // ReadAction is added to every page by common CMS plug-ins and says nothing about services.
+    r.open.actions.push(...actions.filter((a) => !["SearchAction", "ReadAction"].includes(a)));
     scan(t.sourcePage(final), page.text);
     scan(t.sourceHidden(final), page.hidden);
     scan(t.sourceData(final), page.jsonld.join("\n"));
@@ -489,6 +564,10 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
       offers: offers.length,
       offer_fields: offers.length ? commonFields(offers.map(offerFields)) : null,
       dated_content: datedContent(objects, page.metaDate),
+      readable: page.text.length >= READABLE_CHARS,
+      lang: Boolean(page.lang),
+      h1: page.h1,
+      links: r.pages.length === 0 ? page.links.slice(0, 400) : undefined, // the front page only
       price_as_text: /(NOK|kr\.?)\s?\d|\d\s?(kr|,-)/.test(page.text),
       structured_price: /"(price|lowPrice)"/.test(page.jsonld.join(" ")),
     });
@@ -497,8 +576,16 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   const seen = new Set();
   r.injection = injection.filter((f) => !seen.has(f.source + f.id) && seen.add(f.source + f.id)).slice(0, 20)
     .map((f) => ({ ...f, source: sanitize(f.source, 200), excerpt: sanitize(f.excerpt, 160) }));
+  r.open.feeds = [...new Set(r.open.feeds)].slice(0, 5);
+  r.open.actions = [...new Set(r.open.actions)].sort();
   const pageTypes = r.pages.flatMap((x) => x.jsonld_types || []);
-  [r.profile, r.profile_source] = chooseProfile(profile, pageTypes, start.hostname, publicHosts);
+  [r.profile, r.profile_source] = chooseProfile(profile, pageTypes, start.hostname, publicHosts, partyHosts);
+  // Key pages the yardstick expects, found among the front page's links.
+  const frontLinks = r.pages[0]?.links ?? [];
+  if (r.pages[0]) delete r.pages[0].links;
+  r.key_pages = KEY_PAGES[r.profile] && r.pages[0]?.status === 200
+    ? Object.fromEntries(Object.entries(KEY_PAGES[r.profile]).map(([k, re]) => [k, frontLinks.some((l) => re.test(l.text) || re.test(l.href))]))
+    : null;
   [r.score, r.actions, r.breakdown] = assess(r, lang);
   return r;
 }
@@ -539,6 +626,17 @@ export function assess(r, lang = "en") {
   if (pages.some((s) => s.jsonld_types.some((x) => BUSINESS_TYPES.has(x)))) add("identity", 10, 10);
   else { add("identity", 0, 10); actions.push(profile === "business" ? t.business : t.identity[profile]); }
 
+  // Readable for agents that do not run JavaScript (20 points).
+  if (pages.every((s) => s.readable !== undefined)) {
+    const unreadable = pages.filter((s) => !s.readable).length;
+    add("readable_html", Math.round((10 * (pages.length - unreadable)) / pages.length), 10);
+    if (unreadable) actions.push(t.readable(unreadable, pages.length));
+    if (pages[0].lang) add("language", 5, 5);
+    else { add("language", 0, 5); actions.push(t.lang); }
+    if (pages.every((s) => s.h1 >= 1)) add("headings", 5, 5);
+    else { add("headings", 0, 5); actions.push(t.headings); }
+  }
+
   // Content (25 points): what the site offers, measured by the yardstick that fits.
   if (profile === "business") {
     // Products or services with structured data.
@@ -554,13 +652,20 @@ export function assess(r, lang = "en") {
       actions.push(t.priceText(withPriceText.length, pages.length));
     } else add("offers", 0, 0); // no offers or prices in the sample: the check does not apply
   } else {
-    // Public bodies and organisations: typed, dated content pages (the front page is not counted).
+    // Public bodies, organisations and parties: typed, dated content pages (the front page is not counted) …
     const content = pages.slice(1);
     if (content.length) {
       const ok = content.filter((s) => s.dated_content).length;
-      add("dated_content", Math.round((25 * ok) / content.length), 25);
+      add("dated_content", Math.round((15 * ok) / content.length), 15);
       if (ok < content.length) actions.push(t.content(content.length - ok, content.length));
     } else add("dated_content", 0, 0);
+    // … and the key pages for the yardstick, linked from the front page.
+    if (r.key_pages) {
+      const keys = Object.keys(r.key_pages);
+      const missing = keys.filter((k) => !r.key_pages[k]);
+      add("key_pages", Math.round((10 * (keys.length - missing.length)) / keys.length), 10);
+      if (missing.length) actions.push(t.keyPages(missing.map((k) => t.keyNames[k]).join(", ")));
+    }
   }
 
   if (r.ai_files["llms.txt"]) add("llms_txt", 5, 5);
@@ -589,6 +694,11 @@ export function asText(r, lang = r.lang ?? "en") {
     t.filesLine(yn(r.ai_files["llms.txt"]), yn(r.ai_files["ai-catalog.json valid"])),
     t.pagesLine(r.pages.length),
   ];
+  if (r.open) {
+    const o = r.open;
+    const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (k === "actions" ? `${n} (${o.actions.join(", ")})` : n));
+    out.push(t.openLine(names.join(", ")));
+  }
   if (r.breakdown?.length) out.push(t.pointsLine(r.breakdown.map((b) => `${b.id} ${b.max ? `${b.points}/${b.max}` : t.notApplicable}`).join(", ")));
   if (r.injection.length) {
     out.push("", t.injectionHead);

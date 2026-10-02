@@ -23,8 +23,8 @@ Ha dette klart. Kort og konkret er bedre enn langt og pent.
 - **Hva du tilbyr**, og like viktig, **hva du ikke tilbyr**. Da sender ikke AI-en deg feil kunder
 - **Område**: kommunene du betjener, om du kommer til kunden, og om du leverer
 - **Åpningstider**, **telefon**, **e-post** og **kontakt- eller bookingsiden** din
-- **Priser** du gjerne viser, for eksempel «Bursdagskake, 12 personer: fra 595 kr»
-- **Hva du må vite** fra en kunde for å svare på en forespørsel, for eksempel dato, antall personer og allergier
+- **Priser** du gjerne viser, for eksempel «Bursdagskake, 12 personer: fra 595 kr» eller «Dobbeltrom: 1 350 kr per natt med frokost»
+- **Hva du må vite** fra en kunde for å svare på en forespørsel, for eksempel dato, antall personer og allergier, eller datoer og antall gjester
 
 ## Steg 2: Lag filene
 

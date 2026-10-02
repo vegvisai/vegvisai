@@ -190,3 +190,9 @@ test("the English example business (Example Guesthouse Ltd) scores 100", async (
   assert.equal(r.profile, "business");
   assert.equal(r.score, 100, JSON.stringify(r.actions));
 });
+
+test("the Norwegian guesthouse (Eksempel Gjestehus AS) scores 100", async () => {
+  const gjestehus = readFileSync(new URL("../public/eksempel/gjestehus/index.html", import.meta.url), "utf8");
+  const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ ...goodSite, "/": gjestehus }) });
+  assert.equal(r.score, 100, JSON.stringify(r.actions));
+});

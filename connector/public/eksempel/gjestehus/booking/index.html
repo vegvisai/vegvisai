@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>(Oppdiktet) Send bookingforespørsel til Eksempel Gjestehus AS</title>
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}</style>
+</head>
+<body>
+<main>
+<p class="test"><strong>Oppdiktet testbedrift.</strong> Eksempel Bakeri AS finnes ikke. Siden viser hvordan et AI-lesbart visittkort (nivå 0) ser ut.</p>
+<h1>Eksempel Bakeri AS</h1>
+<p>Vi baker brød hver dag og lager bestillingskaker. Butikk i Bodø sentrum.</p>
+<h2>Dette lager vi</h2>
+<ul><li>Bursdagskaker og bryllupskaker på bestilling</li><li>Glutenfrie og laktosefrie kaker</li><li>Brød og boller hver dag</li></ul>
+<h2>Dette gjør vi ikke</h2>
+<ul><li>Levering utenfor Bodø</li><li>Bestillinger med mindre enn to dagers varsel</li></ul>
+<h2>Priser</h2>
+<p>Bursdagskake for 12 personer: 595 kr. Glutenfri sjokoladekake for 8 personer: 450 kr.</p>
+<h2>Send bestilling</h2>
+<p>Oppgi type kake, antall personer og dato, så svarer vi innen én arbeidsdag. <a href="/eksempel/kontakt/">Send forespørsel</a>.</p>
+<p>Lenken kan fylles ut på forhånd: <code>/eksempel/kontakt/?emne=…&amp;kake=…&amp;personer=…&amp;dato=…&amp;beskrivelse=…</code></p>
+<h2>Åpningstider og adresse</h2>
+<p>Mandag–lørdag 07–16. Eksempelgata 1, 8006 Bodø.</p>
+<p><a href="/">Til forsiden</a></p>
+</main>
+</body>
+</html>
+</head>
+<body>
+<main>
+<p class="test"><strong>Test:</strong> Eksempel Gjestehus AS er oppdiktet. Ingenting sendes, og ingenting lagres.</p>
+<h1>Bookingforespørsel (forhåndsutfylt)</h1>
+<p>Slik ville en AI-assistent fylt ut forespørselen. Hos en ekte bedrift ville du selv kontrollert og sendt den.</p>
+<dl id="felt" class="boks"></dl>
+<p><a href="/eksempel/gjestehus/">Tilbake til visittkortet</a></p>
+<script>
+const p=new URLSearchParams(location.search),dl=document.getElementById("felt");
+for(const k of ["rom","ankomst","netter","gjester","melding"]){const dt=document.createElement("dt");dt.textContent=k;const dd=document.createElement("dd");dd.textContent=p.get(k)||"(tomt)";dl.append(dt,dd);}
+</script>
+</main>
+</body>
+</html>

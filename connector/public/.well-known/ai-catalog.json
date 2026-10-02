@@ -67,6 +67,16 @@
       ]
     },
     {
+      "identifier": "urn:air:veiviser-test:web:eksempel-gjestehus",
+      "type": "text/html",
+      "url": "/eksempel/gjestehus/",
+      "description": "Fictional example: an AI-readable business card for a guesthouse (Norwegian page).",
+      "tags": [
+        "example",
+        "business-card"
+      ]
+    },
+    {
       "identifier": "urn:air:veiviser-test:web:example",
       "type": "text/html",
       "url": "/example/",

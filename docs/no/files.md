@@ -28,7 +28,7 @@ Område: Bodø. Åpningstider: mandag–lørdag 07:00–16:00. Priser i NOK inkl
 - Bursdagskake, 12 personer: 595
 
 ## Kontakt
-- [Send forespørsel](https://eksempelbakeri.no/kontakt/)
+- [Send forespørsel](https://bakeri.example/kontakt/)
 ```
 
 ## `/.well-known/ai-catalog.json`: en katalog for agenter
@@ -38,19 +38,19 @@ En JSON-fil i det åpne AI Catalog-formatet som lister oppføringene dine: visit
 ```
 {
   "specVersion": "1.0",
-  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempelbakeri.no" },
+  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "bakeri.example" },
   "entries": [{
-    "identifier": "urn:air:eksempelbakeri.no:web:visittkort",
+    "identifier": "urn:air:bakeri.example:web:visittkort",
     "type": "text/html",
-    "url": "https://eksempelbakeri.no/",
+    "url": "https://bakeri.example/",
     "description": "Bakeri i Bodø med brød, boller og kaker på bestilling.",
     "extensions": {
       "ai.vegvis.local/v1": {
         "services": ["Kaker på bestilling", "Brød og boller"],
         "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"] },
         "languages": ["nb", "en"],
-        "actions": { "contact": "https://eksempelbakeri.no/kontakt/" },
-        "llms_txt": "https://eksempelbakeri.no/llms.txt"
+        "actions": { "contact": "https://bakeri.example/kontakt/" },
+        "llms_txt": "https://bakeri.example/llms.txt"
       }
     }
   }]

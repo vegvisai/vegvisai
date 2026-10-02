@@ -25,15 +25,17 @@ En AI-lesbar nettside virker med alle assistenter i dag, uten at kunden må inst
 En agent kan lage en lenke som åpner et ferdig utfylt skjema på nettsiden din. Kunden klikker og bekrefter, og ingen data går via oss. Eksempler:
 
 ```
-eksempelbakeri.no/bestill?produkt=bursdagskake&dato=2026-10-03&antall=12&uten=notter
-eksempelbakeri.no/sok?kategori=kaker&uten=notter
+bakeri.example/bestill?produkt=bursdagskake&dato=2026-10-03&antall=12&uten=notter
+gjestehus.example/booking/?rom=dobbeltrom&ankomst=2026-10-03&netter=2&gjester=2
 ```
+
+Se de oppdiktede eksemplene: [Eksempel Bakeri AS](https://veiviser-test.testplattform.workers.dev/eksempel/) og [Eksempel Gjestehus AS](https://veiviser-test.testplattform.workers.dev/eksempel/gjestehus/).
 
 Beskriv lenkemønsteret på siden, og i schema.org med `potentialAction` (for eksempel `OrderAction` eller `ReserveAction` med en `EntryPoint` og `urlTemplate`). Da vet agentene hvordan de skal lage den.
 
 ## Produkter og tjenester som krever valg
 
-For ting som krever valg, vilkår eller vurdering, som kaker på bestilling, forsikring, reiser eller produkter for bedriftsmarkedet:
+For ting som krever valg, vilkår eller vurdering, som kaker på bestilling, rom med ulike regler, forsikring, reiser eller produkter for bedriftsmarkedet:
 
 - **Beslutningssider:** «slik velger du», med kriterier og konsekvenser
 - **Oversiktstabeller:** for eksempel hvilke kaker som finnes uten nøtter, gluten eller laktose

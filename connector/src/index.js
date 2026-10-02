@@ -44,14 +44,16 @@ const TEST_BUSINESSES = [
     request: "/eksempel/kontakt/?emne={subject}&kake={cake}&personer={people}&dato={date}&beskrivelse={description}",
   },
   {
-    name: "Example Guesthouse Ltd",
+    name: "Eksempel Gjestehus AS (Example Guesthouse Ltd)",
     test_data: true,
-    notice: "FICTIONAL example business. It does not exist. Used only to test the guide and to show the English example.",
+    notice: "FICTIONAL example business. It does not exist. Used only to test the guide. Norwegian and English pages.",
     categories: ["guesthouse", "accommodation", "lodging", "room", "bed and breakfast", "hotel", "overnatting", "gjestehus", "rom"],
     services: ["single, double and family rooms, breakfast included"],
     area: "Bergen, Norway",
-    page: "/example/",
-    request: "/example/booking/?room={room}&arrival={arrival}&nights={nights}&guests={guests}&message={message}",
+    page: "/eksempel/gjestehus/",
+    page_en: "/example/",
+    request: "/eksempel/gjestehus/booking/?rom={room}&ankomst={arrival}&netter={nights}&gjester={guests}&melding={message}",
+    request_en: "/example/booking/?room={room}&arrival={arrival}&nights={nights}&guests={guests}&message={message}",
   },
 ];
 
@@ -102,7 +104,7 @@ const TOOLS = [
     name: "find_business",
     title: "Find a business (test)",
     description:
-      "Finds businesses in the guide that can help with a need: businesses that registered with a verified AI business card on their own domain, plus two FICTIONAL example businesses (a bakery in Bodø and a guesthouse in Bergen). Results come in random order; the guide does not rank.",
+      "Finds businesses in the guide that can help with a need: businesses that registered with a verified AI business card on their own domain, plus two FICTIONAL example businesses (a bakery in Bodø, and a guesthouse in Bergen with pages in Norwegian and English). Results come in random order; the guide does not rank.",
     inputSchema: {
       type: "object",
       properties: {
@@ -224,7 +226,8 @@ async function checkBusiness({ org_number, name }) {
 async function findBusiness({ need, postal_code }, origin, context = {}) {
   const n = (need || "").toLowerCase();
   const test = TEST_BUSINESSES.filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n))).map((b) =>
-    [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`, `Request link (template): ${origin}${b.request}`].join("\n"));
+    [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, b.page_en && `Page in English: ${origin}${b.page_en}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`,
+      `Request link (template): ${origin}${b.request}`, b.request_en && `Request link in English (template): ${origin}${b.request_en}`].filter(Boolean).join("\n"));
   // Businesses in the register: only what they publish themselves, with the date of verification.
   const real = (await listedMatches(context.env, need)).map((e) =>
     [`${e.name}  [verified domain and org. no. ${e.verified?.domain_and_org_number ?? ""}]`, `Business card: ${e.card_url}`,
@@ -382,7 +385,7 @@ async function api(request, url, env) {
 }
 
 // robots.txt and sitemap.xml are generated here so the addresses are absolute whatever the domain.
-const PAGES = ["/", "/eksempel/", "/example/", "/sjekk/", "/lag/", "/meld-inn/"];
+const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/"];
 const UPDATED = "2026-10-01";
 
 function robots(origin) {

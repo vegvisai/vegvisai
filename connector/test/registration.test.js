@@ -162,3 +162,15 @@ test("a UK business is checked in Companies House when there is a key, otherwise
   const noKey = await verifyBusiness("https://inn.example.co.uk", { country: "GB", consent: true, fetchFn: ukFetch("active") });
   assert.deepEqual([noKey.status, noKey.entry.verification], ["manual", "domain"]);
 });
+
+test("dry_run returns the result of the checks and stores nothing; pull requests are marked in the changelog", async () => {
+  const store = memoryStore();
+  const env = { __store: store };
+  const post = (body) => new Request("https://x.example/api/meld-inn", { method: "POST", body: JSON.stringify(body) });
+  const dry = await (await register(post({ url: ROOT, orgnr: ORG, consent: true, dry_run: true }), env, { fetchFn: fakeFetch() })).json();
+  assert.equal(dry.status, "ok");
+  assert.equal(dry.dry_run, true);
+  assert.equal(await store.get(ORG), null);
+  await register(post({ url: ROOT, orgnr: ORG, consent: true, source: "github" }), env, { fetchFn: fakeFetch() });
+  assert.equal((await store.changes())[0].reason, "pull_request");
+});

@@ -1,0 +1,31 @@
+# The second door into the register (P46): pull requests with registrations/<domain>.json.
+# On a pull request the bot runs the same checks as the form, without storing anything.
+# After merge it sends the entries to the platform, where a person reviews them before they are shown.
+name: Registration
+on:
+  pull_request:
+    paths: ["registrations/**.json"]
+  push:
+    branches: [main]
+    paths: ["registrations/**.json"]
+permissions:
+  contents: read
+jobs:
+  registration:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      PLATFORM: ${{ vars.VEGVIS_PLATFORM || 'https://veiviser-test.testplattform.workers.dev' }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check the pull request (dry run)
+        if: github.event_name == 'pull_request'
+        run: node tools/bots/registration-bot.mjs check $(git diff --name-only --diff-filter=AM "origin/${{ github.base_ref }}...HEAD" -- registrations/)
+      - name: Send merged registrations
+        if: github.event_name == 'push'
+        run: node tools/bots/registration-bot.mjs submit $(git diff --name-only --diff-filter=AM "${{ github.event.before }}" "${{ github.sha }}" -- registrations/)

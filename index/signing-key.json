@@ -1,0 +1,11 @@
+{
+ "algorithm": "Ed25519",
+ "key_id": "4a71584cc11f41fe",
+ "jwk": {
+  "kty": "OKP",
+  "crv": "Ed25519",
+  "x": "izZOSxwj7ggUlG8upn3Y1BT6sqZiIaVt8sBKYMrlWnM"
+ },
+ "purpose": "Signs the monthly releases of the VegvisAI open index. Check a release with tools/bots/verify-release.mjs.",
+ "created": "2026-10-02"
+}

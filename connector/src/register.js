@@ -19,6 +19,14 @@ CREATE TABLE IF NOT EXISTS changes (
   org_number TEXT NOT NULL,
   action TEXT NOT NULL,          -- submitted, listed, updated, removed
   reason TEXT NOT NULL           -- neutral code, never free text
+);
+CREATE TABLE IF NOT EXISTS releases (
+  period TEXT PRIMARY KEY,       -- YYYY-MM; a release is never changed
+  created_at TEXT NOT NULL,
+  body TEXT NOT NULL,            -- the exact bytes that are signed
+  sha256 TEXT NOT NULL,
+  signature TEXT NOT NULL,       -- Ed25519, base64
+  key_id TEXT NOT NULL
 );`;
 
 const nowIso = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
@@ -43,12 +51,23 @@ export function d1Store(db) {
       return (await db.prepare(`SELECT c.at, c.action, c.reason, c.org_number, b.sole_proprietorship FROM changes c
         LEFT JOIN businesses b ON b.org_number = c.org_number ORDER BY c.id DESC LIMIT ?`).bind(limit).all()).results ?? [];
     },
+    async removedSince(at) {
+      return ((await db.prepare(`SELECT DISTINCT c.org_number FROM changes c JOIN businesses b ON b.org_number = c.org_number
+        WHERE c.action = 'removed' AND c.at > ? AND b.sole_proprietorship = 0 AND b.status = 'removed' ORDER BY c.org_number`).bind(at).all()).results ?? []).map((r) => r.org_number);
+    },
+    async releases() { return (await db.prepare("SELECT period, created_at, sha256, key_id FROM releases ORDER BY period DESC").all()).results ?? []; },
+    async getRelease(period) { return db.prepare("SELECT * FROM releases WHERE period = ?").bind(period).first(); },
+    async saveRelease(r) {
+      await db.prepare("INSERT INTO releases (period, created_at, body, sha256, signature, key_id) VALUES (?, ?, ?, ?, ?, ?)")
+        .bind(r.period, r.created_at, r.body, r.sha256, r.signature, r.key_id).run();
+    },
   };
 }
 
 export function memoryStore() {
   const businesses = new Map();
   const log = [];
+  const releases = new Map();
   return {
     async get(org) { return businesses.get(org) ?? null; },
     async save(org, { domain, status, entry, consent }, action, reason) {
@@ -62,6 +81,13 @@ export function memoryStore() {
     async changes(limit = 200) {
       return log.slice(-limit).reverse().map((c) => ({ ...c, sole_proprietorship: businesses.get(c.org_number)?.sole_proprietorship ? 1 : 0 }));
     },
+    async removedSince(at) {
+      return [...new Set(log.filter((c) => c.action === "removed" && c.at > at).map((c) => c.org_number))]
+        .filter((o) => businesses.get(o)?.status === "removed" && !businesses.get(o)?.sole_proprietorship).sort();
+    },
+    async releases() { return [...releases.values()].sort((a, b) => b.period.localeCompare(a.period)).map(({ period, created_at, sha256, key_id }) => ({ period, created_at, sha256, key_id })); },
+    async getRelease(period) { return releases.get(period) ?? null; },
+    async saveRelease(r) { if (releases.has(r.period)) throw new Error("A release is never changed."); releases.set(r.period, { ...r }); },
   };
 }
 
@@ -86,7 +112,7 @@ export async function openExport(store, { now = new Date() } = {}) {
     name: "VegvisAI open index: businesses",
     licence: "ODbL-1.0 (database), DbCL-1.0 (contents)",
     generated: now.toISOString().slice(0, 10),
-    notice: "Only what each business publishes on its own domain. Norwegian businesses are checked in Enhetsregisteret, EU businesses in VIES. Sole proprietorships and entries checked by domain only are not included. Remove the ids in «removed» from any copy.",
+    notice: "Only what each business publishes on its own domain. Norwegian businesses are checked in Enhetsregisteret, EU businesses in VIES, UK businesses in Companies House. Sole proprietorships and entries checked by domain only are not included. Remove the ids in «removed» from any copy.",
     entries,
     removed,
   };

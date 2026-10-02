@@ -1,9 +1,11 @@
 // API for registration (P46): POST /api/meld-inn, GET /api/status, GET /api/endringer,
 // POST /api/admin/review (manual review with a secret token), GET /index/businesses-no.json,
-// and the weekly re-check. Every new listing is reviewed by a person at the start.
+// the signed monthly releases under /index/releases/, and the weekly re-check.
+// Every new listing is reviewed by a person at the start.
 
 import { verifyBusiness, reasonText } from "./registration.js";
 import { d1Store, publicChangelog, openExport } from "./register.js";
+import { makeRelease, publicJwkOf, keyId, PERIOD } from "./release.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import { CheckError } from "./sjekk.js";
 import { language } from "../public/felles/i18n.js";
@@ -42,14 +44,16 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
     return json({ error: e instanceof CheckError ? e.text(lang) : "Invalid web address." }, 400);
   }
   const answer = { status: result.status, reasons: explain(result.reasons, lang), entry: result.entry ?? null };
-  if (result.status === "rejected") return json(answer);
+  // dry_run: the checks only, nothing is stored (the GitHub bot checks pull requests this way).
+  if (result.status === "rejected" || body.dry_run === true) return json({ ...answer, dry_run: body.dry_run === true });
   const org = result.entry.org_number;
   const old = await store.get(org);
   if (old?.status === "listed" && result.status === "ok") {
     await store.save(org, { domain: result.domain, status: "listed", entry: result.entry, consent: true }, "updated", "resubmitted");
     return json({ ...answer, status: "listed" });
   }
-  await store.save(org, { domain: result.domain, status: "pending", entry: result.entry, consent: true }, "submitted", result.status === "manual" ? "domain_mismatch" : "registered");
+  const reason = result.status === "manual" ? "domain_mismatch" : body.source === "github" ? "pull_request" : "registered";
+  await store.save(org, { domain: result.domain, status: "pending", entry: result.entry, consent: true }, "submitted", reason);
   return json({ ...answer, status: "pending" });
 }
 
@@ -128,4 +132,49 @@ export async function listedMatches(env, need, country = "") {
   if (!n) return [];
   return (await store.listed()).map((b) => b.entry).filter((e) => !cc || (e.country ?? "NO") === cc).filter((e) =>
     [...e.categories, e.name, e.description].some((t) => { const s = String(t).toLowerCase(); return s && (s.includes(n) || n.includes(s)); }));
+}
+
+// The signing key: the Worker secret EXPORT_SIGNING_KEY holds the Ed25519 private key as JWK.
+function signingKey(env) {
+  try { return env?.EXPORT_SIGNING_KEY ? JSON.parse(env.EXPORT_SIGNING_KEY) : null; } catch { return null; }
+}
+
+const OPEN = { "Access-Control-Allow-Origin": "*", "X-Robots-Tag": "noindex, nofollow" };
+
+// GET /index/releases.json, /index/releases/<YYYY-MM>.json, /index/releases/<YYYY-MM>.json.sig, /index/signing-key.json
+export async function releases(url, env) {
+  const store = storeFor(env);
+  if (!store) return json({ error: "The register is not available." }, 503);
+  if (url.pathname === "/index/signing-key.json") {
+    const key = signingKey(env);
+    if (!key) return json({ error: "No signing key yet." }, 503);
+    const pub = publicJwkOf(key);
+    return Response.json({ algorithm: "Ed25519", key_id: await keyId(pub), jwk: pub }, { headers: { ...OPEN, "Cache-Control": "max-age=3600" } });
+  }
+  if (url.pathname === "/index/releases.json") {
+    const list = (await store.releases()).map((r) => ({ ...r, url: `/index/releases/${r.period}.json`, signature_url: `/index/releases/${r.period}.json.sig` }));
+    return Response.json({ name: "VegvisAI open index: signed monthly releases", key: "/index/signing-key.json", releases: list }, { headers: { ...OPEN, "Cache-Control": "max-age=600" } });
+  }
+  const m = url.pathname.match(/^\/index\/releases\/(\d{4}-\d{2})\.json(\.sig)?$/);
+  const r = m && PERIOD.test(m[1]) ? await store.getRelease(m[1]) : null;
+  if (!r) return json({ error: "No such release." }, 404);
+  // A release never changes, so it may be cached for a long time.
+  const headers = { ...OPEN, "Cache-Control": "public, max-age=31536000, immutable" };
+  return m[2]
+    ? new Response(r.signature + "\n", { headers: { ...headers, "Content-Type": "text/plain; charset=utf-8" } })
+    : new Response(r.body, { headers: { ...headers, "Content-Type": "application/json; charset=utf-8" } });
+}
+
+// The monthly release (cron, or POST /api/admin/release with the review token).
+export async function monthlyRelease(env, { now = new Date() } = {}) {
+  const store = storeFor(env);
+  const key = signingKey(env);
+  if (!store || !key) return { created: false, error: "no store or signing key" };
+  return makeRelease(store, key, { now });
+}
+
+export async function releaseNow(request, env) {
+  const token = env?.ADMIN_TOKEN;
+  if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
+  return json(await monthlyRelease(env));
 }

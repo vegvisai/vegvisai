@@ -8,4 +8,5 @@ Closes #
 - [ ] Every number has a source; unknowns are written as `[placeholder]`
 - [ ] Index data comes only from open public registers (NLOD), the organisation's own website or my own checks, in my own words; nothing from commercial directories or maps
 - [ ] No secrets, tracking or personal data
+- [ ] Registrations (`registrations/<domain>.json`): I have the right to register each business, and the bot's check passes
 - [ ] Nothing here lets anyone buy ranking, verification or access, or ranks sites or parties against each other

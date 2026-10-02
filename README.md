@@ -30,6 +30,8 @@ The business card always lives on the business's own domain. The index only hold
 
 ## Join the dugnad
 
+*Dugnad* · /ˈdʉːɡnɑd/ or «DOOG-nahd» · is Norwegian for unpaid work done together, like neighbours fixing the road they all use.
+
 Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work, they won't need to. Templates, checks, index data, integrations and guides are all open for pull requests: see [CONTRIBUTING.md](CONTRIBUTING.md).
 
 ## Principles

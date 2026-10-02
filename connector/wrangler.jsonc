@@ -7,7 +7,7 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "run_worker_first": ["/mcp", "/mcp/*", "/api/*", "/robots.txt", "/sitemap.xml", "/index/businesses-no.json"]
+    "run_worker_first": ["/mcp", "/mcp/*", "/api/*", "/robots.txt", "/sitemap.xml", "/index/businesses-no.json", "/index/releases.json", "/index/releases/*", "/index/signing-key.json"]
   },
   // Rate-limit (P39 trinn 3). Tellevindu 60 s. Se src/grense.js.
   "ratelimits": [
@@ -20,8 +20,8 @@
   "d1_databases": [
     { "binding": "REGISTER", "database_name": "vegvis-register", "database_id": "2872b9f3-1bab-4007-bab2-8fb197ace14c", "migrations_dir": "migrations" }
   ],
-  // Weekly re-check of listed businesses: Mondays 04:00 UTC.
-  "triggers": { "crons": ["0 4 * * 1"] },
+  // Weekly re-check of listed businesses: Mondays 04:00 UTC. Signed release of the open index: the 1st of every month, 03:00 UTC.
+  "triggers": { "crons": ["0 4 * * 1", "0 3 1 * *"] },
   // No request logging (observability off). Rate limits use a hash of the IP address in Cloudflare's counters, which expire after 60 s.
   "observability": { "enabled": false }
 }

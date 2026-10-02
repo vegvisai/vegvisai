@@ -49,7 +49,7 @@ https://veiviser-test.testplattform.workers.dev/mcp
 
 | Verktøy | Argumenter | Hva det gjør |
 | --- | --- | --- |
-| `find_business` | `need`, `postal_code` | Finner bedrifter for et behov. Testversjonen har ett oppdiktet bakeri |
+| `find_business` | `need`, `postal_code` | Finner innmeldte bedrifter for et behov, i tilfeldig rekkefølge. Testversjonen har også to oppdiktede eksempler: et bakeri og et gjestehus |
 | `find_political_party` | `name` (valgfri) | Lenker til norske partiers egne sider og partiprogram, alfabetisk og aldri rangert. Listen er ikke komplett ennå |
 | `check_business` | `org_number` eller `name` | Slår opp en norsk bedrift i det offentlige registeret (Brønnøysund) |
 | `find_public_help` | `topic` (f.eks. consumer, health, tax, all) og/eller `municipality` | Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 44 statlige etater og alle 357 kommuner |

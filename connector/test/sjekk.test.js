@@ -182,3 +182,11 @@ test("machine interfaces are listed: MCP, OpenAPI, llms-full.txt, search action 
   assert.equal(r.profile, "government");
   assert.deepEqual([r.open.llms_full, r.open.mcp, r.open.openapi, r.open.search, r.open.datasets], [true, true, true, true, true]);
 });
+
+test("the English example business (Example Guesthouse Ltd) scores 100", async () => {
+  const guesthouse = readFileSync(new URL("../public/example/index.html", import.meta.url), "utf8");
+  const site = { ...goodSite, "/": guesthouse };
+  const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(site) });
+  assert.equal(r.profile, "business");
+  assert.equal(r.score, 100, JSON.stringify(r.actions));
+});

@@ -23,8 +23,8 @@ Have these ready. Short and concrete beats long and polished.
 - **What you offer**, and just as important, **what you don't**. It stops the AI from sending you the wrong customers
 - **Area**: the municipalities you serve, whether you come to the customer, and whether you deliver
 - **Opening hours**, **phone**, **email** and your **contact or booking page**
-- **Prices** you are happy to show, for example «Birthday cake, 12 people: from NOK 595»
-- **What you need to know** from a customer to answer a request, for example date, number of people and allergies
+- **Prices** you are happy to show, for example «Double room: NOK 1,350 a night, breakfast included»
+- **What you need to know** from a customer to answer a request, for example dates, number of guests and special needs
 
 ## Step 2: Generate the files
 

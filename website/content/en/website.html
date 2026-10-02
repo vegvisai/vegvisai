@@ -21,15 +21,15 @@
 
 <h2>Action links: let the AI prepare the next step</h2>
 <p>An agent can build a link that opens a filled-in form on your site. The customer clicks and confirms, and no data passes through us. Examples:</p>
-<pre><code>eksempelbakeri.no/bestill?produkt=bursdagskake&amp;dato=2026-10-03&amp;antall=12&amp;uten=notter
-eksempelbakeri.no/sok?kategori=kaker&amp;uten=notter</code></pre>
+<pre><code>guesthouse.example/booking/?room=double&amp;arrival=2026-10-03&amp;nights=2&amp;guests=2
+guesthouse.example/rooms/?guests=4&amp;breakfast=yes</code></pre>
 <p>Describe the link pattern on the page, and in schema.org with <code>potentialAction</code> (for example <code>OrderAction</code> or <code>ReserveAction</code> with an <code>EntryPoint</code> and <code>urlTemplate</code>). Then agents know how to build it.</p>
 
 <h2>Products and services that need choices</h2>
-<p>For things that need choices, terms or judgement, such as cakes to order, insurance, travel or B2B products:</p>
+<p>For things that need choices, terms or judgement, such as rooms with different rules, insurance, travel or B2B products:</p>
 <ul>
 <li><strong>Decision pages:</strong> «how to choose», with criteria and consequences</li>
-<li><strong>Overview tables:</strong> for example which cakes are available without nuts, gluten or lactose</li>
+<li><strong>Overview tables:</strong> for example which rooms suit families, wheelchair users or guests with pets</li>
 <li><strong>Prices as tables or rules,</strong> not only in a calculator built with JavaScript</li>
 <li><strong>Who the service is for:</strong> area, lead times and limits</li>
 <li><strong>Frequent questions</strong> marked up with <code>FAQPage</code></li>

@@ -43,6 +43,16 @@ const TEST_BUSINESSES = [
     // The business's own Norwegian request form; the parameter names belong to its page.
     request: "/eksempel/kontakt/?emne={subject}&kake={cake}&personer={people}&dato={date}&beskrivelse={description}",
   },
+  {
+    name: "Example Guesthouse Ltd",
+    test_data: true,
+    notice: "FICTIONAL example business. It does not exist. Used only to test the guide and to show the English example.",
+    categories: ["guesthouse", "accommodation", "lodging", "room", "bed and breakfast", "hotel", "overnatting", "gjestehus", "rom"],
+    services: ["single, double and family rooms, breakfast included"],
+    area: "Bergen, Norway",
+    page: "/example/",
+    request: "/example/booking/?room={room}&arrival={arrival}&nights={nights}&guests={guests}&message={message}",
+  },
 ];
 
 // ---------- Tools ----------
@@ -92,7 +102,7 @@ const TOOLS = [
     name: "find_business",
     title: "Find a business (test)",
     description:
-      "Finds businesses in the guide that can help with a need: businesses that registered with a verified AI business card on their own domain, plus one FICTIONAL test business (a bakery in Norway). Results come in random order; the guide does not rank.",
+      "Finds businesses in the guide that can help with a need: businesses that registered with a verified AI business card on their own domain, plus two FICTIONAL example businesses (a bakery in Bodø and a guesthouse in Bergen). Results come in random order; the guide does not rank.",
     inputSchema: {
       type: "object",
       properties: {
@@ -370,7 +380,7 @@ async function api(request, url, env) {
 }
 
 // robots.txt and sitemap.xml are generated here so the addresses are absolute whatever the domain.
-const PAGES = ["/", "/eksempel/", "/sjekk/", "/lag/"];
+const PAGES = ["/", "/eksempel/", "/example/", "/sjekk/", "/lag/", "/meld-inn/"];
 const UPDATED = "2026-10-01";
 
 function robots(origin) {

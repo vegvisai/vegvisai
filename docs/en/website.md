@@ -25,18 +25,18 @@ An AI-readable website works with every assistant today, without the customer in
 An agent can build a link that opens a filled-in form on your site. The customer clicks and confirms, and no data passes through us. Examples:
 
 ```
-eksempelbakeri.no/bestill?produkt=bursdagskake&dato=2026-10-03&antall=12&uten=notter
-eksempelbakeri.no/sok?kategori=kaker&uten=notter
+guesthouse.example/booking/?room=double&arrival=2026-10-03&nights=2&guests=2
+guesthouse.example/rooms/?guests=4&breakfast=yes
 ```
 
 Describe the link pattern on the page, and in schema.org with `potentialAction` (for example `OrderAction` or `ReserveAction` with an `EntryPoint` and `urlTemplate`). Then agents know how to build it.
 
 ## Products and services that need choices
 
-For things that need choices, terms or judgement, such as cakes to order, insurance, travel or B2B products:
+For things that need choices, terms or judgement, such as rooms with different rules, insurance, travel or B2B products:
 
 - **Decision pages:** «how to choose», with criteria and consequences
-- **Overview tables:** for example which cakes are available without nuts, gluten or lactose
+- **Overview tables:** for example which rooms suit families, wheelchair users or guests with pets
 - **Prices as tables or rules,** not only in a calculator built with JavaScript
 - **Who the service is for:** area, lead times and limits
 - **Frequent questions** marked up with `FAQPage`

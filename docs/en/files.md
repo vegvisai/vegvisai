@@ -8,27 +8,30 @@ Two small files that let agents and open guides find you and understand what you
 
 ## `/llms.txt`: an overview for language models
 
-Plain Markdown at the root of your site: who you are, what you do and don't do, prices, contact, and links to your most important pages. Keep it short and factual. Example for the fictional Eksempel Bakeri AS, in the business's own language:
+Plain Markdown at the root of your site: who you are, what you do and don't do, prices, contact, and links to your most important pages. Keep it short and factual. Example for the fictional Example Guesthouse Ltd (see [its business card](https://veiviser-test.testplattform.workers.dev/example/)):
 
 ```
-# Eksempel Bakeri AS
+# Example Guesthouse Ltd
 
-> Bakeri i Bodø med brød, boller og kaker på bestilling.
+> FICTIONAL example. A small guesthouse with six rooms near the harbour in Bergen.
 
-Område: Bodø. Åpningstider: mandag–lørdag 07:00–16:00. Priser i NOK inkludert mva.
+Area: Bergen, Norway. Reception: 08:00–22:00. Prices in NOK per night, VAT and breakfast included.
 
-## Dette gjør vi
-- Kaker på bestilling
-- Brød og boller
+## What we offer
+- Single, double and family rooms
+- Breakfast and Wi-Fi
 
-## Dette gjør vi ikke
-- Bryllupskaker over 100 personer
+## What we do not offer
+- Parking
+- Pets
 
-## Priser
-- Bursdagskake, 12 personer: 595
+## Prices
+- Single room: 950
+- Double room: 1350
+- Family room (up to 4): 1850
 
-## Kontakt
-- [Send forespørsel](https://eksempelbakeri.no/kontakt/)
+## Contact
+- [Request a booking](https://guesthouse.example/booking/)
 ```
 
 ## `/.well-known/ai-catalog.json`: a catalog for agents
@@ -38,19 +41,19 @@ A JSON file in the open AI Catalog format that lists your entries: the business 
 ```
 {
   "specVersion": "1.0",
-  "host": { "displayName": "Eksempel Bakeri AS", "identifier": "eksempelbakeri.no" },
+  "host": { "displayName": "Example Guesthouse Ltd", "identifier": "guesthouse.example" },
   "entries": [{
-    "identifier": "urn:air:eksempelbakeri.no:web:visittkort",
+    "identifier": "urn:air:guesthouse.example:web:business-card",
     "type": "text/html",
-    "url": "https://eksempelbakeri.no/",
-    "description": "Bakeri i Bodø med brød, boller og kaker på bestilling.",
+    "url": "https://guesthouse.example/",
+    "description": "FICTIONAL example. A small guesthouse with six rooms near the harbour in Bergen.",
     "extensions": {
       "ai.vegvis.local/v1": {
-        "services": ["Kaker på bestilling", "Brød og boller"],
-        "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"] },
-        "languages": ["nb", "en"],
-        "actions": { "contact": "https://eksempelbakeri.no/kontakt/" },
-        "llms_txt": "https://eksempelbakeri.no/llms.txt"
+        "services": ["Single, double and family rooms", "Breakfast included"],
+        "area": { "type": "physical", "names": ["Bergen"], "municipality_numbers": ["4601"] },
+        "languages": ["en", "nb"],
+        "actions": { "booking": "https://guesthouse.example/booking/" },
+        "llms_txt": "https://guesthouse.example/llms.txt"
       }
     }
   }]

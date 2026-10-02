@@ -67,6 +67,26 @@
       ]
     },
     {
+      "identifier": "urn:air:veiviser-test:web:example",
+      "type": "text/html",
+      "url": "/example/",
+      "description": "Fictional English example: an AI-readable business card for a guesthouse.",
+      "tags": [
+        "example",
+        "business-card"
+      ]
+    },
+    {
+      "identifier": "urn:air:veiviser-test:web:meld-inn",
+      "type": "text/html",
+      "url": "/meld-inn/",
+      "description": "Register a business in the open guide (Norwegian page).",
+      "tags": [
+        "registration",
+        "tool"
+      ]
+    },
+    {
       "identifier": "urn:air:veiviser-test:llms",
       "type": "text/plain",
       "url": "/llms.txt"

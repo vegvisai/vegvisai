@@ -15,3 +15,5 @@
 
 ## Eksempel
 - [Eksempel Bakeri AS (oppdiktet)](/eksempel/): AI-lesbart visittkort, nivå 0
+- [Example Guesthouse Ltd (fictional, English)](/example/): AI-readable business card with rooms, prices and a booking link
+- [Meld inn bedriften](/meld-inn/): påmelding til den åpne veiviseren

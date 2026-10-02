@@ -26,7 +26,7 @@ Espen Brathaug, Oslo, Norge, er behandlingsansvarlig for personopplysningene Veg
 
 - **Cloudflare** driver nettsiden, AI-sjekken og connectoren som vår databehandler. Data kan behandles utenfor EØS [plassholder: overføringsgrunnlag].
 - **GitHub** lagrer koden og tar imot bidrag på egne vilkår.
-- **Brønnøysundregistrene** spørres om organisasjonsnumre; vi sender bare nummeret.
+- **Brønnøysundregistrene**, EUs momsregister **VIES** og britiske **Companies House** spørres om organisasjons-, moms- og foretaksnumre; vi sender bare nummeret.
 
 Vi selger aldri personopplysninger.
 

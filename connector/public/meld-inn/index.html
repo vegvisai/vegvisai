@@ -7,7 +7,7 @@
 <title>Meld inn bedriften i veiviseren (teknisk test)</title>
 <meta name="description" content="Meld inn bedriften i den åpne veiviseren. Vi leser AI-visittkortet på deres eget domene og sjekker organisasjonsnummeret i Enhetsregisteret. Gratis, og rangering kan ikke kjøpes.">
 <style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e;--ok:#0b6e4f}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73;--ok:#5fd0a5}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
-label{display:block;margin:.8rem 0 .2rem}input{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}input[type=checkbox]{width:auto;margin-right:.4rem}.samtykke{display:flex;align-items:flex-start;gap:.2rem;margin:1rem 0}.samtykke label{margin:0}
+label{display:block;margin:.8rem 0 .2rem}select{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}#annet{margin-top:.4rem}input{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}input[type=checkbox]{width:auto;margin-right:.4rem}.samtykke{display:flex;align-items:flex-start;gap:.2rem;margin:1rem 0}.samtykke label{margin:0}
 button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer;margin-top:.5rem}button:disabled{opacity:.6;cursor:wait}
 .adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.ok{border-left:4px solid var(--ok);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}</style>
 </head>
@@ -16,13 +16,50 @@ button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:
 <p class="test">Teknisk test. Ikke en lansering.</p>
 <h1>Meld inn bedriften</h1>
 <p>Har bedriften et AI-visittkort på sin egen nettside? Da kan den meldes inn i den åpne veiviseren, så AI-assistenter som ikke kjenner dere fra før, finner veien til kortet. Det er gratis, og plassering kan ikke kjøpes.</p>
+<p class="mut"><a href="/register/" hreflang="en" lang="en">English version</a> for businesses outside Norway.</p>
 <p class="mut">Har dere ikke et visittkort ennå? <a href="/lag/">Lag et her</a> på et kvarter, og sjekk nettsiden med <a href="/sjekk/">AI-sjekken</a> først.</p>
 
 <form id="skjema">
+<label for="land">Land</label>
+<select id="land">
+<option value="NO" selected>Norge</option>
+<optgroup label="EU (momsnummer sjekkes i VIES)">
+<option value="BE">Belgia</option>
+<option value="BG">Bulgaria</option>
+<option value="DK">Danmark</option>
+<option value="EE">Estland</option>
+<option value="FI">Finland</option>
+<option value="FR">Frankrike</option>
+<option value="GR">Hellas</option>
+<option value="IE">Irland</option>
+<option value="IT">Italia</option>
+<option value="HR">Kroatia</option>
+<option value="CY">Kypros</option>
+<option value="LV">Latvia</option>
+<option value="LT">Litauen</option>
+<option value="LU">Luxembourg</option>
+<option value="MT">Malta</option>
+<option value="NL">Nederland</option>
+<option value="PL">Polen</option>
+<option value="PT">Portugal</option>
+<option value="RO">Romania</option>
+<option value="SK">Slovakia</option>
+<option value="SI">Slovenia</option>
+<option value="ES">Spania</option>
+<option value="SE">Sverige</option>
+<option value="CZ">Tsjekkia</option>
+<option value="DE">Tyskland</option>
+<option value="HU">Ungarn</option>
+<option value="AT">Østerrike</option>
+</optgroup>
+<option value="GB">Storbritannia (foretaksnummer i Companies House)</option>
+<option value="OTHER">Annet land (bare domenekontroll)</option>
+</select>
+<input id="annet" type="text" maxlength="2" placeholder="Landkode, f.eks. US" hidden>
 <label for="url">Nettadressen til bedriften</label>
 <input id="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.bedrift.no" required>
-<label for="orgnr">Organisasjonsnummer</label>
-<input id="orgnr" type="text" inputmode="numeric" placeholder="9 siffer" pattern="[0-9 ]{9,11}" required>
+<label for="orgnr" id="orgnr-label">Organisasjonsnummer</label>
+<input id="orgnr" type="text" placeholder="9 siffer">
 <div class="samtykke">
 <input id="samtykke" type="checkbox" required>
 <label for="samtykke">Jeg har rett til å melde inn bedriften, og godtar at oppføringen deles åpent under lisensene <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL</a> (indeksen) og <a href="https://opendatacommons.org/licenses/dbcl/1-0/">DbCL</a> (innholdet i oppføringen). Oppføringen inneholder bare det bedriften selv publiserer på nettsiden sin.</label>
@@ -35,8 +72,8 @@ button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:
 <h2>Hva skjer</h2>
 <ol>
 <li>Vi leser <code>/.well-known/ai-catalog.json</code> og visittkortet på deres eget domene.</li>
-<li>Vi sjekker at organisasjonsnummeret i visittkortet stemmer, og at bedriften står i Enhetsregisteret uten konkurs eller avvikling.</li>
-<li>Nettadressen i Enhetsregisteret eller i visittkortet må peke til samme domene. Hvis ikke, ser en person på det.</li>
+<li>Norske bedrifter: vi sjekker at organisasjonsnummeret i visittkortet stemmer, og at bedriften står i Enhetsregisteret uten konkurs eller avvikling. Bedrifter i EU: vi sjekker momsnummeret (schema.org <code>vatID</code>) i EUs register VIES. Storbritannia: foretaksnummeret sjekkes i Companies House. Andre land: bare domenet sjekkes.</li>
+<li>Nettadressen i registeret eller i visittkortet må peke til samme domene. Hvis ikke, ser en person på det.</li>
 <li>Vi ser etter skjulte instrukser til AI i visittkortet.</li>
 <li>I starten går en person gjennom hver ny oppføring før den vises. Status kan sjekkes under.</li>
 </ol>
@@ -44,8 +81,8 @@ button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:
 
 <h2>Sjekk status</h2>
 <form id="statusskjema">
-<label for="orgnr2">Organisasjonsnummer</label>
-<input id="orgnr2" type="text" inputmode="numeric" placeholder="9 siffer" required>
+<label for="orgnr2">Organisasjonsnummer, momsnummer med landkode (DE123456789) eller web:domene</label>
+<input id="orgnr2" type="text" placeholder="9 siffer" required>
 <button>Sjekk status</button>
 </form>
 <p id="statussvar" aria-live="polite"></p>
@@ -54,6 +91,14 @@ button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:
 <script>
 const $ = (id) => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
+const land = () => ($("land").value === "OTHER" ? $("annet").value.trim().toUpperCase() : $("land").value);
+$("land").addEventListener("change", () => {
+  const v = $("land").value;
+  $("annet").hidden = v !== "OTHER";
+  $("orgnr-label").textContent = v === "NO" ? "Organisasjonsnummer" : v === "OTHER" ? "Ikke nødvendig utenfor Norge, EU og Storbritannia" : v === "GB" ? "Company number (valgfritt; det må stå i visittkortet som identifier med propertyID companyNumber)" : "Momsnummer (valgfritt; det må stå i visittkortet som vatID)";
+  $("orgnr").placeholder = v === "NO" ? "9 siffer" : v === "OTHER" ? "" : "f.eks. DE123456789";
+  $("orgnr").disabled = v === "OTHER";
+});
 const STATUS = { pending: "Mottatt. En person går gjennom oppføringen før den vises.", listed: "Oppført i veiviseren.", removed: "Fjernet.", unknown: "Ikke meldt inn.", rejected: "Ikke godkjent ennå." };
 
 $("skjema").addEventListener("submit", async (ev) => {
@@ -63,13 +108,13 @@ $("skjema").addEventListener("submit", async (ev) => {
   $("status").textContent = "Leser visittkortet og sjekker registeret …";
   try {
     const res = await fetch("/api/meld-inn", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url: $("url").value.trim(), orgnr: $("orgnr").value, consent: $("samtykke").checked, lang: "nb" }) });
+      body: JSON.stringify({ url: $("url").value.trim(), country: land(), orgnr: $("orgnr").value, consent: $("samtykke").checked, lang: "nb" }) });
     const r = await res.json();
     if (!res.ok) throw new Error(r.error || "Noe gikk galt.");
     const box = el("div", undefined, r.status === "rejected" ? "adv" : "ok");
     box.append(el("strong", STATUS[r.status] || r.status));
     if (r.reasons.length) { const ul = el("ul"); for (const x of r.reasons) ul.append(el("li", x.text)); box.append(ul); }
-    if (r.entry) box.append(el("p", `${r.entry.name} · ${r.entry.domain} · org.nr. ${r.entry.org_number}`, "mut"));
+    if (r.entry) box.append(el("p", `${r.entry.name} · ${r.entry.domain} · ${r.entry.org_number}`, "mut"));
     $("resultat").append(box);
     $("status").textContent = "";
   } catch (e) {

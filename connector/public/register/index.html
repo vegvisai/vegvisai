@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Register your business in the guide (technical test)</title>
+<meta name="description" content="Register your business in the open guide. We read the AI business card on your own domain and check it in a public register where we can. Free, and ranking cannot be bought.">
+<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e;--ok:#0b6e4f}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73;--ok:#5fd0a5}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
+label{display:block;margin:.8rem 0 .2rem}select{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}#annet{margin-top:.4rem}input{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}input[type=checkbox]{width:auto;margin-right:.4rem}.samtykke{display:flex;align-items:flex-start;gap:.2rem;margin:1rem 0}.samtykke label{margin:0}
+button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer;margin-top:.5rem}button:disabled{opacity:.6;cursor:wait}
+.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.ok{border-left:4px solid var(--ok);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}</style>
+</head>
+<body>
+<main>
+<p class="test">Technical test. Not a launch.</p>
+<h1>Register your business</h1>
+<p>Does your business have an AI business card on its own website? Then it can be registered in the open guide, so AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.</p>
+<p class="mut"><a href="/meld-inn/" hreflang="nb" lang="nb">Norsk versjon</a>.</p>
+<p class="mut">No business card yet? See <a href="https://vegvis.gixer77.com/docs/get-started/">Get started</a> and the <a href="/example/">example</a>, and run the <a href="/sjekk/">AI check</a> first.</p>
+
+<form id="skjema">
+<label for="land">Country</label>
+<select id="land">
+<option value="NO">Norway</option>
+<optgroup label="EU (VAT number checked in VIES)">
+<option value="AT">Austria</option>
+<option value="BE">Belgium</option>
+<option value="BG">Bulgaria</option>
+<option value="HR">Croatia</option>
+<option value="CY">Cyprus</option>
+<option value="CZ">Czechia</option>
+<option value="DK">Denmark</option>
+<option value="EE">Estonia</option>
+<option value="FI">Finland</option>
+<option value="FR">France</option>
+<option value="DE">Germany</option>
+<option value="GR">Greece</option>
+<option value="HU">Hungary</option>
+<option value="IE">Ireland</option>
+<option value="IT">Italy</option>
+<option value="LV">Latvia</option>
+<option value="LT">Lithuania</option>
+<option value="LU">Luxembourg</option>
+<option value="MT">Malta</option>
+<option value="NL">Netherlands</option>
+<option value="PL">Poland</option>
+<option value="PT">Portugal</option>
+<option value="RO">Romania</option>
+<option value="SK">Slovakia</option>
+<option value="SI">Slovenia</option>
+<option value="ES">Spain</option>
+<option value="SE">Sweden</option>
+</optgroup>
+<option value="GB">United Kingdom (company number in Companies House)</option>
+<option value="OTHER">Another country (domain check only)</option>
+</select>
+<input id="annet" type="text" maxlength="2" placeholder="Country code, e.g. US" hidden>
+<label for="url">The business's web address</label>
+<input id="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://www.business.com" required>
+<label for="orgnr" id="orgnr-label">Organisation number</label>
+<input id="orgnr" type="text" placeholder="9 digits">
+<div class="samtykke">
+<input id="samtykke" type="checkbox" required>
+<label for="samtykke">I have the right to register the business, and I agree that the entry is shared openly under <a href="https://opendatacommons.org/licenses/odbl/1-0/">ODbL</a> (the index) and <a href="https://opendatacommons.org/licenses/dbcl/1-0/">DbCL</a> (the content of the entry). The entry holds only what the business publishes on its own website.</label>
+</div>
+<button id="knapp">Register</button>
+</form>
+<p id="status" class="mut" aria-live="polite"></p>
+<div id="resultat"></div>
+
+<h2>What happens</h2>
+<ol>
+<li>We read <code>/.well-known/ai-catalog.json</code> and the business card on your own domain.</li>
+<li>Norwegian businesses: we check the organisation number in Enhetsregisteret, without bankruptcy or winding-up. EU businesses: we check the VAT number in your card (schema.org <code>vatID</code>) in the EU register VIES. UK businesses: the company number is checked in Companies House. Other countries: only the domain is checked.</li>
+<li>The website in the register or in your card must point to the same domain. If not, a person looks at it.</li>
+<li>We look for hidden instructions to AI in the card.</li>
+<li>At the start, a person reviews every new entry before it is shown. You can check the status below.</li>
+</ol>
+<p class="mut">We do not ask for your email and keep no personal data from the form. Every listing, change and removal is in the public <a href="/api/endringer">changelog</a>. We re-check entries every week; if the card is gone, the entry is removed. Read <a href="https://vegvis.gixer77.com/docs/how-we-choose/">how the guide chooses results</a>.</p>
+
+<h2>Check status</h2>
+<form id="statusskjema">
+<label for="orgnr2">Organisation number, VAT number with country code (DE123456789) or web:domain</label>
+<input id="orgnr2" type="text" required>
+<button>Check status</button>
+</form>
+<p id="statussvar" aria-live="polite"></p>
+<p><a href="/">Front page</a></p>
+
+<script>
+const $ = (id) => document.getElementById(id);
+const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
+const land = () => ($("land").value === "OTHER" ? $("annet").value.trim().toUpperCase() : $("land").value);
+$("land").addEventListener("change", () => {
+  const v = $("land").value;
+  $("annet").hidden = v !== "OTHER";
+  $("orgnr-label").textContent = v === "NO" ? "Organisation number" : v === "OTHER" ? "Not needed outside Norway, the EU and the UK" : v === "GB" ? "Company number (optional; it must be in your card as identifier with propertyID companyNumber)" : "VAT number (optional; it must be in your card as vatID)";
+  $("orgnr").placeholder = v === "NO" ? "9 digits" : v === "OTHER" ? "" : "e.g. DE123456789";
+  $("orgnr").disabled = v === "OTHER";
+});
+const STATUS = { pending: "Received. A person reviews the entry before it is shown.", listed: "Listed in the guide.", removed: "Removed.", unknown: "Not registered.", rejected: "Not approved yet." };
+
+$("skjema").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  $("knapp").disabled = true;
+  $("resultat").replaceChildren();
+  $("status").textContent = "Reading the business card and checking the register …";
+  try {
+    const res = await fetch("/api/meld-inn", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: $("url").value.trim(), country: land(), orgnr: $("orgnr").value, consent: $("samtykke").checked, lang: "en" }) });
+    const r = await res.json();
+    if (!res.ok) throw new Error(r.error || "Something went wrong.");
+    const box = el("div", undefined, r.status === "rejected" ? "adv" : "ok");
+    box.append(el("strong", STATUS[r.status] || r.status));
+    if (r.reasons.length) { const ul = el("ul"); for (const x of r.reasons) ul.append(el("li", x.text)); box.append(ul); }
+    if (r.entry) box.append(el("p", `${r.entry.name} · ${r.entry.domain} · ${r.entry.org_number}`, "mut"));
+    $("resultat").append(box);
+    $("status").textContent = "";
+  } catch (e) {
+    $("status").textContent = e.message;
+  } finally {
+    $("knapp").disabled = false;
+  }
+});
+
+$("statusskjema").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const res = await fetch("/api/status?orgnr=" + encodeURIComponent($("orgnr2").value));
+  const r = await res.json();
+  $("statussvar").textContent = res.ok ? (STATUS[r.status] || r.status) : r.error;
+});
+</script>
+</main>
+</body>
+</html>

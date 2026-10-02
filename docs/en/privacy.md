@@ -26,7 +26,7 @@ Espen Brathaug, Oslo, Norway, is the controller for the personal data processed 
 
 - **Cloudflare** runs the website, the AI check and the connector as our processor. Data can be processed outside the EEA [placeholder: transfer basis].
 - **GitHub** hosts the code and receives contributions under its own terms.
-- **Brønnøysundregistrene** is asked about organisation numbers; we send only the number.
+- **Brønnøysundregistrene**, the EU's VAT register **VIES** and the UK's **Companies House** are asked about organisation, VAT and company numbers; we send only the number.
 
 We never sell personal data.
 

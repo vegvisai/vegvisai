@@ -110,6 +110,7 @@ const TOOLS = [
       properties: {
         need: { type: "string", description: "What the consumer needs, e.g. birthday cake" },
         postal_code: { type: "string", description: "Where the service is needed. Ask the consumer if you are not sure (for example when travelling)." },
+        country: { type: "string", description: "ISO country code where the service is needed, e.g. NO, SE, DE. Leave out to search all countries." },
       },
       required: ["need"],
     },
@@ -223,14 +224,17 @@ async function checkBusiness({ org_number, name }) {
   return text("Give org_number or name.", true);
 }
 
-async function findBusiness({ need, postal_code }, origin, context = {}) {
+const VERIFIED = { register: "verified domain and company number in the national register", vat: "verified domain and EU VAT number (VIES)", domain: "verified domain only" };
+
+async function findBusiness({ need, postal_code, country }, origin, context = {}) {
   const n = (need || "").toLowerCase();
-  const test = TEST_BUSINESSES.filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n))).map((b) =>
+  const cc = String(country ?? "").toUpperCase().slice(0, 2);
+  const test = TEST_BUSINESSES.filter((b) => !cc || cc === "NO").filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n))).map((b) =>
     [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, b.page_en && `Page in English: ${origin}${b.page_en}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`,
       `Request link (template): ${origin}${b.request}`, b.request_en && `Request link in English (template): ${origin}${b.request_en}`].filter(Boolean).join("\n"));
   // Businesses in the register: only what they publish themselves, with the date of verification.
-  const real = (await listedMatches(context.env, need)).map((e) =>
-    [`${e.name}  [verified domain and org. no. ${e.verified?.domain_and_org_number ?? ""}]`, `Business card: ${e.card_url}`,
+  const real = (await listedMatches(context.env, need, cc)).map((e) =>
+    [`${e.name}  [${VERIFIED[e.verification ?? "register"]} ${Object.values(e.verified ?? {})[0] ?? ""}]`, `Country: ${e.country ?? "NO"}`, `Business card: ${e.card_url}`,
       e.description && `About: ${e.description}`, e.categories.length && `Offers: ${e.categories.slice(0, 10).join(", ")}`,
       e.area.length && `Area: ${e.area.join(", ")}`, e.request && `Request link (template): ${e.request}`].filter(Boolean).join("\n"));
   // No ranking: everyone who qualifies is shown in random order, new for every question.
@@ -385,7 +389,7 @@ async function api(request, url, env) {
 }
 
 // robots.txt and sitemap.xml are generated here so the addresses are absolute whatever the domain.
-const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/"];
+const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/", "/register/"];
 const UPDATED = "2026-10-01";
 
 function robots(origin) {

@@ -28,6 +28,10 @@ Good first contributions:
 
 Rules for the check: it measures a site against a published yardstick and never ranks sites against each other. Every point must be explainable in the `breakdown`, and a site that cannot be read gets no score.
 
+## Ambassadors: one per country
+
+We are looking for one ambassador per country who knows their own market: translate the guides, check that registration works for their country, find a public register for verification, and help the first businesses. Volunteer role; no ownership or payment. See the issue «Ambassadors wanted: one per country».
+
 ## Where you can help
 
 | Area | Where | Examples |

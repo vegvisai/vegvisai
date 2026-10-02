@@ -10,6 +10,12 @@ import { CheckError } from "./sjekk.js";
 const HEADERS = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
 const json = (body, status = 200) => Response.json(body, { status, headers: HEADERS });
 const digits = (v) => String(v ?? "").replace(/\D/g, "");
+// An entry id: a Norwegian org. no. (9 digits), an EU VAT id (DE123456789) or web:<domain>.
+const entryId = (v) => {
+  const s = String(v ?? "").trim();
+  if (/^\d[\d ]{8,10}$/.test(s)) return digits(s);
+  return /^(?:[A-Z]{2}[A-Z0-9]{2,14}|web:[a-z0-9.-]{3,253})$/.test(s) ? s : "";
+};
 // Reasons that remove a listed business at the re-check; anything else keeps it.
 const REMOVE_ON = new Set(["no_card", "not_in_register", "bankrupt", "injection", "no_org_number", "org_mismatch"]);
 
@@ -30,7 +36,7 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
   if (stop) return json({ error: stop }, 429);
   let result;
   try {
-    result = await verifyBusiness(body.url, { orgNumber: body.orgnr, consent: body.consent === true, fetchFn });
+    result = await verifyBusiness(body.url, { country: body.country ?? "NO", orgNumber: body.orgnr, consent: body.consent === true, fetchFn, companiesHouseKey: env.COMPANIES_HOUSE_KEY });
   } catch (e) {
     return json({ error: e instanceof CheckError ? e.text(lang) : "Invalid web address." }, 400);
   }
@@ -49,8 +55,8 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
 export async function status(url, env) {
   const store = storeFor(env);
   if (!store) return json({ error: "The register is not available." }, 503);
-  const org = digits(url.searchParams.get("orgnr"));
-  if (org.length !== 9) return json({ error: "Give a 9-digit organisation number." }, 400);
+  const org = entryId(url.searchParams.get("orgnr") ?? url.searchParams.get("id"));
+  if (!org) return json({ error: "Give a 9-digit organisation number, an EU VAT number with country code, or web:<domain>." }, 400);
   const b = await store.get(org);
   return json({ org_number: org, status: b?.status ?? "unknown" });
 }
@@ -73,7 +79,7 @@ export async function review(request, env) {
   if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
   const store = storeFor(env);
   const body = await request.json().catch(() => ({}));
-  const org = digits(body.orgnr);
+  const org = entryId(body.orgnr ?? body.id);
   const b = await store.get(org);
   if (!b) return json({ error: "Unknown organisation number." }, 404);
   const to = { list: "listed", reject: "removed", remove: "removed" }[body.decision];
@@ -99,12 +105,12 @@ export async function recheck(env, { fetchFn = fetch } = {}) {
   for (const b of await store.listed()) {
     checked++;
     let r;
-    try { r = await verifyBusiness(b.entry.url, { orgNumber: b.org_number, consent: true, fetchFn }); } catch { continue; }
+    try { r = await verifyBusiness(b.entry.url, { country: b.entry.country ?? "NO", orgNumber: b.entry.country && b.entry.country !== "NO" ? "" : b.org_number, consent: true, fetchFn, companiesHouseKey: env.COMPANIES_HOUSE_KEY }); } catch { continue; }
     const gone = r.status === "rejected" && r.reasons.find((code) => REMOVE_ON.has(code));
     if (gone) {
       await store.save(b.org_number, { domain: b.domain, status: "removed", entry: b.entry, consent: b.consent }, "removed", gone);
       removed++;
-    } else if (r.status === "ok" && JSON.stringify({ ...r.entry, verified: null }) !== JSON.stringify({ ...b.entry, verified: null })) {
+    } else if ((r.status === "ok" || (r.status === "manual" && b.entry.verification === "domain")) && JSON.stringify({ ...r.entry, verified: null }) !== JSON.stringify({ ...b.entry, verified: null })) {
       await store.save(b.org_number, { domain: b.domain, status: "listed", entry: r.entry, consent: b.consent }, "updated", "recheck");
       updated++;
     }
@@ -113,11 +119,12 @@ export async function recheck(env, { fetchFn = fetch } = {}) {
 }
 
 // Listed businesses that match a need, for the connector tool find_business.
-export async function listedMatches(env, need) {
+export async function listedMatches(env, need, country = "") {
   const store = storeFor(env);
   if (!store) return [];
   const n = String(need ?? "").toLowerCase().trim();
+  const cc = String(country ?? "").toUpperCase().slice(0, 2);
   if (!n) return [];
-  return (await store.listed()).map((b) => b.entry).filter((e) =>
+  return (await store.listed()).map((b) => b.entry).filter((e) => !cc || (e.country ?? "NO") === cc).filter((e) =>
     [...e.categories, e.name, e.description].some((t) => { const s = String(t).toLowerCase(); return s && (s.includes(n) || n.includes(s)); }));
 }

@@ -198,7 +198,7 @@ test("the Norwegian guesthouse (Eksempel Gjestehus AS) scores 100", async () => 
 });
 
 test("every static page is one well-formed HTML document with one h1 (no pasted-in pages)", () => {
-  const pages = ["eksempel/index.html", "eksempel/gjestehus/index.html", "eksempel/gjestehus/booking/index.html", "example/index.html", "example/booking/index.html", "eksempel/kontakt/index.html", "meld-inn/index.html", "sjekk/index.html", "lag/index.html", "index.html"];
+  const pages = ["eksempel/index.html", "eksempel/gjestehus/index.html", "eksempel/gjestehus/booking/index.html", "example/index.html", "example/booking/index.html", "eksempel/kontakt/index.html", "meld-inn/index.html", "register/index.html", "sjekk/index.html", "lag/index.html", "index.html"];
   for (const p of pages) {
     const html = readFileSync(new URL(`../public/${p}`, import.meta.url), "utf8");
     for (const tag of ["<html", "</html>", "<head>", "<body>", "<h1>"]) assert.equal(html.split(tag).length - 1, 1, `${p}: ${tag}`);

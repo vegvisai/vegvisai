@@ -9,11 +9,20 @@ import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
 const TIMEOUT_MS = 8000;
 const MAX_BYTES = 1_000_000;
 const BRREG = "https://data.brreg.no/enhetsregisteret/api";
+const VIES = "https://ec.europa.eu/taxation_customs/vies/rest-api/ms";
+// EU countries checked in VIES (Greece is EL there; XI is Northern Ireland).
+export const EU = new Set(["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK", "XI"]);
+const viesCode = (c) => (c === "GR" ? "EL" : c);
+const COMPANIES_HOUSE = "https://api.company-information.service.gov.uk/company";
 const ORG_TYPES = new Set(["Organization", "Corporation", "LocalBusiness", "OnlineBusiness", "NGO", "GovernmentOrganization"]);
 
 // Reasons are neutral codes, so the public changelog never needs free text about a business.
 export const REASONS = {
   no_card: { en: "No AI business card found on the domain (/.well-known/ai-catalog.json or the front page).", nb: "Fant ikke noe AI-visittkort på domenet (/.well-known/ai-catalog.json eller forsiden)." },
+  no_company_number: { en: "The business card has no UK company number (schema.org identifier with propertyID «companyNumber»).", nb: "Visittkortet mangler britisk foretaksnummer (schema.org identifier med propertyID «companyNumber»)." },
+  no_vat_number: { en: "The business card has no EU VAT number (schema.org vatID).", nb: "Visittkortet mangler EU-momsnummer (schema.org vatID)." },
+  vat_mismatch: { en: "The VAT number in the form does not match the one in the business card.", nb: "Momsnummeret i skjemaet stemmer ikke med det i visittkortet." },
+  domain_only: { en: "Outside Norway and the EU only the domain can be checked. A person reviews the entry.", nb: "Utenfor Norge og EU kan bare domenet sjekkes. En person går gjennom oppføringen." },
   no_org_number: { en: "The business card has no organisation number (schema.org identifier with propertyID «orgnr», or taxID).", nb: "Visittkortet mangler organisasjonsnummer (schema.org identifier med propertyID «orgnr», eller taxID)." },
   org_mismatch: { en: "The organisation number in the form does not match the one in the business card.", nb: "Organisasjonsnummeret i skjemaet stemmer ikke med det i visittkortet." },
   not_in_register: { en: "The organisation number is not in Enhetsregisteret.", nb: "Organisasjonsnummeret finnes ikke i Enhetsregisteret." },
@@ -25,6 +34,29 @@ export const REASONS = {
 };
 
 export const reasonText = (code, lang = "en") => (REASONS[code] ?? { en: code, nb: code })[lang === "nb" ? "nb" : "en"];
+
+// A UK company number from the card (Companies House): 8 characters, for example 01234567 or SC123456.
+export function companyNumberFrom(o) {
+  for (const i of [].concat(o.identifier ?? [])) {
+    const v = String(typeof i === "object" ? (/company|crn|registration/i.test(String(i.propertyID ?? "")) ? i.value : "") : i).toUpperCase().replace(/\s/g, "");
+    if (/^(?:[A-Z]{2}\d{6}|\d{8})$/.test(v)) return v;
+  }
+  return null;
+}
+
+// An EU VAT number from the card: vatID, taxID or an identifier marked as VAT. Returns the number without country prefix.
+export function vatNumberFrom(o, country) {
+  const candidates = [o.vatID, o.taxID, ...[].concat(o.identifier ?? []).filter((i) => typeof i === "object" && /vat|mva|moms|tva|ust/i.test(String(i.propertyID ?? ""))).map((i) => i.value)];
+  for (const c of candidates) {
+    const v = String(c ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "");
+    if (!v) continue;
+    const cc = viesCode(country);
+    if (v.startsWith(cc)) return v.slice(cc.length);
+    if (/^[A-Z]{2}/.test(v) && EU.has(v.slice(0, 2))) continue; // another country's number
+    return v;
+  }
+  return null;
+}
 
 const hostOf = (u) => { try { return new URL(u).hostname.toLowerCase().replace(/^www\./, ""); } catch { return ""; } };
 const digits = (v) => String(v ?? "").replace(/\D/g, "");
@@ -92,7 +124,7 @@ async function lookup(fetchFn, orgNumber) {
 
 // Checks a business and builds its entry. status: "ok" (can be listed), "manual" (a person must look),
 // or "rejected" (reasons say why). The same function runs for the form, the bot and the re-check.
-export async function verifyBusiness(address, { orgNumber = "", consent = false, fetchFn = fetch, now = new Date() } = {}) {
+async function verifyNorwegian(address, { orgNumber = "", consent = false, fetchFn = fetch, now = new Date() } = {}) {
   const start = safeAddress(address);
   const origin = start.origin;
   const domain = hostOf(origin);
@@ -139,8 +171,100 @@ export async function verifyBusiness(address, { orgNumber = "", consent = false,
     postal_code: digits(a.postalCode).slice(0, 4) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
     sole_proprietorship: unit.organisasjonsform?.kode === "ENK",
+    country: "NO",
+    verification: "register",
     verified: { domain_and_org_number: now.toISOString().slice(0, 10) },
   };
   const status = reasons.includes("no_consent") ? "rejected" : reasons.includes("domain_mismatch") ? "manual" : "ok";
   return { status, reasons, domain, entry };
+}
+
+// The entry fields that come from the business's own card, the same for every country.
+function cardEntry(biz, card, origin, domain) {
+  const catalogEntry = (card.catalog?.entries ?? []).find((e) => /text\/html/i.test(e.type ?? ""));
+  const offers = [].concat(biz.makesOffer ?? []).map((o) => o?.itemOffered?.name ?? o?.name).filter(Boolean);
+  const action = [].concat(biz.potentialAction ?? [])[0];
+  const target = action?.target?.urlTemplate ?? action?.target?.url ?? (typeof action?.target === "string" ? action.target : null);
+  const a = biz.address ?? {};
+  return {
+    domain,
+    name: sanitize(biz.name ?? domain, 200),
+    url: origin + "/",
+    card_url: card.cardUrl,
+    description: sanitize(biz.description ?? "", 300),
+    categories: [...new Set([...types(biz), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
+    area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
+    postal_code: sanitize(String(a.postalCode ?? ""), 12) || null,
+    request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
+  };
+}
+
+// EU: the VAT number in the card, checked in VIES. Elsewhere: the domain only, always reviewed by a person.
+async function verifyAbroad(address, country, { orgNumber = "", consent = false, fetchFn = fetch, now = new Date(), companiesHouseKey = "" } = {}) {
+  const start = safeAddress(address);
+  const origin = start.origin;
+  const domain = hostOf(origin);
+  const card = await readCard(origin, fetchFn);
+  const biz = businessObject(card.objects);
+  if (!card.page || !biz) return { status: "rejected", reasons: ["no_card"], domain };
+  const published = [card.page.text, card.page.hidden, card.page.jsonld.join("\n"), JSON.stringify(card.catalog ?? {})].join("\n");
+  if (findInstructions(published).some((f) => f.severity !== "low")) return { status: "rejected", reasons: ["injection"], domain };
+
+  const reasons = [];
+  const date = now.toISOString().slice(0, 10);
+  const cardHost = hostOf(biz.url ? new URL(biz.url, card.cardUrl).href : "");
+  let id, verification, verified;
+  if (EU.has(viesCode(country))) {
+    const cc = viesCode(country);
+    const vat = vatNumberFrom(biz, country);
+    const formVat = String(orgNumber ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").replace(new RegExp("^" + cc), "");
+    if (!vat) return { status: "rejected", reasons: ["no_vat_number"], domain };
+    if (formVat && formVat !== vat) return { status: "rejected", reasons: ["vat_mismatch"], domain };
+    const r = await get(fetchFn, `${VIES}/${cc}/vat/${encodeURIComponent(vat)}`, "application/json");
+    let v = null;
+    try { v = JSON.parse(r.text); } catch { /* handled below */ }
+    if (!v || (v.isValid !== true && v.userError !== "INVALID")) return { status: "rejected", reasons: ["register_unavailable"], domain };
+    if (!v.isValid) return { status: "rejected", reasons: ["not_in_register"], domain };
+    id = cc + vat;
+    verification = "vat";
+    verified = { domain_and_vat_number: date };
+    if (cardHost !== domain) reasons.push("domain_mismatch");
+  } else if (country === "GB" && companiesHouseKey) {
+    const number = companyNumberFrom(biz);
+    const formNumber = String(orgNumber ?? "").toUpperCase().replace(/\s/g, "");
+    if (!number) return { status: "rejected", reasons: ["no_company_number"], domain };
+    if (formNumber && formNumber !== number) return { status: "rejected", reasons: ["org_mismatch"], domain };
+    let r;
+    try {
+      r = await fetchFn(`${COMPANIES_HOUSE}/${number}`, { headers: { Authorization: "Basic " + btoa(companiesHouseKey + ":"), Accept: "application/json" }, signal: AbortSignal.timeout(TIMEOUT_MS) });
+    } catch { return { status: "rejected", reasons: ["register_unavailable"], domain }; }
+    if (r.status === 404) return { status: "rejected", reasons: ["not_in_register"], domain };
+    if (!r.ok) return { status: "rejected", reasons: ["register_unavailable"], domain };
+    const c = await r.json();
+    if (c.company_status !== "active") return { status: "rejected", reasons: ["bankrupt"], domain };
+    id = "GB" + number;
+    verification = "register";
+    verified = { domain_and_company_number: date };
+    if (cardHost !== domain) reasons.push("domain_mismatch");
+  } else {
+    id = "web:" + domain;
+    verification = "domain";
+    verified = { domain_only: date };
+    reasons.push("domain_only");
+  }
+  if (!consent) reasons.push("no_consent");
+  const entry = { org_number: id, ...cardEntry(biz, card, origin, domain), country, verification, verified,
+    // Outside the registers we cannot tell a company from a person, so the entry is treated as personal data.
+    sole_proprietorship: verification === "domain" };
+  const status = reasons.includes("no_consent") ? "rejected" : reasons.length ? "manual" : "ok";
+  return { status, reasons, domain, entry };
+}
+
+// Checks a business and builds its entry. country: ISO code, NO by default.
+// status: "ok" (can be listed), "manual" (a person must look) or "rejected" (reasons say why).
+export async function verifyBusiness(address, options = {}) {
+  let country = String(options.country ?? "NO").toUpperCase().slice(0, 2);
+  if (country === "UK") country = "GB";
+  if (country === "NO" || !/^[A-Z]{2}$/.test(country)) return verifyNorwegian(address, options);
+  return verifyAbroad(address, country, options);
 }

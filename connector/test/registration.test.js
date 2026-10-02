@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { verifyBusiness, orgNumberFrom } from "../src/registration.js";
+import { verifyBusiness, orgNumberFrom, vatNumberFrom, companyNumberFrom } from "../src/registration.js";
 import { memoryStore, publicChangelog, openExport } from "../src/register.js";
 import { register, review, recheck, listedMatches } from "../src/innmelding.js";
 
@@ -74,7 +74,7 @@ test("form, review, changelog, export and the re-check work together", async () 
 
   const exp = await openExport(store);
   assert.equal(exp.entries.length, 1);
-  assert.deepEqual(Object.keys(exp.entries[0]).sort(), ["area", "card_url", "categories", "description", "domain", "name", "org_number", "postal_code", "request", "url"]);
+  assert.deepEqual(Object.keys(exp.entries[0]).sort(), ["area", "card_url", "categories", "country", "description", "domain", "name", "org_number", "postal_code", "request", "url"]);
 
   // The card disappears: the re-check removes the business and logs a neutral reason.
   const r = await recheck(env, { fetchFn: fakeFetch({ site: { "/.well-known/ai-catalog.json": undefined, "/ai/": undefined } }) });
@@ -93,4 +93,72 @@ test("sole proprietorships are left out of the export and shown without number i
   assert.equal((await openExport(store)).entries.length, 0);
   assert.equal((await publicChangelog(store))[0].org_number, null);
   assert.equal((await listedMatches(env, "kake")).length, 1, "still in the live index");
+});
+
+// ---------- Outside Norway: EU VAT numbers in VIES, elsewhere the domain only ----------
+
+const EU_ROOT = "https://www.gasthaus.example.de";
+const euCard = (extra = {}) => `<html lang="de"><head><title>Gasthaus</title><script type="application/ld+json">${JSON.stringify({
+  "@context": "https://schema.org", "@type": "LodgingBusiness", name: "Gasthaus Beispiel GmbH", url: EU_ROOT + "/", vatID: "DE123456789",
+  address: { "@type": "PostalAddress", postalCode: "10115", addressLocality: "Berlin", addressCountry: "DE" }, ...extra })}</script></head><body><h1>Gasthaus</h1></body></html>`;
+function euFetch({ valid = true, card = euCard(), down = false } = {}) {
+  return async (url) => {
+    const u = new URL(url);
+    if (u.hostname === "ec.europa.eu") {
+      if (down) return new Response(JSON.stringify({ isValid: false, userError: "MS_UNAVAILABLE" }), { status: 200 });
+      assert.match(u.pathname, /\/ms\/DE\/vat\/123456789$/);
+      return new Response(JSON.stringify({ isValid: valid, userError: valid ? "VALID" : "INVALID", name: "GASTHAUS BEISPIEL GMBH" }), { status: 200 });
+    }
+    return u.pathname === "/" ? new Response(card, { status: 200 }) : new Response("", { status: 404 });
+  };
+}
+
+test("the VAT number is read from vatID, with or without the country prefix", () => {
+  assert.equal(vatNumberFrom({ vatID: "DE 123 456 789" }, "DE"), "123456789");
+  assert.equal(vatNumberFrom({ vatID: "123456789" }, "DE"), "123456789");
+  assert.equal(vatNumberFrom({ vatID: "EL123456789" }, "GR"), "123456789");
+  assert.equal(vatNumberFrom({ vatID: "FR12345678901" }, "DE"), null, "another country's number is not used");
+});
+
+test("an EU business is checked in VIES", async () => {
+  const ok = await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch() });
+  assert.equal(ok.status, "ok", JSON.stringify(ok.reasons));
+  assert.equal(ok.entry.org_number, "DE123456789");
+  assert.deepEqual([ok.entry.country, ok.entry.verification, ok.entry.sole_proprietorship], ["DE", "vat", false]);
+  assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ valid: false }) })).reasons, ["not_in_register"]);
+  assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ down: true }) })).reasons, ["register_unavailable"]);
+  assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ card: euCard({ vatID: undefined }) }) })).reasons, ["no_vat_number"]);
+  assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", orgNumber: "DE999999999", consent: true, fetchFn: euFetch() })).reasons, ["vat_mismatch"]);
+});
+
+test("outside Norway and the EU only the domain is checked, always by a person, and never exported", async () => {
+  const store = memoryStore();
+  const env = { __store: store, ADMIN_TOKEN: "t" };
+  const usFetch = async (url) => new URL(url).pathname === "/" ? new Response(euCard({ vatID: undefined }).replace("gasthaus.example.de", "inn.example.com"), { status: 200 }) : new Response("", { status: 404 });
+  const r = await verifyBusiness("https://inn.example.com", { country: "US", consent: true, fetchFn: usFetch });
+  assert.equal(r.status, "manual");
+  assert.equal(r.entry.org_number, "web:inn.example.com");
+  await register(new Request("https://x.example/api/meld-inn", { method: "POST", body: JSON.stringify({ url: "https://inn.example.com", country: "US", consent: true }) }), env, { fetchFn: usFetch });
+  await review(new Request("https://x.example/api/admin/review", { method: "POST", headers: { Authorization: "Bearer t" }, body: JSON.stringify({ id: "web:inn.example.com", decision: "list" }) }), env);
+  assert.equal((await listedMatches(env, "lodgingbusiness", "US")).length, 1);
+  assert.equal((await listedMatches(env, "lodgingbusiness", "NO")).length, 0, "the country filter works");
+  assert.equal((await openExport(store)).entries.length, 0);
+});
+
+test("a UK business is checked in Companies House when there is a key, otherwise by domain only", async () => {
+  assert.equal(companyNumberFrom({ identifier: { "@type": "PropertyValue", propertyID: "companyNumber", value: "SC 123456" } }), "SC123456");
+  const ukCard = euCard({ vatID: undefined, identifier: { "@type": "PropertyValue", propertyID: "companyNumber", value: "01234567" } }).replaceAll("gasthaus.example.de", "inn.example.co.uk");
+  let auth = "";
+  const ukFetch = (status) => async (url, init = {}) => {
+    const u = new URL(url);
+    if (u.hostname === "api.company-information.service.gov.uk") { auth = init.headers.Authorization; return new Response(JSON.stringify({ company_status: status }), { status: 200 }); }
+    return u.pathname === "/" ? new Response(ukCard, { status: 200 }) : new Response("", { status: 404 });
+  };
+  const ok = await verifyBusiness("https://inn.example.co.uk", { country: "UK", consent: true, fetchFn: ukFetch("active"), companiesHouseKey: "k" });
+  assert.equal(ok.status, "ok", JSON.stringify(ok.reasons));
+  assert.equal(ok.entry.org_number, "GB01234567");
+  assert.equal(auth, "Basic " + btoa("k:"));
+  assert.deepEqual((await verifyBusiness("https://inn.example.co.uk", { country: "GB", consent: true, fetchFn: ukFetch("dissolved"), companiesHouseKey: "k" })).reasons, ["bankrupt"]);
+  const noKey = await verifyBusiness("https://inn.example.co.uk", { country: "GB", consent: true, fetchFn: ukFetch("active") });
+  assert.deepEqual([noKey.status, noKey.entry.verification], ["manual", "domain"]);
 });

@@ -77,16 +77,16 @@ export async function publicChangelog(store, limit = 200) {
 // The open export (ODbL, DbCL for the entries): only listed businesses that gave consent,
 // never sole proprietorships, and only fields the business publishes itself.
 export async function openExport(store, { now = new Date() } = {}) {
-  const FIELDS = ["org_number", "domain", "name", "url", "card_url", "description", "categories", "area", "postal_code", "request"];
+  const FIELDS = ["org_number", "country", "domain", "name", "url", "card_url", "description", "categories", "area", "postal_code", "request"];
   const entries = (await store.listed()).filter((b) => b.consent && !b.sole_proprietorship)
-    .map((b) => Object.fromEntries(FIELDS.map((k) => [k, b.entry[k] ?? null])))
+    .map((b) => Object.fromEntries(FIELDS.map((k) => [k, b.entry[k] ?? (k === "country" ? "NO" : null)])))
     .sort((a, b) => a.org_number.localeCompare(b.org_number));
   const removed = (await store.byStatus("removed")).filter((b) => !b.sole_proprietorship).map((b) => b.org_number).sort();
   return {
-    name: "VegvisAI open index: businesses in Norway",
+    name: "VegvisAI open index: businesses",
     licence: "ODbL-1.0 (database), DbCL-1.0 (contents)",
     generated: now.toISOString().slice(0, 10),
-    notice: "Only what each business publishes on its own domain. Sole proprietorships are not included. Remove the organisation numbers in «removed» from any copy.",
+    notice: "Only what each business publishes on its own domain. Norwegian businesses are checked in Enhetsregisteret, EU businesses in VIES. Sole proprietorships and entries checked by domain only are not included. Remove the ids in «removed» from any copy.",
     entries,
     removed,
   };

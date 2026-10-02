@@ -70,7 +70,7 @@ Read the principles first ([ownership](docs/en/ownership.md)). We will not merge
 
 ## Licences
 
-By contributing you agree that your code is licensed under [Apache 2.0](LICENSE) and your index data under [ODbL 1.0](LICENSE-DATA): the same terms everyone gets (inbound = outbound). The name VegvisAI is not licensed; see [TRADEMARK.md](TRADEMARK.md).
+By contributing you agree that your code is licensed under [Apache 2.0](LICENSE) and your index data under [ODbL 1.0](LICENSE-DATA): the same terms everyone gets (inbound = outbound). Contributions are voluntary and give no ownership in the platform or the brand, and no right to payment. The name VegvisAI is not licensed; see [TRADEMARK.md](TRADEMARK.md).
 
 ## Security
 

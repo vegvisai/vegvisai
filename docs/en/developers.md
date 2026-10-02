@@ -80,7 +80,7 @@ Clients are identified by a hash of the IP address. Nothing is stored.
 
 ## Ranking
 
-The criteria the guide uses to choose businesses, and their relative weights, will be published before launch and linked from every guide page. Placement can never be bought.
+The guide does not rank. It shows everyone who qualifies in random order, new for every question, and tells the agent that the order means nothing. The rules, and what never counts, are on [How the guide chooses results](how-we-choose.md). Placement can never be bought.
 
 ## Source code
 

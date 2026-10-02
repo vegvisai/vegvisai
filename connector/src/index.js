@@ -211,12 +211,14 @@ async function checkBusiness({ org_number, name }) {
 
 function findBusiness({ need }, origin) {
   const n = (need || "").toLowerCase();
-  const hits = TEST_BUSINESSES.filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n)));
+  // No ranking: everyone who qualifies is shown in random order, new for every question.
+  const hits = TEST_BUSINESSES.filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n)))
+    .map((b) => [Math.random(), b]).sort((x, y) => x[0] - y[0]).map(([, b]) => b);
   if (!hits.length) return text("No businesses in the test guide for this need yet.");
   const out = hits.map((b) =>
     [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`, `Request link (template): ${origin}${b.request}`].join("\n")
   );
-  out.push("Ranking in the guide cannot be bought.");
+  out.push("The order is random and means nothing: the guide does not rank, and placement cannot be bought. Choose with the user on what matters to them.");
   return data(out.join("\n\n"));
 }
 

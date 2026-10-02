@@ -38,7 +38,7 @@ Fra første dag holdes domener, nøkler og kontoer slik at de kan overleveres. P
 **Åpent for alle.** Alle bedrifter, bransjer og AI-agenter, også lokale modeller, får samme tilgang på samme vilkår.
 3.
 
-**Rangering kan ikke kjøpes.** Rangering, verifisering og tilgang er aldri betalt. Kriteriene publiseres med relativ vekt.
+**Rangering kan ikke kjøpes.** Rangering, verifisering og tilgang er aldri betalt. Hvordan veiviseren velger og ordner resultater er [publisert](how-we-choose.md).
 4.
 
 **Bedriftene eier sine data.** Rådata forlater aldri bedriften. Plattformen indekserer bare det bedriften selv publiserer.
@@ -59,7 +59,16 @@ Fra første dag holdes domener, nøkler og kontoer slik at de kan overleveres. P
 **Kan alltid flyttes.** Domener, nøkler og kontoer tilhører eieren. Driftsavtaler har exit-klausul, oppsigelsestid og plan for overlevering.
 10.
 
-**Åpne bøker.** Vedtekter, regnskap, rangeringskriterier og fjernede oppføringer er offentlige og etterprøvbare.
+**Åpne bøker.** Vedtekter, regnskap, reglene for resultater og fjernede oppføringer er offentlige og etterprøvbare.
+
+## Løftet vårt
+
+**Utkast til lansering.** Til en nøytral eier tar over, lover gründerne å følge de ti prinsippene over, fra dagen vi lanserer.
+
+1. **Bare strengere, aldri svakere.** Prinsippene kan strammes inn etter hvert som vi lærer. De kan aldri svekkes, og ingen ny regel kan bryte dem.
+2. **Åpent.** Løftet ligger som `PLEDGE.md` i det offentlige repoet. Hver endring er en offentlig commit med dato og begrunnelse.
+3. **Følger med videre.** Løftet skrives inn i vedtektene til hver eier som kommer etter: vårt AS, og deretter den nøytrale eieren.
+4. **Din utvei.** Bryter vi det, er koden (Apache 2.0) og indeksen (ODbL) dine å ta med. Fork oss.
 
 ## Interessert?
 

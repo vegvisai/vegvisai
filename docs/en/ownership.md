@@ -38,7 +38,7 @@ From the first day, domains, keys and accounts are kept so they can be handed ov
 **Open to all.** All businesses, industries and AI agents, including local models, get the same access on the same terms.
 3.
 
-**Ranking can't be bought.** Ranking, verification and access are never paid for. The criteria are published with their relative weights.
+**Ranking can't be bought.** Ranking, verification and access are never paid for. How the guide chooses and orders results is [published](how-we-choose.md).
 4.
 
 **Businesses own their data.** Raw data never leaves the business. The platform only indexes what the business itself publishes.
@@ -59,7 +59,16 @@ From the first day, domains, keys and accounts are kept so they can be handed ov
 **Always movable.** Domains, keys and accounts belong to the owner. Operating agreements have an exit clause, a notice period and a handover plan.
 10.
 
-**Open books.** Articles, accounts, ranking criteria and removed listings are public and can be checked.
+**Open books.** Articles, accounts, the rules for results and removed listings are public and can be checked.
+
+## Our pledge
+
+**Draft for launch.** Until a neutral owner takes over, the founders pledge to follow the ten principles above, from the day we launch.
+
+1. **Only stricter, never weaker.** The principles can be tightened as we learn. They can never be loosened, and no new rule may break them.
+2. **In the open.** The pledge lives as `PLEDGE.md` in the public repository. Every change is a public commit with a date and a reason.
+3. **Carried forward.** The pledge goes into the articles of every owner that follows: our limited company, and then the neutral owner.
+4. **Your remedy.** If we break it, the code (Apache 2.0) and the index (ODbL) are yours to take. Fork us.
 
 ## Interested?
 

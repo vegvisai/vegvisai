@@ -80,7 +80,7 @@ Klienter identifiseres med en hash av IP-adressen. Ingenting lagres.
 
 ## Rangering
 
-Kriteriene veiviseren bruker for å velge bedrifter, og hvor mye hvert kriterium veier, publiseres før lansering og lenkes fra hver veiviserside. Plassering kan aldri kjøpes.
+Veiviseren rangerer ikke. Den viser alle som kvalifiserer i tilfeldig rekkefølge, ny for hvert spørsmål, og sier til agenten at rekkefølgen ikke betyr noe. Reglene, og hva som aldri teller, står på [Slik velger veiviseren](how-we-choose.md). Plassering kan aldri kjøpes.
 
 ## Kildekode
 

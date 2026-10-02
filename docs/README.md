@@ -10,5 +10,6 @@ Generated from the website (`website/content/`). Edit the website fragments, not
 | [AI files: llms.txt and ai-catalog.json](en/files.md) | [AI-filer](no/files.md) |
 | [MCP](en/mcp.md) | [MCP](no/mcp.md) |
 | [Developers](en/developers.md) | [Utviklere](no/developers.md) |
+| [How the guide chooses results](en/how-we-choose.md) | [Slik velger veiviseren](no/how-we-choose.md) |
 | [Background: Capitalism on Rails](en/why.md) | [Bakgrunn](no/why.md) |
 | [Ownership](en/ownership.md) | [Eierskap](no/ownership.md) |

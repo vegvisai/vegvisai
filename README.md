@@ -48,4 +48,6 @@ Most small businesses will never hire a developer to make their website AI-reada
 | The open index | ODbL 1.0 | [LICENSE-DATA](LICENSE-DATA) |
 | Name and logo | Not licensed; see the trademark policy | [TRADEMARK.md](TRADEMARK.md) |
 
+Our promise to keep the principles, only ever stricter: [PLEDGE.md](PLEDGE.md).
+
 The businesses' own data follows each business's own choice of licence. Data from Enhetsregisteret (Brønnøysundregistrene) is used under NLOD 2.0.

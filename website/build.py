@@ -27,8 +27,9 @@ PAGES = {
     "files": {"en": "/docs/ai-files/", "no": "/no/guider/ai-filer/"},
     "mcp": {"en": "/docs/mcp/", "no": "/no/guider/mcp/"},
     "developers": {"en": "/docs/developers/", "no": "/no/guider/utviklere/"},
+    "how-we-choose": {"en": "/docs/how-we-choose/", "no": "/no/guider/slik-velger-vi/"},
 }
-DOCS = ["docs", "get-started", "website", "files", "mcp", "developers"]
+DOCS = ["docs", "get-started", "website", "files", "mcp", "developers", "how-we-choose"]
 
 T = {
     "en": {

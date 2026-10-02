@@ -25,5 +25,5 @@ jobs:
           if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
           git config user.name "vegvisai-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Index release $(ls releases/businesses/*.json | tail -1 | xargs basename .json)"
+          git commit -m "Index release $(basename "$(ls releases/businesses/*.json | tail -1)" .json)"
           git push

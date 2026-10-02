@@ -5,6 +5,7 @@
 
 import { aiCheck, asText, safeAddress, CheckError, PROFILES } from "./sjekk.js";
 import { sanitize } from "../public/felles/injeksjon.js";
+import { tr, language } from "../public/felles/i18n.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import PUBLIC_INDEX from "../public/index/public-no.json" with { type: "json" };
 import PARTIES from "../public/index/parties-no.json" with { type: "json" };
@@ -337,10 +338,6 @@ async function mcp(request, env) {
 // `lang=nb` gives Norwegian texts for the Norwegian pages; the default is English.
 
 const JSON_HEADERS = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
-const API_TEXT = {
-  notFound: { en: "No entity found with this organisation number.", nb: "Fant ingen enhet med dette organisasjonsnummeret." },
-  unknownApi: { en: "Unknown API.", nb: "Ukjent API." },
-};
 
 const tooMany = (message) =>
   Response.json({ error: message }, { status: 429, headers: { ...JSON_HEADERS, "Retry-After": String(RETRY_SECONDS) } });
@@ -352,7 +349,7 @@ async function api(request, url, env) {
   if (url.pathname === "/api/status") return status(url, env);
   if (url.pathname === "/api/endringer") return changelog(env);
   if (request.method !== "GET") return new Response("Method Not Allowed", { status: 405, headers: { Allow: "GET" } });
-  const lang = url.searchParams.get("lang") === "nb" ? "nb" : "en";
+  const lang = language(url.searchParams.get("lang"));
   if (url.pathname === "/api/sjekk") {
     try {
       notOwnDomain(url.searchParams.get("url"), url.origin);
@@ -369,7 +366,7 @@ async function api(request, url, env) {
     const stop = await checkLimits(env, [{ type: "lookup_client", key: await clientKey(request) }], lang);
     if (stop) return tooMany(stop);
     const e = await getEntity(url.searchParams.get("orgnr"));
-    if (!e) return Response.json({ error: API_TEXT.notFound[lang] }, { status: 404, headers: JSON_HEADERS });
+    if (!e) return Response.json({ error: tr(lang, "api.notFound") }, { status: 404, headers: JSON_HEADERS });
     const a = e.forretningsadresse || e.beliggenhetsadresse || {};
     return Response.json({
       org_number: e.organisasjonsnummer,
@@ -385,11 +382,11 @@ async function api(request, url, env) {
       source: SOURCE_BRREG,
     }, { headers: JSON_HEADERS });
   }
-  return Response.json({ error: API_TEXT.unknownApi[lang] }, { status: 404, headers: JSON_HEADERS });
+  return Response.json({ error: tr(lang, "api.unknownApi") }, { status: 404, headers: JSON_HEADERS });
 }
 
 // robots.txt and sitemap.xml are generated here so the addresses are absolute whatever the domain.
-const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/", "/register/", "/create/"];
+const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/check/", "/lag/", "/meld-inn/", "/register/", "/create/"];
 const UPDATED = "2026-10-01";
 
 function robots(origin) {

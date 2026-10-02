@@ -5,62 +5,21 @@
 // identifiers follow the country: Norwegian org. no., EU VAT number (vatID) or UK company number.
 
 import { findInstructions, sanitize } from "./injeksjon.js";
+import { dict, fill, language, LANGS } from "./i18n.js";
 
 export const EXTENSION = "ai.vegvis.local/v1";
 
-// schema.org type -> Norwegian label shown in the form and used as a catalog tag.
-export const TYPES = {
-  LocalBusiness: "Lokal bedrift (generell)",
-  Store: "Butikk",
-  OnlineStore: "Nettbutikk",
-  ProfessionalService: "Profesjonell tjeneste (rådgivning, regnskap o.l.)",
-  HomeAndConstructionBusiness: "Bygg, hus og hjem",
-  AutomotiveBusiness: "Bil og kjøretøy",
-  FoodEstablishment: "Mat og servering",
-  Bakery: "Bakeri",
-  Restaurant: "Restaurant",
-  CafeOrCoffeeShop: "Kafé",
-  HealthAndBeautyBusiness: "Helse og skjønnhet",
-  MedicalBusiness: "Helsetjeneste",
-  SportsActivityLocation: "Sport og trening",
-  LodgingBusiness: "Overnatting",
-  TravelAgency: "Reise",
-  EntertainmentBusiness: "Underholdning og kultur",
-  LegalService: "Juridisk tjeneste",
-  FinancialService: "Finans og forsikring",
-  EducationalOrganization: "Kurs og opplæring",
-  NGO: "Frivillig organisasjon",
-};
-// schema.org type -> English label for the English form.
-export const TYPES_EN = {
-  LocalBusiness: "Local business (general)", Store: "Shop", OnlineStore: "Online shop",
-  ProfessionalService: "Professional service (consulting, accounting etc.)", HomeAndConstructionBusiness: "Building, house and home",
-  AutomotiveBusiness: "Cars and vehicles", FoodEstablishment: "Food and drink", Bakery: "Bakery", Restaurant: "Restaurant",
-  CafeOrCoffeeShop: "Café", HealthAndBeautyBusiness: "Health and beauty", MedicalBusiness: "Health service",
-  SportsActivityLocation: "Sport and fitness", LodgingBusiness: "Accommodation", TravelAgency: "Travel",
-  EntertainmentBusiness: "Entertainment and culture", LegalService: "Legal service", FinancialService: "Finance and insurance",
-  EducationalOrganization: "Courses and training", NGO: "Non-profit organisation",
-};
-// schema.org day -> name used in the generated text.
-const DAY_NAMES = {
-  nb: { Monday: "mandag", Tuesday: "tirsdag", Wednesday: "onsdag", Thursday: "torsdag", Friday: "fredag", Saturday: "lørdag", Sunday: "søndag" },
-  en: { Monday: "Monday", Tuesday: "Tuesday", Wednesday: "Wednesday", Thursday: "Thursday", Friday: "Friday", Saturday: "Saturday", Sunday: "Sunday" },
-};
-const DAYS = DAY_NAMES.nb;
-// Visible text in the generated files.
-const TEXT = {
-  nb: { send: "Send forespørsel", what: "Dette gjør vi", not: "Dette gjør vi ikke", prices: "Priser", contact: "Ta kontakt", include: "Skriv dette i forespørselen, så svarer vi raskere:",
-    email: "E-post", phone: "Telefon", where: "Hvor og når", hours: "Åpningstider", address: "Adresse", covers: "Vi dekker", home: "Vi kommer hjem til kunden.",
-    org: "Org.nr.", vat: "MVA-nummer", company: "Foretaksnummer", llmsTitle: "Oversikt for språkmodeller", area: "Område", homeShort: "Kommer hjem til kunden.",
-    pricesNote: (c) => `Priser i ${c} inkludert mva.`, contactH: "Kontakt", includeLine: "Ta med i forespørselen: ", about: "Om oss", website: "Nettside", orgRegister: "i Enhetsregisteret" },
-  en: { send: "Send a request", what: "What we do", not: "What we do not do", prices: "Prices", contact: "Get in touch", include: "Include this in your request, and we answer faster:",
-    email: "Email", phone: "Phone", where: "Where and when", hours: "Opening hours", address: "Address", covers: "We cover", home: "We come to the customer.",
-    org: "Org. no.", vat: "VAT number", company: "Company number", llmsTitle: "Overview for language models", area: "Area", homeShort: "We come to the customer.",
-    pricesNote: (c) => `Prices in ${c} including VAT.`, contactH: "Contact", includeLine: "Include in your request: ", about: "About us", website: "Website", orgRegister: "in Enhetsregisteret" },
-};
+// Labels, day names and the visible text of the generated files come from locales/<lang>.json («card»).
+// schema.org type -> label shown in the form and used as a catalog tag.
+export const typesFor = (lang) => dict(lang, "card").types;
+export const TYPES = typesFor("nb");
+export const TYPES_EN = typesFor("en");
 const EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","GR","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK"]);
 const CURRENCIES = ["NOK", "EUR", "GBP", "SEK", "DKK", "PLN", "CZK", "HUF", "RON", "BGN", "CHF", "USD"];
 const defaultCurrency = (c) => ({ NO: "NOK", GB: "GBP", SE: "SEK", DK: "DKK", PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", BG: "BGN", CH: "CHF", US: "USD" })[c] ?? (EU.has(c) ? "EUR" : "USD");
+// The visible text for one language, with pricesNote as a function.
+const WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+const cardText = (lang) => { const c = dict(lang, "card"); return { ...c, pricesNote: (currency) => fill(c.pricesNote, { currency }) }; };
 const MAX_LENGTH = { short: 120, sentence: 300, line: 160, url: 300 };
 
 const lines = (s, max = 20) => String(s ?? "").split(/\r?\n/).map((l) => sanitize(l, MAX_LENGTH.line)).filter(Boolean).slice(0, max);
@@ -98,11 +57,11 @@ export function normalize(f) {
   const country = /^[A-Z]{2}$/.test(String(f.country ?? "").toUpperCase()) ? String(f.country).toUpperCase() : "NO";
   const d = {
     country,
-    text: ["nb", "en"].includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
+    text: LANGS.includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
     currency: CURRENCIES.includes(f.currency) ? f.currency : defaultCurrency(country),
     vatId: EU.has(country) ? String(f.vatId ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16) : "",
     companyNumber: country === "GB" ? String(f.companyNumber ?? "").toUpperCase().replace(/\s/g, "").replace(/[^A-Z0-9]/g, "").slice(0, 8) : "",
-    type: TYPES[f.type] ? f.type : "LocalBusiness",
+    type: TYPES_EN[f.type] ? f.type : "LocalBusiness",
     name: sanitize(f.name, MAX_LENGTH.short),
     orgNumber: country === "NO" ? String(f.orgNumber ?? "").replace(/\D/g, "").slice(0, 9) : "",
     website: webAddress(f.website),
@@ -120,7 +79,7 @@ export function normalize(f) {
     homeVisits: Boolean(f.homeVisits),
     phone: sanitize(f.phone, 30).replace(/[^\d+ ]/g, ""),
     email: /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(sanitize(f.email, 120)) ? sanitize(f.email, 120) : "",
-    days: Object.keys(DAYS).filter((k) => (f.days || []).includes(k)),
+    days: WEEK.filter((k) => (f.days || []).includes(k)),
     opens: /^\d{2}:\d{2}$/.test(f.opens) ? f.opens : "",
     closes: /^\d{2}:\d{2}$/.test(f.closes) ? f.closes : "",
     hoursNote: sanitize(f.hoursNote, MAX_LENGTH.line),
@@ -154,7 +113,7 @@ export function missingFields(d) {
 }
 
 function jsonld(d) {
-  const t = TEXT[d.text];
+  const t = cardText(d.text);
   const id = new URL(d.text === "nb" ? "#bedrift" : "#business", d.website).href;
   const o = { "@context": "https://schema.org", "@type": d.type, "@id": id, name: d.name, description: d.summary, url: d.website };
   if (d.orgNumber) o.identifier = { "@type": "PropertyValue", propertyID: "orgnr", value: d.orgNumber };
@@ -190,13 +149,13 @@ function jsonld(d) {
 
 function hoursText(d) {
   const t = [];
-  if (d.days.length && d.opens && d.closes) t.push(`${d.days.map((x) => DAY_NAMES[d.text][x]).join(", ")}: ${d.opens}–${d.closes}`);
+  if (d.days.length && d.opens && d.closes) t.push(`${d.days.map((x) => cardText(d.text).days[x]).join(", ")}: ${d.opens}–${d.closes}`);
   if (d.hoursNote) t.push(d.hoursNote);
   return t.join(". ");
 }
 
 export function makeHtml(d) {
-  const t = TEXT[d.text];
+  const t = cardText(d.text);
   const ul = (xs) => `<ul>${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
   const place = [d.street, [d.postalCode, d.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const parts = [
@@ -245,7 +204,7 @@ ${parts.join("\n")}
 }
 
 export function makeLlmsTxt(d) {
-  const t = TEXT[d.text];
+  const t = cardText(d.text);
   const out = [`# ${d.name}`, "", `> ${d.summary}`, ""];
   const facts = [];
   if (d.areas.length) facts.push(`${t.area}: ${d.areas.join(", ")}.${d.homeVisits ? " " + t.homeShort : ""}`);
@@ -292,7 +251,7 @@ export function makeCatalog(d) {
       type: "text/html",
       url: d.website,
       description: d.summary,
-      tags: [TYPES[d.type].toLowerCase(), ...d.services.slice(0, 7).map((t) => t.toLowerCase())],
+      tags: [typesFor(d.text)[d.type].toLowerCase(), ...d.services.slice(0, 7).map((t) => t.toLowerCase())],
       extensions: { [EXTENSION]: local },
     }],
   }, null, 2) + "\n";

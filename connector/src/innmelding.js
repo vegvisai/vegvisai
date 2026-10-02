@@ -6,6 +6,7 @@ import { verifyBusiness, reasonText } from "./registration.js";
 import { d1Store, publicChangelog, openExport } from "./register.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import { CheckError } from "./sjekk.js";
+import { language } from "../public/felles/i18n.js";
 
 const HEADERS = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
 const json = (body, status = 200) => Response.json(body, { status, headers: HEADERS });
@@ -29,7 +30,7 @@ const explain = (reasons, lang) => reasons.map((code) => ({ code, text: reasonTe
 export async function register(request, env, { fetchFn = fetch } = {}) {
   let body;
   try { body = await request.json(); } catch { return json({ error: "Send JSON." }, 400); }
-  const lang = body.lang === "nb" ? "nb" : "en";
+  const lang = language(body.lang);
   const store = storeFor(env);
   if (!store) return json({ error: "The register is not available." }, 503);
   const stop = await checkLimits(env, [{ type: "register_client", key: await clientKey(request) }], lang);

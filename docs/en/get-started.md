@@ -49,7 +49,7 @@ The open skill `ai-lesbar-nettside` on [GitHub](https://github.com/vegvisai/vegv
 
 ## Step 4: Check it
 
-Run the [AI check](https://veiviser-test.testplattform.workers.dev/sjekk/) on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.
+Run the [AI check](https://veiviser-test.testplattform.workers.dev/check/) on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.
 
 ## Step 5: Register in the open guide
 

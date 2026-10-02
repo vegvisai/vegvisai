@@ -4,6 +4,7 @@
   "type": "module",
   "scripts": {
     "test": "node --test test/",
-    "deploy": "wrangler deploy"
+    "deploy": "wrangler deploy",
+    "locales": "python3 ../locales/build_locales.py"
   }
 }

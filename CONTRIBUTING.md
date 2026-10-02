@@ -22,7 +22,7 @@ Good first contributions:
 - **New checks**, with a test: `hreflang` for multilingual sites, `FAQPage` quality, accessible PDFs, opening hours in schema.org, `llms.txt` structure
 - **Fewer false alarms**: key pages written in other words, sites that render text on the server in unusual ways, sitemaps that are split in many files
 - **More machine interfaces** in «open for AI»: GraphQL, open data portals, booking and order actions in schema.org, MCP server cards as the standard settles
-- **More languages** for the report (today English and Norwegian) and for the key-page patterns
+- **More languages** for the report and the page (one file in `locales/`, see `locales/README.md`) and for the key-page patterns
 - **More cases** in the injection test set (`tools/ai-check/injeksjon-testsett.json`), especially in other languages
 - **A command-line version** and a GitHub Action, so anyone can run the check in CI
 
@@ -41,7 +41,7 @@ We are looking for one ambassador per country who knows their own market: transl
 | The open index | `index/` | More public services, county authorities, other countries, data quality |
 | The connector (MCP) | `connector/src/index.js` | Tests with more agents and local models, new read-only tools |
 | Integrations | new folder | Plug-ins that publish the AI business card from WordPress, Wix, Shopify and other website builders |
-| Guides | `website/content/` | Plainer language, examples, translations (the Markdown in `docs/` is generated) |
+| Guides | `website/content/` | Plainer language, examples, translations (the Markdown in `docs/` is generated; shared texts are in `locales/`) |
 | Security | see below | Prompt-injection patterns, reviews |
 
 ## Ground rules

@@ -5,6 +5,7 @@
 
 import { safeAddress, readPage, jsonldObjects, UA } from "./sjekk.js";
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
+import { tr } from "../public/felles/i18n.js";
 
 const TIMEOUT_MS = 8000;
 const MAX_BYTES = 1_000_000;
@@ -17,23 +18,8 @@ const COMPANIES_HOUSE = "https://api.company-information.service.gov.uk/company"
 const ORG_TYPES = new Set(["Organization", "Corporation", "LocalBusiness", "OnlineBusiness", "NGO", "GovernmentOrganization"]);
 
 // Reasons are neutral codes, so the public changelog never needs free text about a business.
-export const REASONS = {
-  no_card: { en: "No AI business card found on the domain (/.well-known/ai-catalog.json or the front page).", nb: "Fant ikke noe AI-visittkort på domenet (/.well-known/ai-catalog.json eller forsiden)." },
-  no_company_number: { en: "The business card has no UK company number (schema.org identifier with propertyID «companyNumber»).", nb: "Visittkortet mangler britisk foretaksnummer (schema.org identifier med propertyID «companyNumber»)." },
-  no_vat_number: { en: "The business card has no EU VAT number (schema.org vatID).", nb: "Visittkortet mangler EU-momsnummer (schema.org vatID)." },
-  vat_mismatch: { en: "The VAT number in the form does not match the one in the business card.", nb: "Momsnummeret i skjemaet stemmer ikke med det i visittkortet." },
-  domain_only: { en: "Outside Norway and the EU only the domain can be checked. A person reviews the entry.", nb: "Utenfor Norge og EU kan bare domenet sjekkes. En person går gjennom oppføringen." },
-  no_org_number: { en: "The business card has no organisation number (schema.org identifier with propertyID «orgnr», or taxID).", nb: "Visittkortet mangler organisasjonsnummer (schema.org identifier med propertyID «orgnr», eller taxID)." },
-  org_mismatch: { en: "The organisation number in the form does not match the one in the business card.", nb: "Organisasjonsnummeret i skjemaet stemmer ikke med det i visittkortet." },
-  not_in_register: { en: "The organisation number is not in Enhetsregisteret.", nb: "Organisasjonsnummeret finnes ikke i Enhetsregisteret." },
-  bankrupt: { en: "The register shows bankruptcy or winding-up.", nb: "Registeret viser konkurs eller avvikling." },
-  domain_mismatch: { en: "Neither the website in Enhetsregisteret nor the url in the business card points to this domain. A person will check it.", nb: "Verken nettadressen i Enhetsregisteret eller url i visittkortet peker til dette domenet. En person sjekker det." },
-  injection: { en: "The business card contains text that matches patterns for hidden instructions to AI. Remove it and try again.", nb: "Visittkortet inneholder tekst som ligner skjulte instrukser til AI. Fjern den og prøv igjen." },
-  no_consent: { en: "Consent to share the entry under ODbL and DbCL is needed.", nb: "Samtykke til å dele oppføringen under ODbL og DbCL må gis." },
-  register_unavailable: { en: "Enhetsregisteret did not answer. Try again later.", nb: "Enhetsregisteret svarte ikke. Prøv igjen senere." },
-};
-
-export const reasonText = (code, lang = "en") => (REASONS[code] ?? { en: code, nb: code })[lang === "nb" ? "nb" : "en"];
+// The texts are in locales/<lang>.json under «registration».
+export const reasonText = (code, lang = "en") => tr(lang, `registration.${code}`);
 
 // A UK company number from the card (Companies House): 8 characters, for example 01234567 or SC123456.
 export function companyNumberFrom(o) {

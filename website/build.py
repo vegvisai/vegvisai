@@ -16,52 +16,27 @@ PUBLIC = ROOT / "public"
 GITHUB = "https://github.com/vegvisai/vegvisai"
 TEST = "https://veiviser-test.testplattform.workers.dev"
 
-# name -> path per language. Docs pages are listed in DOCS order for the sidebar.
-PAGES = {
-    "home": {"en": "/", "no": "/no/"},
-    "why": {"en": "/why/", "no": "/no/bakgrunn/"},
-    "ownership": {"en": "/ownership/", "no": "/no/eierskap/"},
-    "privacy": {"en": "/privacy/", "no": "/no/personvern/"},
-    "press": {"en": "/press/", "no": "/no/presse/"},
-    "support": {"en": "/support/", "no": "/no/stott/"},
-    "docs": {"en": "/docs/", "no": "/no/guider/"},
-    "get-started": {"en": "/docs/get-started/", "no": "/no/guider/kom-i-gang/"},
-    "website": {"en": "/docs/ai-readable-website/", "no": "/no/guider/ai-lesbar-nettside/"},
-    "files": {"en": "/docs/ai-files/", "no": "/no/guider/ai-filer/"},
-    "mcp": {"en": "/docs/mcp/", "no": "/no/guider/mcp/"},
-    "developers": {"en": "/docs/developers/", "no": "/no/guider/utviklere/"},
-    "how-we-choose": {"en": "/docs/how-we-choose/", "no": "/no/guider/slik-velger-vi/"},
+LOCALES_DIR = ROOT.parent / "locales"
+
+# name -> English path. Docs pages are listed in DOCS order for the sidebar.
+EN_PATHS = {
+    "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/",
+    "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
+    "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
 DOCS = ["docs", "get-started", "website", "files", "mcp", "developers", "how-we-choose"]
 
-T = {
-    "en": {
-        "skip": "Skip to content", "menu": "Main", "how": "How it works", "guides": "Guides",
-        "why": "Background", "owners": "Ownership", "other": "Norsk", "other_lang": "nb",
-        "github": "GitHub", "github_note": "private until launch",
-        "preview": "Technical preview", "preview_text": "Not launched. Examples are fictional.",
-        "licence": "Code: Apache 2.0 · Index: ODbL",
-        "operator": "VegvisAI™ is run by Espen Brathaug, Oslo, Norway.",
-        "owner_note": "* Today VegvisAI is owned and run privately by Espen Brathaug. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles.",
-        "owner_link": "Ownership",
-        "privacy": "Privacy", "press": "Press", "support": "Support",
-        "docs_nav": "Guides", "on_github": "Code and templates on GitHub",
-        "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.",
-    },
-    "no": {
-        "skip": "Hopp til innholdet", "menu": "Hovedmeny", "how": "Slik virker det", "guides": "Guider",
-        "why": "Bakgrunn", "owners": "Eierskap", "other": "English", "other_lang": "en",
-        "github": "GitHub", "github_note": "privat til lansering",
-        "preview": "Teknisk forhåndsvisning", "preview_text": "Ikke lansert. Eksemplene er oppdiktet.",
-        "licence": "Kode: Apache 2.0 · Indeks: ODbL",
-        "operator": "VegvisAI™ drives av Espen Brathaug, Oslo, Norge.",
-        "owner_note": "* I dag eies og drives VegvisAI privat av Espen Brathaug. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene.",
-        "owner_link": "Eierskap",
-        "privacy": "Personvern", "press": "Presse", "support": "Støtt oss",
-        "docs_nav": "Guider", "on_github": "Kode og maler på GitHub",
-        "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
-    },
-}
+# Languages come from locales/<code>.json; a language is built when content/<site_dir>/ exists.
+# Internally a language is keyed by its content folder (en, no, ...). Missing texts fall back to English.
+import json  # noqa: E402
+
+_locales = {p.stem: json.loads(p.read_text()) for p in sorted(LOCALES_DIR.glob("*.json"))}
+_en_site = _locales["en"]["site"]
+META = {d["_meta"]["site_dir"]: d["_meta"] for d in _locales.values() if (CONTENT / d["_meta"]["site_dir"]).is_dir()}
+LANGS = ["en"] + sorted(l for l in META if l != "en")
+T = {d["_meta"]["site_dir"]: {**_en_site, **d.get("site", {})} for d in _locales.values() if d["_meta"]["site_dir"] in META}
+# A page's path in a language: the locale's own path, or its URL prefix plus the English path.
+PAGES = {name: {l: META[l].get("paths", {}).get(name) or META[l]["url_prefix"] + en.lstrip("/") for l in LANGS} for name, en in EN_PATHS.items()}
 
 GH_ICON = ('<svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>')
 
@@ -100,17 +75,19 @@ def docs_sidebar(lang: str, current: str) -> str:
 
 def layout(lang: str, name: str, title: str, description: str, body: str) -> str:
     t = T[lang]
-    other = "no" if lang == "en" else "en"
-    other_path = PAGES[name][other] if read(other, name) else PAGES["home"][other]
+    # Links to the other languages: the same page when it exists there, else that language's front page.
+    others = "\n".join(
+        f'<a href="{PAGES[name][l] if read(l, name) else PAGES["home"][l]}" hreflang="{META[l]["html_lang"]}" lang="{META[l]["html_lang"]}">{META[l]["name"]}</a>'
+        for l in LANGS if l != lang)
     home = PAGES["home"][lang]
     is_doc = name in DOCS
     if is_doc:
         body = f'<div class="wrap docs">{docs_sidebar(lang, name)}<article class="prose">{body}</article></div>'
     alternates = "".join(
-        f'<link rel="alternate" hreflang="{"nb" if l == "no" else "en"}" href="{PAGES[name][l]}">'
-        for l in ("en", "no") if read(l, name))
+        f'<link rel="alternate" hreflang="{META[l]["html_lang"]}" href="{PAGES[name][l]}">'
+        for l in LANGS if read(l, name))
     return f"""<!doctype html>
-<html lang="{'nb' if lang == 'no' else 'en'}">
+<html lang="{META[lang]['html_lang']}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -136,7 +113,7 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
 <a href="{PAGES['why'][lang]}">{t['why']}</a>
 <a href="{PAGES['ownership'][lang]}">{t['owners']}</a>
 <a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a>
-<a href="{other_path}" hreflang="{t['other_lang']}" lang="{t['other_lang']}">{t['other']}</a>
+{others}
 </div>
 </nav>
 <p class="eyebrow nameline">{t['nameline']}</p>
@@ -149,7 +126,7 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
 <div class="wrap row">
 <p><span class="preview">{t['preview']}</span> {t['preview_text']} {t['operator']}</p>
 <p class="owner-note">{t['owner_note']} <a href="{PAGES['ownership'][lang]}">{t['owner_link']}</a></p>
-<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · <a href="{other_path}" hreflang="{t['other_lang']}" lang="{t['other_lang']}">{t['other']}</a></p>
+<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · {others.replace(chr(10), " · ")}</p>
 </div>
 </footer>
 </body>

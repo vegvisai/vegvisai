@@ -3,35 +3,22 @@
 // We store nothing: the client is identified by a hash of the IP address, and the
 // counters only live in Cloudflare's memory for the counting window (60 seconds).
 
+import { tr } from "../public/felles/i18n.js";
+
+// The messages are in locales/<lang>.json under «limits».
 export const LIMITS = {
   // Binding in wrangler.jsonc, and the message shown when the limit is reached.
   check_client: {
     binding: "GRENSE_SJEKK_KLIENT",
-    message: {
-      en: "You have run many checks in a short time. Wait one minute and try again.",
-      nb: "Du har kjørt mange sjekker på kort tid. Vent ett minutt og prøv igjen.",
-    },
   },
   check_target: {
     binding: "GRENSE_SJEKK_MAL",
-    message: {
-      en: "This website has been checked many times in the last minute. Wait one minute and try again.",
-      nb: "Dette nettstedet er sjekket mange ganger det siste minuttet. Vent ett minutt og prøv igjen.",
-    },
   },
   register_client: {
     binding: "GRENSE_INNMELDING",
-    message: {
-      en: "Many registrations in a short time. Wait one minute and try again.",
-      nb: "Mange påmeldinger på kort tid. Vent ett minutt og prøv igjen.",
-    },
   },
   lookup_client: {
     binding: "GRENSE_OPPSLAG_KLIENT",
-    message: {
-      en: "Many lookups in a short time. Wait one minute and try again.",
-      nb: "Mange oppslag på kort tid. Vent ett minutt og prøv igjen.",
-    },
   },
 };
 
@@ -56,7 +43,7 @@ export async function checkLimits(env, checks, lang = "en") {
     const b = env?.[l.binding];
     if (!b || !key) continue;
     const { success } = await b.limit({ key: `${type}:${key}` });
-    if (!success) return l.message[lang === "nb" ? "nb" : "en"];
+    if (!success) return tr(lang, `limits.${type}`);
   }
   return null;
 }

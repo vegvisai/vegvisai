@@ -8,6 +8,7 @@
 // Report texts exist in English (default, API and MCP) and Norwegian (the Norwegian /sjekk/ page).
 
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
+import { tr, dict, fill, language } from "../public/felles/i18n.js";
 
 export const UA = "VegvisAI-check/1.0 (technical test; https://veiviser-test.testplattform.workers.dev/sjekk/)";
 const PAUSE_MS = 500;
@@ -72,140 +73,56 @@ const KEY_PAGES = {
   },
 };
 
-export const language = (lang) => (lang === "nb" ? "nb" : "en");
+export { language };
 
-// ---------- Messages ----------
-
-const ERRORS = {
-  missing: { en: "Enter a web address.", nb: "Oppgi en nettadresse." },
-  invalid: { en: "Invalid web address.", nb: "Ugyldig nettadresse." },
-  protocol: { en: "Only http and https are supported.", nb: "Bare http og https støttes." },
-  port: { en: "Only standard ports (80 and 443) are supported.", nb: "Bare standardporter (80 og 443) støttes." },
-  credentials: { en: "The address cannot contain a user name or password.", nb: "Adressen kan ikke inneholde brukernavn eller passord." },
-  private: { en: "The address must be a public domain.", nb: "Adressen må være et offentlig domene." },
-  ip: { en: "Use a domain name, not an IP address.", nb: "Bruk domenenavn, ikke IP-adresse." },
-  own: { en: "The guide cannot check its own domain. Check it from another address.", nb: "Veiviseren kan ikke sjekke sitt eget domene. Sjekk det fra en annen adresse." },
-};
+// ---------- Messages (locales/<lang>.json, namespaces check and check_errors) ----------
 
 // An error with a code, so the message can be shown in the caller's language.
 export class CheckError extends Error {
   constructor(code) {
-    super(ERRORS[code].en);
+    super(tr("en", `check_errors.${code}`));
     this.code = code;
   }
   text(lang) {
-    return ERRORS[this.code][language(lang)];
+    return tr(lang, `check_errors.${this.code}`);
   }
 }
 
-const T = {
-  en: {
-    robots: (b) => `Open robots.txt to the AI bots that are blocked: ${b}.`,
-    lastmod: (p) => `Update lastmod in the sitemap: ${p} % of the pages are dated more than two years back.`,
-    sitemap: "Publish a sitemap and point to it from robots.txt.",
-    titles: "Give every page its own descriptive title.",
-    descriptions: "Add a meta description to every page.",
-    business: "Describe the business with schema.org (Organization or LocalBusiness): name, address, contact, opening hours and area.",
-    identity: {
-      government: "Describe the public body with schema.org (GovernmentOrganization): name, address, contact and the area you serve.",
-      organisation: "Describe the organisation with schema.org (Organization or NGO): name, address, contact and what you work for.",
-      party: "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme.",
-    },
-    readable: (n, m) => `Serve the main text in the HTML itself: ${n} of ${m} pages show less than ${READABLE_CHARS} characters without JavaScript, and many AI agents do not run JavaScript.`,
-    lang: "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
-    headings: "Give every page one main heading (h1).",
-    keyPages: (names) => `Link clearly from the front page to: ${names}. An AI looks for these pages first.`,
-    keyNames: { services: "services and forms", contact: "contact", about: "about", work: "what you work on", join: "membership or support", programme: "the party programme", policy: "policy and positions", people: "elected representatives and leaders" },
-    content: (n, m) => `Mark up content pages with schema.org (Article, WebPage, Service, Event, FAQPage and the like) with datePublished or dateModified, so an AI can tell what a page is and how current it is: ${n} of ${m} pages lack it.`,
-    zeroWidth: (n) => `Check ${n} low-risk matches, such as zero-width characters from copy and paste or a mention of a system prompt.`,
-    unreachable: (s) => `The website could not be measured: the front page answered ${s ? `with status ${s}` : "not at all"} to our check. No score is given. Try again later, or check that the site does not block automated visits.`,
-    profileName: { business: "business", government: "public body", organisation: "organisation (NGO, association)", party: "political party" },
-    profileSource: { param: "chosen", schema: "from schema.org", domain: "from the domain", index: "from the open index", default: "default" },
-    openLine: (list) => `Open for AI: ${list || "nothing beyond the web pages"}`,
-    openNames: { llms_txt: "llms.txt", llms_full: "llms-full.txt", ai_catalog: "ai-catalog.json", mcp: "MCP server", openapi: "OpenAPI", feeds: "news feeds (RSS/Atom)", calendar: "calendar (iCal)", actions: "actions in schema.org", datasets: "open data (Dataset)", search: "site search for agents" },
-    fields: (f) => `Structured data for products or services is missing fields: ${f}.`,
-    priceText: (n, m) => `Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on ${n} of ${m} pages, so the information exists; it only lacks structure.`,
-    llms: "Publish /llms.txt with a short overview for language models.",
-    catalog: "Publish /.well-known/ai-catalog.json so open guides can find your services.",
-    injection: (n) => `Check ${n} passages that match patterns often used to give instructions to AI assistants. A match says nothing about intent; if the text is not meant for readers, remove it.`,
-    skippedRobots: "robots.txt does not allow it",
-    sourcePage: (u) => `page ${u}`,
-    sourceHidden: (u) => `hidden text on ${u}`,
-    sourceData: (u) => `structured data on ${u}`,
-    sourceTitle: (u) => `title and description on ${u}`,
-    fieldNames: { name: "name", price: "price", currency: "currency", availability: "availability" },
-    yes: "yes", no: "no",
+// The report texts for one language, with the templates turned into functions.
+function checkTexts(lang) {
+  const c = dict(lang, "check");
+  return {
+    ...c,
+    robots: (bots) => fill(c.robots, { bots }),
+    lastmod: (percent) => fill(c.lastmod, { percent }),
+    readable: (n, m) => fill(c.readable, { n, m, chars: READABLE_CHARS }),
+    keyPages: (names) => fill(c.keyPages, { names }),
+    content: (n, m) => fill(c.content, { n, m }),
+    zeroWidth: (n) => fill(c.zeroWidth, { n }),
+    unreachable: (status) => (status ? fill(c.unreachableStatus, { status }) : c.unreachableNone),
+    openLine: (list) => fill(c.openLine, { list: list || c.openLineNone }),
+    fields: (fields) => fill(c.fields, { fields }),
+    priceText: (n, m) => fill(c.priceText, { n, m }),
+    injection: (n) => fill(c.injection, { n }),
+    sourcePage: (url) => fill(c.sourcePage, { url }),
+    sourceHidden: (url) => fill(c.sourceHidden, { url }),
+    sourceData: (url) => fill(c.sourceData, { url }),
+    sourceTitle: (url) => fill(c.sourceTitle, { url }),
     report: (r) => [
-      `AI check of ${r.site} (${r.time}). Sample, not a full review.`,
-      r.score === null ? "Score: not measured." : `Score: ${r.score} of 100.`,
-      `Yardstick: ${T.en.profileName[r.profile]} (${T.en.profileSource[r.profile_source]}).`,
+      fill(c.reportHead, { site: r.site, time: r.time }),
+      r.score === null ? c.scoreNone : fill(c.score, { score: r.score }),
+      fill(c.yardstick, { profile: c.profileName[r.profile], source: c.profileSource[r.profile_source] }),
       "",
-      "Actions:",
+      c.actionsHead,
     ],
-    noActions: "No obvious actions.",
-    robotsLine: (r) => `robots.txt: ${r.robots.exists ? "present" : "missing"}; blocked AI bots: ${r.robots.blocked.join(", ") || "none"}`,
-    sitemapLine: (n) => `Sitemap: ${n} addresses`,
-    filesLine: (a, b) => `llms.txt: ${a}. ai-catalog.json valid: ${b}`,
-    pagesLine: (n) => `Pages in the sample: ${n}`,
-    pointsLine: (b) => `Points per check: ${b}`,
-    notApplicable: "does not apply",
-    injectionHead: "Pattern matches that resemble instructions to AI (quoted as data; a match says nothing about intent):",
-    lowRisk: "low risk",
-  },
-  nb: {
-    robots: (b) => `Åpne robots.txt for AI-robotene som er blokkert: ${b}.`,
-    lastmod: (p) => `Oppdater lastmod i sitemap: ${p} % av sidene er datert mer enn to år tilbake.`,
-    sitemap: "Legg ut en sitemap og pek til den fra robots.txt.",
-    titles: "Gi hver side en egen, beskrivende tittel.",
-    descriptions: "Legg til meta-beskrivelse på alle sider.",
-    business: "Beskriv bedriften med schema.org (Organization eller LocalBusiness): navn, adresse, kontakt, åpningstider og område.",
-    identity: {
-      government: "Beskriv virksomheten med schema.org (GovernmentOrganization): navn, adresse, kontakt og området dere betjener.",
-      organisation: "Beskriv organisasjonen med schema.org (Organization eller NGO): navn, adresse, kontakt og hva dere arbeider for.",
-      party: "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet.",
-    },
-    readable: (n, m) => `Legg hovedteksten i selve HTML-en: ${n} av ${m} sider viser under ${READABLE_CHARS} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.`,
-    lang: "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
-    headings: "Gi hver side én hovedoverskrift (h1).",
-    keyPages: (names) => `Lenk tydelig fra forsiden til: ${names}. AI-en ser etter disse sidene først.`,
-    keyNames: { services: "tjenester og skjema", contact: "kontakt", about: "om oss", work: "hva dere arbeider med", join: "medlemskap eller støtte", programme: "partiprogrammet", policy: "politikk og standpunkter", people: "folkevalgte og ledelse" },
-    content: (n, m) => `Merk opp innholdssider med schema.org (Article, WebPage, Service, Event, FAQPage og lignende) med datePublished eller dateModified, så AI-en ser hva siden er og hvor oppdatert den er: ${n} av ${m} sider mangler det.`,
-    zeroWidth: (n) => `Se over ${n} treff med lav risiko, for eksempel nullbredde-tegn fra kopiering eller omtale av en systemprompt.`,
-    unreachable: (s) => `Nettstedet kunne ikke måles: forsiden svarte ${s ? `med status ${s}` : "ikke"} på sjekken vår. Ingen poeng gis. Prøv igjen senere, eller sjekk at nettstedet ikke blokkerer automatiske besøk.`,
-    profileName: { business: "bedrift", government: "offentlig virksomhet", organisation: "organisasjon (NGO, forening)", party: "politisk parti" },
-    profileSource: { param: "valgt", schema: "fra schema.org", domain: "fra domenet", index: "fra den åpne indeksen", default: "standard" },
-    openLine: (list) => `Åpent for AI: ${list || "ingenting utover nettsidene"}`,
-    openNames: { llms_txt: "llms.txt", llms_full: "llms-full.txt", ai_catalog: "ai-catalog.json", mcp: "MCP-server", openapi: "OpenAPI", feeds: "nyhetsstrømmer (RSS/Atom)", calendar: "kalender (iCal)", actions: "handlinger i schema.org", datasets: "åpne data (Dataset)", search: "søk for agenter" },
-    fields: (f) => `Strukturerte data for produkter eller tjenester mangler felt: ${f}.`,
-    priceText: (n, m) => `Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på ${n} av ${m} sider, så informasjonen finnes; den mangler bare struktur.`,
-    llms: "Legg ut /llms.txt med en kort oversikt for språkmodeller.",
-    catalog: "Publiser /.well-known/ai-catalog.json, så åpne veivisere finner tjenestene deres.",
-    injection: (n) => `Se over ${n} tekstbiter som ligner mønstre som ofte brukes for å gi instrukser til AI-assistenter. Et treff sier ingenting om hensikt; er teksten ikke ment for leserne, kan den fjernes.`,
-    skippedRobots: "robots.txt tillater ikke",
-    sourcePage: (u) => `side ${u}`,
-    sourceHidden: (u) => `skjult tekst på ${u}`,
-    sourceData: (u) => `strukturerte data på ${u}`,
-    sourceTitle: (u) => `tittel og beskrivelse på ${u}`,
-    fieldNames: { name: "navn", price: "pris", currency: "valuta", availability: "tilgjengelighet" },
-    yes: "ja", no: "nei",
-    report: (r) => [
-      `AI-sjekk av ${r.site} (${r.time}). Stikkprøve, ikke full gjennomgang.`,
-      r.score === null ? "Poeng: ikke målt." : `Poeng: ${r.score} av 100.`,
-      `Målestokk: ${T.nb.profileName[r.profile]} (${T.nb.profileSource[r.profile_source]}).`,
-      "",
-      "Tiltak:",
-    ],
-    noActions: "Ingen åpenbare tiltak.",
-    robotsLine: (r) => `robots.txt: ${r.robots.exists ? "finnes" : "mangler"}; blokkerte AI-roboter: ${r.robots.blocked.join(", ") || "ingen"}`,
-    sitemapLine: (n) => `Sitemap: ${n} adresser`,
-    filesLine: (a, b) => `llms.txt: ${a}. ai-catalog.json gyldig: ${b}`,
-    pagesLine: (n) => `Sider i stikkprøven: ${n}`,
-    pointsLine: (b) => `Poeng per sjekk: ${b}`,
-    notApplicable: "gjelder ikke",
-    injectionHead: "Mønstertreff som ligner instrukser til AI (sitert som data; et treff sier ingenting om hensikt):",
-    lowRisk: "lav risiko",
-  },
-};
+    robotsLine: (r) => fill(c.robotsLine, { state: r.robots.exists ? c.robotsPresent : c.robotsMissing, bots: r.robots.blocked.join(", ") || c.botsNone }),
+    sitemapLine: (n) => fill(c.sitemapLine, { n }),
+    filesLine: (llms, catalog) => fill(c.filesLine, { llms, catalog }),
+    pagesLine: (n) => fill(c.pagesLine, { n }),
+    pointsLine: (points) => fill(c.pointsLine, { points }),
+  };
+}
+const T = new Proxy({}, { get: (_, lang) => checkTexts(lang) });
 
 // ---------- Safe address ----------
 

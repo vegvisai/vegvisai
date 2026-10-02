@@ -39,6 +39,12 @@ De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre 
 
 Repoet åpnes ved lansering. Til da kan du skrive til Espen Brathaug, [e-post på vegvis.ai før lansering], hvis du vil være med tidlig.
 
+## Tjen penger på å hjelpe bedrifter
+
+Mange bedrifter vil at noen gjør det for dem, og du kan ta betalt for jobben. Bli med på den åpne [hjelperlisten](https://github.com/vegvisai/vegvisai/tree/main/helpers) ved å vise ett AI-visittkort som får 100 i AI-sjekken og én pull request som er tatt inn. Bedrifter ber om hjelp med skjemaet «Find help» på GitHub.
+
+VegvisAI tar ingen andel, håndterer ingen betaling og garanterer ikke for jobben: avtalen er mellom bedriften og deg. Listen vises i tilfeldig rekkefølge, ingen kan kjøpe seg en plass på den, og en bedrift som bruker en hjelper, får ikke bedre plass i veiviseren. Én ambassadør per land leder de første bedriftene der; ambassadørene står med navn på nettstedet og får førsterett på betalte oppdrag når det finnes et selskap.
+
 ## Veiviser-connectoren (test)
 
 En MCP-server som bare leser, med Streamable HTTP. Ingen registrering, ingen nøkkel.

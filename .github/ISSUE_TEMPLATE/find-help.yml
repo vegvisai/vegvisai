@@ -1,0 +1,52 @@
+name: Find help (for businesses)
+description: Ask a developer for help with your AI business card, the AI check or registration. Helpers answer here; any deal and payment is between you and them.
+title: "Find help: "
+labels: ["find help"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Describe what you need. Developers and agencies from the [helper list](../tree/main/helpers) and the community can answer.
+        **VegvisAI takes no cut, handles no payment and guarantees no work.** Any deal is between you and the helper. Using a helper never gives a better place in the guide: the guide does not rank.
+        Do not post personal data, passwords or prices you do not want public. Swap contact details privately.
+  - type: input
+    id: website
+    attributes:
+      label: Your website
+      placeholder: https://www.example-bakery.no
+    validations:
+      required: true
+  - type: input
+    id: country
+    attributes:
+      label: Country and language
+      placeholder: Norway, Norwegian
+    validations:
+      required: true
+  - type: dropdown
+    id: need
+    attributes:
+      label: What do you need help with?
+      multiple: true
+      options:
+        - Making the AI business card
+        - Putting the files on my website
+        - Fixing what the AI check found
+        - Registering in the guide
+        - Something else
+    validations:
+      required: true
+  - type: textarea
+    id: details
+    attributes:
+      label: Details
+      description: Your website builder (WordPress, Wix, Shopify …), what you have tried, your AI check score, and whether you want free help or are willing to pay.
+    validations:
+      required: true
+  - type: checkboxes
+    id: terms
+    attributes:
+      label: Terms
+      options:
+        - label: I understand that VegvisAI is not part of any deal, and that a helper never affects my place in the guide.
+          required: true

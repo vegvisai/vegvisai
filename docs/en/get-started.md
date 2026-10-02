@@ -55,6 +55,8 @@ Run the [AI check](https://veiviser-test.testplattform.workers.dev/check/) on yo
 
 Register your business with the [registration form](https://veiviser-test.testplattform.workers.dev/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
 
+**Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper never gives a better place in the guide.
+
 ## Step 6: Test it in a few weeks
 
 Ask ChatGPT, Claude or another assistant: «Who can help me with [task] in [area]?» It can take a few weeks before assistants pick up new pages.

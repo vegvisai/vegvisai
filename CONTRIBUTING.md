@@ -30,7 +30,11 @@ Rules for the check: it measures a site against a published yardstick and never 
 
 ## Ambassadors: one per country
 
-We are looking for one ambassador per country who knows their own market: translate the guides, check that registration works for their country, find a public register for verification, and help the first businesses. Volunteer role; no ownership or payment. See the issue «Ambassadors wanted: one per country».
+We are looking for one ambassador per country who knows their own market: translate the guides, check that registration works for their country, find a public register for verification, and help the first businesses. Volunteer role with no ownership; no pay from VegvisAI before there is a company, but ambassadors are named on the website, may earn from helping businesses, and get first right to paid tasks later. See [helpers/](helpers/) and the issue «Ambassadors wanted: one per country».
+
+## Earn by helping businesses
+
+Many businesses will want someone to do it for them. Helpers may charge for that work. Join the open [helper list](helpers/) by showing one AI business card that scores 100 and one merged pull request; businesses ask for help with the issue form «Find help». VegvisAI takes no cut, handles no payment and guarantees no work, and the list is shown in random order: nobody can buy a place on it, and a business that uses a helper gets no better place in the guide.
 
 ## Where you can help
 

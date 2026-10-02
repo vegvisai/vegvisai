@@ -39,6 +39,12 @@ Most small businesses will never hire a developer to make their website AI-reada
 
 The repository opens at launch. Until then, write to Espen Brathaug, [email on vegvis.ai before launch], if you want to join early.
 
+## Earn by helping businesses
+
+Many businesses will want someone to do it for them, and you may charge for that work. Join the open [helper list](https://github.com/vegvisai/vegvisai/tree/main/helpers) by showing one AI business card that scores 100 in the AI check and one merged pull request. Businesses ask for help with the issue form «Find help» on GitHub.
+
+VegvisAI takes no cut, handles no payment and guarantees no work: every deal is between the business and you. The list is shown in random order, nobody can buy a place on it, and a business that uses a helper gets no better place in the guide. One ambassador per country leads the first businesses there; ambassadors are named on the website and get first right to paid tasks when there is a company.
+
 ## The guide connector (test)
 
 A read-only MCP server using Streamable HTTP. No sign-up, no key.

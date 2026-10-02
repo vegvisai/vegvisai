@@ -55,6 +55,8 @@ Kjør [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) på n
 
 Meld inn bedriften i [påmeldingsskjemaet](https://veiviser-test.testplattform.workers.dev/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
 
+**Står du fast?** Be om hjelp med skjemaet «Find help» på [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). En utvikler fra den åpne hjelperlisten kan gjøre det for deg, gratis eller mot en pris dere avtaler. VegvisAI tar ingen andel, og en hjelper gir aldri bedre plass i veiviseren.
+
 ## Steg 6: Test det om noen uker
 
 Spør ChatGPT, Claude eller en annen assistent: «Hvem kan hjelpe meg med [oppgave] i [område]?» Det kan ta noen uker før assistentene fanger opp nye sider.

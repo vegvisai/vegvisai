@@ -11,12 +11,29 @@ Most small businesses will never hire a developer to make their website AI-reada
 - **Every agent.** ChatGPT, Claude, Gemini and the model on your own laptop read the same index on the same terms.
 - **Small steps, real reach.** One good template, one rule in the AI check or one public service in the index is used by every business and every agent from the day it is merged.
 
+## Start here: the AI check
+
+The AI check is our first step for every business, public body and organisation: it shows in 15 seconds how well an AI can read and use a website, and what to fix. It is the easiest place to make a difference, and every improvement reaches every site that runs it.
+
+Code: `connector/src/sjekk.js` (the check and the scoring), `connector/public/felles/injeksjon.js` (prompt injection), tests in `connector/test/`.
+
+Good first contributions:
+
+- **New checks**, with a test: `hreflang` for multilingual sites, `FAQPage` quality, accessible PDFs, opening hours in schema.org, `llms.txt` structure
+- **Fewer false alarms**: key pages written in other words, sites that render text on the server in unusual ways, sitemaps that are split in many files
+- **More machine interfaces** in «open for AI»: GraphQL, open data portals, booking and order actions in schema.org, MCP server cards as the standard settles
+- **More languages** for the report (today English and Norwegian) and for the key-page patterns
+- **More cases** in the injection test set (`tools/ai-check/injeksjon-testsett.json`), especially in other languages
+- **A command-line version** and a GitHub Action, so anyone can run the check in CI
+
+Rules for the check: it measures a site against a published yardstick and never ranks sites against each other. Every point must be explainable in the `breakdown`, and a site that cannot be read gets no score.
+
 ## Where you can help
 
 | Area | Where | Examples |
 | --- | --- | --- |
 | Templates and the skill | `skills/ai-lesbar-nettside/` | schema.org templates for new kinds of business, better interview questions, more languages |
-| The AI check | `connector/src/sjekk.js`, `tools/ai-check/` | New checks, fewer false alarms, clearer advice, more cases in the injection test set |
+| The AI check | `connector/src/sjekk.js`, `tools/ai-check/` | See «Start here» above |
 | The open index | `index/` | More public services, county authorities, other countries, data quality |
 | The connector (MCP) | `connector/src/index.js` | Tests with more agents and local models, new read-only tools |
 | Integrations | new folder | Plug-ins that publish the AI business card from WordPress, Wix, Shopify and other website builders |

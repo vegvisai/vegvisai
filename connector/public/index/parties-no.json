@@ -2,8 +2,8 @@
  "name": "VegvisAI open index: political parties in Norway",
  "licence": "ODbL-1.0",
  "country": "NO",
- "policy": "Every party in Partiregisteret can be listed on the same terms: links to its own public pages, in alphabetical order, never ranked, free of charge. A listing is not an endorsement, and a party that is missing is not less relevant. Parties can ask to be listed, changed or removed.",
- "notice": "Unofficial listing made from the parties' own public pages (P34). The list is not complete yet: more parties are welcome.",
+ "policy": "Every party in Partiregisteret can be listed on the same terms: links to its own public pages, in alphabetical order, never ranked, free of charge. A listing is not an endorsement, and a party that is missing is not less relevant. Any party can take over its own entry at any time, by publishing its own AI catalog file or by asking us, and can ask to be changed or removed.",
+ "notice": "Unofficial listings made from the parties' own public pages, like the public services in the index (P34). Not made or approved by the parties. The list is not complete yet: every party is welcome.",
  "entries": [
   {
    "id": "arbeiderpartiet",
@@ -12,7 +12,8 @@
    "programme_url": "https://www.arbeiderpartiet.no/om/program/",
    "policy_url": "https://www.arbeiderpartiet.no/politikken/",
    "org_number": "971526939",
-   "source": "Enhetsregisteret and arbeiderpartiet.no, checked 2026-10-02"
+   "source": "Enhetsregisteret and arbeiderpartiet.no, checked 2026-10-02",
+   "listing": "unofficial"
   },
   {
    "id": "hoyre",
@@ -23,7 +24,8 @@
    "llms_txt": "https://hoyre.no/llms.txt",
    "feed": "https://hoyre.no/feed/",
    "org_number": "870168012",
-   "source": "Enhetsregisteret and hoyre.no, checked 2026-10-02"
+   "source": "Enhetsregisteret and hoyre.no, checked 2026-10-02",
+   "listing": "unofficial"
   }
  ],
  "updated": "2026-10-02"

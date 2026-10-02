@@ -389,7 +389,7 @@ async function api(request, url, env) {
 }
 
 // robots.txt and sitemap.xml are generated here so the addresses are absolute whatever the domain.
-const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/", "/register/"];
+const PAGES = ["/", "/eksempel/", "/eksempel/gjestehus/", "/example/", "/sjekk/", "/lag/", "/meld-inn/", "/register/", "/create/"];
 const UPDATED = "2026-10-01";
 
 function robots(origin) {

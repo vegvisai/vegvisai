@@ -1,7 +1,8 @@
 // Builds an AI-readable business card (level 0) from the answers in the form on /lag/.
 // Runs in the browser; nothing is sent to us (P23). Same recipe as
 // skills/ai-lesbar-nettside: visittkort.html, llms.txt and ai-catalog.json.
-// The generated files describe a Norwegian business, so their visible text is Norwegian.
+// The visible text of the generated files is Norwegian or English (field «text»);
+// identifiers follow the country: Norwegian org. no., EU VAT number (vatID) or UK company number.
 
 import { findInstructions, sanitize } from "./injeksjon.js";
 
@@ -30,8 +31,36 @@ export const TYPES = {
   EducationalOrganization: "Kurs og opplæring",
   NGO: "Frivillig organisasjon",
 };
-// schema.org day -> Norwegian name used in the generated text.
-const DAYS = { Monday: "mandag", Tuesday: "tirsdag", Wednesday: "onsdag", Thursday: "torsdag", Friday: "fredag", Saturday: "lørdag", Sunday: "søndag" };
+// schema.org type -> English label for the English form.
+export const TYPES_EN = {
+  LocalBusiness: "Local business (general)", Store: "Shop", OnlineStore: "Online shop",
+  ProfessionalService: "Professional service (consulting, accounting etc.)", HomeAndConstructionBusiness: "Building, house and home",
+  AutomotiveBusiness: "Cars and vehicles", FoodEstablishment: "Food and drink", Bakery: "Bakery", Restaurant: "Restaurant",
+  CafeOrCoffeeShop: "Café", HealthAndBeautyBusiness: "Health and beauty", MedicalBusiness: "Health service",
+  SportsActivityLocation: "Sport and fitness", LodgingBusiness: "Accommodation", TravelAgency: "Travel",
+  EntertainmentBusiness: "Entertainment and culture", LegalService: "Legal service", FinancialService: "Finance and insurance",
+  EducationalOrganization: "Courses and training", NGO: "Non-profit organisation",
+};
+// schema.org day -> name used in the generated text.
+const DAY_NAMES = {
+  nb: { Monday: "mandag", Tuesday: "tirsdag", Wednesday: "onsdag", Thursday: "torsdag", Friday: "fredag", Saturday: "lørdag", Sunday: "søndag" },
+  en: { Monday: "Monday", Tuesday: "Tuesday", Wednesday: "Wednesday", Thursday: "Thursday", Friday: "Friday", Saturday: "Saturday", Sunday: "Sunday" },
+};
+const DAYS = DAY_NAMES.nb;
+// Visible text in the generated files.
+const TEXT = {
+  nb: { send: "Send forespørsel", what: "Dette gjør vi", not: "Dette gjør vi ikke", prices: "Priser", contact: "Ta kontakt", include: "Skriv dette i forespørselen, så svarer vi raskere:",
+    email: "E-post", phone: "Telefon", where: "Hvor og når", hours: "Åpningstider", address: "Adresse", covers: "Vi dekker", home: "Vi kommer hjem til kunden.",
+    org: "Org.nr.", vat: "MVA-nummer", company: "Foretaksnummer", llmsTitle: "Oversikt for språkmodeller", area: "Område", homeShort: "Kommer hjem til kunden.",
+    pricesNote: (c) => `Priser i ${c} inkludert mva.`, contactH: "Kontakt", includeLine: "Ta med i forespørselen: ", about: "Om oss", website: "Nettside", orgRegister: "i Enhetsregisteret" },
+  en: { send: "Send a request", what: "What we do", not: "What we do not do", prices: "Prices", contact: "Get in touch", include: "Include this in your request, and we answer faster:",
+    email: "Email", phone: "Phone", where: "Where and when", hours: "Opening hours", address: "Address", covers: "We cover", home: "We come to the customer.",
+    org: "Org. no.", vat: "VAT number", company: "Company number", llmsTitle: "Overview for language models", area: "Area", homeShort: "We come to the customer.",
+    pricesNote: (c) => `Prices in ${c} including VAT.`, contactH: "Contact", includeLine: "Include in your request: ", about: "About us", website: "Website", orgRegister: "in Enhetsregisteret" },
+};
+const EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","GR","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK"]);
+const CURRENCIES = ["NOK", "EUR", "GBP", "SEK", "DKK", "PLN", "CZK", "HUF", "RON", "BGN", "CHF", "USD"];
+const defaultCurrency = (c) => ({ NO: "NOK", GB: "GBP", SE: "SEK", DK: "DKK", PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", BG: "BGN", CH: "CHF", US: "USD" })[c] ?? (EU.has(c) ? "EUR" : "USD");
 const MAX_LENGTH = { short: 120, sentence: 300, line: 160, url: 300 };
 
 const lines = (s, max = 20) => String(s ?? "").split(/\r?\n/).map((l) => sanitize(l, MAX_LENGTH.line)).filter(Boolean).slice(0, max);
@@ -58,7 +87,7 @@ export function parsePrice(l) {
   const i = l.lastIndexOf(":");
   if (i < 1) return { name: l, price: null, text: l };
   const name = l.slice(0, i).trim(), value = l.slice(i + 1).trim();
-  const from = /^fra\b/i.test(value);
+  const from = /^(fra|from)\b/i.test(value);
   const digits = /(\d[\d\s.]*(?:,\d{1,2})?)/.exec(value);
   const price = digits ? Number(digits[1].replace(/[\s.]/g, "").replace(",", ".")) : NaN;
   return { name, price: Number.isFinite(price) ? price.toFixed(2) : null, from, text: `${name}: ${value}` };
@@ -66,10 +95,16 @@ export function parsePrice(l) {
 
 // Sanitises the form into a fixed set of fields.
 export function normalize(f) {
+  const country = /^[A-Z]{2}$/.test(String(f.country ?? "").toUpperCase()) ? String(f.country).toUpperCase() : "NO";
   const d = {
+    country,
+    text: ["nb", "en"].includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
+    currency: CURRENCIES.includes(f.currency) ? f.currency : defaultCurrency(country),
+    vatId: EU.has(country) ? String(f.vatId ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16) : "",
+    companyNumber: country === "GB" ? String(f.companyNumber ?? "").toUpperCase().replace(/\s/g, "").replace(/[^A-Z0-9]/g, "").slice(0, 8) : "",
     type: TYPES[f.type] ? f.type : "LocalBusiness",
     name: sanitize(f.name, MAX_LENGTH.short),
-    orgNumber: String(f.orgNumber ?? "").replace(/\D/g, "").slice(0, 9),
+    orgNumber: country === "NO" ? String(f.orgNumber ?? "").replace(/\D/g, "").slice(0, 9) : "",
     website: webAddress(f.website),
     summary: sanitize(f.summary, MAX_LENGTH.sentence),
     services: lines(f.services),
@@ -78,7 +113,7 @@ export function normalize(f) {
     offerType: f.offerType === "Service" ? "Service" : "Product",
     availability: ["InStock", "PreOrder"].includes(f.availability) ? f.availability : "PreOrder",
     street: sanitize(f.street, MAX_LENGTH.short),
-    postalCode: String(f.postalCode ?? "").replace(/\D/g, "").slice(0, 4),
+    postalCode: country === "NO" ? String(f.postalCode ?? "").replace(/\D/g, "").slice(0, 4) : sanitize(f.postalCode, 12),
     city: sanitize(f.city, 60),
     municipalityNumber: String(f.municipalityNumber ?? "").replace(/\D/g, "").slice(0, 4),
     areas: list(f.areas),
@@ -93,7 +128,7 @@ export function normalize(f) {
     contactPage: webAddress(f.contactPage),
     requestInfo: lines(f.requestInfo, 10),
   };
-  if (!d.languages.length) d.languages = ["nb"];
+  if (!d.languages.length) d.languages = [d.text];
   return d;
 }
 
@@ -119,13 +154,16 @@ export function missingFields(d) {
 }
 
 function jsonld(d) {
-  const id = new URL("#bedrift", d.website).href;
+  const t = TEXT[d.text];
+  const id = new URL(d.text === "nb" ? "#bedrift" : "#business", d.website).href;
   const o = { "@context": "https://schema.org", "@type": d.type, "@id": id, name: d.name, description: d.summary, url: d.website };
   if (d.orgNumber) o.identifier = { "@type": "PropertyValue", propertyID: "orgnr", value: d.orgNumber };
+  if (d.companyNumber) o.identifier = { "@type": "PropertyValue", propertyID: "companyNumber", value: d.companyNumber };
+  if (d.vatId) o.vatID = d.vatId.startsWith(d.country === "GR" ? "EL" : d.country) ? d.vatId : (d.country === "GR" ? "EL" : d.country) + d.vatId;
   if (d.phone) o.telephone = d.phone;
   if (d.email) o.email = d.email;
   if (d.street || d.city)
-    o.address = { "@type": "PostalAddress", streetAddress: d.street || undefined, postalCode: d.postalCode || undefined, addressLocality: d.city || undefined, addressCountry: "NO" };
+    o.address = { "@type": "PostalAddress", streetAddress: d.street || undefined, postalCode: d.postalCode || undefined, addressLocality: d.city || undefined, addressCountry: d.country };
   if (d.areas.length) o.areaServed = d.areas.map((n) => ({ "@type": "Place", name: n }));
   o.availableLanguage = d.languages;
   if (d.days.length && d.opens && d.closes)
@@ -134,8 +172,8 @@ function jsonld(d) {
   const offers = d.prices.filter((p) => p.price);
   if (offers.length)
     o.makesOffer = offers.map((p) => {
-      const offer = { "@type": "Offer", itemOffered: { "@type": d.offerType, name: p.name }, priceCurrency: "NOK" };
-      if (p.from) offer.priceSpecification = { "@type": "PriceSpecification", minPrice: p.price, priceCurrency: "NOK" };
+      const offer = { "@type": "Offer", itemOffered: { "@type": d.offerType, name: p.name }, priceCurrency: d.currency };
+      if (p.from) offer.priceSpecification = { "@type": "PriceSpecification", minPrice: p.price, priceCurrency: d.currency };
       else offer.price = p.price;
       if (d.offerType === "Product") offer.availability = `https://schema.org/${d.availability}`;
       return offer;
@@ -145,39 +183,42 @@ function jsonld(d) {
   if (d.email) o.contactPoint.email = d.email;
   if (d.contactPage) {
     o.contactPoint.url = d.contactPage;
-    o.potentialAction = { "@type": "CommunicateAction", name: "Send forespørsel", target: { "@type": "EntryPoint", url: d.contactPage } };
+    o.potentialAction = { "@type": "CommunicateAction", name: t.send, target: { "@type": "EntryPoint", url: d.contactPage } };
   }
   return JSON.parse(JSON.stringify(o)); // removes undefined
 }
 
 function hoursText(d) {
   const t = [];
-  if (d.days.length && d.opens && d.closes) t.push(`${d.days.map((x) => DAYS[x]).join(", ")}: ${d.opens}–${d.closes}`);
+  if (d.days.length && d.opens && d.closes) t.push(`${d.days.map((x) => DAY_NAMES[d.text][x]).join(", ")}: ${d.opens}–${d.closes}`);
   if (d.hoursNote) t.push(d.hoursNote);
   return t.join(". ");
 }
 
 export function makeHtml(d) {
+  const t = TEXT[d.text];
   const ul = (xs) => `<ul>${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
   const place = [d.street, [d.postalCode, d.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
   const parts = [
     `<h1>${esc(d.name)}</h1>`,
     `<p>${esc(d.summary)}</p>`,
-    d.services.length ? `<h2>Dette gjør vi</h2>\n${ul(d.services)}` : "",
-    d.notOffered.length ? `<h2>Dette gjør vi ikke</h2>\n${ul(d.notOffered)}` : "",
-    d.prices.length ? `<h2>Priser</h2>\n${ul(d.prices.map((p) => p.text))}` : "",
-    `<h2>Ta kontakt</h2>`,
-    d.requestInfo.length ? `<p>Skriv dette i forespørselen, så svarer vi raskere:</p>\n${ul(d.requestInfo)}` : "",
+    d.services.length ? `<h2>${t.what}</h2>\n${ul(d.services)}` : "",
+    d.notOffered.length ? `<h2>${t.not}</h2>\n${ul(d.notOffered)}` : "",
+    d.prices.length ? `<h2>${t.prices}</h2>\n${ul(d.prices.map((p) => p.text))}` : "",
+    `<h2>${t.contact}</h2>`,
+    d.requestInfo.length ? `<p>${t.include}</p>\n${ul(d.requestInfo)}` : "",
     `<ul>${[
-      d.contactPage ? `<li><a href="${esc(d.contactPage)}">Send forespørsel</a></li>` : "",
-      d.email ? `<li>E-post: <a href="mailto:${esc(d.email)}">${esc(d.email)}</a></li>` : "",
-      d.phone ? `<li>Telefon: <a href="tel:${esc(d.phone.replace(/\s/g, ""))}">${esc(d.phone)}</a></li>` : "",
+      d.contactPage ? `<li><a href="${esc(d.contactPage)}">${t.send}</a></li>` : "",
+      d.email ? `<li>${t.email}: <a href="mailto:${esc(d.email)}">${esc(d.email)}</a></li>` : "",
+      d.phone ? `<li>${t.phone}: <a href="tel:${esc(d.phone.replace(/\s/g, ""))}">${esc(d.phone)}</a></li>` : "",
     ].join("")}</ul>`,
-    hoursText(d) || place || d.areas.length ? `<h2>Hvor og når</h2>` : "",
-    hoursText(d) ? `<p>Åpningstider: ${esc(hoursText(d))}.</p>` : "",
-    place ? `<p>Adresse: ${esc(place)}.</p>` : "",
-    d.areas.length ? `<p>Vi dekker: ${esc(d.areas.join(", "))}.${d.homeVisits ? " Vi kommer hjem til kunden." : ""}</p>` : "",
-    d.orgNumber ? `<p>Org.nr. ${esc(d.orgNumber)}</p>` : "",
+    hoursText(d) || place || d.areas.length ? `<h2>${t.where}</h2>` : "",
+    hoursText(d) ? `<p>${t.hours}: ${esc(hoursText(d))}.</p>` : "",
+    place ? `<p>${t.address}: ${esc(place)}.</p>` : "",
+    d.areas.length ? `<p>${t.covers}: ${esc(d.areas.join(", "))}.${d.homeVisits ? " " + t.home : ""}</p>` : "",
+    d.orgNumber ? `<p>${t.org} ${esc(d.orgNumber)}</p>` : "",
+    d.vatId ? `<p>${t.vat} ${esc(jsonld(d).vatID)}</p>` : "",
+    d.companyNumber ? `<p>${t.company} ${esc(d.companyNumber)}</p>` : "",
   ].filter(Boolean);
   const description = sanitize(`${d.name}: ${d.summary}`, 160);
   return `<!doctype html>
@@ -188,7 +229,7 @@ export function makeHtml(d) {
 <title>${esc(d.name)}${d.city ? `, ${esc(d.city)}` : ""}</title>
 <meta name="description" content="${esc(description)}">
 <link rel="canonical" href="${esc(d.website)}">
-<link rel="alternate" type="text/plain" href="/llms.txt" title="Oversikt for språkmodeller">
+<link rel="alternate" type="text/plain" href="/llms.txt" title="${t.llmsTitle}">
 <script type="application/ld+json">
 ${jsonInScript(jsonld(d))}
 </script>
@@ -204,22 +245,25 @@ ${parts.join("\n")}
 }
 
 export function makeLlmsTxt(d) {
+  const t = TEXT[d.text];
   const out = [`# ${d.name}`, "", `> ${d.summary}`, ""];
   const facts = [];
-  if (d.areas.length) facts.push(`Område: ${d.areas.join(", ")}.${d.homeVisits ? " Kommer hjem til kunden." : ""}`);
-  if (hoursText(d)) facts.push(`Åpningstider: ${hoursText(d)}.`);
-  if (d.prices.length) facts.push("Priser i NOK inkludert mva.");
+  if (d.areas.length) facts.push(`${t.area}: ${d.areas.join(", ")}.${d.homeVisits ? " " + t.homeShort : ""}`);
+  if (hoursText(d)) facts.push(`${t.hours}: ${hoursText(d)}.`);
+  if (d.prices.length) facts.push(t.pricesNote(d.currency));
   if (facts.length) out.push(facts.join(" "), "");
-  if (d.services.length) out.push("## Dette gjør vi", ...d.services.map((t) => `- ${t}`), "");
-  if (d.notOffered.length) out.push("## Dette gjør vi ikke", ...d.notOffered.map((t) => `- ${t}`), "");
-  if (d.prices.length) out.push("## Priser", ...d.prices.map((p) => `- ${p.text}`), "");
-  out.push("## Kontakt");
-  if (d.contactPage) out.push(`- [Send forespørsel](${d.contactPage})`);
-  if (d.email) out.push(`- E-post: ${d.email}`);
-  if (d.phone) out.push(`- Telefon: ${d.phone}`);
-  if (d.requestInfo.length) out.push("", "Ta med i forespørselen: " + d.requestInfo.join("; ") + ".");
-  out.push("", "## Om oss", `- [Nettside](${d.website})`);
-  if (d.orgNumber) out.push(`- Org.nr. ${d.orgNumber} i Enhetsregisteret`);
+  if (d.services.length) out.push(`## ${t.what}`, ...d.services.map((t) => `- ${t}`), "");
+  if (d.notOffered.length) out.push(`## ${t.not}`, ...d.notOffered.map((t) => `- ${t}`), "");
+  if (d.prices.length) out.push(`## ${t.prices}`, ...d.prices.map((p) => `- ${p.text}`), "");
+  out.push(`## ${t.contactH}`);
+  if (d.contactPage) out.push(`- [${t.send}](${d.contactPage})`);
+  if (d.email) out.push(`- ${t.email}: ${d.email}`);
+  if (d.phone) out.push(`- ${t.phone}: ${d.phone}`);
+  if (d.requestInfo.length) out.push("", t.includeLine + d.requestInfo.join("; ") + ".");
+  out.push("", `## ${t.about}`, `- [${t.website}](${d.website})`);
+  if (d.orgNumber) out.push(`- ${t.org} ${d.orgNumber} ${t.orgRegister}`);
+  if (d.vatId) out.push(`- ${t.vat} ${jsonld(d).vatID}`);
+  if (d.companyNumber) out.push(`- ${t.company} ${d.companyNumber} (Companies House)`);
   return out.join("\n") + "\n";
 }
 
@@ -231,18 +275,20 @@ export function makeCatalog(d) {
       type: d.homeVisits ? "at-customer" : d.street ? "physical" : "digital",
       names: d.areas,
       ...(d.municipalityNumber ? { municipality_numbers: [d.municipalityNumber] } : {}),
-      delivery_countries: ["NO"],
+      delivery_countries: [d.country],
     },
     languages: d.languages,
     actions: JSON.parse(JSON.stringify({ contact: d.contactPage || undefined, email: d.email || undefined, phone: d.phone || undefined })),
     llms_txt: new URL("/llms.txt", d.website).href,
   };
   if (d.orgNumber) local.org_number = d.orgNumber;
+  if (d.vatId) local.vat_id = jsonld(d).vatID;
+  if (d.companyNumber) local.company_number = d.companyNumber;
   return JSON.stringify({
     specVersion: "1.0",
     host: { displayName: d.name, identifier: domain },
     entries: [{
-      identifier: `urn:air:${domain}:web:visittkort`,
+      identifier: `urn:air:${domain}:web:${d.text === "nb" ? "visittkort" : "business-card"}`,
       type: "text/html",
       url: d.website,
       description: d.summary,

@@ -19,6 +19,13 @@ export const LIMITS = {
       nb: "Dette nettstedet er sjekket mange ganger det siste minuttet. Vent ett minutt og prøv igjen.",
     },
   },
+  register_client: {
+    binding: "GRENSE_INNMELDING",
+    message: {
+      en: "Many registrations in a short time. Wait one minute and try again.",
+      nb: "Mange påmeldinger på kort tid. Vent ett minutt og prøv igjen.",
+    },
+  },
   lookup_client: {
     binding: "GRENSE_OPPSLAG_KLIENT",
     message: {

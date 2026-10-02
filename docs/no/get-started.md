@@ -51,7 +51,11 @@ Den åpne ferdigheten `ai-lesbar-nettside` på [GitHub](https://github.com/vegvi
 
 Kjør [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) på nettsiden din. Et komplett visittkort får 100 poeng. Sjekken varsler også hvis noe på nettsiden ser ut som skjulte instruksjoner til AI.
 
-## Steg 5: Test det om noen uker
+## Steg 5: Meld inn bedriften i den åpne veiviseren
+
+Meld inn bedriften i [påmeldingsskjemaet](https://veiviser-test.testplattform.workers.dev/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
+
+## Steg 6: Test det om noen uker
 
 Spør ChatGPT, Claude eller en annen assistent: «Hvem kan hjelpe meg med [oppgave] i [område]?» Det kan ta noen uker før assistentene fanger opp nye sider.
 

@@ -10,10 +10,10 @@ The guide does not rank. It finds who can help with what you asked, and shows th
 
 ## 1. Who can be shown
 
-**Planned criteria.** The test version has one fictional business, and these checks are being built. We publish them before launch so you can hold us to them. When they run, a business or organisation is shown only when all of these are true:
+Since 2026-10-02 these checks run when a business registers and again every week, and a person reviews every new entry before it is shown. A business or organisation is shown only when all of these are true:
 
 - **It can help.** The need matches the services and categories in its own AI business card.
-- **It serves the place.** The area in its card covers where the help is needed. The agent asks for the place instead of guessing.
+- **It serves the place.** The area in its card covers where the help is needed. Today the guide shows the area to the agent, which checks it with the user and asks for the place instead of guessing; automatic filtering by place comes later.
 - **It is registered.** The card is published on its own domain, and the organisation number matches the public register, without bankruptcy or winding-up.
 - **No known hidden instructions.** The automatic scan has found no serious pattern match for hidden instructions to AI (prompt injection) in its card or pages. A scan can miss things.
 

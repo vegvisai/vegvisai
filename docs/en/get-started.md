@@ -51,7 +51,11 @@ The open skill `ai-lesbar-nettside` on [GitHub](https://github.com/vegvisai/vegv
 
 Run the [AI check](https://veiviser-test.testplattform.workers.dev/sjekk/) on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.
 
-## Step 5: Test it in a few weeks
+## Step 5: Register in the open guide
+
+Register your business with the [registration form](https://veiviser-test.testplattform.workers.dev/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
+
+## Step 6: Test it in a few weeks
 
 Ask ChatGPT, Claude or another assistant: «Who can help me with [task] in [area]?» It can take a few weeks before assistants pick up new pages.
 

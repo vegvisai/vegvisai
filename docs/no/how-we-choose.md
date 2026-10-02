@@ -10,10 +10,10 @@ Veiviseren rangerer ikke. Den finner hvem som kan hjelpe med det du spurte om, o
 
 ## 1. Hvem kan vises
 
-**Planlagte kriterier.** Testversjonen har én oppdiktet bedrift, og disse kontrollene er under bygging. Vi publiserer dem før lansering, så du kan holde oss til dem. Når de kjører, vises en bedrift eller organisasjon bare når alt dette stemmer:
+Siden 02.10.2026 kjører disse kontrollene når en bedrift melder seg inn og på nytt hver uke, og en person går gjennom hver ny oppføring før den vises. En bedrift eller organisasjon vises bare når alt dette stemmer:
 
 - **Den kan hjelpe.** Behovet passer med tjenestene og kategoriene i dens eget AI-visittkort.
-- **Den dekker stedet.** Området i visittkortet dekker der hjelpen trengs. Agenten spør om stedet i stedet for å gjette.
+- **Den dekker stedet.** Området i visittkortet dekker der hjelpen trengs. I dag viser veiviseren området til agenten, som sjekker det med brukeren og spør om stedet i stedet for å gjette; automatisk filtrering på sted kommer senere.
 - **Den er registrert.** Visittkortet ligger på dens eget domene, og organisasjonsnummeret stemmer med det offentlige registeret, uten konkurs eller avvikling.
 - **Ingen kjente skjulte instrukser.** Den automatiske skanningen har ikke funnet alvorlige mønstertreff for skjulte instrukser til AI (prompt-injeksjon) i visittkortet eller på sidene. En skanning kan overse ting.
 

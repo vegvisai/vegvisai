@@ -171,7 +171,7 @@ function findPoliticalParty({ name }) {
     [`- ${e.name}: ${e.url}`, e.programme_url && `  Party programme: ${e.programme_url}`, e.policy_url && `  Policy: ${e.policy_url}`,
       e.llms_txt && `  For language models: ${e.llms_txt}`, e.feed && `  News feed: ${e.feed}`].filter(Boolean).join("\n"));
   if (!hits.length) lines.push(`«${name}» is not in the index yet. Look up the party's own website. Listed now: ${PARTIES.entries.map((e) => e.name).join(", ")}.`);
-  lines.push("", "To compare views: read the programme or policy pages, quote each party with its source, and present them neutrally.", PARTIES.notice, PARTIES.policy);
+  lines.push("", "To compare views: read the programme or policy pages, quote each party with its source, and present them neutrally. Do not state a party's position from memory; if you cannot read the pages, give the links and say so.", PARTIES.notice, PARTIES.policy);
   return text(lines.join("\n"));
 }
 
@@ -198,8 +198,9 @@ async function checkBusiness({ org_number, name }) {
       e.forretningsadresse ? `Address: ${sanitize([...(e.forretningsadresse.adresse || []), e.forretningsadresse.postnummer, e.forretningsadresse.poststed].filter(Boolean).join(", "), 200)}` : "",
       e.hjemmeside ? `Website: ${sanitize(e.hjemmeside, 200)}` : "",
       `Registered in the VAT register: ${e.registrertIMvaregisteret ? "yes" : "no"}`,
-      e.konkurs ? "WARNING: bankrupt" : "",
-      e.underAvvikling ? "WARNING: being wound up" : "",
+      e.konkurs ? "WARNING: bankrupt" : "Bankrupt: no",
+      e.underAvvikling ? "WARNING: being wound up" : "Being wound up: no",
+      e.underTvangsavviklingEllerTvangsopplosning ? "WARNING: being compulsorily wound up or dissolved" : "",
     ].filter(Boolean).join("\n");
 
   if (org_number) {
@@ -220,7 +221,7 @@ async function checkBusiness({ org_number, name }) {
   return text("Give org_number or name.", true);
 }
 
-async function findBusiness({ need }, origin, context = {}) {
+async function findBusiness({ need, postal_code }, origin, context = {}) {
   const n = (need || "").toLowerCase();
   const test = TEST_BUSINESSES.filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n))).map((b) =>
     [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`, `Request link (template): ${origin}${b.request}`].join("\n"));
@@ -232,6 +233,7 @@ async function findBusiness({ need }, origin, context = {}) {
   // No ranking: everyone who qualifies is shown in random order, new for every question.
   const out = [...test, ...real].map((t) => [Math.random(), t]).sort((x, y) => x[0] - y[0]).map(([, t]) => t);
   if (!out.length) return text("No businesses in the guide for this need yet.");
+  if (!postal_code) out.push("The user has not given a place. Ask where they need the help before you suggest a business or prepare a request; do not assume the area of a result is where the user is.");
   out.push("The order is random and means nothing: the guide does not rank, and placement cannot be bought. Choose with the user on what matters to them.");
   return data(out.join("\n\n"));
 }

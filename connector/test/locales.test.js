@@ -35,14 +35,16 @@ test("unknown languages fall back to English, Norwegian variants to nb", () => {
   assert.equal(dict("nb", "card").days.Monday, "mandag");
 });
 
-test("the AI check pages are rendered from the template for every language", () => {
-  const tpl = readFileSync(new URL("templates/check.html", dir), "utf8");
-  for (const f of files) {
-    const meta = JSON.parse(readFileSync(new URL(f, dir), "utf8"))._meta;
-    const path = meta.check_path || `${meta.url_prefix}check/`;
-    const page = readFileSync(new URL(`../public${path}index.html`, import.meta.url), "utf8");
-    assert.ok(!page.includes("{{"), `${path} has unfilled placeholders`);
-    assert.ok(page.includes(`<html lang="${meta.html_lang}">`), `${path} has the wrong language`);
-    assert.ok(tpl.includes("Do not edit") && page.includes("Do not edit"), `${path} is not generated`);
+test("the AI check, registration and generator pages are rendered from the templates for every language", () => {
+  for (const page of ["check", "register", "create"]) {
+    for (const f of files) {
+      const meta = JSON.parse(readFileSync(new URL(f, dir), "utf8"))._meta;
+      const path = meta[`${page}_path`] || `${meta.url_prefix}${page}/`;
+      const html = readFileSync(new URL(`../public${path}index.html`, import.meta.url), "utf8");
+      assert.ok(!html.includes("{{"), `${path} has unfilled placeholders`);
+      assert.ok(html.includes(`<html lang="${meta.html_lang}">`), `${path} has the wrong language`);
+      assert.ok(html.includes(`templates/${page}.html. Do not edit.`), `${path} is not generated from the template`);
+      JSON.parse(html.match(/id="tekster">([\s\S]*?)<\/script>/)[1]);
+    }
   }
 });

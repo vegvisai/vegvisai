@@ -7,7 +7,7 @@ can start small. A key whose {placeholders} differ from English is an error.
 
 Writes ../testplattform/public/felles/locales.js (all namespaces except «site»,
 which the website build reads directly, and «pages»), renders the page templates in
-templates/ for every language (the AI check at _meta.check_path, or <url_prefix>check/)
+templates/ for every language (each page at _meta.<page>_path, or <url_prefix><page>/)
 and prints how complete each language is.
 
 Usage: python3 locales/build_locales.py [--strict]
@@ -16,6 +16,7 @@ Usage: python3 locales/build_locales.py [--strict]
 import html
 import json
 import re
+import unicodedata
 import sys
 from pathlib import Path
 
@@ -50,36 +51,98 @@ def merged(base, own):
 # The texts the check page script needs at run time, with English filling the gaps.
 CHECK_KEYS = ("profileName", "profileSource", "keyNames", "openNames", "checkNames", "yes", "no", "noActions",
               "notApplicable", "robotsLine", "robotsPresent", "robotsMissing", "botsNone")
+EU = ("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "GR", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU",
+      "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK")
+SITE = "https://vegvis.gixer77.com"  # the website until launch (step 14: vegvis.ai)
+# Letters that sort after z in the Nordic alphabets.
+NORDIC = {"nb", "nn", "da", "sv", "fi", "is"}
+LAST = {"Æ": "z1", "Ä": "z2", "Ø": "z3", "Ö": "z4", "Å": "z5"}
 
 
-def check_path(meta):
-    return meta.get("check_path") or meta["url_prefix"] + "check/"
+def page_path(meta, page):
+    """Where a page lives for one language: _meta.<page>_path, otherwise <url_prefix><page>/."""
+    return meta.get(f"{page}_path") or meta["url_prefix"] + f"{page}/"
 
 
-def render_check(locales):
-    tpl = (HERE / "templates" / "check.html").read_text()
+def site_path(meta, page, english):
+    """A page on the website, in this language when the website has it, otherwise in English."""
+    if (HERE.parent / "website" / "content" / meta["site_dir"]).is_dir():
+        return SITE + (meta.get("paths", {}).get(page) or meta["url_prefix"] + english.lstrip("/"))
+    return SITE + english
+
+
+def sort_key(code):
+    def key(name):
+        if code in NORDIC:
+            name = "".join(LAST.get(ch.upper(), ch) for ch in name)
+        return unicodedata.normalize("NFD", name).encode("ascii", "ignore").decode().casefold()
+    return key
+
+
+def attr(v):
+    return str(v).replace("&", "&amp;").replace("&amp;#10;", "&#10;").replace('"', "&quot;").replace("<", "&lt;")
+
+
+# page -> (template, published page name, namespace the page script reads)
+PAGES = {"check": "check", "register": "register", "create": "create"}
+
+
+def render_pages(locales):
     written = []
-    for code, data in locales.items():
-        d = merged(locales["en"], data)
-        meta, t = d["_meta"], d["pages"]["check"]
-        others = [(c, locales[c]["_meta"]) for c in locales if c != code]
-        alternates = "\n".join(f'<link rel="alternate" hreflang="{m["html_lang"]}" href="{check_path(m)}">' for _, m in [(code, meta), *others])
-        languages = "".join(f' · <a href="{check_path(m)}" hreflang="{m["html_lang"]}" lang="{m["html_lang"]}">{html.escape(m["name"])}</a>' for _, m in others)
-        texts = json.dumps({"page": t, "check": {k: d["check"][k] for k in CHECK_KEYS}}, ensure_ascii=False).replace("</", "<\\/")
-        values = {"alternates": alternates, "languages": languages, "texts": texts}
-        def sub(m):
-            key = m.group(1)
-            if key in values:
-                return values[key]
-            ns, name = key.split(".", 1)
-            v = (meta if ns == "_meta" else t)[name]
-            # Page texts may hold <code> and <strong>; attribute values are escaped.
-            return html.escape(v) if name in ("title", "description", "urlPlaceholder", "yardstick", "appName") else v
-        out = PUBLIC / check_path(meta).strip("/") / "index.html"
-        out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(re.sub(r"\{\{([\w.]+)\}\}", sub, tpl))
-        written.append(check_path(meta))
+    for page in PAGES:
+        tpl = (HERE / "templates" / f"{page}.html").read_text()
+        for code, data in locales.items():
+            d = merged(locales["en"], data)
+            meta, t = d["_meta"], d["pages"][page]
+            paths = {p: page_path(meta, p) for p in PAGES}
+            paths["howWeChoose"] = site_path(meta, "how-we-choose", "/docs/how-we-choose/")
+            t = {k: fill_paths(v, paths) for k, v in t.items()}
+            others = [locales[c]["_meta"] for c in locales if c != code]
+            countries = d["countries"]
+            alternates = "\n".join(f'<link rel="alternate" hreflang="{m["html_lang"]}" href="{page_path(m, page)}">' for m in [meta, *others])
+            languages = "".join(f' · <a href="{page_path(m, page)}" hreflang="{m["html_lang"]}" lang="{m["html_lang"]}">{html.escape(m["name"])}</a>' for m in others)
+            texts = {"page": t, "check": {k: d["check"][k] for k in CHECK_KEYS}} if page == "check" else t
+            selected = meta.get("country")
+            option = lambda c: f'<option value="{c}"{" selected" if c == selected else ""}>{html.escape(countries[c])}</option>'
+            values = {
+                "alternates": alternates,
+                "languages": languages,
+                "texts": json.dumps(texts, ensure_ascii=False).replace("</", "<\\/"),
+                "euOptions": "\n".join(option(c) for c in sorted(EU, key=lambda c: sort_key(code)(countries[c]))),
+                "gbOption": html.escape(fill(t.get("gbOption", ""), {"name": countries["GB"]})),
+                "serveLanguages": code if code == "en" else f"{code}, en",
+            }
+
+            def sub(m, meta=meta, t=t, values=values, paths=paths, option=option, selected=selected):
+                kind, _, key = m.group(1).rpartition(":")
+                if kind == "path":
+                    return paths[key]
+                if kind == "option":
+                    return option(key)
+                if kind == "selected":
+                    return " selected" if key == selected else ""
+                if key in values:
+                    return values[key]
+                ns, name = key.split(".", 1)
+                v = (meta if ns == "_meta" else t)[name]
+                if kind == "attr":
+                    return attr(v)
+                if kind == "json":
+                    return json.dumps(v, ensure_ascii=False)[1:-1]
+                return v  # page texts may hold <a>, <code> and <strong>
+            out = PUBLIC / page_path(meta, page).strip("/") / "index.html"
+            out.parent.mkdir(parents=True, exist_ok=True)
+            out.write_text(re.sub(r"\{\{([\w.:]+)\}\}", sub, tpl))
+            written.append(page_path(meta, page))
     return written
+
+
+def fill(text, values):
+    return re.sub(r"\{(\w+)\}", lambda m: str(values.get(m.group(1), m.group(0))), text)
+
+
+def fill_paths(v, paths):
+    return fill(v, paths) if isinstance(v, str) else v
 
 
 def main():
@@ -109,9 +172,9 @@ def main():
         "// Every user-facing text in the connector, the AI check and the business card generator.\n"
         f"export const LOCALES = {json.dumps(connector, ensure_ascii=False, indent=1)};\n"
     )
-    pages = render_check(locales)
+    pages = render_pages(locales)
     print("\n".join(report))
-    print("Rendered the AI check at " + ", ".join(pages))
+    print("Rendered " + ", ".join(pages))
     print(f"Wrote {OUT.relative_to(HERE.parent.parent)}")
     if errors:
         print("\nErrors:\n" + "\n".join(errors))

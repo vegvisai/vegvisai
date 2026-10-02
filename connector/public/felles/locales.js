@@ -11,7 +11,8 @@ export const LOCALES = {
    "paths": {},
    "check_path": "/check/",
    "register_path": "/register/",
-   "create_path": "/create/"
+   "create_path": "/create/",
+   "country": "GB"
   },
   "check": {
    "robots": "Open robots.txt to the AI bots that are blocked: {bots}.",
@@ -227,6 +228,37 @@ export const LOCALES = {
     "Saturday": "Saturday",
     "Sunday": "Sunday"
    }
+  },
+  "countries": {
+   "NO": "Norway",
+   "GB": "United Kingdom",
+   "AT": "Austria",
+   "BE": "Belgium",
+   "BG": "Bulgaria",
+   "HR": "Croatia",
+   "CY": "Cyprus",
+   "CZ": "Czechia",
+   "DK": "Denmark",
+   "EE": "Estonia",
+   "FI": "Finland",
+   "FR": "France",
+   "DE": "Germany",
+   "GR": "Greece",
+   "HU": "Hungary",
+   "IE": "Ireland",
+   "IT": "Italy",
+   "LV": "Latvia",
+   "LT": "Lithuania",
+   "LU": "Luxembourg",
+   "MT": "Malta",
+   "NL": "Netherlands",
+   "PL": "Poland",
+   "PT": "Portugal",
+   "RO": "Romania",
+   "SK": "Slovakia",
+   "SI": "Slovenia",
+   "ES": "Spain",
+   "SE": "Sweden"
   }
  },
  "nb": {
@@ -253,7 +285,8 @@ export const LOCALES = {
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",
-   "create_path": "/lag/"
+   "create_path": "/lag/",
+   "country": "NO"
   },
   "check": {
    "robots": "Åpne robots.txt for AI-robotene som er blokkert: {bots}.",
@@ -469,6 +502,37 @@ export const LOCALES = {
     "Saturday": "lørdag",
     "Sunday": "søndag"
    }
+  },
+  "countries": {
+   "NO": "Norge",
+   "GB": "Storbritannia",
+   "AT": "Østerrike",
+   "BE": "Belgia",
+   "BG": "Bulgaria",
+   "HR": "Kroatia",
+   "CY": "Kypros",
+   "CZ": "Tsjekkia",
+   "DK": "Danmark",
+   "EE": "Estland",
+   "FI": "Finland",
+   "FR": "Frankrike",
+   "DE": "Tyskland",
+   "GR": "Hellas",
+   "HU": "Ungarn",
+   "IE": "Irland",
+   "IT": "Italia",
+   "LV": "Latvia",
+   "LT": "Litauen",
+   "LU": "Luxembourg",
+   "MT": "Malta",
+   "NL": "Nederland",
+   "PL": "Polen",
+   "PT": "Portugal",
+   "RO": "Romania",
+   "SK": "Slovakia",
+   "SI": "Slovenia",
+   "ES": "Spania",
+   "SE": "Sverige"
   }
  }
 };

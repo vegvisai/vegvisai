@@ -8,7 +8,7 @@ Alt bygger på åpne standarder og åpne lisenser. Alle agenter kan lese veivise
 
 ## Bygg det med oss: dugnad for det åpne AI-nettet
 
-På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.
+På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien*, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.
 
 De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre nettsiden AI-lesbar. Med åpne maler, en gratis AI-sjekk og en skill som gjør jobben for dem, trenger de ikke det. Hver pull request kan hjelpe tusenvis av bedrifter å bli funnet på rettferdige vilkår, og hjelpe folk å få ærlige svar fra sin egen AI.
 
@@ -37,7 +37,7 @@ De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre 
 2. Lag en issue med ideen din, eller ta en som er merket `good first issue`.
 3. Send en pull request. Kode bidras under Apache 2.0 og indeksdata under ODbL: de samme vilkårene alle får.
 
-Repoet åpnes ved lansering. Til da kan du skrive til [kontaktadresse] hvis du vil være med tidlig.
+Repoet åpnes ved lansering. Til da kan du skrive til Espen Brathaug, [e-post på vegvis.ai før lansering], hvis du vil være med tidlig.
 
 ## Veiviser-connectoren (test)
 
@@ -69,7 +69,7 @@ Hvert svar som inneholder tekst fra bedrifter, nettsider eller registre, starter
 | AI-sjekk, per nettside som sjekkes | 3 |
 | Oppslag i registeret, per klient | 30 |
 
-Klienter identifiseres med en hash av IP-adressen. Ingenting lagres.
+Klienter identifiseres med en hash av IP-adressen, som bare brukes til grensene; tellerne utløper etter 60 sekunder. Vi fører ikke logg over forespørsler.
 
 ## Lisenser
 

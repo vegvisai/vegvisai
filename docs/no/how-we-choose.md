@@ -10,16 +10,16 @@ Veiviseren rangerer ikke. Den finner hvem som kan hjelpe med det du spurte om, o
 
 ## 1. Hvem kan vises
 
-En bedrift eller organisasjon vises bare når alt dette stemmer:
+**Planlagte kriterier.** Testversjonen har én oppdiktet bedrift, og disse kontrollene er under bygging. Vi publiserer dem før lansering, så du kan holde oss til dem. Når de kjører, vises en bedrift eller organisasjon bare når alt dette stemmer:
 
 - **Den kan hjelpe.** Behovet passer med tjenestene og kategoriene i dens eget AI-visittkort.
 - **Den dekker stedet.** Området i visittkortet dekker der hjelpen trengs. Agenten spør om stedet i stedet for å gjette.
-- **Den er ekte.** Visittkortet ligger på dens eget domene, og organisasjonsnummeret stemmer med det offentlige registeret, uten konkurs eller avvikling.
-- **Den er trygg.** Ingen alvorlige funn av skjulte instrukser til AI (prompt-injeksjon) i visittkortet eller på sidene.
+- **Den er registrert.** Visittkortet ligger på dens eget domene, og organisasjonsnummeret stemmer med det offentlige registeret, uten konkurs eller avvikling.
+- **Ingen kjente skjulte instrukser.** Den automatiske skanningen har ikke funnet alvorlige mønstertreff for skjulte instrukser til AI (prompt-injeksjon) i visittkortet eller på sidene. En skanning kan overse ting.
 
 ## 2. I hvilken rekkefølge
 
-- **Tilfeldig rekkefølge, ny for hvert spørsmål.** Alle som kvalifiserer har samme sjanse til å vises først. Ingen ligger alltid øverst.
+- **Tilfeldig rekkefølge, ny for hvert spørsmål.** Alle som kvalifiserer har samme sjanse til å vises først. Ingen ligger alltid øverst. Dette gjelder allerede i testversjonen.
 - **Offentlige tjenester for seg.** Gratis offentlige tjenester vises for seg og blandes aldri med eller rangeres mot bedrifter.
 - **Politiske partier for seg.** Partier listes alfabetisk og rangeres aldri.
 

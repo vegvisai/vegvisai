@@ -8,7 +8,7 @@ Everything is built on open standards and open licences. Any agent can read the 
 
 ## Build it with us: a dugnad for the open AI web
 
-In Norway, a *dugnad* is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road, and nobody charges a toll. That is what we are building: an open road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.
+In Norway, a *dugnad* is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road*, and nobody charges a toll. That is what we are building: an open road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.
 
 Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work for them, they won't need to. Every pull request can help thousands of businesses get found on fair terms, and help people get honest answers from their own AI.
 
@@ -37,7 +37,7 @@ Most small businesses will never hire a developer to make their website AI-reada
 2. Open an issue with your idea, or pick one marked `good first issue`.
 3. Send a pull request. Code is contributed under Apache 2.0 and index data under ODbL: the same terms everyone gets.
 
-The repository opens at launch. Until then, write to [contact address] if you want to join early.
+The repository opens at launch. Until then, write to Espen Brathaug, [email on vegvis.ai before launch], if you want to join early.
 
 ## The guide connector (test)
 
@@ -69,7 +69,7 @@ Every answer that contains text from businesses, websites or registers starts wi
 | AI check, per website checked | 3 |
 | Register lookups, per client | 30 |
 
-Clients are identified by a hash of the IP address. Nothing is stored.
+Clients are identified by a hash of the IP address, used only for the rate limit; the counters expire after 60 seconds. We keep no request logs.
 
 ## Licences
 

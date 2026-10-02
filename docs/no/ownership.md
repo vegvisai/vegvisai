@@ -41,7 +41,7 @@ Fra første dag holdes domener, nøkler og kontoer slik at de kan overleveres. P
 **Rangering kan ikke kjøpes.** Rangering, verifisering og tilgang er aldri betalt. Hvordan veiviseren velger og ordner resultater er [publisert](how-we-choose.md).
 4.
 
-**Bedriftene eier sine data.** Rådata forlater aldri bedriften. Plattformen indekserer bare det bedriften selv publiserer.
+**Bedriftene eier sine data.** Plattformen ber aldri om rådata. Den indekserer bare det bedriften selv publiserer.
 5.
 
 **Åpne lisenser.** Koden er Apache 2.0 og indeksen ODbL. Lisensene kan aldri strammes inn.
@@ -63,15 +63,15 @@ Fra første dag holdes domener, nøkler og kontoer slik at de kan overleveres. P
 
 ## Løftet vårt
 
-**Utkast til lansering.** Til en nøytral eier tar over, lover gründerne å følge de ti prinsippene over, fra dagen vi lanserer.
+**Utkast til lansering.** VegvisAI eies og drives privat av Espen Brathaug. Til en nøytral eier tar over, lover han å følge prinsipp 1–6, 9 og 10 fra dagen vi lanserer. Prinsipp 7 og 8 krever flere eiere og gjelder for den nøytrale eieren. Dette er et personlig løfte gitt offentlig; den egentlige garantien er at koden og indeksen er åpne.
 
-1. **Bare strengere, aldri svakere.** Prinsippene kan strammes inn etter hvert som vi lærer. De kan aldri svekkes, og ingen ny regel kan bryte dem.
+1. **Bare strengere, aldri svakere.** Prinsippene skal strammes inn etter hvert som vi lærer, ikke svekkes, og ingen ny regel skal bryte dem.
 2. **Åpent.** Løftet ligger som `PLEDGE.md` i det offentlige repoet. Hver endring er en offentlig commit med dato og begrunnelse.
 3. **Følger med videre.** Løftet skrives inn i vedtektene til hver eier som kommer etter: vårt AS, og deretter den nøytrale eieren.
 4. **Din utvei.** Bryter vi det, er koden (Apache 2.0) og indeksen (ODbL) dine å ta med. Fork oss.
 
 ## Interessert?
 
-Vil bedriften eller organisasjonen din være med å eie og forvalte veien til kunden, vil vi gjerne snakke med dere. Kontakt: [kontaktadresse kommer før lansering].
+Vil bedriften eller organisasjonen din være med å eie og forvalte veien til kunden, vil vi gjerne snakke med dere. Kontakt: Espen Brathaug, Oslo, Norge, [e-post på vegvis.ai før lansering].
 
 Les mer om [hvorfor vi bygger VegvisAI](why.md).

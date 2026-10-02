@@ -17,7 +17,8 @@ export const PATTERNS = [
     re: /\b(ignorer|glem|overstyr|se bort fra)\b[^.\n]{0,40}\b(tidligere|forrige|alle|dine|ovenstående|systemets)\b[^.\n]{0,30}\b(instruks(er|ene)?|instruksjon(er|ene)?|regler|beskjeder|føringer)(?![\wæøåÆØÅ])/i },
   { id: "new-role", text: { en: "tries to give the AI a new role", nb: "prøver å gi AI-en en ny rolle" },
     re: /\b(you are now|from now on,? you|act as|pretend (to be|you are)|du er nå|fra nå av (er|skal) du|lat som du er|oppfør deg som)(?![\wæøåÆØÅ])/i },
-  { id: "system-prompt", text: { en: "refers to a system prompt or developer mode", nb: "viser til systemprompt eller utviklermodus" },
+  // Only mentioning a system prompt is common in articles about AI; it is a low-risk match on its own.
+  { id: "system-prompt", severity: "low", text: { en: "mentions a system prompt or developer mode", nb: "nevner systemprompt eller utviklermodus" },
     re: /\b(system ?prompt|developer mode|jailbreak|systemmelding|utviklermodus|DAN mode)(?![\wæøåÆØÅ])/i },
   { id: "role-marker", text: { en: "contains role markers from chat formats", nb: "inneholder rollemarkører fra chatformater" },
     re: /(<\|im_(start|end)\|>|<\|(system|assistant|user)\|>|\[\/?INST\]|<<\/?SYS>>|^\s*#{2,}\s*(system|instruction|instruks)\b|^\s*(system|assistant|assistent)\s*:)/im },
@@ -63,7 +64,7 @@ export function findInstructions(text, lang = "en") {
   const visible = s.replace(INVISIBLE, "");
   for (const p of PATTERNS) {
     const m = p.re.exec(visible);
-    if (m) findings.push({ id: p.id, severity: "high", text: p.text[l], excerpt: excerpt(visible, m.index, m[0].length) });
+    if (m) findings.push({ id: p.id, severity: p.severity ?? "high", text: p.text[l], excerpt: excerpt(visible, m.index, m[0].length) });
   }
   return findings;
 }

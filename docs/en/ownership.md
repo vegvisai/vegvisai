@@ -41,7 +41,7 @@ From the first day, domains, keys and accounts are kept so they can be handed ov
 **Ranking can't be bought.** Ranking, verification and access are never paid for. How the guide chooses and orders results is [published](how-we-choose.md).
 4.
 
-**Businesses own their data.** Raw data never leaves the business. The platform only indexes what the business itself publishes.
+**Businesses own their data.** The platform never asks for raw data. It only indexes what the business itself publishes.
 5.
 
 **Open licences.** The code is Apache 2.0 and the index ODbL. The licences can never be tightened.
@@ -63,15 +63,15 @@ From the first day, domains, keys and accounts are kept so they can be handed ov
 
 ## Our pledge
 
-**Draft for launch.** Until a neutral owner takes over, the founders pledge to follow the ten principles above, from the day we launch.
+**Draft for launch.** VegvisAI is owned and run privately by Espen Brathaug. Until a neutral owner takes over, he promises to follow principles 1–6, 9 and 10 from the day we launch. Principles 7 and 8 need several owners and apply to the neutral owner. This is a personal promise made in public; the real guarantee is that the code and the index are open.
 
-1. **Only stricter, never weaker.** The principles can be tightened as we learn. They can never be loosened, and no new rule may break them.
+1. **Only stricter, never weaker.** The principles will be tightened as we learn, not loosened, and no new rule will break them.
 2. **In the open.** The pledge lives as `PLEDGE.md` in the public repository. Every change is a public commit with a date and a reason.
 3. **Carried forward.** The pledge goes into the articles of every owner that follows: our limited company, and then the neutral owner.
 4. **Your remedy.** If we break it, the code (Apache 2.0) and the index (ODbL) are yours to take. Fork us.
 
 ## Interested?
 
-If your business or organisation wants to help own and steward the road to the customer, we would like to talk. Contact: [contact address coming before launch].
+If your business or organisation wants to help own and steward the road to the customer, we would like to talk. Contact: Espen Brathaug, Oslo, Norway, [email on vegvis.ai before launch].
 
 Read more about [why we build VegvisAI](why.md).

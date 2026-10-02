@@ -1,19 +1,19 @@
 # Contributing: join the dugnad
 
-In Norway, a *dugnad* is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road, and nobody charges a toll. VegvisAI is that road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.
+In Norway, a *dugnad* is when neighbours turn up on a Saturday to fix the road they all use. Nobody should own the road, and nobody should charge a toll. VegvisAI aims to be that road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.
 
 Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work for them, they won't need to. Every pull request can help thousands of businesses get found on fair terms, and help people get honest answers from their own AI.
 
 ## Why it is worth your time
 
 - **Fair by design.** Ranking, verification and access can never be bought. Your work can never be turned into a toll booth.
-- **Open for good.** Code under Apache 2.0, the index under ODbL, and a neutral owner with locked principles as the goal. If we ever become a gatekeeper, fork us.
+- **Open for good.** Code under Apache 2.0, the index under ODbL. Today the platform is owned privately by Espen Brathaug; the goal is a neutral owner with locked principles. If we ever become a gatekeeper, fork us.
 - **Every agent.** ChatGPT, Claude, Gemini and the model on your own laptop read the same index on the same terms.
 - **Small steps, real reach.** One good template, one rule in the AI check or one public service in the index is used by every business and every agent from the day it is merged.
 
 ## Start here: the AI check
 
-The AI check is our first step for every business, public body and organisation: it shows in 15 seconds how well an AI can read and use a website, and what to fix. It is the easiest place to make a difference, and every improvement reaches every site that runs it.
+The AI check is our first step for every business, public body and organisation: it shows in about a minute how well an AI can read and use a website, and what to fix. It is the easiest place to make a difference, and every improvement reaches every site that runs it.
 
 Code: `connector/src/sjekk.js` (the check and the scoring), `connector/public/felles/injeksjon.js` (prompt injection), tests in `connector/test/`.
 
@@ -66,7 +66,7 @@ Read the principles first ([ownership](docs/en/ownership.md)). We will not merge
 
 **No secrets** in commits: no API tokens, keys or `.env` files.
 
-**Index data:** every entry needs a source and a working link. Public services are listed with links only.
+**Index data:** every entry needs a source and a working link. Public services are listed with links only. Use only open public registers (NLOD), facts you have checked yourself on the organisation's own website, and your own words. Never copy from commercial directories or maps (for example Gulesider, 1881, Proff or Google Maps): their terms or database rights could taint the whole open index.
 
 ## Licences
 
@@ -74,7 +74,7 @@ By contributing you agree that your code is licensed under [Apache 2.0](LICENSE)
 
 ## Security
 
-Found a way to make an agent follow instructions hidden in a website, or a way around the rate limits? Do not open a public issue. Write to [security contact] and we will answer within [placeholder] working days.
+Found a way to make an agent follow instructions hidden in a website, or a way around the rate limits? Do not open a public issue. See [SECURITY.md](SECURITY.md).
 
 ## Conduct
 

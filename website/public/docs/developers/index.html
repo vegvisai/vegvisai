@@ -46,7 +46,7 @@
 <p class="lead">Everything is built on open standards and open licences. Any agent can read the guide on the same terms, and anyone can run their own copy.</p>
 
 <h2 id="join">Build it with us: a dugnad for the open AI web</h2>
-<p>In Norway, a <em>dugnad</em> is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road, and nobody charges a toll. That is what we are building: an open road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.</p>
+<p>In Norway, a <em>dugnad</em> is when neighbours turn up on a Saturday to fix the road they all use. Nobody owns the road*, and nobody charges a toll. That is what we are building: an open road between AI assistants and everyone who serves people, from the bakery on the corner to the municipality's waste collection.</p>
 <p>Most small businesses will never hire a developer to make their website AI-readable. With open templates, a free AI check and a skill that does the work for them, they won't need to. Every pull request can help thousands of businesses get found on fair terms, and help people get honest answers from their own AI.</p>
 <h3>Why it is worth your time</h3>
 <ul>
@@ -74,7 +74,7 @@
 <li>Open an issue with your idea, or pick one marked <code>good first issue</code>.</li>
 <li>Send a pull request. Code is contributed under Apache 2.0 and index data under ODbL: the same terms everyone gets.</li>
 </ol>
-<p>The repository opens at launch. Until then, write to [contact address] if you want to join early.</p>
+<p>The repository opens at launch. Until then, write to Espen Brathaug, [email on vegvis.ai before launch], if you want to join early.</p>
 
 <h2>The guide connector (test)</h2>
 <p>A read-only MCP server using Streamable HTTP. No sign-up, no key.</p>
@@ -103,7 +103,7 @@
 <tr><td>Register lookups, per client</td><td>30</td></tr>
 </tbody>
 </table>
-<p>Clients are identified by a hash of the IP address. Nothing is stored.</p>
+<p>Clients are identified by a hash of the IP address, used only for the rate limit; the counters expire after 60 seconds. We keep no request logs.</p>
 
 <h2>Licences</h2>
 <ul>
@@ -122,8 +122,9 @@
 </main>
 <footer>
 <div class="wrap row">
-<p><span class="preview">Technical preview</span> Not launched. Examples are fictional.</p>
-<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (private until launch) · Code: Apache 2.0 · Index: ODbL · <a href="/no/guider/utviklere/" hreflang="nb" lang="nb">Norsk</a></p>
+<p><span class="preview">Technical preview</span> Not launched. Examples are fictional. Run by Espen Brathaug, Oslo, Norway.</p>
+<p class="owner-note">* Today VegvisAI is owned and run privately by Espen Brathaug. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles. <a href="/ownership/">Ownership</a></p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (private until launch) · Code: Apache 2.0 · Index: ODbL · <a href="/privacy/">Privacy</a> · <a href="/no/guider/utviklere/" hreflang="nb" lang="nb">Norsk</a></p>
 </div>
 </footer>
 </body>

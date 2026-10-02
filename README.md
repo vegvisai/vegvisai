@@ -1,12 +1,12 @@
 # VegvisAI
 
-An open guide that makes businesses visible and understandable to every AI assistant, from ChatGPT and Claude to local language models. The customer installs nothing, and the business hands over no data.
+An open guide that makes businesses visible and understandable to every AI assistant, from ChatGPT and Claude to local language models. The customer installs nothing, and the business shares only what it publishes itself.
 
-**Status:** private while we build. The repository opens at launch.
+**Status:** private while we build. The repository opens at launch. VegvisAI is owned and run privately by Espen Brathaug, Oslo, Norway; the aim is a neutral owner ([PLEDGE.md](PLEDGE.md)).
 
 ## Step one: the free AI check
 
-How well can an AI read your website? The AI check reads a site the way ChatGPT, Claude, Gemini and local models do, and gives a score out of 100 with the points for every check, the fixes that matter most, and what the site already has open for AI (feeds, search, data, APIs, MCP). It has yardsticks for businesses, public bodies, organisations and political parties, and it never ranks sites against each other. Code in [`connector/src/sjekk.js`](connector/src/sjekk.js); help improve it: [CONTRIBUTING.md](CONTRIBUTING.md#start-here-the-ai-check).
+How well can an AI read your website? The AI check reads the public files of a site, much as AI assistants such as ChatGPT, Claude, Gemini and local models can, and gives a score out of 100 with the points for every check, the fixes that matter most, and what the site already has open for AI (feeds, search, data, APIs, MCP). It has yardsticks for businesses, public bodies, organisations and political parties, and it never ranks sites against each other. Code in [`connector/src/sjekk.js`](connector/src/sjekk.js); help improve it: [CONTRIBUTING.md](CONTRIBUTING.md#start-here-the-ai-check).
 
 ## How it works
 

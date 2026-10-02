@@ -10,16 +10,16 @@ The guide does not rank. It finds who can help with what you asked, and shows th
 
 ## 1. Who can be shown
 
-A business or organisation is shown only when all of these are true:
+**Planned criteria.** The test version has one fictional business, and these checks are being built. We publish them before launch so you can hold us to them. When they run, a business or organisation is shown only when all of these are true:
 
 - **It can help.** The need matches the services and categories in its own AI business card.
 - **It serves the place.** The area in its card covers where the help is needed. The agent asks for the place instead of guessing.
-- **It is real.** The card is published on its own domain, and the organisation number matches the public register, without bankruptcy or winding-up.
-- **It is safe.** No serious finding of hidden instructions to AI (prompt injection) in its card or pages.
+- **It is registered.** The card is published on its own domain, and the organisation number matches the public register, without bankruptcy or winding-up.
+- **No known hidden instructions.** The automatic scan has found no serious pattern match for hidden instructions to AI (prompt injection) in its card or pages. A scan can miss things.
 
 ## 2. In which order
 
-- **Random order, new for every question.** Everyone who qualifies has the same chance to be shown first. No one is always on top.
+- **Random order, new for every question.** Everyone who qualifies has the same chance to be shown first. No one is always on top. This already applies in the test version.
 - **Public services apart.** Free public services are shown separately and never mixed with or ranked against businesses.
 - **Political parties apart.** Parties are listed alphabetically and never ranked.
 

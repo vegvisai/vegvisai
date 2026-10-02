@@ -15,6 +15,6 @@
     { "name": "GRENSE_SJEKK_MAL", "namespace_id": "1002", "simple": { "limit": 3, "period": 60 } },
     { "name": "GRENSE_OPPSLAG_KLIENT", "namespace_id": "1003", "simple": { "limit": 30, "period": 60 } }
   ],
-  // Ingen logging av forespørsler: vi lagrer ingen personopplysninger.
+  // No request logging (observability off). Rate limits use a hash of the IP address in Cloudflare's counters, which expire after 60 s.
   "observability": { "enabled": false }
 }

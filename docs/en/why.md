@@ -45,7 +45,7 @@ We like competition. Real competition, where the best business gets the customer
 **The road to the customer should not be owned by anyone.** Not by us either.
 2.
 
-**The business owns its data, customers and till.** We link and index. We do not store business data, and we do not sell it.
+**The business owns its data, customers and till.** We link and index. We keep only what businesses publish themselves, and we never sell it.
 3.
 
 **Ranking can't be bought.** The criteria are open. Early users get better terms, never a better position.

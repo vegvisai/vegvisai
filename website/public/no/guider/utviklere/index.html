@@ -46,7 +46,7 @@
 <p class="lead">Alt bygger på åpne standarder og åpne lisenser. Alle agenter kan lese veiviseren på samme vilkår, og alle kan drive sin egen kopi.</p>
 
 <h2 id="bli-med">Bygg det med oss: dugnad for det åpne AI-nettet</h2>
-<p>På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.</p>
+<p>På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien*, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.</p>
 <p>De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre nettsiden AI-lesbar. Med åpne maler, en gratis AI-sjekk og en skill som gjør jobben for dem, trenger de ikke det. Hver pull request kan hjelpe tusenvis av bedrifter å bli funnet på rettferdige vilkår, og hjelpe folk å få ærlige svar fra sin egen AI.</p>
 <h3>Hvorfor det er verdt tiden din</h3>
 <ul>
@@ -74,7 +74,7 @@
 <li>Lag en issue med ideen din, eller ta en som er merket <code>good first issue</code>.</li>
 <li>Send en pull request. Kode bidras under Apache 2.0 og indeksdata under ODbL: de samme vilkårene alle får.</li>
 </ol>
-<p>Repoet åpnes ved lansering. Til da kan du skrive til [kontaktadresse] hvis du vil være med tidlig.</p>
+<p>Repoet åpnes ved lansering. Til da kan du skrive til Espen Brathaug, [e-post på vegvis.ai før lansering], hvis du vil være med tidlig.</p>
 
 <h2>Veiviser-connectoren (test)</h2>
 <p>En MCP-server som bare leser, med Streamable HTTP. Ingen registrering, ingen nøkkel.</p>
@@ -103,7 +103,7 @@
 <tr><td>Oppslag i registeret, per klient</td><td>30</td></tr>
 </tbody>
 </table>
-<p>Klienter identifiseres med en hash av IP-adressen. Ingenting lagres.</p>
+<p>Klienter identifiseres med en hash av IP-adressen, som bare brukes til grensene; tellerne utløper etter 60 sekunder. Vi fører ikke logg over forespørsler.</p>
 
 <h2>Lisenser</h2>
 <ul>
@@ -122,8 +122,9 @@
 </main>
 <footer>
 <div class="wrap row">
-<p><span class="preview">Teknisk forhåndsvisning</span> Ikke lansert. Eksemplene er oppdiktet.</p>
-<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (privat til lansering) · Kode: Apache 2.0 · Indeks: ODbL · <a href="/docs/developers/" hreflang="en" lang="en">English</a></p>
+<p><span class="preview">Teknisk forhåndsvisning</span> Ikke lansert. Eksemplene er oppdiktet. Drevet av Espen Brathaug, Oslo, Norge.</p>
+<p class="owner-note">* I dag eies og drives VegvisAI privat av Espen Brathaug. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene. <a href="/no/eierskap/">Eierskap</a></p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (privat til lansering) · Kode: Apache 2.0 · Indeks: ODbL · <a href="/no/personvern/">Personvern</a> · <a href="/docs/developers/" hreflang="en" lang="en">English</a></p>
 </div>
 </footer>
 </body>

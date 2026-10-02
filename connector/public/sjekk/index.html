@@ -50,7 +50,7 @@ table{border-collapse:collapse;width:100%;font-size:.9rem;display:block;overflow
 </table>
 <p class="mut">Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. Svarer ikke forsiden, gis ingen poeng: da er nettstedet ikke målt. Sjekken ser også etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene. Noen få nullbredde-tegn, som ofte kommer fra kopiering, regnes som lav risiko.</p>
 <p class="mut">Sjekken lister også hva nettstedet har åpent for AI utover sidene: nyhetsstrømmer, kalender, søk og handlinger i schema.org, åpne data, OpenAPI og MCP. Dette gir ikke poeng ennå.</p>
-<p class="mut">Vi lagrer ikke adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.</p>
+<p class="mut">Vi fører ikke logg over adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.</p>
 <p><a href="/">Til forsiden</a> · <a href="/lag/">Lag et AI-lesbart visittkort</a></p>
 
 <script>
@@ -101,7 +101,7 @@ function show(r) {
   const low = r.injection.filter((f) => f.severity === "low");
   if (high.length) {
     const warn = el("div", undefined, "adv");
-    warn.append(el("strong", "Mulig prompt-injeksjon"), el("p", "Tekst på nettstedet ligner instrukser til AI-assistenter. Den vises her som sitat og blir ikke fulgt."));
+    warn.append(el("strong", "Mønstertreff som ligner instrukser til AI"), el("p", "Noe tekst på nettstedet ligner mønstre som ofte brukes for å gi instrukser til AI-assistenter. Et treff sier ingenting om hensikt. Teksten vises her som sitat og blir ikke fulgt."));
     const ul = el("ul");
     for (const f of high) ul.append(el("li", `${f.source}: ${f.text}${f.excerpt ? ` («${f.excerpt}»)` : ""}`));
     warn.append(ul);

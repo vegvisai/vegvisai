@@ -45,7 +45,7 @@ Vi liker konkurranse. Ekte konkurranse, der den beste bedriften får kunden ford
 **Veien til kunden skal ikke eies av noen.** Heller ikke av oss.
 2.
 
-**Bedriften eier sine egne data, kunder og kasse.** Vi lenker og indekserer. Vi lagrer ikke bedriftsdata, og vi selger dem ikke.
+**Bedriften eier sine egne data, kunder og kasse.** Vi lenker og indekserer. Vi tar bare vare på det bedriftene selv publiserer, og vi selger det aldri.
 3.
 
 **Rangering kan ikke kjøpes.** Kriteriene er åpne. Tidlige brukere får bedre vilkår, aldri bedre plassering.

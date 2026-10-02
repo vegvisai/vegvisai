@@ -22,6 +22,8 @@ PAGES = {
     "why": {"en": "/why/", "no": "/no/bakgrunn/"},
     "ownership": {"en": "/ownership/", "no": "/no/eierskap/"},
     "privacy": {"en": "/privacy/", "no": "/no/personvern/"},
+    "press": {"en": "/press/", "no": "/no/presse/"},
+    "support": {"en": "/support/", "no": "/no/stott/"},
     "docs": {"en": "/docs/", "no": "/no/guider/"},
     "get-started": {"en": "/docs/get-started/", "no": "/no/guider/kom-i-gang/"},
     "website": {"en": "/docs/ai-readable-website/", "no": "/no/guider/ai-lesbar-nettside/"},
@@ -42,9 +44,9 @@ T = {
         "operator": "VegvisAI™ is run by Espen Brathaug, Oslo, Norway.",
         "owner_note": "* Today VegvisAI is owned and run privately by Espen Brathaug. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles.",
         "owner_link": "Ownership",
-        "privacy": "Privacy",
+        "privacy": "Privacy", "press": "Press", "support": "Support",
         "docs_nav": "Guides", "on_github": "Code and templates on GitHub",
-        "nameline": "Vegvis · /ˈʋeːɡˌʋiːs/ or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.",
+        "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.",
     },
     "no": {
         "skip": "Hopp til innholdet", "menu": "Hovedmeny", "how": "Slik virker det", "guides": "Guider",
@@ -55,9 +57,9 @@ T = {
         "operator": "VegvisAI™ drives av Espen Brathaug, Oslo, Norge.",
         "owner_note": "* I dag eies og drives VegvisAI privat av Espen Brathaug. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene.",
         "owner_link": "Eierskap",
-        "privacy": "Personvern",
+        "privacy": "Personvern", "press": "Presse", "support": "Støtt oss",
         "docs_nav": "Guider", "on_github": "Kode og maler på GitHub",
-        "nameline": "Vegvis · /ˈʋeːɡˌʋiːs/ · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
+        "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
     },
 }
 
@@ -147,7 +149,7 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
 <div class="wrap row">
 <p><span class="preview">{t['preview']}</span> {t['preview_text']} {t['operator']}</p>
 <p class="owner-note">{t['owner_note']} <a href="{PAGES['ownership'][lang]}">{t['owner_link']}</a></p>
-<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{other_path}" hreflang="{t['other_lang']}" lang="{t['other_lang']}">{t['other']}</a></p>
+<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · <a href="{other_path}" hreflang="{t['other_lang']}" lang="{t['other_lang']}">{t['other']}</a></p>
 </div>
 </footer>
 </body>

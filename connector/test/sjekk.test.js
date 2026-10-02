@@ -196,3 +196,11 @@ test("the Norwegian guesthouse (Eksempel Gjestehus AS) scores 100", async () => 
   const r = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch({ ...goodSite, "/": gjestehus }) });
   assert.equal(r.score, 100, JSON.stringify(r.actions));
 });
+
+test("every static page is one well-formed HTML document with one h1 (no pasted-in pages)", () => {
+  const pages = ["eksempel/index.html", "eksempel/gjestehus/index.html", "eksempel/gjestehus/booking/index.html", "example/index.html", "example/booking/index.html", "eksempel/kontakt/index.html", "meld-inn/index.html", "sjekk/index.html", "lag/index.html", "index.html"];
+  for (const p of pages) {
+    const html = readFileSync(new URL(`../public/${p}`, import.meta.url), "utf8");
+    for (const tag of ["<html", "</html>", "<head>", "<body>", "<h1>"]) assert.equal(html.split(tag).length - 1, 1, `${p}: ${tag}`);
+  }
+});

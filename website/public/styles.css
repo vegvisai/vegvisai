@@ -158,3 +158,13 @@ dl.terms dd { margin: .2rem 0 0; color: var(--muted); }
 .brand svg { width: 2.15em; height: 2.15em; margin-right: -0.42em; margin-bottom: -0.2em; flex: none; }
 .owner-note { font-size: .85rem; opacity: .85; margin-top: .4rem; }
 .brand .tm { font: 500 .45em var(--body); margin-left: .1em; vertical-align: super; opacity: .8; }
+
+.ipa { font-family: "IBM Plex Sans", "Noto Sans", "DejaVu Sans", system-ui, sans-serif; letter-spacing: 0; }
+/* Tables marked .stack become one card per row on narrow screens. */
+@media (max-width: 40rem) {
+  .prose table.stack, .prose table.stack tbody, .prose table.stack tr, .prose table.stack td { display: block; width: 100%; }
+  .prose table.stack thead { display: none; }
+  .prose table.stack tr { border-top: 1px solid var(--line); padding: .6rem 0; }
+  .prose table.stack td { border: 0; padding: .2rem 0; }
+  .prose table.stack td::before { content: attr(data-label); display: block; font: 500 .75rem var(--mono); color: var(--subtle); text-transform: uppercase; letter-spacing: .03em; }
+}

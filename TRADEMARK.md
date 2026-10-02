@@ -1,6 +1,6 @@
 # Trademark policy (draft)
 
-The code and the index are open. The name is not.
+The code and the index are open. The name VegvisAI™ is not.
 
 **You may**
 

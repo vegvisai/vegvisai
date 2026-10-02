@@ -1,4 +1,4 @@
-# VegvisAI
+# VegvisAI™
 
 An open guide that makes businesses visible and understandable to every AI assistant, from ChatGPT and Claude to local language models. The customer installs nothing, and the business shares only what it publishes itself.
 

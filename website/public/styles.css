@@ -157,3 +157,4 @@ dl.terms dd { margin: .2rem 0 0; color: var(--muted); }
 .brand { gap: 0; align-items: flex-end; font-size: 1.45rem; line-height: 1; }
 .brand svg { width: 2.15em; height: 2.15em; margin-right: -0.42em; margin-bottom: -0.2em; flex: none; }
 .owner-note { font-size: .85rem; opacity: .85; margin-top: .4rem; }
+.brand .tm { font: 500 .45em var(--body); margin-left: .1em; vertical-align: super; opacity: .8; }

@@ -39,7 +39,7 @@ T = {
         "github": "GitHub", "github_note": "private until launch",
         "preview": "Technical preview", "preview_text": "Not launched. Examples are fictional.",
         "licence": "Code: Apache 2.0 · Index: ODbL",
-        "operator": "Run by Espen Brathaug, Oslo, Norway.",
+        "operator": "VegvisAI™ is run by Espen Brathaug, Oslo, Norway.",
         "owner_note": "* Today VegvisAI is owned and run privately by Espen Brathaug. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles.",
         "owner_link": "Ownership",
         "privacy": "Privacy",
@@ -52,7 +52,7 @@ T = {
         "github": "GitHub", "github_note": "privat til lansering",
         "preview": "Teknisk forhåndsvisning", "preview_text": "Ikke lansert. Eksemplene er oppdiktet.",
         "licence": "Kode: Apache 2.0 · Indeks: ODbL",
-        "operator": "Drevet av Espen Brathaug, Oslo, Norge.",
+        "operator": "VegvisAI™ drives av Espen Brathaug, Oslo, Norge.",
         "owner_note": "* I dag eies og drives VegvisAI privat av Espen Brathaug. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene.",
         "owner_link": "Eierskap",
         "privacy": "Personvern",
@@ -127,7 +127,7 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
 <header class="top">
 <div class="wrap">
 <nav class="nav" aria-label="{t['menu']}">
-<a class="brand" href="{home}" aria-label="VegvisAI">{mark()}<span aria-hidden="true">egvisAI</span></a>
+<a class="brand" href="{home}" aria-label="VegvisAI">{mark()}<span aria-hidden="true">egvisAI<sup class="tm">™</sup></span></a>
 <div class="links">
 <a href="{home}#how">{t['how']}</a>
 <a href="{PAGES['docs'][lang]}">{t['guides']}</a>

@@ -14,7 +14,7 @@ VegvisAI is an open guide that helps AI assistants such as ChatGPT, Claude, Gemi
 
 | What | Fact | Source |
 | --- | --- | --- |
-| Launch | [date of launch] | — |
+| Launch | 4 October 2026 | — |
 | Owner | Owned and run privately by Espen Brathaug, Oslo, Norway. The aim is a neutral owner, such as a cooperative | [Ownership](ownership.md) |
 | Licences | Code Apache 2.0, the index ODbL 1.0 | [GitHub](https://github.com/vegvisai/vegvisai) |
 | Ranking | None. Everyone who qualifies is shown in random order; nothing can be bought | [How the guide chooses](how-we-choose.md) |

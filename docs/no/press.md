@@ -14,7 +14,7 @@ VegvisAI er en åpen veiviser som hjelper AI-assistenter som ChatGPT, Claude, Ge
 
 | Hva | Fakta | Kilde |
 | --- | --- | --- |
-| Lansering | [lanseringsdato] | — |
+| Lansering | 4. oktober 2026 | — |
 | Eier | Eies og drives privat av Espen Brathaug, Oslo. Målet er en nøytral eier, for eksempel et samvirke | [Eierskap](ownership.md) |
 | Lisenser | Koden Apache 2.0, indeksen ODbL 1.0 | [GitHub](https://github.com/vegvisai/vegvisai) |
 | Rangering | Ingen. Alle som kvalifiserer vises i tilfeldig rekkefølge; ingenting kan kjøpes | [Slik velger veiviseren](how-we-choose.md) |

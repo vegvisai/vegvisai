@@ -38,7 +38,7 @@ const TEST_BUSINESSES = [
     test_data: true,
     notice: "FICTIONAL test business. It does not exist. Used only to test the guide.",
     categories: ["bakery", "bakeri", "cake", "kake", "bread", "brød", "birthday cake", "bursdagskake", "gluten-free", "glutenfri"],
-    services: ["cakes to order", "bread and buns"],
+    services: ["cakes to order", "gluten-free and lactose-free cakes", "bread and buns"],
     area: "Bodø, Norway",
     page: "/eksempel/",
     // The business's own Norwegian request form; the parameter names belong to its page.
@@ -77,9 +77,9 @@ const TOOLS = [
   },
   {
     name: "find_political_party",
-    title: "Find a political party",
+    title: "What the parties say themselves",
     description:
-      "Returns links to Norwegian political parties' own pages: website, party programme, policy pages and machine-readable files. Use it to answer what a party says about a topic: read the programme or policy pages, give each party's view in its own words with a link to the source, and do not take sides. The list is alphabetical, never ranked, and not complete yet; a party that is missing is not less relevant.",
+      "For political questions: what Norwegian parties say themselves about a topic, from their own pages. Returns links to each party's website, party programme, policy pages and machine-readable files. Use it to answer what a party says about a topic: read the programme or policy pages, give each party's view in its own words with a link to the source, and do not take sides. The list is alphabetical, never ranked, and not complete yet; a party that is missing is not less relevant.",
     inputSchema: {
       type: "object",
       properties: {
@@ -175,7 +175,7 @@ function findPoliticalParty({ name }) {
     [`- ${e.name}: ${e.url}`, e.programme_url && `  Party programme: ${e.programme_url}`, e.policy_url && `  Policy: ${e.policy_url}`,
       e.llms_txt && `  For language models: ${e.llms_txt}`, e.feed && `  News feed: ${e.feed}`].filter(Boolean).join("\n"));
   if (!hits.length) lines.push(`«${name}» is not in the index yet. Look up the party's own website. Listed now: ${PARTIES.entries.map((e) => e.name).join(", ")}.`);
-  lines.push("", "To compare views: read the programme or policy pages, quote each party with its source, and present them neutrally. Do not state a party's position from memory; if you cannot read the pages, give the links and say so.", PARTIES.notice, PARTIES.policy);
+  lines.push("", "To compare views: read each party's national programme or policy pages, quote each party in its own words with the source, and present them side by side in the same way. A local branch speaks only for its own municipality: if you use one, say which. Do not summarise a position in your own words, do not describe one party in relation to another, and do not state a party's position from memory; if you cannot read the pages, give the links and say so.", PARTIES.notice, PARTIES.policy);
   return text(lines.join("\n"));
 }
 

@@ -125,7 +125,7 @@ export const exportable = (b) => b.status === "listed" && b.entry.open_licence =
 export const LICENCE = {
   database: "Open Database License (ODbL) 1.0, https://opendatacommons.org/licenses/odbl/1-0/",
   contents: "Database Contents License (DbCL) 1.0, https://opendatacommons.org/licenses/dbcl/1-0/",
-  attribution: "VegvisAI open index, https://vegvis.ai/ [placeholder until launch: https://veiviser-test.testplattform.workers.dev/]",
+  attribution: "VegvisAI open index, https://vegvis.ai/",
   share_alike: "If you publicly use an adapted version of this database, the adapted database must be offered under the ODbL. Products made with the data (for example answers or maps) are not themselves covered by share-alike.",
   sources: [
     "Enhetsregisteret, Brønnøysundregistrene (NLOD 2.0): checks of Norwegian organisation numbers",

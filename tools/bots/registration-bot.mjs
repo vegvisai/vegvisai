@@ -7,7 +7,7 @@
 import { readFileSync, existsSync, appendFileSync } from "node:fs";
 import { basename } from "node:path";
 
-const PLATFORM = (process.env.PLATFORM || "https://veiviser-test.testplattform.workers.dev").replace(/\/$/, "");
+const PLATFORM = (process.env.PLATFORM || "https://vegvis.ai").replace(/\/$/, "");
 // Only the web address and the country: the platform reads names and numbers from the card and the register,
 // so no personal data ends up in the public git history (P46, Espen 2026-10-03).
 const KEYS = new Set(["url", "country", "consent"]);

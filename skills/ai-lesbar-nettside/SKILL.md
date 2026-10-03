@@ -69,7 +69,7 @@ Show the result and get approval. Then explain, for the business's setup:
 
 ### 5. Measure
 
-Run the AI check before and after, and suggest next steps. Use the `ai_check` tool in the guide connector if it is connected; otherwise fetch `https://veiviser-test.testplattform.workers.dev/api/sjekk?url=<url>` (JSON: score out of 100, findings and actions), or point the business to the web page `/sjekk/` on the same address. Also suggest a simple test: in a few weeks, ask ChatGPT and Claude «hvem kan hjelpe meg med [oppgave] i [område]?» (who can help me with [task] in [area]?).
+Run the AI check before and after, and suggest next steps. Use the `ai_check` tool in the guide connector if it is connected; otherwise fetch `https://vegvis.ai/api/sjekk?url=<url>` (JSON: score out of 100, findings and actions), or point the business to the web page `/sjekk/` on the same address. Also suggest a simple test: in a few weeks, ask ChatGPT and Claude «hvem kan hjelpe meg med [oppgave] i [område]?» (who can help me with [task] in [area]?).
 
 ## Level 1: AI-readable website
 

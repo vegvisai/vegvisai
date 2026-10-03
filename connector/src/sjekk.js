@@ -11,7 +11,7 @@ import { catalogProblems } from "../public/felles/ai-catalog.js";
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
 import { tr, dict, fill, language } from "../public/felles/i18n.js";
 
-export const UA = "VegvisAI-check/1.0 (technical test; https://veiviser-test.testplattform.workers.dev/sjekk/)";
+export const UA = "VegvisAI-check/1.0 (+https://vegvis.ai/check/)";
 const PAUSE_MS = 500;
 const MAX_BYTES = 2_000_000;
 const TIMEOUT_MS = 8000;

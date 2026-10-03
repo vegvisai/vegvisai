@@ -37,7 +37,7 @@ Show that you can do the job, then add yourself to `helpers.json` in a pull requ
 }
 ```
 
-Your entry is public on GitHub and stays in the git history. No phone numbers or private addresses; link to your own website for contact. See the [privacy notice](https://vegvis.gixer77.com/privacy/).
+Your entry is public on GitHub and stays in the git history. No phone numbers or private addresses; link to your own website for contact. See the [privacy notice](https://vegvis.ai/privacy/).
 
 ## Ambassadors
 

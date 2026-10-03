@@ -7,7 +7,7 @@
 import { existsSync, mkdirSync, writeFileSync, rmSync } from "node:fs";
 import { verify } from "./verify-release.mjs";
 
-const PLATFORM = (process.env.PLATFORM || "https://veiviser-test.testplattform.workers.dev").replace(/\/$/, "");
+const PLATFORM = (process.env.PLATFORM || "https://vegvis.ai").replace(/\/$/, "");
 const OUT = new URL("../../releases/businesses/", import.meta.url);
 const KEY = new URL("../../index/signing-key.json", import.meta.url);
 

@@ -53,7 +53,7 @@ CHECK_KEYS = ("profileName", "profileSource", "keyNames", "openNames", "checkNam
               "notApplicable", "robotsLine", "robotsPresent", "robotsMissing", "botsNone")
 EU = ("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "GR", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU",
       "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK")
-SITE = "https://vegvis.gixer77.com"  # the website until launch (step 14: vegvis.ai)
+SITE = "https://vegvis.ai"  # behind Cloudflare Access until opening (step 14e)
 # Letters that sort after z in the Nordic alphabets.
 NORDIC = {"nb", "nn", "da", "sv", "fi", "is"}
 LAST = {"Æ": "z1", "Ä": "z2", "Ø": "z3", "Ö": "z4", "Å": "z5"}

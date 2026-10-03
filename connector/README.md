@@ -2,7 +2,7 @@
 
 The guide on Cloudflare Workers: web pages for businesses, the AI check, the AI business card generator, the open index and a read-only MCP connector. No dependencies beyond Wrangler, no storage, no logging of content.
 
-- Test address: https://veiviser-test.testplattform.workers.dev (all pages `noindex` while we test)
+- Address: https://vegvis.ai/mcp (the connector) and https://vegvis.ai/check/ (the AI check), from launch. Until then the test address https://veiviser-test.testplattform.workers.dev is used for agent tests (all pages `noindex`)
 - MCP: `POST /mcp` (Streamable HTTP, stateless JSON-RPC, no login)
 - Tools: `find_business` (test data: one fictional bakery), `check_business` (Enhetsregisteret), `find_public_help` (the open index of public services, by topic or municipality), `find_political_party` (the parties' own pages and programmes, alphabetical, never ranked), `ai_check` (how a website looks to AI, score out of 100 by the yardstick that fits: business, government, organisation or party, plus what the site has open for AI)
 - API: `GET /api/sjekk?url=…` (AI check as JSON), `GET /api/enhet?orgnr=…` (register lookup for the generator form)

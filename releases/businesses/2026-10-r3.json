@@ -13,50 +13,8 @@
  },
  "generated": "2026-10-03",
  "notice": "Only what each business publishes on its own domain, and only businesses that chose the open licence there. Norwegian businesses are checked in Enhetsregisteret, EU businesses in VIES, UK businesses in Companies House. We ask re-users to remove the ids listed as removed; the ODbL does not require it, but it respects the businesses' wishes. Copies that are already downloaded cannot be recalled by us.",
- "entries": [
-  {
-   "org_number": "web:sit-bakeri.gixer77.com",
-   "country": "IS",
-   "domain": "sit-bakeri.gixer77.com",
-   "name": "SIT Testbakeri",
-   "url": "https://sit-bakeri.gixer77.com/",
-   "card_url": "https://sit-bakeri.gixer77.com/",
-   "description": "Oppdiktet testbedrift for VegvisAI. Baker brød og bestillingskaker i Reykjavík.",
-   "categories": [
-    "bakery",
-    "test",
-    "bursdagskake, 12 personer",
-    "glutenfri sjokoladekake, 8 personer"
-   ],
-   "area": [
-    "Reykjavík"
-   ],
-   "postal_code": "101",
-   "request": "https://sit-bakeri.gixer77.com/kontakt/?kake={kake}&personer={personer}&dato={dato}&beskrivelse={beskrivelse}"
-  },
-  {
-   "org_number": "web:sit-pensjonat.gixer77.com",
-   "country": "IS",
-   "domain": "sit-pensjonat.gixer77.com",
-   "name": "SIT Test Guesthouse",
-   "url": "https://sit-pensjonat.gixer77.com/",
-   "card_url": "https://sit-pensjonat.gixer77.com/",
-   "description": "Fictional test business for VegvisAI. A small guesthouse with four rooms in Akureyri.",
-   "categories": [
-    "lodgingbusiness",
-    "guesthouse",
-    "test",
-    "double room with breakfast, one night",
-    "family room for four, one night"
-   ],
-   "area": [
-    "Akureyri"
-   ],
-   "postal_code": "600",
-   "request": "https://sit-pensjonat.gixer77.com/kontakt/?room={room}&arrival={arrival}&nights={nights}&guests={guests}&message={message}"
-  }
- ],
- "period": "2026-10-r2",
+ "entries": [],
+ "period": "2026-10-r3",
  "previous": "2026-10",
  "removed_since_previous": [],
  "key_id": "4a71584cc11f41fe",

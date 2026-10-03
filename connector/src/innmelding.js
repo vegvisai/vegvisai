@@ -198,6 +198,13 @@ export async function withdrawNow(request, env) {
   return json(await withdrawRelease(store, key, body.period, reason));
 }
 
+// POST /api/admin/recheck with the review token: the weekly re-check now (SIT step 10, or after a fix).
+export async function recheckNow(request, env) {
+  const token = env?.ADMIN_TOKEN;
+  if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
+  return json(await recheck(env));
+}
+
 export async function releaseNow(request, env) {
   const token = env?.ADMIN_TOKEN;
   if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);

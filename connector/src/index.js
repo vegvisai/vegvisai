@@ -9,7 +9,7 @@ import { tr, language } from "../public/felles/i18n.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import PUBLIC_INDEX from "../public/index/public-no.json" with { type: "json" };
 import PARTIES from "../public/index/parties-no.json" with { type: "json" };
-import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, withdrawNow } from "./innmelding.js";
+import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, recheckNow, withdrawNow } from "./innmelding.js";
 
 import { LAUNCHED } from "./launch.js";
 
@@ -352,6 +352,7 @@ async function api(request, url, env) {
   if (url.pathname === "/api/admin/review" && request.method === "POST") return review(request, env);
   if (url.pathname === "/api/admin/pending") return pending(request, env);
   if (url.pathname === "/api/admin/release" && request.method === "POST") return releaseNow(request, env);
+  if (url.pathname === "/api/admin/recheck" && request.method === "POST") return recheckNow(request, env);
   if (url.pathname === "/api/admin/withdraw" && request.method === "POST") return withdrawNow(request, env);
   if (url.pathname === "/api/status") return status(url, env);
   if (url.pathname === "/api/endringer") return changelog(env);

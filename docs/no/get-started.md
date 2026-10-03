@@ -32,7 +32,7 @@ Velg en av to måter. Begge er gratis.
 
 ### A. Generatoren i nettleseren
 
-Fyll ut skjemaet i [generatoren for AI-visittkort](https://veiviser-test.testplattform.workers.dev/lag/). Ingenting sendes til oss: filene lages i nettleseren din, og du laster dem ned. Skjemaet kan hente opplysninger om bedriften din fra Brønnøysundregistrene.
+Fyll ut skjemaet i [generatoren for AI-visittkort](https://vegvis.ai/lag/). Ingenting sendes til oss: filene lages i nettleseren din, og du laster dem ned. Skjemaet kan hente opplysninger om bedriften din fra Brønnøysundregistrene.
 
 ### B. AI-ferdigheten
 
@@ -49,11 +49,11 @@ Den åpne ferdigheten `ai-lesbar-nettside` på [GitHub](https://github.com/vegvi
 
 ## Steg 4: Sjekk det
 
-Kjør [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) på nettsiden din. Et komplett visittkort får 100 poeng. Sjekken varsler også hvis noe på nettsiden ser ut som skjulte instruksjoner til AI.
+Kjør [AI-sjekken](https://vegvis.ai/sjekk/) på nettsiden din. Et komplett visittkort får 100 poeng. Sjekken varsler også hvis noe på nettsiden ser ut som skjulte instruksjoner til AI.
 
 ## Steg 5: Meld inn bedriften i den åpne veiviseren
 
-Meld inn bedriften i [påmeldingsskjemaet](https://veiviser-test.testplattform.workers.dev/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
+Meld inn bedriften i [påmeldingsskjemaet](https://vegvis.ai/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
 
 **Står du fast?** Be om hjelp med skjemaet «Find help» på [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). En utvikler fra den åpne hjelperlisten kan gjøre det for deg, gratis eller mot en pris dere avtaler. VegvisAI tar ingen andel, og en hjelper gir ingen fordel i veiviseren: reglene er de samme om dere gjør det selv eller betaler noen. Gi aldri en hjelper passordene deres; gi hjelperen egen innlogging og fjern den etterpå.
 

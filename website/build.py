@@ -14,7 +14,7 @@ ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
 PUBLIC = ROOT / "public"
 GITHUB = "https://github.com/vegvisai/vegvisai"
-TEST = "https://veiviser-test.testplattform.workers.dev"
+TEST = ""  # the platform answers its own paths on the same address (src/index.js, step 14d)
 
 LOCALES_DIR = ROOT.parent / "locales"
 

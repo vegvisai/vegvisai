@@ -10,7 +10,7 @@ Vi behandler så lite personopplysninger som vi kan. Her står hva vi behandler,
 
 ## Hvem som er ansvarlig
 
-VegvisAI drives privat til et selskap eller en annen eier tar over (se [Eierskap](ownership.md)). Behandlingsansvarlig er Espen Brathaug, Oslo. Kontakt om personvern, fjerning og sletting: [kontaktadresse].
+VegvisAI drives privat til et selskap eller en annen eier tar over (se [Eierskap](ownership.md)). Behandlingsansvarlig er Espen Brathaug, Oslo. Kontakt om personvern, fjerning og sletting: [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 ## Hva vi behandler
 

@@ -8,7 +8,7 @@ Two small files that let agents and open guides find you and understand what you
 
 ## `/llms.txt`: an overview for language models
 
-Plain Markdown at the root of your site: who you are, what you do and don't do, prices, contact, and links to your most important pages. Keep it short and factual. Example for the fictional Example Guesthouse Ltd (see [its business card](https://veiviser-test.testplattform.workers.dev/example/)):
+Plain Markdown at the root of your site: who you are, what you do and don't do, prices, contact, and links to your most important pages. Keep it short and factual. Example for the fictional Example Guesthouse Ltd (see [its business card](https://vegvis.ai/example/)):
 
 ```
 # Example Guesthouse Ltd

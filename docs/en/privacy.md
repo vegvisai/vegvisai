@@ -10,7 +10,7 @@ We process as little personal data as we can. Here is what we process, why, and 
 
 ## Who is responsible
 
-VegvisAI is run privately until a company or another owner takes over (see [Ownership](ownership.md)). The controller is Espen Brathaug, Oslo, Norway. Contact for privacy questions, removal and deletion: [contact address].
+VegvisAI is run privately until a company or another owner takes over (see [Ownership](ownership.md)). The controller is Espen Brathaug, Oslo, Norway. Contact for privacy questions, removal and deletion: [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 ## What we process
 

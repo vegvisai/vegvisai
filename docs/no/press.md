@@ -19,7 +19,7 @@ VegvisAI er en åpen veiviser som hjelper AI-assistenter som ChatGPT, Claude, Ge
 | Lisenser | Koden Apache 2.0, indeksen ODbL 1.0 | [GitHub](https://github.com/vegvisai/vegvisai) |
 | Rangering | Ingen. Alle som kvalifiserer vises i tilfeldig rekkefølge; ingenting kan kjøpes | [Slik velger veiviseren](how-we-choose.md) |
 | Offentlige tjenester i indeksen | 44 statlige etater og alle 357 kommuner, bare lenker | Enhetsregisteret (NLOD) og etatenes egne nettsider |
-| AI-sjekken | Fem målestokker: bedrift, offentlig virksomhet, organisasjon, politisk parti og nyhetsmedium. Poeng av 100 med poeng per sjekk | [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) |
+| AI-sjekken | Fem målestokker: bedrift, offentlig virksomhet, organisasjon, politisk parti og nyhetsmedium. Poeng av 100 med poeng per sjekk | [AI-sjekken](https://vegvis.ai/sjekk/) |
 | Testet med | Claude, Codex (OpenAI) og Gemini (Google) som agenter | Connector-tester 01.10.2026 og 02.10.2026 |
 
 ## De tre linjene
@@ -54,4 +54,4 @@ Farger: natt `#0E1424`, signalblå `#1B45E0`, sti-oransje `#F28C28`. Skrifter: S
 
 ## Kontakt
 
-Espen Brathaug, Oslo. [e-post på vegvis.ai før lansering]
+Espen Brathaug, Oslo. [contact@vegvis.ai](mailto:contact@vegvis.ai)

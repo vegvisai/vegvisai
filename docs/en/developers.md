@@ -37,7 +37,7 @@ Most small businesses will never hire a developer to make their website AI-reada
 2. Open an issue with your idea, or pick one marked `good first issue`.
 3. Send a pull request. Code is contributed under Apache 2.0 and index data under ODbL: the same terms everyone gets.
 
-The repository opens at launch. Until then, write to Espen Brathaug, [email on vegvis.ai before launch], if you want to join early.
+The repository opens at launch. Until then, write to Espen Brathaug, [contact@vegvis.ai](mailto:contact@vegvis.ai), if you want to join early.
 
 ## Earn by helping businesses
 
@@ -50,7 +50,7 @@ VegvisAI takes no cut, handles no payment and guarantees no work: every deal is 
 A read-only MCP server using Streamable HTTP. No sign-up, no key.
 
 ```
-https://veiviser-test.testplattform.workers.dev/mcp
+/mcp
 ```
 
 | Tool | Arguments | What it does |

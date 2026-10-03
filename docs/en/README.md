@@ -26,7 +26,7 @@ How agents use the open guide.](developers.md)
 
 ## How to measure progress
 
-Run the free [AI check](https://veiviser-test.testplattform.workers.dev/check/) before and after. It reads your site the way an AI assistant does and gives a score out of 100 with concrete fixes. A complete AI business card scores 100.
+Run the free [AI check](https://vegvis.ai/check/) before and after. It reads your site the way an AI assistant does and gives a score out of 100 with concrete fixes. A complete AI business card scores 100.
 
 ## Words explained
 

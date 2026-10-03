@@ -72,6 +72,6 @@ From the first day, domains, keys and accounts are kept so they can be handed ov
 
 ## Interested?
 
-If your business or organisation wants to help own and steward the road to the customer, we would like to talk. Contact: Espen Brathaug, Oslo, Norway, [email on vegvis.ai before launch].
+If your business or organisation wants to help own and steward the road to the customer, we would like to talk. Contact: Espen Brathaug, Oslo, Norway, [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 Read more about [why we build VegvisAI](why.md).

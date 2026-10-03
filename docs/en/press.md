@@ -19,7 +19,7 @@ VegvisAI is an open guide that helps AI assistants such as ChatGPT, Claude, Gemi
 | Licences | Code Apache 2.0, the index ODbL 1.0 | [GitHub](https://github.com/vegvisai/vegvisai) |
 | Ranking | None. Everyone who qualifies is shown in random order; nothing can be bought | [How the guide chooses](how-we-choose.md) |
 | Public services in the index | 44 state agencies and all 357 Norwegian municipalities, links only | Enhetsregisteret (NLOD) and the agencies' own websites |
-| The AI check | Five yardsticks: business, public body, organisation, political party and news medium. Score out of 100 with the points for every check | [The AI check](https://veiviser-test.testplattform.workers.dev/check/) |
+| The AI check | Five yardsticks: business, public body, organisation, political party and news medium. Score out of 100 with the points for every check | [The AI check](https://vegvis.ai/check/) |
 | Tested with | Claude, Codex (OpenAI) and Gemini (Google) as agents | Connector tests 2026-10-01 and 2026-10-02 |
 
 ## The three lines
@@ -54,4 +54,4 @@ Colours: night `#0E1424`, signal blue `#1B45E0`, trail orange `#F28C28`. Fonts: 
 
 ## Contact
 
-Espen Brathaug, Oslo, Norway. [email on vegvis.ai before launch]
+Espen Brathaug, Oslo, Norway. [contact@vegvis.ai](mailto:contact@vegvis.ai)

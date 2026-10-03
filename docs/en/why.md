@@ -89,7 +89,7 @@ Make an AI business card for your business.](get-started.md) [Tool
 
 ### Check your website
 
-See how AI assistants read your site today, with concrete fixes.](https://veiviser-test.testplattform.workers.dev/check/) [Open source
+See how AI assistants read your site today, with concrete fixes.](https://vegvis.ai/check/) [Open source
 
 ### Read the code
 

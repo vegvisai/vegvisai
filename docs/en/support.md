@@ -8,8 +8,8 @@ VegvisAI is free, open source and run in spare time. Here is how you can help, w
 
 ## Without money
 
-- **Run the [AI check](https://veiviser-test.testplattform.workers.dev/check/)** on your own website, and on your municipality's or your club's.
-- **Make an AI business card** and [register](https://veiviser-test.testplattform.workers.dev/meld-inn/) your business.
+- **Run the [AI check](https://vegvis.ai/check/)** on your own website, and on your municipality's or your club's.
+- **Make an AI business card** and [register](https://vegvis.ai/meld-inn/) your business.
 - **Join the dugnad on [GitHub](developers.md#join)**: code, checks, index data, translations.
 - **Tell others.** The guide gets better with every business and every contributor.
 

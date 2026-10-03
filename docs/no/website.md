@@ -29,7 +29,7 @@ bakeri.example/bestill?produkt=bursdagskake&dato=2026-10-03&antall=12&uten=notte
 gjestehus.example/booking/?rom=dobbeltrom&ankomst=2026-10-03&netter=2&gjester=2
 ```
 
-Se de oppdiktede eksemplene: [Eksempel Bakeri AS](https://veiviser-test.testplattform.workers.dev/eksempel/) og [Eksempel Gjestehus AS](https://veiviser-test.testplattform.workers.dev/eksempel/gjestehus/).
+Se de oppdiktede eksemplene: [Eksempel Bakeri AS](https://vegvis.ai/eksempel/) og [Eksempel Gjestehus AS](https://vegvis.ai/eksempel/gjestehus/).
 
 Beskriv lenkemønsteret på siden, og i schema.org med `potentialAction` (for eksempel `OrderAction` eller `ReserveAction` med en `EntryPoint` og `urlTemplate`). Da vet agentene hvordan de skal lage den.
 

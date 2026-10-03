@@ -32,7 +32,7 @@ Pick one of two ways. Both are free.
 
 ### A. The generator in your browser
 
-Fill in the form in the [AI business card generator](https://veiviser-test.testplattform.workers.dev/lag/). Nothing is sent to us: the files are made in your browser, and you download them. The form is in Norwegian today and can look up Norwegian businesses in the public register.
+Fill in the form in the [AI business card generator](https://vegvis.ai/lag/). Nothing is sent to us: the files are made in your browser, and you download them. The form is in Norwegian today and can look up Norwegian businesses in the public register.
 
 ### B. The AI skill
 
@@ -49,11 +49,11 @@ The open skill `ai-lesbar-nettside` on [GitHub](https://github.com/vegvisai/vegv
 
 ## Step 4: Check it
 
-Run the [AI check](https://veiviser-test.testplattform.workers.dev/check/) on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.
+Run the [AI check](https://vegvis.ai/check/) on your site. A complete business card scores 100. The check also warns if anything on the site looks like hidden instructions to AI.
 
 ## Step 5: Register in the open guide
 
-Register your business with the [registration form](https://veiviser-test.testplattform.workers.dev/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
+Register your business with the [registration form](https://vegvis.ai/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
 
 **Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper gives no advantage in the guide: the same rules apply whether you do it yourself or pay someone. Never give a helper your passwords; give them their own login and remove it afterwards.
 

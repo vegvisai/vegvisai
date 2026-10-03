@@ -5,7 +5,7 @@
 Please report security problems privately, never in a public issue:
 
 - **GitHub:** use «Report a vulnerability» under the Security tab of this repository (private vulnerability reporting).
-- **Email:** [security@vegvis.ai, before launch]
+- **Email:** security@vegvis.ai
 
 We aim to confirm that we have received your report within [placeholder: 5] working days. This is a project run in spare time, so a fix can take longer; we will tell you what we plan to do and when.
 

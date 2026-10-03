@@ -8,8 +8,8 @@ VegvisAI er gratis, åpen kildekode og drives på fritiden. Her er hvordan du ka
 
 ## Uten penger
 
-- **Kjør [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/)** på din egen nettside, og på kommunens eller idrettslagets.
-- **Lag et AI-visittkort** og [meld inn](https://veiviser-test.testplattform.workers.dev/meld-inn/) bedriften.
+- **Kjør [AI-sjekken](https://vegvis.ai/sjekk/)** på din egen nettside, og på kommunens eller idrettslagets.
+- **Lag et AI-visittkort** og [meld inn](https://vegvis.ai/meld-inn/) bedriften.
 - **Bli med på dugnaden på [GitHub](developers.md#bli-med)**: kode, sjekker, indeksdata, oversettelser.
 - **Fortell andre om det.** Veiviseren blir bedre for hver bedrift og hver bidragsyter.
 

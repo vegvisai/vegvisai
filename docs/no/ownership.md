@@ -72,6 +72,6 @@ Fra første dag holdes domener, nøkler og kontoer slik at de kan overleveres. P
 
 ## Interessert?
 
-Vil bedriften eller organisasjonen din være med å eie og forvalte veien til kunden, vil vi gjerne snakke med dere. Kontakt: Espen Brathaug, Oslo, Norge, [e-post på vegvis.ai før lansering].
+Vil bedriften eller organisasjonen din være med å eie og forvalte veien til kunden, vil vi gjerne snakke med dere. Kontakt: Espen Brathaug, Oslo, Norge, [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 Les mer om [hvorfor vi bygger VegvisAI](why.md).

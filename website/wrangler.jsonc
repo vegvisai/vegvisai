@@ -2,9 +2,16 @@
   // VegvisAI landing page and docs (P36). Test address on Espen's private domain until launch.
   // Access is restricted with Cloudflare Access (email login); see README.md.
   "name": "vegvis-site",
+  "main": "src/index.js",
   "compatibility_date": "2026-09-01",
   "workers_dev": false,
-  "routes": [{ "pattern": "vegvis.gixer77.com", "custom_domain": true }],
-  "assets": { "directory": "./public", "not_found_handling": "404-page" },
+  // vegvis.ai is behind Cloudflare Access until launch (step 14e), like vegvis.gixer77.com.
+  "routes": [
+    { "pattern": "vegvis.gixer77.com", "custom_domain": true },
+    { "pattern": "vegvis.ai", "custom_domain": true }
+  ],
+  "assets": { "directory": "./public", "binding": "ASSETS", "not_found_handling": "404-page" },
+  // The platform (AI check, generator, registration, connector) answers its own paths on the same address.
+  "services": [{ "binding": "PLATFORM", "service": "veiviser-test" }],
   "observability": { "enabled": false }
 }

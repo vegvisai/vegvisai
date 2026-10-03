@@ -26,7 +26,7 @@ Hvordan agenter bruker den åpne veiviseren.](developers.md)
 
 ## Slik måler du fremgangen
 
-Kjør den gratis [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) før og etter. Den leser nettsiden din slik en AI-assistent gjør, og gir en poengsum av 100 med konkrete forbedringer. Et komplett AI-visittkort får 100.
+Kjør den gratis [AI-sjekken](https://vegvis.ai/sjekk/) før og etter. Den leser nettsiden din slik en AI-assistent gjør, og gir en poengsum av 100 med konkrete forbedringer. Et komplett AI-visittkort får 100.
 
 ## Ord og uttrykk
 

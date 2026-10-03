@@ -89,7 +89,7 @@ Lag et AI-visittkort for bedriften din.](get-started.md) [Verktøy
 
 ### Sjekk nettsiden din
 
-Se hvordan AI-assistenter leser nettsiden din i dag, med konkrete forbedringer.](https://veiviser-test.testplattform.workers.dev/sjekk/) [Åpen kildekode
+Se hvordan AI-assistenter leser nettsiden din i dag, med konkrete forbedringer.](https://vegvis.ai/sjekk/) [Åpen kildekode
 
 ### Les koden
 

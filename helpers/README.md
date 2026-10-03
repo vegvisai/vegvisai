@@ -15,7 +15,7 @@ Businesses ask for help with the issue form [Find help](../../issues/new?templat
 7. **Do not agree prices** with other helpers.
 8. **Removal.** A helper who breaks these rules is removed. The pull request names only the rule number; the reasons are given to the helper privately, and the helper may answer first.
 
-Report fraud, unlawful content or broken rules privately to [contact address], not in a public issue.
+Report fraud, unlawful content or broken rules privately to contact@vegvis.ai, not in a public issue.
 
 ## Join the list
 

@@ -138,8 +138,25 @@ export async function listedMatches(env, need, country = "") {
   const n = String(need ?? "").toLowerCase().trim();
   const cc = String(country ?? "").toUpperCase().slice(0, 2);
   if (!n) return [];
-  return (await store.listed()).map((b) => b.entry).filter((e) => !cc || (e.country ?? "NO") === cc).filter((e) =>
-    [...e.categories, e.name, e.description].some((t) => { const s = String(t).toLowerCase(); return s && (s.includes(n) || n.includes(s)); }));
+  return (await store.listed()).map((b) => b.entry).filter((e) => !cc || (e.country ?? "NO") === cc)
+    .filter((e) => needMatches(need, [...e.categories, e.name, e.description]));
+}
+
+// Does a need match these texts? The whole need as before («kake» in «bursdagskake»), or one of its words
+// against a word in the texts, so «bursdagskaker» finds «bursdagskake» and «bakeri» finds «bakery»
+// (found in SIT step 8, 2026-10-04: agents send whole phrases and other word forms). Filters, never ranks.
+const FILLER = new Set(["finn", "find", "trenger", "need", "needs", "want", "ønsker", "gjerne", "noen", "some", "that", "with",
+  "lager", "makes", "make", "hvor", "where", "near", "nær", "til", "for", "som", "and", "the", "eller", "også", "bruk", "use", "tool", "vegvisai"]);
+const words = (t) => String(t ?? "").toLowerCase().split(/[^\p{L}\p{N}]+/u).filter((w) => w.length >= 4 && !FILLER.has(w));
+const prefix = (a, b) => { let i = 0; while (i < a.length && i < b.length && a[i] === b[i]) i++; return i; };
+export function needMatches(need, texts) {
+  const n = String(need ?? "").toLowerCase().trim();
+  if (!n) return false;
+  const all = texts.map((t) => String(t ?? "").toLowerCase()).filter(Boolean);
+  if (all.some((s) => s.includes(n) || n.includes(s))) return true;
+  const nw = words(n);
+  const tw = new Set(all.flatMap(words));
+  return nw.some((a) => [...tw].some((b) => a.includes(b) || b.includes(a) || prefix(a, b) >= 5));
 }
 
 // The signing key: the Worker secret EXPORT_SIGNING_KEY holds the Ed25519 private key as JWK.

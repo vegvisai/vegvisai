@@ -9,7 +9,7 @@ import { tr, language } from "../public/felles/i18n.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import PUBLIC_INDEX from "../public/index/public-no.json" with { type: "json" };
 import PARTIES from "../public/index/parties-no.json" with { type: "json" };
-import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, recheckNow, withdrawNow } from "./innmelding.js";
+import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, recheckNow, withdrawNow, needMatches } from "./innmelding.js";
 
 import { LAUNCHED } from "./launch.js";
 
@@ -234,7 +234,7 @@ const VERIFIED = { register: "verified domain and company number in the national
 async function findBusiness({ need, postal_code, country }, origin, context = {}) {
   const n = (need || "").toLowerCase();
   const cc = String(country ?? "").toUpperCase().slice(0, 2);
-  const test = TEST_BUSINESSES.filter((b) => !cc || cc === "NO").filter((b) => b.categories.some((c) => n.includes(c) || c.includes(n))).map((b) =>
+  const test = TEST_BUSINESSES.filter((b) => !cc || cc === "NO").filter((b) => needMatches(n, b.categories)).map((b) =>
     [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, b.page_en && `Page in English: ${origin}${b.page_en}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`,
       `Request link (template): ${origin}${b.request}`, b.request_en && `Request link in English (template): ${origin}${b.request_en}`].filter(Boolean).join("\n"));
   // Businesses in the register: only what they publish themselves, with the date of verification.

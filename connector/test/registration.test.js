@@ -215,3 +215,13 @@ test("a domain-only registration is logged with its own reason, not as a domain 
   assert.equal(`${log[0].action}:${log[0].reason}`, "submitted:domain_only");
   assert.equal(log[0].org_number, null);
 });
+
+test("a need matches other word forms and whole phrases, and only what fits", async () => {
+  const { needMatches } = await import("../src/innmelding.js");
+  const bakery = ["bakery", "Bursdagskake, 12 personer", "SIT Testbakeri", "Baker brød og bestillingskaker i Reykjavík."];
+  const lodging = ["guesthouse", "Double room with breakfast", "SIT Test Guesthouse", "A small guesthouse with four rooms in Akureyri."];
+  for (const need of ["kake", "bursdagskaker", "bakeri", "bakeri i Reykjavík som lager bursdagskake", "birthday cake bakery"]) assert.ok(needMatches(need, bakery), need);
+  for (const need of ["guesthouse", "Find a guesthouse in Akureyri, Iceland", "overnatting gjestehus Akureyri"]) assert.ok(needMatches(need, lodging), need);
+  for (const need of ["rørlegger", "bursdagskake", "find a plumber"]) assert.ok(!needMatches(need, lodging), need);
+  assert.ok(!needMatches("", bakery));
+});

@@ -368,11 +368,12 @@ export function chooseProfile(chosen, pageTypes, host, publicHosts = new Set(), 
   if (pageTypes.includes("NewsMediaOrganization")) return ["media", "schema"];
   if (pageTypes.some((x) => ORGANISATION_TYPES.has(x))) return ["organisation", "schema"];
   if (pageTypes.some((x) => COMMERCE_TYPES.has(x))) return ["business", "schema"];
-  if (pageTypes.some((x) => MEDIA_TYPES.has(x))) return ["media", "schema"];
+  // The open indexes and the domain come before a news article on one page: public bodies publish news too.
   const h = host.replace(/^www\./, "");
   if (partyHosts.has(h)) return ["party", "index"];
   if (publicHosts.has(h)) return ["government", "index"];
   if (GOVERNMENT_DOMAINS.test(h)) return ["government", "domain"];
+  if (pageTypes.some((x) => MEDIA_TYPES.has(x))) return ["media", "schema"];
   return ["business", "default"];
 }
 

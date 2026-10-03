@@ -229,3 +229,11 @@ test("a news medium is measured by the media yardstick, with advice to let searc
   assert.ok(r.actions.some((t) => t.includes("nyhetsmedium") && t.includes("GPTBot")), JSON.stringify(r.actions));
   assert.equal(r.breakdown.find((b) => b.id === "ai_access").points, 0);
 });
+
+test("a public body that publishes news articles keeps the public yardstick", async () => {
+  const { chooseProfile } = await import("../src/sjekk.js");
+  assert.deepEqual(chooseProfile("", ["NewsArticle"], "www.regjeringen.no", new Set(["regjeringen.no"])), ["government", "index"]);
+  assert.deepEqual(chooseProfile("", ["NewsArticle"], "www.tromso.kommune.no"), ["government", "domain"]);
+  assert.deepEqual(chooseProfile("", ["NewsArticle"], "www.avisa.no"), ["media", "schema"]);
+  assert.deepEqual(chooseProfile("", ["NewsMediaOrganization"], "www.avisa.no"), ["media", "schema"]);
+});

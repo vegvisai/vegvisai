@@ -7,6 +7,7 @@
 // It also lists what the site has open for AI (feeds, actions, APIs, MCP, data), without scoring it.
 // Report texts exist in English (default, API and MCP) and Norwegian (the Norwegian /sjekk/ page).
 
+import { catalogProblems } from "../public/felles/ai-catalog.js";
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
 import { tr, dict, fill, language } from "../public/felles/i18n.js";
 
@@ -430,7 +431,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   const cat = await get(root + "/.well-known/ai-catalog.json");
   let catOk = false;
   if (cat.status === 200) {
-    try { catOk = Array.isArray(JSON.parse(cat.text).entries); } catch { /* invalid JSON */ }
+    try { catOk = catalogProblems(JSON.parse(cat.text)).length === 0; } catch { /* invalid JSON */ }
   }
   // llms.txt must be text, not an HTML page that answers 200 to everything.
   const llmsOk = llms.status === 200 && !/^\s*<(!doctype|html)/i.test(llms.text);
@@ -560,8 +561,9 @@ export function assess(r, lang = "en") {
   else { add("titles", 0, 10); actions.push(t.titles); }
   if (pages.every((s) => s.description)) add("descriptions", 5, 5);
   else { add("descriptions", 0, 5); actions.push(t.descriptions); }
-  if (pages.some((s) => s.jsonld_types.some((x) => BUSINESS_TYPES.has(x)))) add("identity", 10, 10);
-  else { add("identity", 0, 10); actions.push(profile === "business" ? t.business : t.identity[profile]); }
+  // Who the site belongs to, in schema.org: what AI assistants and search actually use (13 points).
+  if (pages.some((s) => s.jsonld_types.some((x) => BUSINESS_TYPES.has(x)))) add("identity", 13, 13);
+  else { add("identity", 0, 13); actions.push(profile === "business" ? t.business : t.identity[profile]); }
 
   // Readable for agents that do not run JavaScript (20 points).
   if (pages.every((s) => s.readable !== undefined)) {
@@ -605,8 +607,9 @@ export function assess(r, lang = "en") {
     }
   }
 
-  if (r.ai_files["llms.txt"]) add("llms_txt", 5, 5);
-  else { add("llms_txt", 0, 5); actions.push(t.llms); }
+  // llms.txt is contested (Google says site owners can ignore it), so it weighs little (2 points, 2026-10-03).
+  if (r.ai_files["llms.txt"]) add("llms_txt", 2, 2);
+  else { add("llms_txt", 0, 2); actions.push(t.llms); }
   if (r.ai_files["ai-catalog.json valid"]) add("ai_catalog", 5, 5);
   else { add("ai_catalog", 0, 5); actions.push(t.catalog); }
 

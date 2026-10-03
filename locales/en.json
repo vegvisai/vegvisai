@@ -92,7 +92,7 @@
   },
   "fields": "Structured data for products or services is missing fields: {fields}.",
   "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
-  "llms": "Publish /llms.txt with a short overview for language models.",
+  "llms": "Optional: publish /llms.txt with a short overview for language models. Some assistants read it; Google says it can be ignored, so it weighs little.",
   "catalog": "Publish /.well-known/ai-catalog.json so open guides can find your services.",
   "injection": "Check {n} passages that match patterns often used to give instructions to AI assistants. A match says nothing about intent; if the text is not meant for readers, remove it.",
   "skippedRobots": "robots.txt does not allow it",
@@ -287,7 +287,7 @@
    "row6": "Products or services have structured data with name, price and currency (and availability for goods)",
    "row7": "Content pages are marked with a type (Article, WebPage, Service, Event and the like) and a date (published or changed)",
    "row8": "The front page links to the key pages: services, contact and about (public body); work, membership, contact and about (organisation); party programme, policy, representatives and contact (party); about, contact and editorial standards (medium)",
-   "row9": "<code>/llms.txt</code> and <code>/.well-known/ai-catalog.json</code>",
+   "row9": "<code>/llms.txt</code> (2; contested, Google says it can be ignored) and <code>/.well-known/ai-catalog.json</code> valid by the <a href=\"https://github.com/Agent-Card/ai-catalog\">AI Catalog specification</a> (5)",
    "note1": "Checks that do not apply, such as prices on a site without prices, do not count, and the total is scaled to 100. If the front page does not answer, no score is given: the site is not measured. The check also looks for text that resembles instructions to AI assistants (prompt injection), also in hidden text. Such findings do not cost points, but come first among the actions. A few zero-width characters, which often come from copy and paste, count as low risk.",
    "note2": "The check also lists what the site has open for AI beyond the pages: news feeds, calendar, search and actions in schema.org, open data, OpenAPI and MCP. This gives no points yet.",
    "note3": "We keep no log of the addresses that are checked, and we use no cookies. The check does not run JavaScript; content that is only made in the browser is not seen. That is also how many AI agents read web pages.",
@@ -320,7 +320,8 @@
    "none": "(none)",
    "noneData": "none",
    "footer": "Time: {time}. A sample, not a full review.",
-   "profMedia": "News medium"
+   "profMedia": "News medium",
+   "noteOthers": "Other free checks measure more technical details for developers, for example Cloudflare's <a href=\"https://isitagentready.com/\">isitagentready.com</a>. This check adds yardsticks for public bodies, organisations, parties and news media, the scan for hidden instructions, plain advice, and a ready AI business card. What matters most is still your own clear website; a free Google Business Profile helps too."
   },
   "register": {
    "title": "Register your business in the guide (technical test)",

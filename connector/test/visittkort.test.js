@@ -49,8 +49,8 @@ test("generated business card scores 100 in the AI check", async () => {
   assert.equal(r.score, 100, JSON.stringify(r.actions));
   const catalog = JSON.parse(files[".well-known/ai-catalog.json"]);
   assert.equal(catalog.host.identifier, "bakeri.eksempel.no");
-  assert.equal(EXTENSION, "ai.vegvis.local/v1");
-  const ext = catalog.entries[0].extensions["ai.vegvis.local/v1"];
+  assert.equal(EXTENSION, "ai.vegvis.local-business");
+  const ext = catalog.entries[0].extensions["ai.vegvis.local-business"];
   assert.deepEqual(ext.area, { type: "physical", names: ["Bodø", "Fauske"], municipality_numbers: ["1804"], delivery_countries: ["NO"] });
   assert.deepEqual(ext.actions, { contact: "https://bakeri.eksempel.no/bestill", email: "post@bakeri.eksempel.no", phone: "+47 00 00 00 00" });
   assert.equal(ext.org_number, undefined);
@@ -85,7 +85,7 @@ test("an English card for a UK business has the company number, GBP and English 
   assert.equal(ld.makesOffer[0].priceCurrency, "GBP");
   assert.match(r.files["index.html"], /<h2>Prices<\/h2>/);
   assert.match(r.files["llms.txt"], /Company number 01234567 \(Companies House\)/);
-  assert.equal(JSON.parse(r.files[".well-known/ai-catalog.json"]).entries[0].extensions["ai.vegvis.local/v1"].company_number, "01234567");
+  assert.equal(JSON.parse(r.files[".well-known/ai-catalog.json"]).entries[0].extensions["ai.vegvis.local-business"].company_number, "01234567");
 });
 
 test("a German business gets its VAT number as vatID with the country prefix, and EUR", () => {
@@ -94,4 +94,14 @@ test("a German business gets its VAT number as vatID with the country prefix, an
   assert.equal(ld.vatID, "DE123456789");
   assert.equal(ld.makesOffer[0].priceCurrency, "EUR");
   assert.equal(ld.identifier, undefined);
+});
+
+test("the generated ai-catalog.json is valid by the AI Catalog specification", async () => {
+  const { catalogProblems } = await import("../public/felles/ai-catalog.js");
+  const { readFileSync } = await import("node:fs");
+  const r = makeFiles({ name: "Test AS", website: "https://www.test.example.no", summary: "Vi tester.", phone: "+47 00 00 00 00", type: "LocalBusiness", text: "nb" }, { lang: "nb" });
+  assert.deepEqual(catalogProblems(JSON.parse(r.files[".well-known/ai-catalog.json"])), []);
+  assert.deepEqual(catalogProblems(JSON.parse(readFileSync(new URL("../public/.well-known/ai-catalog.json", import.meta.url), "utf8"))), []);
+  assert.ok(catalogProblems({ specVersion: "1", entries: [{ identifier: "x", type: "t", url: "u", data: {} }] }).length >= 2);
+  assert.ok(catalogProblems({ specVersion: "1.0", entries: [], extensions: { "ai.vegvis.local/v1": {} } })[0].includes("reverse-DNS"));
 });

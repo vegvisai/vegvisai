@@ -106,7 +106,7 @@
   },
   "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
   "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
-  "llms": "Legg ut /llms.txt med en kort oversikt for språkmodeller.",
+  "llms": "Valgfritt: legg ut /llms.txt med en kort oversikt for språkmodeller. Noen assistenter leser den; Google sier den kan overses, så den teller lite.",
   "catalog": "Publiser /.well-known/ai-catalog.json, så åpne veivisere finner tjenestene deres.",
   "injection": "Se over {n} tekstbiter som ligner mønstre som ofte brukes for å gi instrukser til AI-assistenter. Et treff sier ingenting om hensikt; er teksten ikke ment for leserne, kan den fjernes.",
   "skippedRobots": "robots.txt tillater ikke",
@@ -301,7 +301,7 @@
    "row6": "Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)",
    "row7": "Innholdssider er merket med type (Article, WebPage, Service, Event e.l.) og dato (publisert eller endret)",
    "row8": "Forsiden lenker til nøkkelsidene: tjenester, kontakt og om oss (offentlig); arbeid, medlemskap, kontakt og om oss (organisasjon); partiprogram, politikk, folkevalgte og kontakt (parti); om oss, kontakt og redaksjonelle retningslinjer (medium)",
-   "row9": "<code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code>",
+   "row9": "<code>/llms.txt</code> (2; omstridt, Google sier den kan overses) og <code>/.well-known/ai-catalog.json</code> gyldig etter <a href=\"https://github.com/Agent-Card/ai-catalog\">AI Catalog-spesifikasjonen</a> (5)",
    "note1": "Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. Svarer ikke forsiden, gis ingen poeng: da er nettstedet ikke målt. Sjekken ser også etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene. Noen få nullbredde-tegn, som ofte kommer fra kopiering, regnes som lav risiko.",
    "note2": "Sjekken lister også hva nettstedet har åpent for AI utover sidene: nyhetsstrømmer, kalender, søk og handlinger i schema.org, åpne data, OpenAPI og MCP. Dette gir ikke poeng ennå.",
    "note3": "Vi fører ikke logg over adressene som sjekkes, og vi bruker ikke informasjonskapsler. Sjekken kjører ikke JavaScript; innhold som bare lages i nettleseren, blir ikke sett. Det er også slik mange AI-agenter leser nettsider.",
@@ -334,7 +334,8 @@
    "none": "(ingen)",
    "noneData": "ingen",
    "footer": "Tidspunkt: {time}. Stikkprøve, ikke en fullstendig gjennomgang.",
-   "profMedia": "Nyhetsmedium"
+   "profMedia": "Nyhetsmedium",
+   "noteOthers": "Andre gratis sjekker måler flere tekniske detaljer for utviklere, for eksempel Cloudflares <a href=\"https://isitagentready.com/\">isitagentready.com</a>. Denne sjekken legger til målestokker for offentlige virksomheter, organisasjoner, partier og nyhetsmedier, sjekken for skjulte instrukser, enkle råd og et ferdig AI-visittkort. Det som betyr mest, er fortsatt deres egen tydelige nettside; en gratis Google-bedriftsprofil hjelper også."
   },
   "register": {
    "title": "Meld inn bedriften i veiviseren (teknisk test)",

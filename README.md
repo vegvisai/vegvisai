@@ -1,8 +1,10 @@
 # VegvisAI™
 
-An open guide that makes businesses visible and understandable to every AI assistant, from ChatGPT and Claude to local language models. The customer installs nothing, and the business shares only what it publishes itself.
+**Get found by AI without paying anyone for it.**
 
-**Status:** private while we build. The repository opens at launch. VegvisAI is owned and run privately by Espen Brathaug, Oslo, Norway; the aim is a neutral owner ([PLEDGE.md](PLEDGE.md)).
+An open, neutral guide that makes every business findable for AI assistants, from ChatGPT and Claude to local language models, and shows how businesses can use AI to earn money themselves, on their own terms. The customer installs nothing, and the business shares only what it publishes itself.
+
+**Status:** private while we build. The repository opens at launch. VegvisAI is privately owned today; the aim is a neutral owner ([PLEDGE.md](PLEDGE.md), and Ownership on the website).
 
 ## Step one: the free AI check
 

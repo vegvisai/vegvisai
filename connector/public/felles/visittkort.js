@@ -7,7 +7,8 @@
 import { findInstructions, sanitize } from "./injeksjon.js";
 import { dict, fill, language, LANGS } from "./i18n.js";
 
-export const EXTENSION = "ai.vegvis.local/v1";
+// A reverse-DNS key, as the AI Catalog specification requires for vendor extensions.
+export const EXTENSION = "ai.vegvis.local-business";
 
 // Labels, day names and the visible text of the generated files come from locales/<lang>.json («card»).
 // schema.org type -> label shown in the form and used as a catalog tag.

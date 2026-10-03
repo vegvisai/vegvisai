@@ -15,7 +15,7 @@
         "norway"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -31,7 +31,7 @@
         "norway"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -47,7 +47,7 @@
         "norway"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -62,7 +62,7 @@
         "tool"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -77,7 +77,7 @@
         "tool"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -91,7 +91,7 @@
         "business-card"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -106,7 +106,7 @@
         "business-card"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -121,7 +121,7 @@
         "business-card"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -136,7 +136,7 @@
         "tool"
       ],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }
@@ -146,7 +146,7 @@
       "type": "text/plain",
       "url": "/llms.txt",
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "index_licence": "ODbL-1.0 DbCL-1.0"
         }
       }

@@ -16,7 +16,7 @@ const card = (extra = {}) => `<html lang="nb"><head><title>Butikken AS</title>
   potentialAction: { "@type": "OrderAction", target: { "@type": "EntryPoint", urlTemplate: "/bestill/?kake={kake}" } }, ...extra })}</script>
 </head><body><h1>Butikken</h1></body></html>`;
 // The card's catalog gives the export licence on the business's own domain (P46).
-const catalog = JSON.stringify({ specVersion: "1.0", entries: [{ type: "text/html", url: ROOT + "/ai/", tags: ["bakery", "cake"], extensions: { "ai.vegvis.local/v1": { index_licence: "ODbL-1.0 DbCL-1.0" } } }] });
+const catalog = JSON.stringify({ specVersion: "1.0", entries: [{ type: "text/html", url: ROOT + "/ai/", tags: ["bakery", "cake"], extensions: { "ai.vegvis.local-business": { index_licence: "ODbL-1.0 DbCL-1.0" } } }] });
 const unit = (extra = {}) => JSON.stringify({ organisasjonsnummer: ORG, navn: "BUTIKKEN AS", organisasjonsform: { kode: "AS" }, hjemmeside: "www.butikken.example.no", ...extra });
 
 function fakeFetch({ site = {}, brreg = unit() } = {}) {

@@ -8,7 +8,7 @@
       "url": "https://www.eksempel-bakeri.example/",
       "tags": ["bakeri", "kaker", "brød"],
       "extensions": {
-        "ai.vegvis.local/v1": {
+        "ai.vegvis.local-business": {
           "services": ["bestillingskaker", "brød og boller"],
           "area": { "type": "physical", "names": ["Bodø"], "municipality_numbers": ["1804"], "delivery_countries": ["NO"] },
           "languages": ["nb", "en"],

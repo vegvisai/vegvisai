@@ -79,6 +79,8 @@ test("a withdrawn release is replaced by a signed revision and answers 410", asy
   assert.equal((await releases(new URL("https://x.example/index/releases/2026-10.json"), env)).status, 410);
   const r2 = JSON.parse(await (await releases(new URL("https://x.example/index/releases/2026-10-r2.json"), env)).text());
   assert.ok(!r2.entries.some((e) => e.org_number === "933333333"));
+  assert.ok(!r2.removed_since_previous.includes("933333333"), "an erased id is never listed as removed in the replacement");
+  assert.equal(r2.previous, null, "the replacement stands in place of the withdrawn release");
   const list = await (await releases(new URL("https://x.example/index/releases.json"), env)).json();
   assert.equal(list.releases.find((r) => r.period === "2026-10").replaced_by, "2026-10-r2");
 });

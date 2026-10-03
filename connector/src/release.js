@@ -24,10 +24,14 @@ export function publicJwkOf(privateJwk) {
 
 // Makes the release for the month of «now», unless it exists. privateJwk: the Ed25519 key as JWK.
 // period: give one to make a replacement (YYYY-MM-rN) after a withdrawal.
-export async function makeRelease(store, privateJwk, { now = new Date(), period = periodOf(now) } = {}) {
+// previousPeriod: a replacement stands in place of the withdrawn release, so it is compared with the release
+// before that one; otherwise an id erased on request would show up as «removed» in the new release.
+export async function makeRelease(store, privateJwk, { now = new Date(), period = periodOf(now), previousPeriod } = {}) {
   const existing = await store.getRelease(period);
   if (existing) return { period, created: false };
-  const previous = (await store.releases()).find((r) => !r.withdrawn && r.period !== period) ?? null;
+  const previous = previousPeriod !== undefined
+    ? (previousPeriod ? { period: previousPeriod } : null)
+    : (await store.releases()).find((r) => !r.withdrawn && r.period !== period) ?? null;
   const base = await openExport(store, { now });
   // Removed since the previous release: ids that were in it and are not in this one, whatever the reason.
   const before = previous ? JSON.parse((await store.getRelease(previous.period)).body).entries.map((e) => e.org_number) : [];
@@ -69,7 +73,7 @@ export async function withdrawRelease(store, privateJwk, period, reason, { now =
   let n = 2;
   while (taken.has(`${base}-r${n}`)) n++;
   const replacement = `${base}-r${n}`;
-  await makeRelease(store, privateJwk, { now, period: replacement });
+  await makeRelease(store, privateJwk, { now, period: replacement, previousPeriod: JSON.parse(old.body).previous ?? null });
   await store.withdrawRelease(period, String(reason).slice(0, 40), replacement);
   return { withdrawn: true, period, replaced_by: replacement };
 }

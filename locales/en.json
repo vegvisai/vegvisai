@@ -34,7 +34,7 @@
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business."
  },
  "check": {
-  "robots": "Open robots.txt to the AI bots that are blocked: {bots}.",
+  "robots": "AI assistants cannot read or cite the site when someone asks: robots.txt blocks {bots}, which fetch pages on behalf of users. Open robots.txt to them. If the blocking is a deliberate choice, this is what it costs.",
   "lastmod": "Update lastmod in the sitemap: {percent} % of the pages are dated more than two years back.",
   "sitemap": "Publish a sitemap and point to it from robots.txt.",
   "titles": "Give every page its own descriptive title.",
@@ -43,7 +43,8 @@
   "identity": {
    "government": "Describe the public body with schema.org (GovernmentOrganization): name, address, contact and the area you serve.",
    "organisation": "Describe the organisation with schema.org (Organization or NGO): name, address, contact and what you work for.",
-   "party": "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme."
+   "party": "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme.",
+   "media": "Describe the medium with schema.org (NewsMediaOrganization): name, editor, contact, and links to the editorial standards and corrections policy."
   },
   "readable": "Serve the main text in the HTML itself: {n} of {m} pages show less than {chars} characters without JavaScript, and many AI agents do not run JavaScript.",
   "lang": "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
@@ -57,7 +58,8 @@
    "join": "membership or support",
    "programme": "the party programme",
    "policy": "policy and positions",
-   "people": "elected representatives and leaders"
+   "people": "elected representatives and leaders",
+   "editorial": "editorial standards and corrections"
   },
   "content": "Mark up content pages with schema.org (Article, WebPage, Service, Event, FAQPage and the like) with datePublished or dateModified, so an AI can tell what a page is and how current it is: {n} of {m} pages lack it.",
   "zeroWidth": "Check {n} low-risk matches, such as zero-width characters from copy and paste or a mention of a system prompt.",
@@ -65,7 +67,8 @@
    "business": "business",
    "government": "public body",
    "organisation": "organisation (NGO, association)",
-   "party": "political party"
+   "party": "political party",
+   "media": "news medium"
   },
   "profileSource": {
    "param": "chosen",
@@ -140,7 +143,10 @@
    "headings": "Main heading",
    "llms_txt": "llms.txt",
    "ai_catalog": "ai-catalog.json"
-  }
+  },
+  "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
+  "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
+  "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}."
  },
  "check_errors": {
   "missing": "Enter a web address.",
@@ -266,21 +272,21 @@
    "profParty": "Political party",
    "button": "Check",
    "whatH2": "What the check looks at",
-   "whatIntro": "The check has four yardsticks: <strong>business</strong>, <strong>public body</strong>, <strong>organisation</strong> (NGO, association) and <strong>political party</strong>. Most of it is the same for all; only the content part differs. The yardstick is detected from schema.org on the pages, the domain (for example <code>kommune.no</code>) or the open index of public services. You can also choose it yourself.",
+   "whatIntro": "The check has five yardsticks: <strong>business</strong>, <strong>public body</strong>, <strong>organisation</strong> (NGO, association), <strong>political party</strong> and <strong>news medium</strong>. Most of it is the same for all; only the content part differs. The yardstick is detected from schema.org on the pages, the domain (for example <code>kommune.no</code>) or the open index of public services. You can also choose it yourself.",
    "thCheck": "Check",
    "thApplies": "Applies to",
    "thPoints": "Points",
    "all": "All",
    "businessOnly": "Business",
-   "nonBusiness": "Public body, organisation, party",
-   "row1": "<code>robots.txt</code> blocks none of the common AI bots",
+   "nonBusiness": "Public body, organisation, party, medium",
+   "row1": "<code>robots.txt</code> lets in the AI bots that fetch pages when someone asks (15), and the training bots (5). Blocking only training can be a deliberate choice",
    "row2": "A sitemap exists, and at most half of the pages are dated more than two years back",
    "row3": "Every page has its own title; every page has a meta description",
    "row4": "The business or body is described with schema.org (Organization, LocalBusiness, GovernmentOrganization, NGO, PoliticalParty and the like)",
    "row5": "The pages show at least 300 characters of text without JavaScript; the language is declared; every page has a main heading",
    "row6": "Products or services have structured data with name, price and currency (and availability for goods)",
    "row7": "Content pages are marked with a type (Article, WebPage, Service, Event and the like) and a date (published or changed)",
-   "row8": "The front page links to the key pages: services, contact and about (public body); work, membership, contact and about (organisation); party programme, policy, representatives and contact (party)",
+   "row8": "The front page links to the key pages: services, contact and about (public body); work, membership, contact and about (organisation); party programme, policy, representatives and contact (party); about, contact and editorial standards (medium)",
    "row9": "<code>/llms.txt</code> and <code>/.well-known/ai-catalog.json</code>",
    "note1": "Checks that do not apply, such as prices on a site without prices, do not count, and the total is scaled to 100. If the front page does not answer, no score is given: the site is not measured. The check also looks for text that resembles instructions to AI assistants (prompt injection), also in hidden text. Such findings do not cost points, but come first among the actions. A few zero-width characters, which often come from copy and paste, count as low risk.",
    "note2": "The check also lists what the site has open for AI beyond the pages: news feeds, calendar, search and actions in schema.org, open data, OpenAPI and MCP. This gives no points yet.",
@@ -313,7 +319,8 @@
    "skipped": "skipped",
    "none": "(none)",
    "noneData": "none",
-   "footer": "Time: {time}. A sample, not a full review."
+   "footer": "Time: {time}. A sample, not a full review.",
+   "profMedia": "News medium"
   },
   "register": {
    "title": "Register your business in the guide (technical test)",

@@ -15,7 +15,7 @@ export const LOCALES = {
    "country": "GB"
   },
   "check": {
-   "robots": "Open robots.txt to the AI bots that are blocked: {bots}.",
+   "robots": "AI assistants cannot read or cite the site when someone asks: robots.txt blocks {bots}, which fetch pages on behalf of users. Open robots.txt to them. If the blocking is a deliberate choice, this is what it costs.",
    "lastmod": "Update lastmod in the sitemap: {percent} % of the pages are dated more than two years back.",
    "sitemap": "Publish a sitemap and point to it from robots.txt.",
    "titles": "Give every page its own descriptive title.",
@@ -24,7 +24,8 @@ export const LOCALES = {
    "identity": {
     "government": "Describe the public body with schema.org (GovernmentOrganization): name, address, contact and the area you serve.",
     "organisation": "Describe the organisation with schema.org (Organization or NGO): name, address, contact and what you work for.",
-    "party": "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme."
+    "party": "Describe the party with schema.org (PoliticalParty or Organization): name, address, contact and links to the party programme.",
+    "media": "Describe the medium with schema.org (NewsMediaOrganization): name, editor, contact, and links to the editorial standards and corrections policy."
    },
    "readable": "Serve the main text in the HTML itself: {n} of {m} pages show less than {chars} characters without JavaScript, and many AI agents do not run JavaScript.",
    "lang": "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
@@ -38,7 +39,8 @@ export const LOCALES = {
     "join": "membership or support",
     "programme": "the party programme",
     "policy": "policy and positions",
-    "people": "elected representatives and leaders"
+    "people": "elected representatives and leaders",
+    "editorial": "editorial standards and corrections"
    },
    "content": "Mark up content pages with schema.org (Article, WebPage, Service, Event, FAQPage and the like) with datePublished or dateModified, so an AI can tell what a page is and how current it is: {n} of {m} pages lack it.",
    "zeroWidth": "Check {n} low-risk matches, such as zero-width characters from copy and paste or a mention of a system prompt.",
@@ -46,7 +48,8 @@ export const LOCALES = {
     "business": "business",
     "government": "public body",
     "organisation": "organisation (NGO, association)",
-    "party": "political party"
+    "party": "political party",
+    "media": "news medium"
    },
    "profileSource": {
     "param": "chosen",
@@ -121,7 +124,10 @@ export const LOCALES = {
     "headings": "Main heading",
     "llms_txt": "llms.txt",
     "ai_catalog": "ai-catalog.json"
-   }
+   },
+   "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
+   "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
+   "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}."
   },
   "check_errors": {
    "missing": "Enter a web address.",
@@ -289,7 +295,7 @@ export const LOCALES = {
    "country": "NO"
   },
   "check": {
-   "robots": "Åpne robots.txt for AI-robotene som er blokkert: {bots}.",
+   "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",
    "lastmod": "Oppdater lastmod i sitemap: {percent} % av sidene er datert mer enn to år tilbake.",
    "sitemap": "Legg ut en sitemap og pek til den fra robots.txt.",
    "titles": "Gi hver side en egen, beskrivende tittel.",
@@ -298,7 +304,8 @@ export const LOCALES = {
    "identity": {
     "government": "Beskriv virksomheten med schema.org (GovernmentOrganization): navn, adresse, kontakt og området dere betjener.",
     "organisation": "Beskriv organisasjonen med schema.org (Organization eller NGO): navn, adresse, kontakt og hva dere arbeider for.",
-    "party": "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet."
+    "party": "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet.",
+    "media": "Beskriv mediet med schema.org (NewsMediaOrganization): navn, redaktør, kontakt og lenker til redaksjonelle retningslinjer og rettelser."
    },
    "readable": "Legg hovedteksten i selve HTML-en: {n} av {m} sider viser under {chars} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.",
    "lang": "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
@@ -312,7 +319,8 @@ export const LOCALES = {
     "join": "medlemskap eller støtte",
     "programme": "partiprogrammet",
     "policy": "politikk og standpunkter",
-    "people": "folkevalgte og ledelse"
+    "people": "folkevalgte og ledelse",
+    "editorial": "redaksjonelle retningslinjer og rettelser"
    },
    "content": "Merk opp innholdssider med schema.org (Article, WebPage, Service, Event, FAQPage og lignende) med datePublished eller dateModified, så AI-en ser hva siden er og hvor oppdatert den er: {n} av {m} sider mangler det.",
    "zeroWidth": "Se over {n} treff med lav risiko, for eksempel nullbredde-tegn fra kopiering eller omtale av en systemprompt.",
@@ -320,7 +328,8 @@ export const LOCALES = {
     "business": "bedrift",
     "government": "offentlig virksomhet",
     "organisation": "organisasjon (NGO, forening)",
-    "party": "politisk parti"
+    "party": "politisk parti",
+    "media": "nyhetsmedium"
    },
    "profileSource": {
     "param": "valgt",
@@ -395,7 +404,10 @@ export const LOCALES = {
     "headings": "Hovedoverskrift",
     "llms_txt": "llms.txt",
     "ai_catalog": "ai-catalog.json"
-   }
+   },
+   "robotsTraining": "robots.txt blokkerer AI-trening ({bots}). Det kan være et bevisst valg: AI-assistenter kan fortsatt lese og sitere nettstedet gjennom søkerobotene sine.",
+   "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
+   "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}."
   },
   "check_errors": {
    "missing": "Oppgi en nettadresse.",

@@ -121,7 +121,7 @@ const TOOLS = [
     name: "ai_check",
     title: "AI check of a website",
     description:
-      "Checks how a public website looks to AI assistants: robots.txt, sitemap, schema.org, llms.txt, ai-catalog.json, and text that looks like prompt injection. Returns a score out of 100, the points per check and concrete actions. Uses the yardstick that fits the site: business, government (public bodies), organisation (NGOs, associations) or party (political parties); it is detected unless given. Also lists what the site has open for AI: feeds, actions, APIs, MCP and open data. Takes 5–15 seconds.",
+      "Checks how a public website looks to AI assistants: robots.txt, sitemap, schema.org, llms.txt, ai-catalog.json, and text that looks like prompt injection. Returns a score out of 100, the points per check and concrete actions. Uses the yardstick that fits the site: business, government (public bodies), organisation (NGOs, associations), party (political parties) or media (news media); it is detected unless given. Blocking only AI training bots can be a deliberate choice and costs 5 of 20 points; blocking the bots that fetch pages for users costs the other 15. Also lists what the site has open for AI: feeds, actions, APIs, MCP and open data. Takes 5–15 seconds.",
     inputSchema: {
       type: "object",
       properties: {

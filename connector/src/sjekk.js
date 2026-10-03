@@ -2,8 +2,8 @@
 // Port of the AI check to Workers, with an industry-neutral score
 // and a scan for text that looks like instructions to AI (prompt injection).
 // Reads only public files, respects robots.txt and stores nothing.
-// Four yardsticks (P22, P45): business, government (public bodies), organisation (NGOs, associations)
-// and party (political parties). The common part is the same for all; only the content part differs.
+// Five yardsticks (P22, P45): business, government (public bodies), organisation (NGOs, associations),
+// party (political parties) and media (news media). The common part is the same for all; only the content part differs.
 // It also lists what the site has open for AI (feeds, actions, APIs, MCP, data), without scoring it.
 // Report texts exist in English (default, API and MCP) and Norwegian (the Norwegian /sjekk/ page).
 
@@ -29,10 +29,13 @@ const AI_BOTS = {
   "Applebot-Extended": "Apple Intelligence",
   "CCBot": "Common Crawl",
 };
+// Bots that fetch a page when someone asks an AI assistant. The others collect text for training;
+// blocking only those can be a deliberate choice and still lets assistants read and cite the site.
+const ANSWER_BOTS = new Set(["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot"]);
 const PRODUCT_TYPES = new Set(["Product", "IndividualProduct", "ProductModel"]);
 const SERVICE_TYPES = new Set(["Service", "FoodService", "FinancialProduct", "BroadcastService", "CableOrSatelliteService", "GovernmentService", "Taxi", "TaxiService"]);
 const BUSINESS_TYPES = new Set([
-  "Organization", "Corporation", "LocalBusiness", "OnlineBusiness", "OnlineStore", "Store",
+  "Organization", "Corporation", "NewsMediaOrganization", "LocalBusiness", "OnlineBusiness", "OnlineStore", "Store",
   "HardwareStore", "ElectronicsStore", "HomeAndConstructionBusiness", "AutoRepair",
   "FoodEstablishment", "Bakery", "Restaurant", "CafeOrCoffeeShop", "ProfessionalService",
   "HealthAndBeautyBusiness", "MedicalBusiness", "LegalService", "FinancialService",
@@ -43,6 +46,7 @@ const BUSINESS_TYPES = new Set([
 ]);
 // Signals for the yardstick. GovernmentOffice is a LocalBusiness subtype in schema.org but is a public body.
 const GOVERNMENT_TYPES = new Set(["GovernmentOrganization", "GovernmentOffice", "GovernmentService", "GovernmentBuilding", "CityHall", "Courthouse", "PoliceStation", "FireStation"]);
+const MEDIA_TYPES = new Set(["NewsMediaOrganization", "NewsArticle", "ReportageNewsArticle", "AnalysisNewsArticle", "OpinionNewsArticle", "BackgroundNewsArticle", "ReviewNewsArticle", "LiveBlogPosting"]);
 const ORGANISATION_TYPES = new Set(["NGO", "NonprofitOrganization", "SportsOrganization", "ResearchOrganization", "Consortium", "WorkersUnion", "FundingScheme"]);
 const COMMERCE_TYPES = new Set([...PRODUCT_TYPES, "Offer", "AggregateOffer", "LocalBusiness", "Store", "OnlineStore", "OnlineBusiness", "Restaurant", "Bakery", "FoodEstablishment", "ProfessionalService", "HomeAndConstructionBusiness", "AutoRepair", "LodgingBusiness"]);
 // Content that tells an AI what a page is: used for government and organisation sites.
@@ -51,7 +55,7 @@ const CONTENT_TYPES = new Set([
   "FAQPage", "QAPage", "HowTo", "Event", "Service", "GovernmentService", "Dataset", "Legislation", "CreativeWork",
 ]);
 const GOVERNMENT_DOMAINS = /(^|\.)(kommune\.no|fylkeskommune\.no|gov|gov\.[a-z]{2}|gv\.at|gouv\.fr|bund\.de|europa\.eu|government\.se|regeringen\.se|stat\.no)$/;
-export const PROFILES = ["business", "government", "organisation", "party"];
+export const PROFILES = ["business", "government", "organisation", "party", "media"];
 // Key pages an AI should find from the front page, per yardstick. Matched on link text and address.
 const KEY_PAGES = {
   government: {
@@ -64,6 +68,11 @@ const KEY_PAGES = {
     join: /bli medlem|medlemskap|frivillig|støtt|gi en gave|gave|donér|doner|join|donate|volunteer|support us/i,
     contact: /kontakt|contact/i,
     about: /om oss|om \S+|about/i,
+  },
+  media: {
+    about: /om oss|om \S+|redaksjonen|about/i,
+    contact: /kontakt|tips oss|contact|tips/i,
+    editorial: /redaktørplakat|vær varsom|presseetikk|etikk|redaksjonelle|retningslinjer|rettelser|ethics|editorial|standards|corrections/i,
   },
   party: {
     programme: /partiprogram|valgprogram|program|manifesto|programme/i,
@@ -94,6 +103,9 @@ function checkTexts(lang) {
   return {
     ...c,
     robots: (bots) => fill(c.robots, { bots }),
+    robotsTraining: (bots) => fill(c.robotsTraining, { bots }),
+    robotsTrainingAlso: (bots) => fill(c.robotsTrainingAlso, { bots }),
+    robotsMedia: (bots) => fill(c.robotsMedia, { bots }),
     lastmod: (percent) => fill(c.lastmod, { percent }),
     readable: (n, m) => fill(c.readable, { n, m, chars: READABLE_CHARS }),
     keyPages: (names) => fill(c.keyPages, { names }),
@@ -353,8 +365,10 @@ export function chooseProfile(chosen, pageTypes, host, publicHosts = new Set(), 
   if (PROFILES.includes(chosen)) return [chosen, "param"];
   if (pageTypes.includes("PoliticalParty")) return ["party", "schema"];
   if (pageTypes.some((x) => GOVERNMENT_TYPES.has(x))) return ["government", "schema"];
+  if (pageTypes.includes("NewsMediaOrganization")) return ["media", "schema"];
   if (pageTypes.some((x) => ORGANISATION_TYPES.has(x))) return ["organisation", "schema"];
   if (pageTypes.some((x) => COMMERCE_TYPES.has(x))) return ["business", "schema"];
+  if (pageTypes.some((x) => MEDIA_TYPES.has(x))) return ["media", "schema"];
   const h = host.replace(/^www\./, "");
   if (partyHosts.has(h)) return ["party", "index"];
   if (publicHosts.has(h)) return ["government", "index"];
@@ -369,7 +383,7 @@ function datedContent(objects, metaDate) {
   return typed && dated;
 }
 
-// profile: "business", "government", "organisation", or empty to detect it.
+// profile: "business", "government", "organisation", "party", "media", or empty to detect it.
 // publicHosts, partyHosts: host names (without www.) from the open index of public services and of parties.
 export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new Date(), pauseMs = PAUSE_MS, lang = "en", profile = "", publicHosts, partyHosts } = {}) {
   const t = T[language(lang)];
@@ -526,8 +540,13 @@ export function assess(r, lang = "en") {
   }
 
   // Common to all yardsticks (75 points).
-  if (!r.robots.blocked.length) add("ai_access", 20, 20);
-  else { add("ai_access", 0, 20); actions.push(t.robots(r.robots.blocked.join(", "))); }
+  // 15 points for the bots that fetch pages when someone asks, 5 for the training bots.
+  const answerBlocked = r.robots.blocked.filter((b) => ANSWER_BOTS.has(b));
+  const trainingBlocked = r.robots.blocked.filter((b) => !ANSWER_BOTS.has(b));
+  add("ai_access", (answerBlocked.length ? 0 : 15) + (trainingBlocked.length ? 0 : 5), 20);
+  if (answerBlocked.length) actions.push(t.robots(answerBlocked.join(", ")) + (profile === "media" ? " " + t.robotsMedia(trainingBlocked.join(", ") || "GPTBot, ClaudeBot, CCBot, Google-Extended") : ""));
+  if (trainingBlocked.length && !answerBlocked.length) actions.push(t.robotsTraining(trainingBlocked.join(", ")));
+  else if (trainingBlocked.length && profile !== "media") actions.push(t.robotsTrainingAlso(trainingBlocked.join(", ")));
   if (r.sitemap.url_count) {
     add("sitemap", 10, 10);
     const a = r.sitemap.share_older_than_2_years;

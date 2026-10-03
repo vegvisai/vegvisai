@@ -204,3 +204,28 @@ test("every static page is one well-formed HTML document with one h1 (no pasted-
     for (const tag of ["<html", "</html>", "<head>", "<body>", "<h1>"]) assert.equal(html.split(tag).length - 1, 1, `${p}: ${tag}`);
   }
 });
+
+test("blocking only training bots costs 5 of 20 and is called a possible choice; blocking answer bots costs 15", async () => {
+  const site = (robots) => makeFetch({ ...goodSite, "/robots.txt": robots + `\nSitemap: ${ROOT}/sitemap.xml\n` });
+  const training = await aiCheck(ROOT, { pauseMs: 0, fetchFn: site("User-agent: GPTBot\nDisallow: /\n\nUser-agent: CCBot\nDisallow: /\n\nUser-agent: *\nAllow: /") });
+  assert.deepEqual(training.breakdown.find((b) => b.id === "ai_access"), { id: "ai_access", points: 15, max: 20 });
+  assert.ok(training.actions.some((t) => t.includes("deliberate choice") && t.includes("GPTBot")), JSON.stringify(training.actions));
+  const answer = await aiCheck(ROOT, { pauseMs: 0, fetchFn: site("User-agent: Claude-SearchBot\nDisallow: /\n\nUser-agent: *\nAllow: /") });
+  assert.deepEqual(answer.breakdown.find((b) => b.id === "ai_access"), { id: "ai_access", points: 5, max: 20 });
+  assert.ok(answer.actions.some((t) => t.includes("Claude-SearchBot") && t.includes("cannot read or cite")));
+});
+
+test("a news medium is measured by the media yardstick, with advice to let search bots in", async () => {
+  const article = (n) => `<html lang="nb"><head><title>Sak ${n}</title><meta name="description" content="Nyhet"><script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsArticle","headline":"Sak ${n}","datePublished":"2026-10-0${n}"}</script></head><body><h1>Sak ${n}</h1><p>${"Tekst ".repeat(80)}</p></body></html>`;
+  const front = `<html lang="nb"><head><title>Avisa</title><meta name="description" content="Nyheter"><script type="application/ld+json">{"@context":"https://schema.org","@type":"NewsMediaOrganization","name":"Avisa"}</script></head><body><h1>Avisa</h1><p>${"Nyheter ".repeat(60)}</p><a href="/om-oss/">Om oss</a> <a href="/kontakt/">Tips oss</a> <a href="/redaktorplakat/">Redaktørplakaten</a> <a href="/sak/1">Sak 1</a> <a href="/sak/2">Sak 2</a></body></html>`;
+  const r = await aiCheck(ROOT, { pauseMs: 0, lang: "nb", fetchFn: makeFetch({
+    "/robots.txt": `User-agent: PerplexityBot\nDisallow: /\n\nUser-agent: GPTBot\nDisallow: /\n\nUser-agent: *\nAllow: /\nSitemap: ${ROOT}/sitemap.xml\n`,
+    "/sitemap.xml": `<urlset><url><loc>${ROOT}/sak/1</loc><lastmod>2026-10-01</lastmod></url><url><loc>${ROOT}/sak/2</loc><lastmod>2026-10-02</lastmod></url></urlset>`,
+    "/": front, "/sak/1": article(1), "/sak/2": article(2),
+  }) });
+  assert.equal(r.profile, "media");
+  assert.equal(r.profile_source, "schema");
+  assert.deepEqual(r.key_pages, { about: true, contact: true, editorial: true });
+  assert.ok(r.actions.some((t) => t.includes("nyhetsmedium") && t.includes("GPTBot")), JSON.stringify(r.actions));
+  assert.equal(r.breakdown.find((b) => b.id === "ai_access").points, 0);
+});

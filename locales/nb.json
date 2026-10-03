@@ -48,7 +48,7 @@
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift."
  },
  "check": {
-  "robots": "Åpne robots.txt for AI-robotene som er blokkert: {bots}.",
+  "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",
   "lastmod": "Oppdater lastmod i sitemap: {percent} % av sidene er datert mer enn to år tilbake.",
   "sitemap": "Legg ut en sitemap og pek til den fra robots.txt.",
   "titles": "Gi hver side en egen, beskrivende tittel.",
@@ -57,7 +57,8 @@
   "identity": {
    "government": "Beskriv virksomheten med schema.org (GovernmentOrganization): navn, adresse, kontakt og området dere betjener.",
    "organisation": "Beskriv organisasjonen med schema.org (Organization eller NGO): navn, adresse, kontakt og hva dere arbeider for.",
-   "party": "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet."
+   "party": "Beskriv partiet med schema.org (PoliticalParty eller Organization): navn, adresse, kontakt og lenke til partiprogrammet.",
+   "media": "Beskriv mediet med schema.org (NewsMediaOrganization): navn, redaktør, kontakt og lenker til redaksjonelle retningslinjer og rettelser."
   },
   "readable": "Legg hovedteksten i selve HTML-en: {n} av {m} sider viser under {chars} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.",
   "lang": "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
@@ -71,7 +72,8 @@
    "join": "medlemskap eller støtte",
    "programme": "partiprogrammet",
    "policy": "politikk og standpunkter",
-   "people": "folkevalgte og ledelse"
+   "people": "folkevalgte og ledelse",
+   "editorial": "redaksjonelle retningslinjer og rettelser"
   },
   "content": "Merk opp innholdssider med schema.org (Article, WebPage, Service, Event, FAQPage og lignende) med datePublished eller dateModified, så AI-en ser hva siden er og hvor oppdatert den er: {n} av {m} sider mangler det.",
   "zeroWidth": "Se over {n} treff med lav risiko, for eksempel nullbredde-tegn fra kopiering eller omtale av en systemprompt.",
@@ -79,7 +81,8 @@
    "business": "bedrift",
    "government": "offentlig virksomhet",
    "organisation": "organisasjon (NGO, forening)",
-   "party": "politisk parti"
+   "party": "politisk parti",
+   "media": "nyhetsmedium"
   },
   "profileSource": {
    "param": "valgt",
@@ -154,7 +157,10 @@
    "headings": "Hovedoverskrift",
    "llms_txt": "llms.txt",
    "ai_catalog": "ai-catalog.json"
-  }
+  },
+  "robotsTraining": "robots.txt blokkerer AI-trening ({bots}). Det kan være et bevisst valg: AI-assistenter kan fortsatt lese og sitere nettstedet gjennom søkerobotene sine.",
+  "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
+  "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}."
  },
  "check_errors": {
   "missing": "Oppgi en nettadresse.",
@@ -280,21 +286,21 @@
    "profParty": "Politisk parti",
    "button": "Sjekk",
    "whatH2": "Hva sjekken ser på",
-   "whatIntro": "Sjekken har fire målestokker: <strong>bedrift</strong>, <strong>offentlig virksomhet</strong>, <strong>organisasjon</strong> (NGO, forening) og <strong>politisk parti</strong>. Det meste er likt for alle; bare innholdsdelen er forskjellig. Målestokken finnes ut fra schema.org på sidene, domenet (for eksempel <code>kommune.no</code>) eller den åpne indeksen over offentlige tjenester. Du kan også velge selv.",
+   "whatIntro": "Sjekken har fem målestokker: <strong>bedrift</strong>, <strong>offentlig virksomhet</strong>, <strong>organisasjon</strong> (NGO, forening), <strong>politisk parti</strong> og <strong>nyhetsmedium</strong>. Det meste er likt for alle; bare innholdsdelen er forskjellig. Målestokken finnes ut fra schema.org på sidene, domenet (for eksempel <code>kommune.no</code>) eller den åpne indeksen over offentlige tjenester. Du kan også velge selv.",
    "thCheck": "Sjekk",
    "thApplies": "Gjelder",
    "thPoints": "Poeng",
    "all": "Alle",
    "businessOnly": "Bedrift",
-   "nonBusiness": "Offentlig, organisasjon, parti",
-   "row1": "<code>robots.txt</code> blokkerer ingen av de vanlige AI-robotene",
+   "nonBusiness": "Offentlig, organisasjon, parti, medium",
+   "row1": "<code>robots.txt</code> slipper inn AI-robotene som henter sider når noen spør (15), og treningsrobotene (5). Å blokkere bare trening kan være et bevisst valg",
    "row2": "Sitemap finnes, og høyst halvparten av sidene er datert mer enn to år tilbake",
    "row3": "Hver side har egen tittel; alle sider har meta-beskrivelse",
    "row4": "Virksomheten er beskrevet med schema.org (Organization, LocalBusiness, GovernmentOrganization, NGO, PoliticalParty e.l.)",
    "row5": "Sidene viser minst 300 tegn tekst uten JavaScript; språk er oppgitt; hver side har en hovedoverskrift",
    "row6": "Produkter eller tjenester har strukturerte data med navn, pris og valuta (og tilgjengelighet for varer)",
    "row7": "Innholdssider er merket med type (Article, WebPage, Service, Event e.l.) og dato (publisert eller endret)",
-   "row8": "Forsiden lenker til nøkkelsidene: tjenester, kontakt og om oss (offentlig); arbeid, medlemskap, kontakt og om oss (organisasjon); partiprogram, politikk, folkevalgte og kontakt (parti)",
+   "row8": "Forsiden lenker til nøkkelsidene: tjenester, kontakt og om oss (offentlig); arbeid, medlemskap, kontakt og om oss (organisasjon); partiprogram, politikk, folkevalgte og kontakt (parti); om oss, kontakt og redaksjonelle retningslinjer (medium)",
    "row9": "<code>/llms.txt</code> og <code>/.well-known/ai-catalog.json</code>",
    "note1": "Sjekker som ikke gjelder, for eksempel priser på en side uten priser, teller ikke med, og summen skaleres til 100. Svarer ikke forsiden, gis ingen poeng: da er nettstedet ikke målt. Sjekken ser også etter tekst som ligner instrukser til AI-assistenter (prompt-injeksjon), også i skjult tekst. Slike funn gir ikke trekk, men står øverst i tiltakene. Noen få nullbredde-tegn, som ofte kommer fra kopiering, regnes som lav risiko.",
    "note2": "Sjekken lister også hva nettstedet har åpent for AI utover sidene: nyhetsstrømmer, kalender, søk og handlinger i schema.org, åpne data, OpenAPI og MCP. Dette gir ikke poeng ennå.",
@@ -327,7 +333,8 @@
    "skipped": "hoppet over",
    "none": "(ingen)",
    "noneData": "ingen",
-   "footer": "Tidspunkt: {time}. Stikkprøve, ikke en fullstendig gjennomgang."
+   "footer": "Tidspunkt: {time}. Stikkprøve, ikke en fullstendig gjennomgang.",
+   "profMedia": "Nyhetsmedium"
   },
   "register": {
    "title": "Meld inn bedriften i veiviseren (teknisk test)",

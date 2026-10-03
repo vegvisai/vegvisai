@@ -9,8 +9,11 @@ import { makeRelease, withdrawRelease, publicJwkOf, keyId, PERIOD } from "./rele
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import { CheckError } from "./sjekk.js";
 import { language } from "../public/felles/i18n.js";
+import { LAUNCHED } from "./launch.js";
 
-const HEADERS = { "Cache-Control": "no-store", "X-Robots-Tag": "noindex, nofollow" };
+const NOINDEX = LAUNCHED ? {} : { "X-Robots-Tag": "noindex, nofollow" };
+
+const HEADERS = { "Cache-Control": "no-store", ...NOINDEX };
 const json = (body, status = 200) => Response.json(body, { status, headers: HEADERS });
 const digits = (v) => String(v ?? "").replace(/\D/g, "");
 // An entry id: a Norwegian org. no. (9 digits), an EU VAT id (DE123456789) or web:<domain>.
@@ -141,7 +144,7 @@ function signingKey(env) {
   try { return env?.EXPORT_SIGNING_KEY ? JSON.parse(env.EXPORT_SIGNING_KEY) : null; } catch { return null; }
 }
 
-const OPEN = { "Access-Control-Allow-Origin": "*", "X-Robots-Tag": "noindex, nofollow" };
+const OPEN = { "Access-Control-Allow-Origin": "*", ...NOINDEX };
 
 // GET /index/releases.json, /index/releases/<YYYY-MM>.json, /index/releases/<YYYY-MM>.json.sig, /index/signing-key.json
 export async function releases(url, env) {

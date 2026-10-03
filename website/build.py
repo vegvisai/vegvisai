@@ -7,6 +7,7 @@ footer, docs sidebar) is added here so every page shares it.
 
 Usage: python3 build.py   (then: npx wrangler deploy)
 """
+import json
 import re
 from pathlib import Path
 
@@ -17,6 +18,8 @@ GITHUB = "https://github.com/vegvisai/vegvisai"
 TEST = ""  # the platform answers its own paths on the same address (src/index.js, step 14d)
 
 LOCALES_DIR = ROOT.parent / "locales"
+# The opening switch (step 14e): launch.json. Before opening, every page says noindex.
+LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched") is True
 
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
@@ -74,32 +77,39 @@ def docs_sidebar(lang: str, current: str) -> str:
 
 
 def layout(lang: str, name: str, title: str, description: str, body: str) -> str:
-    t = T[lang]
     # Links to the other languages: the same page when it exists there, else that language's front page.
     others = "\n".join(
         f'<a href="{PAGES[name][l] if read(l, name) else PAGES["home"][l]}" hreflang="{META[l]["html_lang"]}" lang="{META[l]["html_lang"]}">{META[l]["name"]}</a>'
         for l in LANGS if l != lang)
-    home = PAGES["home"][lang]
-    is_doc = name in DOCS
-    if is_doc:
+    if name in DOCS:
         body = f'<div class="wrap docs">{docs_sidebar(lang, name)}<article class="prose">{body}</article></div>'
     alternates = "".join(
         f'<link rel="alternate" hreflang="{META[l]["html_lang"]}" href="{PAGES[name][l]}">'
         for l in LANGS if read(l, name))
+    return shell(lang, title, description, body, alternates=alternates, others=others)
+
+
+def shell(lang: str, title: str, description: str, body: str, *, alternates: str = "", others: str = "",
+          head_extra: str = "", css: tuple = ("/styles.css",), icon: str = "/brand/favicon.svg", html_lang: str = "") -> str:
+    """The page frame shared by the website and the platform's tool pages (locales/build_locales.py)."""
+    t = T[lang]
+    home = PAGES["home"][lang]
+    robots = "" if LAUNCHED else '<meta name="robots" content="noindex, nofollow">\n'
+    styles = "\n".join(f'<link rel="stylesheet" href="{c}">' for c in css)
+    preview = "" if LAUNCHED else f'<span class="preview">{t["preview"]}</span> {t["preview_text"]} '
     return f"""<!doctype html>
-<html lang="{META[lang]['html_lang']}">
+<html lang="{html_lang or META[lang]['html_lang']}">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex, nofollow">
-<title>{title}</title>
+{robots}<title>{title}</title>
 <meta name="description" content="{description}">
-<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-{alternates}
+<link rel="icon" href="{icon}" type="image/svg+xml">
+{alternates}{head_extra}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
-<link rel="stylesheet" href="/styles.css">
+{styles}
 </head>
 <body>
 <a class="skip" href="#main">{t['skip']}</a>
@@ -124,7 +134,7 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
 </main>
 <footer>
 <div class="wrap row">
-<p><span class="preview">{t['preview']}</span> {t['preview_text']} {t['operator']}</p>
+<p>{preview}{t['operator']}</p>
 <p class="owner-note">{t['owner_note']} <a href="{PAGES['ownership'][lang]}">{t['owner_link']}</a></p>
 <p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · {others.replace(chr(10), " · ")}</p>
 </div>
@@ -147,6 +157,13 @@ def main() -> None:
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(layout(lang, name, title, description, body))
             built += 1
+    # The headers file follows the opening switch too.
+    (PUBLIC / "_headers").write_text("/*\n" + ("" if LAUNCHED else "  X-Robots-Tag: noindex, nofollow\n") + "  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n")
+    # The platform's tool pages use the same frame, so they get the same stylesheet and mark.
+    shared = ROOT.parent / "testplattform" / "public" / "felles"
+    for f in ("styles.css", "tools.css"):
+        if (PUBLIC / f).exists():
+            (shared / ("site.css" if f == "styles.css" else f)).write_text((PUBLIC / f).read_text())
     print(f"Built {built} pages into {PUBLIC}")
 
 

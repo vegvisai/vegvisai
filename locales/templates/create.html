@@ -12,17 +12,11 @@
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"WebApplication","name":"{{json:t.appName}}","applicationCategory":"DeveloperApplication","inLanguage":"{{_meta.html_lang}}","isAccessibleForFree":true,"offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}}
 </script>
-<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
-fieldset{border:1px solid var(--box);border-radius:8px;margin:0 0 1.25rem;padding:.75rem 1rem 1rem}legend{font-weight:600;padding:0 .3rem}label{display:block;margin:.6rem 0 .2rem}.hjelp{font-size:.85rem;color:var(--mut);margin:.1rem 0 0}
-input,select,textarea{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}textarea{min-height:5.5rem;resize:vertical}input[type=checkbox],input[type=radio]{width:auto;margin-right:.35rem}
-.rad{display:flex;gap:.5rem;flex-wrap:wrap;align-items:end}.rad>*{flex:1 1 8rem}.dager{display:flex;flex-wrap:wrap;gap:.25rem 1rem}.dager label{display:inline-flex;align-items:center;margin:0}
-button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer}button.sek{background:var(--box);color:var(--fg)}
-.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.adv strong{color:var(--adv)}
-.fil{margin:1rem 0}.fil textarea{font:13px/1.45 ui-monospace,monospace;min-height:12rem;white-space:pre}.fil .knapper{display:flex;gap:.5rem;margin-top:.4rem}</style>
 </head>
 <body>
 <main>
-<p class="test">{{t.test}}{{languages}}</p>
+<section class="tool"><div class="wrap prose">
+{{testBanner}}
 <h1>{{t.h1}}</h1>
 <p>{{t.intro}}</p>
 <p><button type="button" class="sek" id="example">{{t.exampleButton}}</button></p>
@@ -246,6 +240,7 @@ $("form").addEventListener("submit", (ev) => {
 });
 showCountry();
 </script>
+</div></section>
 </main>
 </body>
 </html>

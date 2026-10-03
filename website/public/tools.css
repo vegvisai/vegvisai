@@ -1,0 +1,52 @@
+/* The platform's tool pages (AI check, generator, registration) inside the website frame.
+   Uses the variables in styles.css. Built pages: locales/templates/*.html. */
+.tool { padding: 2.5rem 0 4rem; }
+.tool .prose { max-width: 48rem; }
+.tool .mut { color: var(--subtle); }
+.tool .hjelp { font-size: .9rem; color: var(--subtle); margin: .2rem 0 0; }
+.tool .test { border: 1.5px dashed var(--line); padding: .5rem .8rem; border-radius: 10px; font-size: .9rem; color: var(--muted); }
+.tool code { background: var(--soft); padding: .1em .35em; border-radius: 6px; font: .9em var(--mono); }
+.tool .boks { background: var(--soft); padding: 1.1rem 1.3rem; border-radius: 14px; }
+.tool .poeng { font: 700 3rem/1 var(--display); font-variant-numeric: tabular-nums; color: var(--ink); }
+.tool .adv, .tool .ok { padding: .7rem 1.1rem; background: var(--soft); border-radius: 0 12px 12px 0; }
+.tool .adv { border-left: 4px solid var(--orange); }
+.tool .adv strong { color: var(--ink); }
+.tool .ok { border-left: 4px solid var(--blue); }
+
+/* Forms */
+.tool form { margin-top: 1rem; }
+.tool #skjema:not(.stack) { display: flex; gap: .6rem; flex-wrap: wrap; align-items: center; }
+.tool label { display: block; margin: .8rem 0 .25rem; color: var(--ink); font-weight: 500; }
+.tool input, .tool select, .tool textarea {
+  font: inherit; width: 100%; padding: .6rem .8rem; border: 1.5px solid var(--line); border-radius: 10px;
+  background: var(--paper); color: var(--ink);
+}
+.tool input:focus, .tool select:focus, .tool textarea:focus { border-color: var(--blue); outline: none; }
+.tool #url { flex: 1 1 16rem; width: auto; min-width: 0; }
+.tool #skjema > select { width: auto; max-width: 100%; }
+.tool textarea { min-height: 5.5rem; resize: vertical; }
+.tool input[type=checkbox], .tool input[type=radio] { width: auto; margin-right: .4rem; accent-color: var(--blue); }
+.tool button {
+  font: 500 1rem var(--body); min-height: 2.9rem; padding: 0 1.3rem; border: 0; border-radius: 999px;
+  background: var(--blue); color: var(--paper); cursor: pointer;
+}
+.tool button:hover { background: var(--blue-dark); }
+.tool button:disabled { opacity: .6; cursor: wait; }
+.tool button.sek { background: var(--haze); color: var(--night); }
+.tool button.sek:hover { background: var(--line); }
+.tool fieldset { border: 1.5px solid var(--line); border-radius: 14px; margin: 0 0 1.3rem; padding: .9rem 1.2rem 1.2rem; }
+.tool legend { font: 700 1.05rem var(--display); padding: 0 .4rem; }
+.tool .rad { display: flex; gap: .6rem; flex-wrap: wrap; align-items: end; }
+.tool .rad > * { flex: 1 1 9rem; }
+.tool .dager { display: flex; flex-wrap: wrap; gap: .3rem 1rem; }
+.tool .dager label, .tool .samtykke label { display: inline-flex; align-items: center; margin: 0; font-weight: 400; }
+.tool .samtykke { display: flex; align-items: flex-start; gap: .3rem; margin: 1rem 0; }
+.tool .fil { margin: 1.2rem 0; }
+.tool .fil textarea { font: 13px/1.45 var(--mono); min-height: 12rem; white-space: pre; }
+.tool .fil .knapper { display: flex; gap: .5rem; margin-top: .5rem; }
+
+/* Tables in results */
+.tool table { width: 100%; border-collapse: collapse; font-size: .95rem; display: block; overflow-x: auto; }
+.tool th, .tool td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+.tool td { word-break: break-word; }
+.tool th { font-family: var(--display); }

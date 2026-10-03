@@ -9,14 +9,11 @@
 <title>{{t.title}}</title>
 <meta name="description" content="{{attr:t.description}}">
 {{alternates}}
-<style>:root{--bg:#fbfaf7;--fg:#1d1d1b;--mut:#5b5b57;--acc:#0b6e4f;--box:#f0eee7;--adv:#a8321e;--ok:#0b6e4f}@media (prefers-color-scheme:dark){:root{--bg:#161614;--fg:#ecebe6;--mut:#a9a8a1;--acc:#5fd0a5;--box:#23231f;--adv:#ff8a73;--ok:#5fd0a5}}body{background:var(--bg);color:var(--fg);font:17px/1.55 system-ui,sans-serif;margin:0}main{max-width:44rem;margin:0 auto;padding:2rem 1rem 4rem}a{color:var(--acc)}h1{font-size:2rem;line-height:1.2}.mut{color:var(--mut)}.boks{background:var(--box);padding:1rem 1.25rem;border-radius:8px}.test{border:1px dashed var(--mut);padding:.5rem .75rem;border-radius:6px;font-size:.9rem}code{background:var(--box);padding:.1em .3em;border-radius:4px}
-label{display:block;margin:.8rem 0 .2rem}select{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}#annet{margin-top:.4rem}input{font:inherit;width:100%;box-sizing:border-box;padding:.45rem .6rem;border:1px solid var(--mut);border-radius:6px;background:var(--bg);color:var(--fg)}input[type=checkbox]{width:auto;margin-right:.4rem}.samtykke{display:flex;align-items:flex-start;gap:.2rem;margin:1rem 0}.samtykke label{margin:0}
-button{font:inherit;padding:.55rem 1.1rem;border:0;border-radius:6px;background:var(--acc);color:var(--bg);cursor:pointer;margin-top:.5rem}button:disabled{opacity:.6;cursor:wait}
-.adv{border-left:4px solid var(--adv);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}.ok{border-left:4px solid var(--ok);padding:.5rem 1rem;background:var(--box);border-radius:0 8px 8px 0}</style>
 </head>
 <body>
 <main>
-<p class="test">{{t.test}}{{languages}}</p>
+<section class="tool"><div class="wrap prose">
+{{testBanner}}
 <h1>{{t.h1}}</h1>
 <p>{{t.intro}}</p>
 <p class="mut">{{t.noCard}}</p>
@@ -111,6 +108,7 @@ $("statusskjema").addEventListener("submit", async (ev) => {
   $("statussvar").textContent = res.ok ? (P.status[r.status] || r.status) : r.error;
 });
 </script>
+</div></section>
 </main>
 </body>
 </html>

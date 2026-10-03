@@ -29,4 +29,4 @@ These cannot apply while one person owns the platform. They are the aim, and the
 - **Carried forward.** The principles go into the articles of association or shareholders' agreement of every owner that follows: first a limited company (AS), then the neutral owner.
 - **Your remedy.** If I break it, the code and the index are yours to take under their licences. Fork us, under your own name (see [TRADEMARK.md](TRADEMARK.md)).
 
-Signed: [Espen Brathaug, date of launch]
+Signed: Espen Brathaug, 4 October 2026

@@ -1,0 +1,19 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "ai.vegvis/vegvisai",
+  "title": "VegvisAI guide",
+  "description": "Open guide to businesses, public services and parties in Norway. Never ranks; read-only.",
+  "version": "1.5.0",
+  "websiteUrl": "https://vegvis.ai/",
+  "repository": {
+    "url": "https://github.com/vegvisai/vegvisai",
+    "source": "github",
+    "subfolder": "connector"
+  },
+  "remotes": [
+    {
+      "type": "streamable-http",
+      "url": "https://vegvis.ai/mcp"
+    }
+  ]
+}

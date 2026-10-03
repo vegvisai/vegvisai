@@ -1,0 +1,64 @@
+{
+ "name": "VegvisAI open index: businesses",
+ "licence": {
+  "database": "Open Database License (ODbL) 1.0, https://opendatacommons.org/licenses/odbl/1-0/",
+  "contents": "Database Contents License (DbCL) 1.0, https://opendatacommons.org/licenses/dbcl/1-0/",
+  "attribution": "VegvisAI open index, https://vegvis.ai/",
+  "share_alike": "If you publicly use an adapted version of this database, the adapted database must be offered under the ODbL. Products made with the data (for example answers or maps) are not themselves covered by share-alike.",
+  "sources": [
+   "Enhetsregisteret, Brønnøysundregistrene (NLOD 2.0): checks of Norwegian organisation numbers",
+   "Companies House (Open Government Licence v3.0): checks of UK company numbers",
+   "VIES, European Commission: checks of EU VAT numbers"
+  ]
+ },
+ "generated": "2026-10-03",
+ "notice": "Only what each business publishes on its own domain, and only businesses that chose the open licence there. Norwegian businesses are checked in Enhetsregisteret, EU businesses in VIES, UK businesses in Companies House. We ask re-users to remove the ids listed as removed; the ODbL does not require it, but it respects the businesses' wishes. Copies that are already downloaded cannot be recalled by us.",
+ "entries": [
+  {
+   "org_number": "web:sit-bakeri.gixer77.com",
+   "country": "IS",
+   "domain": "sit-bakeri.gixer77.com",
+   "name": "SIT Testbakeri",
+   "url": "https://sit-bakeri.gixer77.com/",
+   "card_url": "https://sit-bakeri.gixer77.com/",
+   "description": "Oppdiktet testbedrift for VegvisAI. Baker brød og bestillingskaker i Reykjavík.",
+   "categories": [
+    "bakery",
+    "test",
+    "bursdagskake, 12 personer",
+    "glutenfri sjokoladekake, 8 personer"
+   ],
+   "area": [
+    "Reykjavík"
+   ],
+   "postal_code": "101",
+   "request": "https://sit-bakeri.gixer77.com/kontakt/?kake={kake}&personer={personer}&dato={dato}&beskrivelse={beskrivelse}"
+  },
+  {
+   "org_number": "web:sit-pensjonat.gixer77.com",
+   "country": "IS",
+   "domain": "sit-pensjonat.gixer77.com",
+   "name": "SIT Test Guesthouse",
+   "url": "https://sit-pensjonat.gixer77.com/",
+   "card_url": "https://sit-pensjonat.gixer77.com/",
+   "description": "Fictional test business for VegvisAI. A small guesthouse with four rooms in Akureyri.",
+   "categories": [
+    "lodgingbusiness",
+    "guesthouse",
+    "test",
+    "double room with breakfast, one night",
+    "family room for four, one night"
+   ],
+   "area": [
+    "Akureyri"
+   ],
+   "postal_code": "600",
+   "request": "https://sit-pensjonat.gixer77.com/kontakt/?room={room}&arrival={arrival}&nights={nights}&guests={guests}&message={message}"
+  }
+ ],
+ "period": "2026-10-r2",
+ "previous": "2026-10",
+ "removed_since_previous": [],
+ "key_id": "4a71584cc11f41fe",
+ "signature": "Ed25519 over the exact bytes of this file; see /index/releases/<period>.json.sig and /index/signing-key.json. The signature shows that the file is unchanged and comes from VegvisAI, not that every entry is correct."
+}

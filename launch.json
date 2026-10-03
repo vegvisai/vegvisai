@@ -1,4 +1,4 @@
 {
- "launched": false,
+ "launched": true,
  "_note": "The opening switch. false: test markers, noindex and the connector's test name stay. Set to true at opening; the website and locale builds read it."
 }

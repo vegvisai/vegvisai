@@ -270,7 +270,7 @@
  },
  "pages": {
   "check": {
-   "title": "AI-sjekk: hvordan ser nettstedet ut for AI? (teknisk test)",
+   "title": "AI-sjekk · VegvisAI",
    "description": "Gratis sjekk av hvordan et nettsted ser ut for AI-assistenter: robots.txt, sitemap, schema.org, llms.txt, ai-catalog.json og tekst som ligner prompt-injeksjon.",
    "appName": "AI-sjekk (teknisk test)",
    "test": "Teknisk test. Ikke en lansering.",
@@ -338,7 +338,7 @@
    "noteOthers": "Andre gratis sjekker måler flere tekniske detaljer for utviklere, for eksempel Cloudflares <a href=\"https://isitagentready.com/\">isitagentready.com</a>. Denne sjekken legger til målestokker for offentlige virksomheter, organisasjoner, partier og nyhetsmedier, sjekken for skjulte instrukser, enkle råd og et ferdig AI-visittkort. Det som betyr mest, er fortsatt deres egen tydelige nettside; en gratis Google-bedriftsprofil hjelper også."
   },
   "register": {
-   "title": "Meld inn bedriften i veiviseren (teknisk test)",
+   "title": "Meld inn bedriften · VegvisAI",
    "description": "Meld inn bedriften i den åpne veiviseren. Vi leser AI-visittkortet på deres eget domene og sjekker organisasjonsnummeret i Enhetsregisteret. Gratis, og rangering kan ikke kjøpes.",
    "test": "Teknisk test. Ikke en lansering.",
    "h1": "Meld inn bedriften",
@@ -381,7 +381,7 @@
    }
   },
   "create": {
-   "title": "Lag et AI-lesbart visittkort (teknisk test)",
+   "title": "Lag et AI-visittkort · VegvisAI",
    "description": "Svar på noen spørsmål og få et visittkort som AI-assistenter forstår: en HTML-side med schema.org, llms.txt og ai-catalog.json. Alt skjer i nettleseren; ingenting lagres.",
    "appName": "Visittkort-generator (teknisk test)",
    "test": "Teknisk test. Ikke en lansering. Alt skjer i nettleseren: vi ser ikke det du skriver, og ingenting lagres.",

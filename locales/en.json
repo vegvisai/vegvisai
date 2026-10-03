@@ -256,7 +256,7 @@
  },
  "pages": {
   "check": {
-   "title": "AI check: how does your website look to AI? (technical test)",
+   "title": "AI check · VegvisAI",
    "description": "Free check of how a website looks to AI assistants: robots.txt, sitemap, schema.org, llms.txt, ai-catalog.json and text that resembles prompt injection.",
    "appName": "AI check (technical test)",
    "test": "Technical test. Not a launch.",
@@ -324,7 +324,7 @@
    "noteOthers": "Other free checks measure more technical details for developers, for example Cloudflare's <a href=\"https://isitagentready.com/\">isitagentready.com</a>. This check adds yardsticks for public bodies, organisations, parties and news media, the scan for hidden instructions, plain advice, and a ready AI business card. What matters most is still your own clear website; a free Google Business Profile helps too."
   },
   "register": {
-   "title": "Register your business in the guide (technical test)",
+   "title": "Register your business · VegvisAI",
    "description": "Register your business in the open guide. We read the AI business card on your own domain and check it in a public register where we can. Free, and ranking cannot be bought.",
    "test": "Technical test. Not a launch.",
    "h1": "Register your business",
@@ -367,7 +367,7 @@
    }
   },
   "create": {
-   "title": "Make an AI-readable business card (technical test)",
+   "title": "Make an AI business card · VegvisAI",
    "description": "Answer a few questions and get a business card that AI assistants understand: an HTML page with schema.org, llms.txt and ai-catalog.json. Everything happens in your browser; nothing is stored.",
    "appName": "Business card generator (technical test)",
    "test": "Technical test. Not a launch. Everything happens in your browser: we do not see what you type, and nothing is stored.",

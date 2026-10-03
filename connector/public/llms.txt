@@ -1,20 +1,24 @@
-# Veiviser (teknisk test)
+# VegvisAI
 
-> Teknisk test av en åpen veiviser som gjør bedrifter synlige og forståelige for AI-assistenter. Ikke en lansering. Bedriften i eksemplet er oppdiktet.
+> An open guide that helps AI assistants find businesses, public services and political parties' own words, starting with Norway. Get found by AI without paying anyone for it: the guide never ranks, placement cannot be bought, and businesses own their own data. Open source (Apache 2.0), open index (ODbL).
 
 ## Connector (MCP)
-- [Veiviser-connector](/mcp): Streamable HTTP, bare lesing. Verktøy: find_business, check_business, find_public_help, find_political_party, ai_check
+- [VegvisAI connector](/mcp): Streamable HTTP, read-only. Tools: find_business, check_business, find_public_help, find_political_party, ai_check
 
-## Åpen indeks (ODbL)
-- [Offentlige tjenester i Norge](/index/public-no.json): statlige etater etter tema og nettsidene til alle 357 kommuner. Bare lenker.
-- [Politiske partier](/index/parties-no.json): partienes egne sider og partiprogram, alfabetisk og aldri rangert. Listen er ikke komplett ennå.
+## Open index (ODbL)
+- [Businesses](/index/businesses-no.json): registered businesses that chose the open licence on their own domain. Signed monthly releases: [/index/releases.json](/index/releases.json)
+- [Public services in Norway](/index/public-no.json): state agencies by topic and the websites of all 357 municipalities. Links only.
+- [Political parties](/index/parties-no.json): the parties' own pages and programmes, alphabetical and never ranked. Not complete yet.
 
-## Verktøy for bedrifter
-- [AI-sjekk](/sjekk/): hvordan ser et nettsted ut for AI-assistenter? API: /api/sjekk?url=…
-- [Lag et AI-lesbart visittkort](/lag/): skjema som lager visittkort, llms.txt og ai-catalog.json i nettleseren
+## Tools for businesses
+- [AI check](/check/) ([Norwegian](/sjekk/)): how does a website look to AI assistants? API: /api/sjekk?url=…
+- [Make an AI business card](/create/) ([Norwegian](/lag/)): a form that makes a business card, llms.txt and ai-catalog.json in the browser
+- [Register a business](/register/) ([Norwegian](/meld-inn/)): free, reviewed by a person, never ranked
 
-## Eksempel
-- [Eksempel Bakeri AS (oppdiktet)](/eksempel/): AI-lesbart visittkort, nivå 0
-- [Eksempel Gjestehus AS (oppdiktet)](/eksempel/gjestehus/): AI-lesbart visittkort med rom, priser og bookinglenke
-- [Example Guesthouse Ltd (fictional, English)](/example/): the same guesthouse in English
-- [Meld inn bedriften](/meld-inn/): påmelding til den åpne veiviseren
+## Examples (fictional businesses)
+- [Eksempel Bakeri AS](/eksempel/): AI-readable business card (Norwegian)
+- [Eksempel Gjestehus AS](/eksempel/gjestehus/): rooms, prices and a booking link (Norwegian)
+- [Example Guesthouse Ltd](/example/): the same guesthouse in English
+
+## About
+- [How the guide chooses](/docs/how-we-choose/), [privacy](/privacy/), [ownership](/ownership/)

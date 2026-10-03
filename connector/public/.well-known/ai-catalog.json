@@ -1,12 +1,12 @@
 {
   "specVersion": "1.0",
   "host": {
-    "displayName": "VegvisAI guide (technical test)",
-    "identifier": "veiviser-test"
+    "displayName": "VegvisAI guide",
+    "identifier": "vegvisai"
   },
   "entries": [
     {
-      "identifier": "urn:air:veiviser-test:mcp:veiviser",
+      "identifier": "urn:air:vegvisai:mcp:veiviser",
       "type": "application/mcp",
       "url": "/mcp",
       "description": "Guide connector, read-only: find a business (test), Norwegian business lookup in Brønnøysund, public help, political parties, AI check of a website.",
@@ -21,7 +21,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:data:public-no",
+      "identifier": "urn:air:vegvisai:data:public-no",
       "type": "application/json",
       "url": "/index/public-no.json",
       "description": "Open index (ODbL) of public services in Norway: state agencies by topic and the websites of all 357 municipalities. Links only.",
@@ -37,7 +37,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:data:parties-no",
+      "identifier": "urn:air:vegvisai:data:parties-no",
       "type": "application/json",
       "url": "/index/parties-no.json",
       "description": "Open index (ODbL) of political parties in Norway: links to the parties' own pages and programmes, alphabetical, never ranked. Not complete yet.",
@@ -53,7 +53,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:sjekk",
+      "identifier": "urn:air:vegvisai:web:sjekk",
       "type": "text/html",
       "url": "/sjekk/",
       "description": "AI check: how does a website look to AI assistants? (Norwegian page)",
@@ -68,7 +68,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:lag",
+      "identifier": "urn:air:vegvisai:web:lag",
       "type": "text/html",
       "url": "/lag/",
       "description": "Make an AI-readable business card in the browser (Norwegian page).",
@@ -83,7 +83,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:eksempel",
+      "identifier": "urn:air:vegvisai:web:eksempel",
       "type": "text/html",
       "url": "/eksempel/",
       "tags": [
@@ -97,7 +97,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:eksempel-gjestehus",
+      "identifier": "urn:air:vegvisai:web:eksempel-gjestehus",
       "type": "text/html",
       "url": "/eksempel/gjestehus/",
       "description": "Fictional example: an AI-readable business card for a guesthouse (Norwegian page).",
@@ -112,7 +112,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:example",
+      "identifier": "urn:air:vegvisai:web:example",
       "type": "text/html",
       "url": "/example/",
       "description": "Fictional English example: an AI-readable business card for a guesthouse.",
@@ -127,7 +127,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:web:meld-inn",
+      "identifier": "urn:air:vegvisai:web:meld-inn",
       "type": "text/html",
       "url": "/meld-inn/",
       "description": "Register a business in the open guide (Norwegian page).",
@@ -142,7 +142,7 @@
       }
     },
     {
-      "identifier": "urn:air:veiviser-test:llms",
+      "identifier": "urn:air:vegvisai:llms",
       "type": "text/plain",
       "url": "/llms.txt",
       "extensions": {

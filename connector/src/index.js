@@ -183,7 +183,7 @@ function findPoliticalParty({ name }) {
   return text(lines.join("\n"));
 }
 
-const BRREG_HEADERS = { Accept: "application/json", "User-Agent": "veiviser-test/1.1" };
+const BRREG_HEADERS = { Accept: "application/json", "User-Agent": "VegvisAI/1.1 (+https://vegvis.ai/)" };
 
 // Fetches one entity from Enhetsregisteret, or null.
 async function getEntity(orgNumber) {

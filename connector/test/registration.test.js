@@ -79,7 +79,7 @@ test("form, review, changelog, export and the re-check work together", async () 
 
   // The card disappears: the re-check removes the business and logs a neutral reason.
   const r = await recheck(env, { fetchFn: fakeFetch({ site: { "/.well-known/ai-catalog.json": undefined, "/ai/": undefined } }) });
-  assert.deepEqual(r, { checked: 1, removed: 1, updated: 0 });
+  assert.deepEqual(r, { checked: 1, removed: 1, updated: 0, retention: { entries: 0, ids: 0 } });
   assert.equal((await openExport(store)).entries.length, 0, "a removed business leaves the export");
   const log = await publicChangelog(store);
   assert.deepEqual(log.map((c) => `${c.action}:${c.reason}`), ["removed:no_card", "listed:reviewed", "submitted:registered"]);

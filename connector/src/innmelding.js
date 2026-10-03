@@ -4,7 +4,7 @@
 // Every new listing is reviewed by a person at the start.
 
 import { verifyBusiness, reasonText } from "./registration.js";
-import { d1Store, publicChangelog, openExport } from "./register.js";
+import { d1Store, publicChangelog, openExport, applyRetention } from "./register.js";
 import { makeRelease, withdrawRelease, publicJwkOf, keyId, PERIOD } from "./release.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import { CheckError } from "./sjekk.js";
@@ -125,7 +125,9 @@ export async function recheck(env, { fetchFn = fetch } = {}) {
       updated++;
     }
   }
-  return { checked, removed, updated };
+  // Backstop for the monthly purge: nothing removed stays longer than 35 days.
+  const retention = await applyRetention(store);
+  return { checked, removed, updated, retention };
 }
 
 // Listed businesses that match a need, for the connector tool find_business.
@@ -177,7 +179,10 @@ export async function monthlyRelease(env, { now = new Date() } = {}) {
   const store = storeFor(env);
   const key = signingKey(env);
   if (!store || !key) return { created: false, error: "no store or signing key" };
-  return makeRelease(store, key, { now });
+  const release = await makeRelease(store, key, { now });
+  // Removed content is only needed until a release has listed the removal.
+  const retention = await applyRetention(store, { now, afterRelease: Boolean(release.created) });
+  return { ...release, retention };
 }
 
 // POST /api/admin/withdraw { period, reason } with the review token.

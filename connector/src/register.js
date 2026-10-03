@@ -56,6 +56,17 @@ export function d1Store(db) {
         db.prepare("INSERT INTO changes (at, org_number, action, reason, personal) VALUES (?, 'erased', 'erased', 'request', 1)").bind(nowIso()),
       ]);
     },
+    // Retention: removed rows older than contentBefore are deleted (personal ids leave the changelog too);
+    // ids of removed businesses leave the changelog when the event is older than idBefore.
+    async purge(contentBefore, idBefore) {
+      const gone = "SELECT org_number FROM businesses WHERE status = 'removed' AND updated_at < ?1";
+      const [personal, rows, ids] = await db.batch([
+        db.prepare(`UPDATE changes SET org_number = 'erased' WHERE personal = 1 AND org_number IN (${gone})`).bind(contentBefore),
+        db.prepare("DELETE FROM businesses WHERE status = 'removed' AND updated_at < ?1").bind(contentBefore),
+        db.prepare("UPDATE changes SET org_number = 'erased' WHERE org_number != 'erased' AND at < ?1 AND org_number NOT IN (SELECT org_number FROM businesses)").bind(idBefore),
+      ]);
+      return { entries: rows.meta?.changes ?? 0, ids: (personal.meta?.changes ?? 0) + (ids.meta?.changes ?? 0) };
+    },
     async listed() { return ((await db.prepare("SELECT * FROM businesses WHERE status = 'listed'").all()).results ?? []).map(row); },
     async byStatus(status) { return ((await db.prepare("SELECT * FROM businesses WHERE status = ?").bind(status).all()).results ?? []).map(row); },
     async changes(limit = 200) {
@@ -90,6 +101,17 @@ export function memoryStore() {
       for (const c of log) if (c.org_number === org) Object.assign(c, { org_number: "erased", personal: 1 });
       log.push({ at: nowIso(), org_number: "erased", action: "erased", reason: "request", personal: 1 });
     },
+    async purge(contentBefore, idBefore) {
+      let entries = 0, ids = 0;
+      for (const b of [...businesses.values()]) {
+        if (b.status !== "removed" || b.updated_at >= contentBefore) continue;
+        businesses.delete(b.org_number);
+        entries++;
+        for (const c of log) if (c.personal && c.org_number === b.org_number) { c.org_number = "erased"; ids++; }
+      }
+      for (const c of log) if (c.org_number !== "erased" && c.at < idBefore && !businesses.has(c.org_number)) { c.org_number = "erased"; ids++; }
+      return { entries, ids };
+    },
     async listed() { return [...businesses.values()].filter((b) => b.status === "listed"); },
     async byStatus(status) { return [...businesses.values()].filter((b) => b.status === status); },
     async changes(limit = 200) {
@@ -103,6 +125,17 @@ export function memoryStore() {
     async saveRelease(r) { if (releases.has(r.period)) throw new Error("A release is never changed."); releases.set(r.period, { ...r }); },
     async withdrawRelease(period, reason, replacedBy) { const r = releases.get(period); if (r && !r.withdrawn) Object.assign(r, { withdrawn: reason, replaced_by: replacedBy }); },
   };
+}
+
+// Retention of removed entries (Espen 2026-10-03): the content goes when the next monthly release is out,
+// at the latest after 35 days; personal ids (ENK, EU VAT, domain only) go with it. Organisation ids of
+// removed businesses stay in the changelog for 12 months, so re-users who sync rarely can follow.
+export const RETENTION = { contentDays: 35, idDays: 365 };
+const daysBefore = (now, days) => new Date(now.getTime() - days * 86400000).toISOString().replace(/\.\d+Z$/, "Z");
+
+export async function applyRetention(store, { now = new Date(), afterRelease = false } = {}) {
+  const contentBefore = afterRelease ? now.toISOString().replace(/\.\d+Z$/, "Z") : daysBefore(now, RETENTION.contentDays);
+  return store.purge(contentBefore, daysBefore(now, RETENTION.idDays));
 }
 
 // The public changelog: entries that may hold personal data are shown without their id.

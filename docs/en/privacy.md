@@ -10,7 +10,7 @@ We process as little personal data as we can. Here is what we process, why, and 
 
 ## Who is responsible
 
-Espen Brathaug, Oslo, Norway, is the controller for the personal data processed by VegvisAI. Contact: [email on vegvis.ai before launch].
+VegvisAI is run privately until a company or another owner takes over (see [Ownership](ownership.md)). The controller is Espen Brathaug, Oslo, Norway. Contact for privacy questions, removal and deletion: [contact address].
 
 ## What we process
 
@@ -18,21 +18,26 @@ Espen Brathaug, Oslo, Norway, is the controller for the personal data processed 
 | --- | --- | --- | --- |
 | This website | Your IP address and browser information, handled by Cloudflare to deliver the pages and stop attacks. No cookies of our own, no analytics | To run a secure website (legitimate interest) | Cloudflare's own security logs [placeholder: check period] |
 | The AI check and the connector | The web address you check. A hash of your IP address, used only for rate limits | To give you the result and stop misuse (legitimate interest) | We keep no request logs. Rate limit counters expire after 60 seconds |
-| Registration | The web address and organisation number of the business, and what its business card on its own domain publishes. We do not ask for your email | To list the business you ask us to list (legitimate interest) | Until the business is removed. Every change is in the public changelog, where sole proprietorships are shown without their number |
-| The open index | What the business itself publishes on its website. For a sole proprietorship this can include the owner's name | To make the business findable for AI assistants, as it asked (legitimate interest) | Until the business is removed. Sole proprietorships are not included in the open export, which is published monthly |
-| Contributions on GitHub | Your GitHub user name and what you contribute | To run an open source project (legitimate interest); GitHub's own terms apply | As long as the project's history exists |
+| Registration (the form and pull requests) | The web address of the business, and what its business card on its own domain publishes; the organisation, VAT or company number is read from the card and the public register. We do not ask for your email. A pull request file holds only the web address and the country | To list the business you ask us to list, so AI assistants can find it (legitimate interest). Every kind of business is welcome, sole proprietorships included | Until the business is removed or deleted. A removed entry is kept [placeholder: period] so the re-check and the changelog work, then deleted |
+| The public changelog | The date, the kind of change and a neutral reason. Entries that may hold personal data (sole proprietorships, EU VAT entries, entries checked by domain only) are shown without their number | Transparency: anyone can see how the index changes (legitimate interest) | As long as the register exists; deleted entries become anonymous events |
+| The open export and the monthly releases | What the business itself publishes on its website, only when it chose the open licence there (ODbL and DbCL, in its own `ai-catalog.json`). For a sole proprietorship this can include the owner's name | To let other open guides use the data, as the business chose on its own domain (consent, given and withdrawn on the domain) | A release is a fixed file. After a deletion request we withdraw the release and publish a replacement; copies others have already downloaded cannot be recalled |
+| GitHub: contributions, pull requests, «Find help» and the helper list | Your GitHub user name and what you write or contribute; for helpers, the entry in the helper list | To run an open source project and let businesses and helpers meet (legitimate interest). Everything there is public and GitHub's own terms apply | As long as the project's history exists; git history cannot be changed afterwards. Logs from the GitHub bots are kept one day |
+
+## If someone else registered your business
+
+Anyone with the right to register a business can do it, for example a web agency. If your sole proprietorship was registered by someone else, this page is your information about it: the data comes from your own website and the public registers, it is used to make your business findable, and you can ask for removal or deletion at any time.
 
 ## Who else handles the data
 
-- **Cloudflare** runs the website, the AI check and the connector as our processor. Data can be processed outside the EEA [placeholder: transfer basis].
-- **GitHub** hosts the code and receives contributions under its own terms.
+- **Cloudflare** runs the website, the AI check, the connector and the register as our processor. Data can be processed outside the EEA [placeholder: transfer basis].
+- **GitHub** hosts the code, the pull requests, «Find help» and the helper list under its own terms.
 - **Brønnøysundregistrene**, the EU's VAT register **VIES** and the UK's **Companies House** are asked about organisation, VAT and company numbers; we send only the number.
 
-We never sell personal data.
+We never sell personal data. Helpers and businesses who make deals through «Find help» are responsible for the personal data they share with each other.
 
-## Removal from the index
+## Removal and deletion
 
-A business can ask to be removed at any time, and so can the owner of a sole proprietorship. We remove the entry from the register and the live index, and leave it out of the next export. Every export lists the entries removed since the last one, so others who use the open data can remove them too. We cannot recall copies that others have already downloaded.
+A business can ask to be removed at any time, and the owner of a sole proprietorship can ask for deletion. Removal takes the entry out of the live index and the next release. Deletion erases the entry, and the changelog keeps only an anonymous event. Every release lists the entries removed since the previous one, and a withdrawn release is marked so mirrors delete it. We cannot recall copies that others have already downloaded. Removing the open licence from your `ai-catalog.json` takes you out of the next release.
 
 ## Your rights
 

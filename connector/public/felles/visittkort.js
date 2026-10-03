@@ -57,6 +57,8 @@ export function normalize(f) {
   const country = /^[A-Z]{2}$/.test(String(f.country ?? "").toUpperCase()) ? String(f.country).toUpperCase() : "NO";
   const d = {
     country,
+    // The export licence (P46): on by default; the business gives it on its own domain.
+    openLicence: f.openLicence !== false && f.openLicence !== "false",
     text: LANGS.includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
     currency: CURRENCIES.includes(f.currency) ? f.currency : defaultCurrency(country),
     vatId: EU.has(country) ? String(f.vatId ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16) : "",
@@ -243,6 +245,8 @@ export function makeCatalog(d) {
   if (d.orgNumber) local.org_number = d.orgNumber;
   if (d.vatId) local.vat_id = jsonld(d).vatID;
   if (d.companyNumber) local.company_number = d.companyNumber;
+  // Shared openly in the VegvisAI index under ODbL (the database) and DbCL (this entry); remove to opt out.
+  if (d.openLicence) local.index_licence = "ODbL-1.0 DbCL-1.0";
   return JSON.stringify({
     specVersion: "1.0",
     host: { displayName: d.name, identifier: domain },

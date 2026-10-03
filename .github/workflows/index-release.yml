@@ -21,9 +21,9 @@ jobs:
       - run: node tools/bots/fetch-releases.mjs
       - name: Commit new releases
         run: |
-          git add releases/
+          git add -A releases/
           if git diff --cached --quiet; then echo "Nothing new."; exit 0; fi
           git config user.name "vegvisai-bot"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git commit -m "Index release $(basename "$(ls releases/businesses/*.json | tail -1)" .json)"
+          git commit -m "Index releases: $(git diff --cached --name-status | sed 's#releases/businesses/##' | tr '\n' ' ')"
           git push

@@ -112,6 +112,12 @@ button{font:inherit;padding:.5rem 1rem;border:0;border-radius:6px;background:var
 <p class="hjelp">{{t.requiredHelp}}</p>
 </fieldset>
 
+<fieldset>
+<legend>{{t.licenceH}}</legend>
+<label><input type="checkbox" id="openLicence" name="openLicence" checked>{{t.licence}}</label>
+<p class="hjelp">{{t.licenceHelp}}</p>
+</fieldset>
+
 <button>{{t.button}}</button>
 </form>
 
@@ -155,6 +161,7 @@ function readForm() {
   const f = Object.fromEntries(new FormData($("form")));
   f.days = [...document.querySelectorAll("input[name=days]:checked")].map((c) => c.value);
   f.homeVisits = $("homeVisits").checked;
+  f.openLicence = $("openLicence").checked;
   f.country = country();
   f.text = LANG;
   return f;

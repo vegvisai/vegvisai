@@ -6,9 +6,10 @@ body:
   - type: markdown
     attributes:
       value: |
-        Describe what you need. Developers and agencies from the [helper list](../tree/main/helpers) and the community can answer.
-        **VegvisAI takes no cut, handles no payment and guarantees no work.** Any deal is between you and the helper. Using a helper never gives a better place in the guide: the guide does not rank.
-        Do not post personal data, passwords or prices you do not want public. Swap contact details privately.
+        For businesses that want help with their own business (not private persons). Describe what you need; developers and agencies from the [helper list](../tree/main/helpers) and the community can answer.
+        **VegvisAI takes no cut, handles no payment and guarantees no work.** Any deal is between you and the helper; the helper list is not a certification, so check references and agree terms in writing. Using a helper gives no advantage in the guide: the same rules apply whether you do it yourself or pay someone.
+        **Safety:** never post or send passwords. Give a helper their own login with limited access, and remove it when the job is done. An answer in this thread is not an approval by VegvisAI.
+        This issue is public and stays on GitHub. Do not post personal data or prices you do not want public; swap contact details privately. Report fraud privately to [contact address]. See the [privacy notice](https://vegvis.gixer77.com/privacy/).
   - type: input
     id: website
     attributes:
@@ -48,5 +49,5 @@ body:
     attributes:
       label: Terms
       options:
-        - label: I understand that VegvisAI is not part of any deal, and that a helper never affects my place in the guide.
+        - label: I ask on behalf of a business, I understand that VegvisAI is not part of any deal, and that a helper gives no advantage in the guide.
           required: true

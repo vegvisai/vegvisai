@@ -5,7 +5,7 @@
 
 import { verifyBusiness, reasonText } from "./registration.js";
 import { d1Store, publicChangelog, openExport } from "./register.js";
-import { makeRelease, publicJwkOf, keyId, PERIOD } from "./release.js";
+import { makeRelease, withdrawRelease, publicJwkOf, keyId, PERIOD } from "./release.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import { CheckError } from "./sjekk.js";
 import { language } from "../public/felles/i18n.js";
@@ -87,8 +87,10 @@ export async function review(request, env) {
   const org = entryId(body.orgnr ?? body.id);
   const b = await store.get(org);
   if (!b) return json({ error: "Unknown organisation number." }, 404);
+  // erase: real deletion on request (GDPR art. 17); the changelog keeps only an anonymous event.
+  if (body.decision === "erase") { await store.erase(org); return json({ org_number: org, status: "erased" }); }
   const to = { list: "listed", reject: "removed", remove: "removed" }[body.decision];
-  if (!to) return json({ error: "decision must be list, reject or remove." }, 400);
+  if (!to) return json({ error: "decision must be list, reject, remove or erase." }, 400);
   const reason = /^[a-z_]{2,40}$/.test(body.reason ?? "") ? body.reason : body.decision === "list" ? "reviewed" : "request";
   await store.save(org, { domain: b.domain, status: to, entry: b.entry, consent: b.consent }, to === "listed" ? "listed" : "removed", reason);
   return json({ org_number: org, status: to });
@@ -153,11 +155,13 @@ export async function releases(url, env) {
   }
   if (url.pathname === "/index/releases.json") {
     const list = (await store.releases()).map((r) => ({ ...r, url: `/index/releases/${r.period}.json`, signature_url: `/index/releases/${r.period}.json.sig` }));
-    return Response.json({ name: "VegvisAI open index: signed monthly releases", key: "/index/signing-key.json", releases: list }, { headers: { ...OPEN, "Cache-Control": "max-age=600" } });
+    return Response.json({ name: "VegvisAI open index: signed monthly releases", key: "/index/signing-key.json",
+      notice: "A withdrawn release must not be used; delete your copy and use the release in «replaced_by».", releases: list }, { headers: { ...OPEN, "Cache-Control": "max-age=600" } });
   }
-  const m = url.pathname.match(/^\/index\/releases\/(\d{4}-\d{2})\.json(\.sig)?$/);
+  const m = url.pathname.match(/^\/index\/releases\/([\d-r]+)\.json(\.sig)?$/);
   const r = m && PERIOD.test(m[1]) ? await store.getRelease(m[1]) : null;
   if (!r) return json({ error: "No such release." }, 404);
+  if (r.withdrawn) return Response.json({ error: "This release is withdrawn. Delete any copy.", withdrawn: r.withdrawn, replaced_by: r.replaced_by }, { status: 410, headers: OPEN });
   // A release never changes, so it may be cached for a long time.
   const headers = { ...OPEN, "Cache-Control": "public, max-age=31536000, immutable" };
   return m[2]
@@ -171,6 +175,18 @@ export async function monthlyRelease(env, { now = new Date() } = {}) {
   const key = signingKey(env);
   if (!store || !key) return { created: false, error: "no store or signing key" };
   return makeRelease(store, key, { now });
+}
+
+// POST /api/admin/withdraw { period, reason } with the review token.
+export async function withdrawNow(request, env) {
+  const token = env?.ADMIN_TOKEN;
+  if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
+  const body = await request.json().catch(() => ({}));
+  const store = storeFor(env);
+  const key = signingKey(env);
+  if (!store || !key || !PERIOD.test(String(body.period ?? ""))) return json({ error: "Give a period, and check the store and the signing key." }, 400);
+  const reason = /^[a-z_]{2,40}$/.test(body.reason ?? "") ? body.reason : "erasure_request";
+  return json(await withdrawRelease(store, key, body.period, reason));
 }
 
 export async function releaseNow(request, env) {

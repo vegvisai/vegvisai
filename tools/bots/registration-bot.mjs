@@ -8,7 +8,9 @@ import { readFileSync, existsSync, appendFileSync } from "node:fs";
 import { basename } from "node:path";
 
 const PLATFORM = (process.env.PLATFORM || "https://veiviser-test.testplattform.workers.dev").replace(/\/$/, "");
-const KEYS = new Set(["url", "country", "id", "consent"]);
+// Only the web address and the country: the platform reads names and numbers from the card and the register,
+// so no personal data ends up in the public git history (P46, Espen 2026-10-03).
+const KEYS = new Set(["url", "country", "consent"]);
 const WAIT_MS = 21000; // the platform accepts three registrations a minute per client
 const [mode, ...files] = process.argv.slice(2);
 if (!["check", "submit"].includes(mode)) { console.error("Usage: registration-bot.mjs check|submit <files...>"); process.exit(2); }
@@ -18,13 +20,13 @@ export function problem(name, data) {
   if (!/^registrations\/[a-z0-9.-]+\.json$/.test(name)) return "The file must be registrations/<domain>.json, in lower case.";
   if (typeof data !== "object" || data === null || Array.isArray(data)) return "The file must hold one JSON object.";
   const extra = Object.keys(data).filter((k) => !KEYS.has(k));
-  if (extra.length) return `Unknown fields: ${extra.join(", ")}. Allowed: url, country, id, consent.`;
+  if (extra.includes("id")) return "Leave out «id»: we read the organisation, VAT or company number from your card, so no number is kept in the public history.";
+  if (extra.length) return `Unknown fields: ${extra.join(", ")}. Allowed: url, country, consent.`;
   let host;
   try { const u = new URL(data.url); if (u.protocol !== "https:") throw 0; host = u.hostname.replace(/^www\./, ""); } catch { return "url must be an https address."; }
   if (basename(name, ".json") !== host) return `The file name must match the domain: registrations/${host}.json.`;
   if (!/^[A-Z]{2}$/.test(String(data.country ?? ""))) return "country must be a two-letter country code, for example NO, DE or GB.";
-  if (data.id !== undefined && !/^[A-Za-z0-9 ]{2,20}$/.test(String(data.id))) return "id must be an organisation, VAT or company number.";
-  if (data.consent !== true) return "consent must be true: you have the right to register the business, and the entry is shared under ODbL and DbCL.";
+  if (data.consent !== true) return "consent must be true: you have the right to register this business.";
   return null;
 }
 
@@ -42,12 +44,13 @@ for (const [i, name] of todo.entries()) {
   if (i > 0) await new Promise((r) => setTimeout(r, WAIT_MS));
   const res = await fetch(`${PLATFORM}/api/meld-inn`, {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ url: data.url, country: data.country, orgnr: data.id ?? "", consent: true, lang: "en", ...(mode === "check" ? { dry_run: true } : { source: "github" }) }),
+    body: JSON.stringify({ url: data.url, country: data.country, consent: true, lang: "en", ...(mode === "check" ? { dry_run: true } : { source: "github" }) }),
   });
   const r = await res.json().catch(() => ({ error: `HTTP ${res.status}` }));
   if (!res.ok || r.error) { summary(`- \`${name}\`: **${r.error ?? `HTTP ${res.status}`}**`); failed++; continue; }
   const status = { ok: "passes the checks", manual: "passes, but a person must look at it", rejected: "does not pass", pending: "received; a person reviews it before it is shown", listed: "already listed; updated" }[r.status] ?? r.status;
-  summary(`- \`${name}\`: ${status}${r.entry ? ` (${r.entry.name}, ${r.entry.org_number})` : ""}`);
+  // Never the name or the number: the summary is public.
+  summary(`- \`${name}\`: ${status}${r.entry ? (r.entry.open_licence ? "; shared openly (licence on the domain)" : "; in the guide, not in the open export (no licence on the domain)") : ""}`);
   for (const x of r.reasons ?? []) summary(`  - ${x.text}`);
   if (r.status === "rejected") failed++;
 }

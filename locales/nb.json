@@ -38,8 +38,8 @@
   "preview_text": "Ikke lansert. Eksemplene er oppdiktet.",
   "licence": "Kode: Apache 2.0 · Indeks: ODbL",
   "operator": "VegvisAI™ drives av Espen Brathaug, Oslo, Norge.",
-  "owner_note": "* I dag eies og drives VegvisAI privat av Espen Brathaug. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene.",
-  "owner_link": "Eierskap",
+  "owner_note": "* I dag er VegvisAI privat eid. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene.",
+  "owner_link": "Se Eierskap",
   "privacy": "Personvern",
   "press": "Presse",
   "support": "Støtt oss",
@@ -356,7 +356,7 @@
    "labelEU": "Momsnummer (valgfritt; det må stå i visittkortet som vatID)",
    "placeholderNO": "9 siffer",
    "placeholderEU": "f.eks. DE123456789",
-   "consent": "Jeg har rett til å melde inn bedriften, og godtar at oppføringen deles åpent under lisensene <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (indeksen) og <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (innholdet i oppføringen). Oppføringen inneholder bare det bedriften selv publiserer på nettsiden sin.",
+   "consent": "Jeg har rett til å melde inn denne bedriften. (Om oppføringen deles åpent under ODbL og DbCL, velges på bedriftens egen nettside, i ai-catalog.json; generatoren legger det inn. Uten det blir bedriften funnet i veiviseren, men ikke i den åpne eksporten.)",
    "button": "Meld inn",
    "whatH2": "Hva skjer",
    "step1": "Vi leser <code>/.well-known/ai-catalog.json</code> og visittkortet på deres eget domene.",
@@ -504,7 +504,10 @@
     "contactPage": "https://www.eksempel-bakeri.example/bestill",
     "requestInfo": "Type kake\nAntall personer\nØnsket dato",
     "days": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday"
-   }
+   },
+   "licenceH": "Den åpne indeksen",
+   "licence": "Del visittkortet vårt åpent i VegvisAI-indeksen",
+   "licenceHelp": "Under de åpne lisensene <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (indeksen) og <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (oppføringen deres), så andre åpne veivisere også kan bruke det. Valget skrives inn i ai-catalog.json på deres egen nettside; bare dere kan gi eller fjerne det. Kopier andre allerede har lastet ned, kan ikke trekkes tilbake. Uten det blir dere fortsatt funnet i VegvisAI-veiviseren, men ikke i den åpne eksporten."
   }
  },
  "countries": {

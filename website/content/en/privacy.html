@@ -8,7 +8,7 @@
 <div class="note"><p><strong>Draft.</strong> To be completed before launch. Points marked [placeholder] are not decided yet.</p></div>
 
 <h2>Who is responsible</h2>
-<p>Espen Brathaug, Oslo, Norway, is the controller for the personal data processed by VegvisAI. Contact: [email on vegvis.ai before launch].</p>
+<p>VegvisAI is run privately until a company or another owner takes over (see <a href="/ownership/">Ownership</a>). The controller is Espen Brathaug, Oslo, Norway. Contact for privacy questions, removal and deletion: [contact address].</p>
 
 <h2>What we process</h2>
 <table class="stack">
@@ -16,22 +16,26 @@
 <tbody>
 <tr><td data-label="Where">This website</td><td data-label="What">Your IP address and browser information, handled by Cloudflare to deliver the pages and stop attacks. No cookies of our own, no analytics</td><td data-label="Why, and the legal basis">To run a secure website (legitimate interest)</td><td data-label="How long">Cloudflare's own security logs [placeholder: check period]</td></tr>
 <tr><td data-label="Where">The AI check and the connector</td><td data-label="What">The web address you check. A hash of your IP address, used only for rate limits</td><td data-label="Why, and the legal basis">To give you the result and stop misuse (legitimate interest)</td><td data-label="How long">We keep no request logs. Rate limit counters expire after 60 seconds</td></tr>
-<tr><td data-label="Where">Registration</td><td data-label="What">The web address and organisation number of the business, and what its business card on its own domain publishes. We do not ask for your email</td><td data-label="Why, and the legal basis">To list the business you ask us to list (legitimate interest)</td><td data-label="How long">Until the business is removed. Every change is in the public changelog, where sole proprietorships are shown without their number</td></tr>
-<tr><td data-label="Where">The open index</td><td data-label="What">What the business itself publishes on its website. For a sole proprietorship this can include the owner's name</td><td data-label="Why, and the legal basis">To make the business findable for AI assistants, as it asked (legitimate interest)</td><td data-label="How long">Until the business is removed. Sole proprietorships are not included in the open export, which is published monthly</td></tr>
-<tr><td data-label="Where">Contributions on GitHub</td><td data-label="What">Your GitHub user name and what you contribute</td><td data-label="Why, and the legal basis">To run an open source project (legitimate interest); GitHub's own terms apply</td><td data-label="How long">As long as the project's history exists</td></tr>
+<tr><td data-label="Where">Registration (the form and pull requests)</td><td data-label="What">The web address of the business, and what its business card on its own domain publishes; the organisation, VAT or company number is read from the card and the public register. We do not ask for your email. A pull request file holds only the web address and the country</td><td data-label="Why, and the legal basis">To list the business you ask us to list, so AI assistants can find it (legitimate interest). Every kind of business is welcome, sole proprietorships included</td><td data-label="How long">Until the business is removed or deleted. A removed entry is kept [placeholder: period] so the re-check and the changelog work, then deleted</td></tr>
+<tr><td data-label="Where">The public changelog</td><td data-label="What">The date, the kind of change and a neutral reason. Entries that may hold personal data (sole proprietorships, EU VAT entries, entries checked by domain only) are shown without their number</td><td data-label="Why, and the legal basis">Transparency: anyone can see how the index changes (legitimate interest)</td><td data-label="How long">As long as the register exists; deleted entries become anonymous events</td></tr>
+<tr><td data-label="Where">The open export and the monthly releases</td><td data-label="What">What the business itself publishes on its website, only when it chose the open licence there (ODbL and DbCL, in its own <code>ai-catalog.json</code>). For a sole proprietorship this can include the owner's name</td><td data-label="Why, and the legal basis">To let other open guides use the data, as the business chose on its own domain (consent, given and withdrawn on the domain)</td><td data-label="How long">A release is a fixed file. After a deletion request we withdraw the release and publish a replacement; copies others have already downloaded cannot be recalled</td></tr>
+<tr><td data-label="Where">GitHub: contributions, pull requests, «Find help» and the helper list</td><td data-label="What">Your GitHub user name and what you write or contribute; for helpers, the entry in the helper list</td><td data-label="Why, and the legal basis">To run an open source project and let businesses and helpers meet (legitimate interest). Everything there is public and GitHub's own terms apply</td><td data-label="How long">As long as the project's history exists; git history cannot be changed afterwards. Logs from the GitHub bots are kept one day</td></tr>
 </tbody>
 </table>
 
+<h2>If someone else registered your business</h2>
+<p>Anyone with the right to register a business can do it, for example a web agency. If your sole proprietorship was registered by someone else, this page is your information about it: the data comes from your own website and the public registers, it is used to make your business findable, and you can ask for removal or deletion at any time.</p>
+
 <h2>Who else handles the data</h2>
 <ul>
-<li><strong>Cloudflare</strong> runs the website, the AI check and the connector as our processor. Data can be processed outside the EEA [placeholder: transfer basis].</li>
-<li><strong>GitHub</strong> hosts the code and receives contributions under its own terms.</li>
+<li><strong>Cloudflare</strong> runs the website, the AI check, the connector and the register as our processor. Data can be processed outside the EEA [placeholder: transfer basis].</li>
+<li><strong>GitHub</strong> hosts the code, the pull requests, «Find help» and the helper list under its own terms.</li>
 <li><strong>Brønnøysundregistrene</strong>, the EU's VAT register <strong>VIES</strong> and the UK's <strong>Companies House</strong> are asked about organisation, VAT and company numbers; we send only the number.</li>
 </ul>
-<p>We never sell personal data.</p>
+<p>We never sell personal data. Helpers and businesses who make deals through «Find help» are responsible for the personal data they share with each other.</p>
 
-<h2>Removal from the index</h2>
-<p>A business can ask to be removed at any time, and so can the owner of a sole proprietorship. We remove the entry from the register and the live index, and leave it out of the next export. Every export lists the entries removed since the last one, so others who use the open data can remove them too. We cannot recall copies that others have already downloaded.</p>
+<h2>Removal and deletion</h2>
+<p>A business can ask to be removed at any time, and the owner of a sole proprietorship can ask for deletion. Removal takes the entry out of the live index and the next release. Deletion erases the entry, and the changelog keeps only an anonymous event. Every release lists the entries removed since the previous one, and a withdrawn release is marked so mirrors delete it. We cannot recall copies that others have already downloaded. Removing the open licence from your <code>ai-catalog.json</code> takes you out of the next release.</p>
 
 <h2>Your rights</h2>
 <p>You can ask for access to, correction of, or deletion of your personal data, and you can object to our processing. Write to the contact above. If you think we break the rules, you can complain to <a href="https://www.datatilsynet.no/">Datatilsynet</a>, the Norwegian Data Protection Authority.</p>

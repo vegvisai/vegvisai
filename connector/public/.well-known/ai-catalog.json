@@ -13,7 +13,12 @@
       "tags": [
         "guide",
         "norway"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:data:public-no",
@@ -24,7 +29,12 @@
         "index",
         "public-services",
         "norway"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:data:parties-no",
@@ -35,7 +45,12 @@
         "index",
         "politics",
         "norway"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:sjekk",
@@ -45,7 +60,12 @@
       "tags": [
         "ai-check",
         "tool"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:lag",
@@ -55,7 +75,12 @@
       "tags": [
         "business-card",
         "tool"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:eksempel",
@@ -64,7 +89,12 @@
       "tags": [
         "example",
         "business-card"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:eksempel-gjestehus",
@@ -74,7 +104,12 @@
       "tags": [
         "example",
         "business-card"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:example",
@@ -84,7 +119,12 @@
       "tags": [
         "example",
         "business-card"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:web:meld-inn",
@@ -94,12 +134,22 @@
       "tags": [
         "registration",
         "tool"
-      ]
+      ],
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     },
     {
       "identifier": "urn:air:veiviser-test:llms",
       "type": "text/plain",
-      "url": "/llms.txt"
+      "url": "/llms.txt",
+      "extensions": {
+        "ai.vegvis.local/v1": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
     }
   ]
 }

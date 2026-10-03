@@ -15,7 +15,8 @@ const card = (extra = {}) => `<html lang="nb"><head><title>Butikken AS</title>
   makesOffer: [{ "@type": "Offer", itemOffered: { "@type": "Product", name: "Bursdagskake" } }],
   potentialAction: { "@type": "OrderAction", target: { "@type": "EntryPoint", urlTemplate: "/bestill/?kake={kake}" } }, ...extra })}</script>
 </head><body><h1>Butikken</h1></body></html>`;
-const catalog = JSON.stringify({ specVersion: "1.0", entries: [{ type: "text/html", url: ROOT + "/ai/", tags: ["bakery", "cake"] }] });
+// The card's catalog gives the export licence on the business's own domain (P46).
+const catalog = JSON.stringify({ specVersion: "1.0", entries: [{ type: "text/html", url: ROOT + "/ai/", tags: ["bakery", "cake"], extensions: { "ai.vegvis.local/v1": { index_licence: "ODbL-1.0 DbCL-1.0" } } }] });
 const unit = (extra = {}) => JSON.stringify({ organisasjonsnummer: ORG, navn: "BUTIKKEN AS", organisasjonsform: { kode: "AS" }, hjemmeside: "www.butikken.example.no", ...extra });
 
 function fakeFetch({ site = {}, brreg = unit() } = {}) {
@@ -79,18 +80,18 @@ test("form, review, changelog, export and the re-check work together", async () 
   // The card disappears: the re-check removes the business and logs a neutral reason.
   const r = await recheck(env, { fetchFn: fakeFetch({ site: { "/.well-known/ai-catalog.json": undefined, "/ai/": undefined } }) });
   assert.deepEqual(r, { checked: 1, removed: 1, updated: 0 });
-  assert.equal((await openExport(store)).removed[0], ORG);
+  assert.equal((await openExport(store)).entries.length, 0, "a removed business leaves the export");
   const log = await publicChangelog(store);
   assert.deepEqual(log.map((c) => `${c.action}:${c.reason}`), ["removed:no_card", "listed:reviewed", "submitted:registered"]);
 });
 
-test("sole proprietorships are left out of the export and shown without number in the changelog", async () => {
+test("sole proprietorships that chose the open licence are exported, and never shown with number in the changelog", async () => {
   const store = memoryStore();
   const env = { __store: store, ADMIN_TOKEN: "t" };
   const req = new Request("https://x.example/api/meld-inn", { method: "POST", body: JSON.stringify({ url: ROOT, orgnr: ORG, consent: true }) });
   await register(req, env, { fetchFn: fakeFetch({ brreg: unit({ organisasjonsform: { kode: "ENK" } }) }) });
   await review(new Request("https://x.example/api/admin/review", { method: "POST", headers: { Authorization: "Bearer t" }, body: JSON.stringify({ orgnr: ORG, decision: "list" }) }), env);
-  assert.equal((await openExport(store)).entries.length, 0);
+  assert.equal((await openExport(store)).entries.length, 1, "the owner chose it on their own domain (P46, 2026-10-03)");
   assert.equal((await publicChangelog(store))[0].org_number, null);
   assert.equal((await listedMatches(env, "kake")).length, 1, "still in the live index");
 });
@@ -124,7 +125,7 @@ test("an EU business is checked in VIES", async () => {
   const ok = await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch() });
   assert.equal(ok.status, "ok", JSON.stringify(ok.reasons));
   assert.equal(ok.entry.org_number, "DE123456789");
-  assert.deepEqual([ok.entry.country, ok.entry.verification, ok.entry.sole_proprietorship], ["DE", "vat", false]);
+  assert.deepEqual([ok.entry.country, ok.entry.verification, ok.entry.sole_proprietorship], ["DE", "vat", true], "VIES cannot tell a company from a sole trader");
   assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ valid: false }) })).reasons, ["not_in_register"]);
   assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ down: true }) })).reasons, ["register_unavailable"]);
   assert.deepEqual((await verifyBusiness(EU_ROOT, { country: "DE", consent: true, fetchFn: euFetch({ card: euCard({ vatID: undefined }) }) })).reasons, ["no_vat_number"]);
@@ -173,4 +174,28 @@ test("dry_run returns the result of the checks and stores nothing; pull requests
   assert.equal(await store.get(ORG), null);
   await register(post({ url: ROOT, orgnr: ORG, consent: true, source: "github" }), env, { fetchFn: fakeFetch() });
   assert.equal((await store.changes())[0].reason, "pull_request");
+});
+
+test("the export holds only entries that chose the open licence on their own domain", async () => {
+  const store = memoryStore();
+  const env = { __store: store, ADMIN_TOKEN: "t" };
+  const noLicence = JSON.stringify({ specVersion: "1.0", entries: [{ type: "text/html", url: ROOT + "/ai/" }] });
+  const r = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site: { "/.well-known/ai-catalog.json": noLicence } }) });
+  assert.equal(r.entry.open_licence, false);
+  await store.save(ORG, { domain: r.domain, status: "listed", entry: r.entry, consent: true }, "listed", "reviewed");
+  assert.equal((await listedMatches(env, "kake")).length, 1, "still in the live index");
+  assert.equal((await openExport(store)).entries.length, 0, "but not in the export");
+});
+
+test("a sole proprietorship can be erased for real, and its id never shows in the changelog", async () => {
+  const store = memoryStore();
+  const env = { __store: store, ADMIN_TOKEN: "t" };
+  const auth = { Authorization: "Bearer t" };
+  const post = (path, body, headers = {}) => new Request("https://x.example" + path, { method: "POST", headers, body: JSON.stringify(body) });
+  await register(post("/api/meld-inn", { url: ROOT, consent: true }), env, { fetchFn: fakeFetch({ brreg: unit({ organisasjonsform: { kode: "ENK" } }) }) });
+  await review(post("/api/admin/review", { orgnr: ORG, decision: "erase" }, auth), env);
+  assert.equal(await store.get(ORG), null);
+  const log = await publicChangelog(store);
+  assert.ok(log.every((c) => c.org_number === null), JSON.stringify(log));
+  assert.equal(log[0].action, "erased");
 });

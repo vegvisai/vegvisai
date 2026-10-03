@@ -45,7 +45,7 @@ The open skill `ai-lesbar-nettside` on [GitHub](https://github.com/vegvisai/vegv
 3. Upload `ai-catalog.json` to the folder `/.well-known/`.
 4. Make sure `robots.txt` lets AI crawlers in. Many site builders block them by default.
 
-**No website?** The card can live on a free host, or be hosted by us or an agency for you. You still own the content and can move it at any time.
+**No website?** The card can live on a free host, or be hosted by us or an agency for you. You still own the content and can move it at any time. Whoever hosts it for you handles your data on your behalf; agree that in writing.
 
 ## Step 4: Check it
 
@@ -55,7 +55,7 @@ Run the [AI check](https://veiviser-test.testplattform.workers.dev/check/) on yo
 
 Register your business with the [registration form](https://veiviser-test.testplattform.workers.dev/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
 
-**Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper never gives a better place in the guide.
+**Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper gives no advantage in the guide: the same rules apply whether you do it yourself or pay someone. Never give a helper your passwords; give them their own login and remove it afterwards.
 
 ## Step 6: Test it in a few weeks
 

@@ -24,8 +24,8 @@
   "preview_text": "Not launched. Examples are fictional.",
   "licence": "Code: Apache 2.0 · Index: ODbL",
   "operator": "VegvisAI™ is run by Espen Brathaug, Oslo, Norway.",
-  "owner_note": "* Today VegvisAI is owned and run privately by Espen Brathaug. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles.",
-  "owner_link": "Ownership",
+  "owner_note": "* Today VegvisAI is privately owned. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles.",
+  "owner_link": "See Ownership",
   "privacy": "Privacy",
   "press": "Press",
   "support": "Support",
@@ -342,7 +342,7 @@
    "labelEU": "VAT number (optional; it must be in your card as vatID)",
    "placeholderNO": "9 digits",
    "placeholderEU": "e.g. DE123456789",
-   "consent": "I have the right to register the business, and I agree that the entry is shared openly under <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (the index) and <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (the content of the entry). The entry holds only what the business publishes on its own website.",
+   "consent": "I have the right to register this business. (Whether the entry is shared openly under ODbL and DbCL is chosen on the business's own website, in ai-catalog.json; the generator adds it. Without it the business is found in the guide, but not in the open export.)",
    "button": "Register",
    "whatH2": "What happens",
    "step1": "We read <code>/.well-known/ai-catalog.json</code> and the business card on your own domain.",
@@ -489,7 +489,10 @@
     "contactPage": "https://guesthouse.example/booking/",
     "requestInfo": "Room\nArrival date\nNumber of nights\nNumber of guests",
     "days": "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday,Sunday"
-   }
+   },
+   "licenceH": "The open index",
+   "licence": "Share our business card openly in the VegvisAI index",
+   "licenceHelp": "Under the open licences <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (the index) and <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (your entry), so other open guides can use it too. The choice is written into ai-catalog.json on your own website; only you can give or remove it. Copies others have already downloaded cannot be recalled. Without it you are still found in the VegvisAI guide, but not in the open export."
   }
  },
  "countries": {

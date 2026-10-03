@@ -43,7 +43,7 @@ The repository opens at launch. Until then, write to Espen Brathaug, [email on v
 
 Many businesses will want someone to do it for them, and you may charge for that work. Join the open [helper list](https://github.com/vegvisai/vegvisai/tree/main/helpers) by showing one AI business card that scores 100 in the AI check and one merged pull request. Businesses ask for help with the issue form «Find help» on GitHub.
 
-VegvisAI takes no cut, handles no payment and guarantees no work: every deal is between the business and you. The list is shown in random order, nobody can buy a place on it, and a business that uses a helper gets no better place in the guide. One ambassador per country leads the first businesses there; ambassadors are named on the website and get first right to paid tasks when there is a company.
+VegvisAI takes no cut, handles no payment and guarantees no work: every deal is between the business and you, and the list is not a certification. It is sorted alphabetically and the order means nothing; nobody can buy a place on it, and a business gets no advantage in the guide from using a helper. One ambassador per country helps the first businesses there; ambassadors are named on the website, and the role gives no right or priority to tasks or payment.
 
 ## The guide connector (test)
 

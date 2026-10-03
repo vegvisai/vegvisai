@@ -1,10 +1,10 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { memoryStore } from "../src/register.js";
-import { makeRelease, verifyRelease, publicJwkOf } from "../src/release.js";
+import { makeRelease, verifyRelease, publicJwkOf, withdrawRelease } from "../src/release.js";
 import { releases, register } from "../src/innmelding.js";
 
-const entry = (org, extra = {}) => ({ org_number: org, country: "NO", domain: `${org}.example`, name: `Business ${org}`, url: `https://${org}.example/`, categories: [], ...extra });
+const entry = (org, extra = {}) => ({ org_number: org, country: "NO", domain: `${org}.example`, name: `Business ${org}`, url: `https://${org}.example/`, categories: [], open_licence: true, ...extra });
 const newKey = async () => (await crypto.subtle.exportKey("jwk", (await crypto.subtle.generateKey({ name: "Ed25519" }, true, ["sign", "verify"])).privateKey));
 
 async function storeWith() {
@@ -20,7 +20,7 @@ test("a monthly release is signed, verifiable, and never changed", async () => {
   const key = await newKey();
   const r = await makeRelease(store, key, { now: new Date("2026-10-02T03:00:00Z") });
   assert.equal(r.period, "2026-10");
-  assert.equal(r.entries, 2, "sole proprietorships are left out");
+  assert.equal(r.entries, 3, "every entry that chose the open licence, sole proprietorships included");
   const saved = await store.getRelease("2026-10");
   assert.ok(await verifyRelease(saved.body, saved.signature, publicJwkOf(key)));
   assert.equal(await verifyRelease(saved.body.replace("Business", "Busyness"), saved.signature, publicJwkOf(key)), false, "a changed copy fails");
@@ -40,7 +40,7 @@ test("the next release lists what was removed since the previous one", async () 
   await makeRelease(store, key, { now: new Date("2026-11-01T03:00:00Z") });
   const nov = JSON.parse((await store.getRelease("2026-11")).body);
   assert.equal(nov.previous, "2026-10");
-  assert.deepEqual(nov.removed_since_previous, ["922222222"], "sole proprietorships are never named");
+  assert.deepEqual(nov.removed_since_previous, ["922222222", "933333333"], "everything that was in the previous release and is gone now");
   assert.deepEqual(nov.entries.map((e) => e.org_number), ["911111111"]);
 });
 
@@ -66,4 +66,19 @@ test("dry_run checks a registration without storing it", async () => {
   const r = await (await register(req, env, { fetchFn: async () => new Response("", { status: 404 }) })).json();
   assert.equal(r.status, "rejected");
   assert.equal((await store.changes()).length, 0);
+});
+
+test("a withdrawn release is replaced by a signed revision and answers 410", async () => {
+  const store = await storeWith();
+  const key = await newKey();
+  const env = { __store: store, EXPORT_SIGNING_KEY: JSON.stringify(key) };
+  await makeRelease(store, key, { now: new Date("2026-10-02T03:00:00Z") });
+  await store.save("933333333", { domain: "c.example", status: "removed", entry: entry("933333333", { sole_proprietorship: true }), consent: true }, "removed", "request");
+  const w = await withdrawRelease(store, key, "2026-10", "erasure_request", { now: new Date("2026-10-05T03:00:00Z") });
+  assert.deepEqual(w, { withdrawn: true, period: "2026-10", replaced_by: "2026-10-r2" });
+  assert.equal((await releases(new URL("https://x.example/index/releases/2026-10.json"), env)).status, 410);
+  const r2 = JSON.parse(await (await releases(new URL("https://x.example/index/releases/2026-10-r2.json"), env)).text());
+  assert.ok(!r2.entries.some((e) => e.org_number === "933333333"));
+  const list = await (await releases(new URL("https://x.example/index/releases.json"), env)).json();
+  assert.equal(list.releases.find((r) => r.period === "2026-10").replaced_by, "2026-10-r2");
 });

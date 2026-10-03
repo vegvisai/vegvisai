@@ -45,7 +45,7 @@ Den åpne ferdigheten `ai-lesbar-nettside` på [GitHub](https://github.com/vegvi
 3. Last opp `ai-catalog.json` til mappen `/.well-known/`.
 4. Sjekk at `robots.txt` slipper inn AI-crawlere. Mange nettsidebyggere stenger dem ute som standard.
 
-**Ingen nettside?** Visittkortet kan ligge hos en gratis nettvert, eller driftes for deg av oss eller et byrå. Du eier fortsatt innholdet og kan flytte det når som helst.
+**Ingen nettside?** Visittkortet kan ligge hos en gratis nettvert, eller driftes for deg av oss eller et byrå. Du eier fortsatt innholdet og kan flytte det når som helst. Den som drifter det for deg, behandler dataene på dine vegne; avtal det skriftlig.
 
 ## Steg 4: Sjekk det
 
@@ -55,7 +55,7 @@ Kjør [AI-sjekken](https://veiviser-test.testplattform.workers.dev/sjekk/) på n
 
 Meld inn bedriften i [påmeldingsskjemaet](https://veiviser-test.testplattform.workers.dev/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
 
-**Står du fast?** Be om hjelp med skjemaet «Find help» på [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). En utvikler fra den åpne hjelperlisten kan gjøre det for deg, gratis eller mot en pris dere avtaler. VegvisAI tar ingen andel, og en hjelper gir aldri bedre plass i veiviseren.
+**Står du fast?** Be om hjelp med skjemaet «Find help» på [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). En utvikler fra den åpne hjelperlisten kan gjøre det for deg, gratis eller mot en pris dere avtaler. VegvisAI tar ingen andel, og en hjelper gir ingen fordel i veiviseren: reglene er de samme om dere gjør det selv eller betaler noen. Gi aldri en hjelper passordene deres; gi hjelperen egen innlogging og fjern den etterpå.
 
 ## Steg 6: Test det om noen uker
 

@@ -99,6 +99,14 @@ async function readCard(origin, fetchFn) {
   return { catalog, cardUrl: page.url, page: parsed, objects: jsonldObjects(parsed.jsonld) };
 }
 
+// The export licence, given on the business's own domain (P46, Espen 2026-10-03): ODbL or DbCL named in
+// the ai-catalog.json extension (index_licence) or as schema.org license in the card.
+const OPEN = /odbl|dbcl|opendatacommons\.org\/licenses\/(odbl|dbcl)/i;
+export function openLicence(card, biz) {
+  const ext = (card.catalog?.entries ?? []).flatMap((e) => Object.values(e.extensions ?? {}));
+  return ext.some((x) => OPEN.test(String(x?.index_licence ?? ""))) || OPEN.test(String(biz?.license ?? ""));
+}
+
 async function lookup(fetchFn, orgNumber) {
   for (const kind of ["enheter", "underenheter"]) {
     const r = await get(fetchFn, `${BRREG}/${kind}/${orgNumber}`, "application/json");
@@ -157,6 +165,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
     postal_code: digits(a.postalCode).slice(0, 4) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
     sole_proprietorship: unit.organisasjonsform?.kode === "ENK",
+    open_licence: openLicence(card, biz),
     country: "NO",
     verification: "register",
     verified: { domain_and_org_number: now.toISOString().slice(0, 10) },
@@ -240,8 +249,10 @@ async function verifyAbroad(address, country, { orgNumber = "", consent = false,
   }
   if (!consent) reasons.push("no_consent");
   const entry = { org_number: id, ...cardEntry(biz, card, origin, domain), country, verification, verified,
-    // Outside the registers we cannot tell a company from a person, so the entry is treated as personal data.
-    sole_proprietorship: verification === "domain" };
+    open_licence: openLicence(card, biz),
+    // VIES and the domain alone cannot tell a company from a sole trader, so those entries are treated as
+    // possible personal data. Companies House registers companies only.
+    sole_proprietorship: verification === "domain" || verification === "vat" };
   const status = reasons.includes("no_consent") ? "rejected" : reasons.length ? "manual" : "ok";
   return { status, reasons, domain, entry };
 }

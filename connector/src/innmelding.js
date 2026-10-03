@@ -55,7 +55,8 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
     await store.save(org, { domain: result.domain, status: "listed", entry: result.entry, consent: true }, "updated", "resubmitted");
     return json({ ...answer, status: "listed" });
   }
-  const reason = result.status === "manual" ? "domain_mismatch" : body.source === "github" ? "pull_request" : "registered";
+  // A manual review keeps the first reason (domain_mismatch, domain_only), so the changelog says why.
+  const reason = result.status === "manual" ? result.reasons[0] ?? "manual" : body.source === "github" ? "pull_request" : "registered";
   await store.save(org, { domain: result.domain, status: "pending", entry: result.entry, consent: true }, "submitted", reason);
   return json({ ...answer, status: "pending" });
 }

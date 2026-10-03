@@ -206,3 +206,12 @@ test("a card of a specific business type (Bakery) without any number is found an
   assert.deepEqual(r.reasons, ["domain_only"]);
   assert.equal(r.entry.org_number, "web:butikken.example.no");
 });
+
+test("a domain-only registration is logged with its own reason, not as a domain mismatch", async () => {
+  const store = memoryStore();
+  const req = new Request("https://x.example/api/meld-inn", { method: "POST", body: JSON.stringify({ url: ROOT, country: "IS", consent: true }) });
+  await register(req, { __store: store }, { fetchFn: fakeFetch({ site: { "/ai/": card({ identifier: undefined }) } }) });
+  const log = await publicChangelog(store);
+  assert.equal(`${log[0].action}:${log[0].reason}`, "submitted:domain_only");
+  assert.equal(log[0].org_number, null);
+});

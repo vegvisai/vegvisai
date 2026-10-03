@@ -199,3 +199,10 @@ test("a sole proprietorship can be erased for real, and its id never shows in th
   assert.ok(log.every((c) => c.org_number === null), JSON.stringify(log));
   assert.equal(log[0].action, "erased");
 });
+
+test("a card of a specific business type (Bakery) without any number is found and goes to review as domain only", async () => {
+  const r = await verifyBusiness(ROOT, { country: "IS", consent: true, fetchFn: fakeFetch({ site: { "/ai/": card({ identifier: undefined }) } }) });
+  assert.equal(r.status, "manual", JSON.stringify(r.reasons));
+  assert.deepEqual(r.reasons, ["domain_only"]);
+  assert.equal(r.entry.org_number, "web:butikken.example.no");
+});

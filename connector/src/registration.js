@@ -3,7 +3,7 @@
 // by pull requests through the bot, and by the weekly re-check, so the rules are the same.
 // The entry holds only a pointer and what the business itself publishes (P23).
 
-import { safeAddress, readPage, jsonldObjects, UA } from "./sjekk.js";
+import { safeAddress, readPage, jsonldObjects, UA, BUSINESS_TYPES } from "./sjekk.js";
 import { findInstructions, sanitize } from "../public/felles/injeksjon.js";
 import { tr } from "../public/felles/i18n.js";
 
@@ -15,7 +15,9 @@ const VIES = "https://ec.europa.eu/taxation_customs/vies/rest-api/ms";
 export const EU = new Set(["AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "EL", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU", "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK", "XI"]);
 const viesCode = (c) => (c === "GR" ? "EL" : c);
 const COMPANIES_HOUSE = "https://api.company-information.service.gov.uk/company";
-const ORG_TYPES = new Set(["Organization", "Corporation", "LocalBusiness", "OnlineBusiness", "NGO", "GovernmentOrganization"]);
+// The same business types the AI check knows (Bakery, Restaurant, LodgingBusiness and so on), so a card
+// without an organisation number is still found (found in the SIT preparation 2026-10-03).
+const ORG_TYPES = BUSINESS_TYPES;
 
 // Reasons are neutral codes, so the public changelog never needs free text about a business.
 // The texts are in locales/<lang>.json under «registration».

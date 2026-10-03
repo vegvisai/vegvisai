@@ -35,7 +35,7 @@ const AI_BOTS = {
 const ANSWER_BOTS = new Set(["OAI-SearchBot", "ChatGPT-User", "Claude-SearchBot", "Claude-User", "PerplexityBot"]);
 const PRODUCT_TYPES = new Set(["Product", "IndividualProduct", "ProductModel"]);
 const SERVICE_TYPES = new Set(["Service", "FoodService", "FinancialProduct", "BroadcastService", "CableOrSatelliteService", "GovernmentService", "Taxi", "TaxiService"]);
-const BUSINESS_TYPES = new Set([
+export const BUSINESS_TYPES = new Set([
   "Organization", "Corporation", "NewsMediaOrganization", "LocalBusiness", "OnlineBusiness", "OnlineStore", "Store",
   "HardwareStore", "ElectronicsStore", "HomeAndConstructionBusiness", "AutoRepair",
   "FoodEstablishment", "Bakery", "Restaurant", "CafeOrCoffeeShop", "ProfessionalService",

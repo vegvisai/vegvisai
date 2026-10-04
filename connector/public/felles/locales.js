@@ -29,7 +29,7 @@ export const LOCALES = {
    },
    "readable": "Serve the main text in the HTML itself: {n} of {m} pages show less than {chars} characters without JavaScript, and many AI agents do not run JavaScript.",
    "lang": "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
-   "headings": "Give every page one main heading (h1).",
+   "headings": "Give every page one main heading (h1): {n} of {m} pages have none ({pages}).",
    "keyPages": "Link clearly from the front page to: {names}. An AI looks for these pages first.",
    "keyNames": {
     "services": "services and forms",
@@ -309,7 +309,7 @@ export const LOCALES = {
    },
    "readable": "Legg hovedteksten i selve HTML-en: {n} av {m} sider viser under {chars} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.",
    "lang": "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
-   "headings": "Gi hver side én hovedoverskrift (h1).",
+   "headings": "Gi hver side én hovedoverskrift (h1): {n} av {m} sider mangler den ({pages}).",
    "keyPages": "Lenk tydelig fra forsiden til: {names}. AI-en ser etter disse sidene først.",
    "keyNames": {
     "services": "tjenester og skjema",

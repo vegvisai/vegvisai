@@ -237,3 +237,18 @@ test("a public body that publishes news articles keeps the public yardstick", as
   assert.deepEqual(chooseProfile("", ["NewsArticle"], "www.avisa.no"), ["media", "schema"]);
   assert.deepEqual(chooseProfile("", ["NewsMediaOrganization"], "www.avisa.no"), ["media", "schema"]);
 });
+
+test("main heading points follow the share of pages with an h1, and the action names the pages without one", async () => {
+  const text = "Tekst om verkstedet. ".repeat(30);
+  const html = (title, h1) => `<html lang="nb"><head><title>${title}</title><meta name="description" content="${title}"></head><body>${h1 ? `<h1>${title}</h1>` : ""}<p>${text}</p></body></html>`;
+  const files = {
+    "/robots.txt": `User-agent: *\nAllow: /\nSitemap: ${ROOT}/sitemap.xml\n`,
+    "/sitemap.xml": `<urlset>${["/", "/a/", "/b/", "/uten-overskrift/"].map((p) => `<url><loc>${ROOT}${p}</loc><lastmod>2026-09-29</lastmod></url>`).join("")}</urlset>`,
+    "/": html("Forside", true), "/a/": html("Side A", true), "/b/": html("Side B", true), "/uten-overskrift/": html("Side C", false),
+  };
+  const r = await aiCheck(ROOT, { pauseMs: 0, lang: "en", fetchFn: makeFetch(files) });
+  const h = r.breakdown.find((x) => x.id === "headings");
+  assert.equal(r.pages.length, 4);
+  assert.deepEqual([h.points, h.max], [4, 5]);
+  assert.ok(r.actions.some((a) => a.includes("1 of 4 pages have none (/uten-overskrift/)")), JSON.stringify(r.actions));
+});

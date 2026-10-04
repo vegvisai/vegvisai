@@ -111,6 +111,7 @@ function checkTexts(lang) {
     readable: (n, m) => fill(c.readable, { n, m, chars: READABLE_CHARS }),
     keyPages: (names) => fill(c.keyPages, { names }),
     content: (n, m) => fill(c.content, { n, m }),
+    headings: (n, m, pages) => fill(c.headings, { n, m, pages }),
     zeroWidth: (n) => fill(c.zeroWidth, { n }),
     unreachable: (status) => (status ? fill(c.unreachableStatus, { status }) : c.unreachableNone),
     openLine: (list) => fill(c.openLine, { list: list || c.openLineNone }),
@@ -572,8 +573,10 @@ export function assess(r, lang = "en") {
     if (unreadable) actions.push(t.readable(unreadable, pages.length));
     if (pages[0].lang) add("language", 5, 5);
     else { add("language", 0, 5); actions.push(t.lang); }
-    if (pages.every((s) => s.h1 >= 1)) add("headings", 5, 5);
-    else { add("headings", 0, 5); actions.push(t.headings); }
+    // In proportion, and the action names the pages without a main heading (feedback after launch, 2026-10-04).
+    const noH1 = pages.filter((s) => !(s.h1 >= 1));
+    add("headings", Math.round((5 * (pages.length - noH1.length)) / pages.length), 5);
+    if (noH1.length) actions.push(t.headings(noH1.length, pages.length, noH1.map((s) => new URL(s.url).pathname).join(", ")));
   }
 
   // Content (25 points): what the site offers, measured by the yardstick that fits.

@@ -48,7 +48,7 @@
   },
   "readable": "Serve the main text in the HTML itself: {n} of {m} pages show less than {chars} characters without JavaScript, and many AI agents do not run JavaScript.",
   "lang": "Declare the page language (<html lang=\"nb\">), so an AI reads and quotes it correctly.",
-  "headings": "Give every page one main heading (h1).",
+  "headings": "Give every page one main heading (h1): {n} of {m} pages have none ({pages}).",
   "keyPages": "Link clearly from the front page to: {names}. An AI looks for these pages first.",
   "keyNames": {
    "services": "services and forms",

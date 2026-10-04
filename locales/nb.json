@@ -62,7 +62,7 @@
   },
   "readable": "Legg hovedteksten i selve HTML-en: {n} av {m} sider viser under {chars} tegn uten JavaScript, og mange AI-agenter kjører ikke JavaScript.",
   "lang": "Oppgi språket på siden (<html lang=\"nb\">), så AI-en leser og siterer riktig.",
-  "headings": "Gi hver side én hovedoverskrift (h1).",
+  "headings": "Gi hver side én hovedoverskrift (h1): {n} av {m} sider mangler den ({pages}).",
   "keyPages": "Lenk tydelig fra forsiden til: {names}. AI-en ser etter disse sidene først.",
   "keyNames": {
    "services": "tjenester og skjema",

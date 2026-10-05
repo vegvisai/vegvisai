@@ -99,7 +99,11 @@ if (mc) {
 <li><strong>The customer's login is the access.</strong> Tools run with the visitor's own session, so check permissions on your server exactly as you do for the normal form.</li>
 <li><strong>Payments and orders stay with the customer.</strong> Let them confirm on your page. No tool should pay, sign or delete without a click from the customer.</li>
 <li><strong>Return only what the visitor may see,</strong> and no personal data about others.</li>
+<li><strong>Ask only for what you need.</strong> A form that sends with <code>method="get"</code> puts the details in the web address, where they can end up in logs and browser history. Never ask for health information, national identity numbers or card details in such a form.</li>
+<li><strong>Orders with payment follow the usual rules for online sales.</strong> If a tool places an order the customer must pay for, the customer must get the required information first, the order button must say clearly that the order means paying, and the right of withdrawal applies where it normally does.</li>
 </ul>
+
+<p class="mut">This guide is general guidance, not legal advice. You decide what your own website does.</p>
 
 <h2>Where it fits</h2>
 <p>An AI business card tells agents who you are (level 0). Action links let them send the customer to the right page (level 1). WebMCP lets the agent help the customer fill in that page. Your own MCP server (level 3) is for live data that partners and returning customers use from their own assistant. The guide never ranks any of this: WebMCP makes it easier to finish a task on your site, not to be shown first.</p>

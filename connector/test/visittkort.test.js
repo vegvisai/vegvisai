@@ -105,3 +105,27 @@ test("the generated ai-catalog.json is valid by the AI Catalog specification", a
   assert.ok(catalogProblems({ specVersion: "1", entries: [{ identifier: "x", type: "t", url: "u", data: {} }] }).length >= 2);
   assert.ok(catalogProblems({ specVersion: "1.0", entries: [], extensions: { "ai.vegvis.local/v1": {} } })[0].includes("reverse-DNS"));
 });
+
+test("with WebMCP ticked, the card gets a request form agents can fill in, and still scores 100", async () => {
+  assert.ok(!makeFiles(FORM).files["index.html"].includes("toolname"), "off by default");
+  const { files } = makeFiles({ ...FORM, webmcp: true }, { lang: "nb" });
+  const html = files["index.html"];
+  assert.match(html, /<form action="https:\/\/bakeri\.eksempel\.no\/bestill" method="get" toolname="send_request" tooldescription="Send en forespørsel til Eksempel Bakeri AS\./);
+  assert.match(html, /<input name="onsket_dato" toolparamdescription="Ønsket dato">/);
+  assert.ok(!html.includes("toolautosubmit"), "the visitor clicks Send");
+  const site = {
+    "/robots.txt": "User-agent: *\nAllow: /\nSitemap: https://bakeri.eksempel.no/sitemap.xml\n",
+    "/sitemap.xml": "<urlset><url><loc>https://bakeri.eksempel.no/</loc><lastmod>2026-10-01</lastmod></url></urlset>",
+    "/": html, "/llms.txt": files["llms.txt"], "/.well-known/ai-catalog.json": files[".well-known/ai-catalog.json"],
+  };
+  const fetchFn = async (url) => { const x = site[new URL(url).pathname]; return new Response(x ?? "", { status: x === undefined ? 404 : 200 }); };
+  const r = await aiCheck("https://bakeri.eksempel.no", { fetchFn, pauseMs: 0 });
+  assert.equal(r.score, 100, JSON.stringify(r.actions));
+  assert.deepEqual(r.open.webmcp, ["send_request"]);
+  assert.deepEqual(r.injection, []);
+});
+
+test("no WebMCP form without a request page, even when ticked", () => {
+  const html = makeFiles({ ...FORM, contactPage: "", webmcp: true }).files["index.html"];
+  assert.ok(!html.includes("<form"));
+});

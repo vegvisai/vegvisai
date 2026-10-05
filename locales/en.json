@@ -254,7 +254,10 @@
    "Friday": "Friday",
    "Saturday": "Saturday",
    "Sunday": "Sunday"
-  }
+  },
+  "toolDescription": "Send a request to {name}. The form opens {name}'s own request page with these details filled in. Nothing is paid or booked here.",
+  "message": "Message",
+  "messageDescription": "What the customer needs, in their own words"
  },
  "pages": {
   "check": {
@@ -495,7 +498,10 @@
    },
    "licenceH": "The open index",
    "licence": "Share our business card openly in the VegvisAI index",
-   "licenceHelp": "Under the open licences <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (the index) and <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (your entry), so other open guides can use it too. The choice is written into ai-catalog.json on your own website; only you can give or remove it. Copies others have already downloaded cannot be recalled. Without it you are still found in the VegvisAI guide, but not in the open export."
+   "licenceHelp": "Under the open licences <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (the index) and <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (your entry), so other open guides can use it too. The choice is written into ai-catalog.json on your own website; only you can give or remove it. Copies others have already downloaded cannot be recalled. Without it you are still found in the VegvisAI guide, but not in the open export.",
+   "webmcpH": "AI agents (experimental)",
+   "webmcp": "Add a request form that AI agents can fill in (WebMCP)",
+   "webmcpHelp": "Needs the request page above. The visitor's own AI agent fills in the form and the visitor clicks Send, which opens your request page with the details in the address. Ask only for what you need: the details travel in the web address, so never ask for health information, national identity numbers or card details. WebMCP is an experiment in Chrome and can change; see <a href=\"/docs/webmcp/\">the guide</a>. Browsers that do not know it ignore the form attributes."
   }
  },
  "countries": {

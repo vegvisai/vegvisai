@@ -235,7 +235,10 @@ export const LOCALES = {
     "Friday": "Friday",
     "Saturday": "Saturday",
     "Sunday": "Sunday"
-   }
+   },
+   "toolDescription": "Send a request to {name}. The form opens {name}'s own request page with these details filled in. Nothing is paid or booked here.",
+   "message": "Message",
+   "messageDescription": "What the customer needs, in their own words"
   },
   "countries": {
    "NO": "Norway",
@@ -518,7 +521,10 @@ export const LOCALES = {
     "Friday": "fredag",
     "Saturday": "lørdag",
     "Sunday": "søndag"
-   }
+   },
+   "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
+   "message": "Melding",
+   "messageDescription": "Hva kunden trenger, med egne ord"
   },
   "countries": {
    "NO": "Norge",

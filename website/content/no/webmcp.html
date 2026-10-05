@@ -58,7 +58,11 @@ if (mc) {
 <li><strong>Kundens innlogging er tilgangen.</strong> Verktøyene kjører med den besøkendes egen innlogging, så sjekk tilganger på serveren akkurat som for det vanlige skjemaet.</li>
 <li><strong>Betaling og bestilling bekrefter kunden selv.</strong> La kunden bekrefte på siden din. Ingen verktøy skal betale, signere eller slette uten at kunden trykker.</li>
 <li><strong>Returner bare det den besøkende har lov til å se,</strong> og ingen personopplysninger om andre.</li>
+<li><strong>Be bare om det du trenger.</strong> Et skjema som sender med <code>method="get"</code>, legger opplysningene i nettadressen, der de kan havne i logger og nettleserhistorikk. Be aldri om helseopplysninger, fødselsnummer eller kortopplysninger i et slikt skjema.</li>
+<li><strong>Bestilling med betaling følger de vanlige reglene for netthandel.</strong> Legger et verktøy inn en bestilling kunden må betale for, skal kunden få de pålagte opplysningene først, bestillingsknappen skal si tydelig at bestillingen forplikter til å betale, og angreretten gjelder der den ellers gjelder.</li>
 </ul>
+
+<p class="mut">Denne guiden er generell veiledning, ikke juridisk rådgivning. Du bestemmer selv hva din egen nettside gjør.</p>
 
 <h2>Hvor det passer inn</h2>
 <p>AI-visittkortet forteller agenter hvem du er (nivå 0). Handlingslenker lar dem sende kunden til riktig side (nivå 1). WebMCP lar agenten hjelpe kunden med å fylle ut den siden. Din egen MCP-server (nivå 3) er for levende data som partnere og faste kunder bruker fra sin egen assistent. Veiviseren rangerer aldri noe av dette: WebMCP gjør det lettere å fullføre en oppgave på nettsiden din, ikke å bli vist først.</p>

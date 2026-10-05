@@ -269,7 +269,10 @@
    "Friday": "fredag",
    "Saturday": "lørdag",
    "Sunday": "søndag"
-  }
+  },
+  "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
+  "message": "Melding",
+  "messageDescription": "Hva kunden trenger, med egne ord"
  },
  "pages": {
   "check": {
@@ -511,7 +514,10 @@
    },
    "licenceH": "Den åpne indeksen",
    "licence": "Del visittkortet vårt åpent i VegvisAI-indeksen",
-   "licenceHelp": "Under de åpne lisensene <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (indeksen) og <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (oppføringen deres), så andre åpne veivisere også kan bruke det. Valget skrives inn i ai-catalog.json på deres egen nettside; bare dere kan gi eller fjerne det. Kopier andre allerede har lastet ned, kan ikke trekkes tilbake. Uten det blir dere fortsatt funnet i VegvisAI-veiviseren, men ikke i den åpne eksporten."
+   "licenceHelp": "Under de åpne lisensene <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (indeksen) og <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (oppføringen deres), så andre åpne veivisere også kan bruke det. Valget skrives inn i ai-catalog.json på deres egen nettside; bare dere kan gi eller fjerne det. Kopier andre allerede har lastet ned, kan ikke trekkes tilbake. Uten det blir dere fortsatt funnet i VegvisAI-veiviseren, men ikke i den åpne eksporten.",
+   "webmcpH": "AI-agenter (eksperimentelt)",
+   "webmcp": "Legg til et forespørselsskjema som AI-agenter kan fylle ut (WebMCP)",
+   "webmcpHelp": "Krever forespørselssiden over. Den besøkendes egen AI-agent fyller ut skjemaet, og den besøkende trykker Send, som åpner forespørselssiden deres med opplysningene i adressen. Be bare om det du trenger: opplysningene sendes i nettadressen, så be aldri om helseopplysninger, fødselsnummer eller kortopplysninger. WebMCP er et eksperiment i Chrome og kan endre seg; se <a href=\"/no/guider/webmcp/\">guiden</a>. Nettlesere som ikke kjenner det, ignorerer attributtene."
   }
  },
  "countries": {

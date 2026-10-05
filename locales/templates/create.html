@@ -113,6 +113,12 @@
 <p class="hjelp">{{t.licenceHelp}}</p>
 </fieldset>
 
+<fieldset>
+<legend>{{t.webmcpH}}</legend>
+<label><input type="checkbox" id="webmcp" name="webmcp">{{t.webmcp}}</label>
+<p class="hjelp">{{t.webmcpHelp}}</p>
+</fieldset>
+
 <button>{{t.button}}</button>
 </form>
 
@@ -157,6 +163,7 @@ function readForm() {
   f.days = [...document.querySelectorAll("input[name=days]:checked")].map((c) => c.value);
   f.homeVisits = $("homeVisits").checked;
   f.openLicence = $("openLicence").checked;
+  f.webmcp = $("webmcp").checked;
   f.country = country();
   f.text = LANG;
   return f;

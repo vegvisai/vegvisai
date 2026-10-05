@@ -20,7 +20,31 @@ const CURRENCIES = ["NOK", "EUR", "GBP", "SEK", "DKK", "PLN", "CZK", "HUF", "RON
 const defaultCurrency = (c) => ({ NO: "NOK", GB: "GBP", SE: "SEK", DK: "DKK", PL: "PLN", CZ: "CZK", HU: "HUF", RO: "RON", BG: "BGN", CH: "CHF", US: "USD" })[c] ?? (EU.has(c) ? "EUR" : "USD");
 // The visible text for one language, with pricesNote as a function.
 const WEEK = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
-const cardText = (lang) => { const c = dict(lang, "card"); return { ...c, pricesNote: (currency) => fill(c.pricesNote, { currency }) }; };
+const cardText = (lang) => { const c = dict(lang, "card"); return { ...c, pricesNote: (currency) => fill(c.pricesNote, { currency }), toolDescription: (name) => fill(c.toolDescription, { name }) }; };
+
+// A form field name from a request line: lower case, ASCII, words joined with _ («Ønsket dato» -> onsket_dato).
+const FOLD = { æ: "ae", ø: "o", å: "a", ä: "a", ö: "o", ü: "u", ß: "ss", é: "e", è: "e" };
+const fieldName = (s) => s.toLowerCase().replace(/[æøåäöüßéè]/g, (c) => FOLD[c]).replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 30) || "detail";
+
+// The WebMCP request form: a GET form to the business's own request page. No toolautosubmit, so the
+// visitor clicks Send. Only made when the business ticks the box and has a request page.
+function requestForm(d, t) {
+  if (!d.webmcp || !d.contactPage) return "";
+  const used = new Set(["message"]);
+  const fields = d.requestInfo.map((info) => {
+    let n = fieldName(info), i = 2;
+    while (used.has(n)) n = `${fieldName(info).slice(0, 27)}_${i++}`;
+    used.add(n);
+    return `<p><label>${esc(info)} <input name="${n}" toolparamdescription="${esc(info)}"></label></p>`;
+  });
+  return [
+    `<form action="${esc(d.contactPage)}" method="get" toolname="send_request" tooldescription="${esc(t.toolDescription(d.name))}">`,
+    ...fields,
+    `<p><label>${t.message} <textarea name="message" toolparamdescription="${esc(t.messageDescription)}"></textarea></label></p>`,
+    `<p><button type="submit">${t.send}</button></p>`,
+    `</form>`,
+  ].join("\n");
+}
 const MAX_LENGTH = { short: 120, sentence: 300, line: 160, url: 300 };
 
 const lines = (s, max = 20) => String(s ?? "").split(/\r?\n/).map((l) => sanitize(l, MAX_LENGTH.line)).filter(Boolean).slice(0, max);
@@ -60,6 +84,8 @@ export function normalize(f) {
     country,
     // The export licence (P46): on by default; the business gives it on its own domain.
     openLicence: f.openLicence !== false && f.openLicence !== "false",
+    // WebMCP (experimental, off by default): a request form on the card that the visitor's agent can fill in.
+    webmcp: f.webmcp === true || f.webmcp === "true" || f.webmcp === "on",
     text: LANGS.includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
     currency: CURRENCIES.includes(f.currency) ? f.currency : defaultCurrency(country),
     vatId: EU.has(country) ? String(f.vatId ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16) : "",
@@ -174,6 +200,7 @@ export function makeHtml(d) {
       d.email ? `<li>${t.email}: <a href="mailto:${esc(d.email)}">${esc(d.email)}</a></li>` : "",
       d.phone ? `<li>${t.phone}: <a href="tel:${esc(d.phone.replace(/\s/g, ""))}">${esc(d.phone)}</a></li>` : "",
     ].join("")}</ul>`,
+    requestForm(d, t),
     hoursText(d) || place || d.areas.length ? `<h2>${t.where}</h2>` : "",
     hoursText(d) ? `<p>${t.hours}: ${esc(hoursText(d))}.</p>` : "",
     place ? `<p>${t.address}: ${esc(place)}.</p>` : "",

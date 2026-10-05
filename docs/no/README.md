@@ -18,7 +18,15 @@ To små filer som lar agenter og åpne veivisere finne deg.](files.md) [Eksperim
 
 ### La AI-agenter bruke skjemaene dine (WebMCP)
 
-Tre attributter på skjemaene du allerede har.](https://vegvis.ai/no/guider/webmcp/) [Nivå 3
+Tre attributter på skjemaene du allerede har.](https://vegvis.ai/no/guider/webmcp/) [Eksperimentelt
+
+### Agenter fyller handlekurven, kunden betaler som før
+
+Søk og handlekurv for agenter, din egen kasse.](https://vegvis.ai/no/guider/agentkasse/) [Oversikt
+
+### Betaling via AI-agenter
+
+Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/) [Nivå 3
 
 ### Din egen AI-tjeneste (MCP)
 

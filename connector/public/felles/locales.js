@@ -293,7 +293,10 @@ export const LOCALES = {
     "webmcp": "/no/guider/webmcp/",
     "mcp": "/no/guider/mcp/",
     "developers": "/no/guider/utviklere/",
-    "how-we-choose": "/no/guider/slik-velger-vi/"
+    "how-we-choose": "/no/guider/slik-velger-vi/",
+    "changelog": "/no/endringslogg/",
+    "agent-checkout": "/no/guider/agentkasse/",
+    "agent-payments": "/no/guider/agentbetaling/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",

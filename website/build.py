@@ -23,11 +23,11 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
-    "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/",
+    "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/",
     "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
-    "webmcp": "/docs/webmcp/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
+    "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
-DOCS = ["docs", "get-started", "website", "files", "webmcp", "mcp", "developers", "how-we-choose"]
+DOCS = ["docs", "get-started", "website", "files", "webmcp", "agent-checkout", "agent-payments", "mcp", "developers", "how-we-choose"]
 
 # Languages come from locales/<code>.json; a language is built when content/<site_dir>/ exists.
 # Internally a language is keyed by its content folder (en, no, ...). Missing texts fall back to English.
@@ -136,7 +136,7 @@ def shell(lang: str, title: str, description: str, body: str, *, alternates: str
 <div class="wrap row">
 <p>{preview}{t['operator']}</p>
 <p class="owner-note">{t['owner_note']} <a href="{PAGES['ownership'][lang]}">{t['owner_link']}</a></p>
-<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · {others.replace(chr(10), " · ")}</p>
+<p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['changelog'][lang]}">{t['changelog']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · {others.replace(chr(10), " · ")}</p>
 </div>
 </footer>
 </body>

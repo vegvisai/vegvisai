@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What's new · VegvisAI</title>
+<meta name="description" content="Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+<div class="wrap">
+<nav class="nav" aria-label="Main">
+<a class="brand" href="/" aria-label="VegvisAI"><svg viewBox="0 0 64 64" aria-hidden="true">
+<path d="M6 22 L22 54 L42 20" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#FFFFFF"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#0E1424"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#0E1424"/>
+</svg><span aria-hidden="true">egvisAI<sup class="tm">™</sup></span></a>
+<div class="links">
+<a href="/#how">How it works</a>
+<a href="/docs/">Guides</a>
+<a href="/why/">Background</a>
+<a href="/ownership/">Ownership</a>
+<a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="/no/endringslogg/" hreflang="nb" lang="nb">Norsk</a>
+</div>
+</nav>
+<p class="eyebrow nameline">Vegvis · <span class="ipa">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.</p>
+</div>
+</header>
+<main id="main">
+<p class="eyebrow">Changelog</p>
+<h1>What's new</h1>
+<p class="lead">Every change to the guide, the AI check, the generator and the open index, newest first. The code and its full history are open on <a href="https://github.com/vegvisai/vegvisai">GitHub</a>. Changes to the register itself (businesses added or removed) are in the <a href="/api/endringer">public register changelog</a>.</p>
+
+<h2>5 October 2026</h2>
+<ul>
+<li><strong>New guide: agents fill the cart, customers pay as today.</strong> A recipe for letting a visitor's own AI agent search products and fill the cart on the shop's website, while the customer pays in the checkout the shop already has. <a href="/docs/agent-checkout/">Read it</a>.</li>
+<li><strong>New overview: paying through AI agents.</strong> The payment solutions and open protocols that are coming, with status and sources, listed neutrally. <a href="/docs/agent-payments/">Read it</a>.</li>
+<li><strong>New guide: let AI agents use your forms (WebMCP).</strong> Three HTML attributes on the forms a business already has. <a href="/docs/webmcp/">Read it</a>.</li>
+<li><strong>Generator:</strong> an optional request form that AI agents can fill in, made from the business's own request details. Off by default; the customer still clicks Send.</li>
+<li><strong>AI check:</strong> lists WebMCP tools under «open for AI» (no points yet, since WebMCP is experimental) and checks their descriptions for hidden instructions to AI.</li>
+<li><strong>Registration:</strong> a business card with hidden instructions in its WebMCP descriptions is not listed.</li>
+</ul>
+
+<h2>4 October 2026: VegvisAI is open</h2>
+<ul>
+<li>The website, the AI check, the generator, registration and the connector opened on vegvis.ai, and the code repository became public.</li>
+<li>The connector is listed in the official MCP registry as <code>ai.vegvis/vegvisai</code>.</li>
+<li><strong>AI check:</strong> main headings now give points in proportion to the pages that have one, and the advice names the pages without one. This came from the first user's feedback on launch day.</li>
+<li><code>llms.txt</code> and <code>ai-catalog.json</code> for vegvis.ai rewritten for the open platform.</li>
+</ul>
+
+<h2>3 and 4 October 2026: system test before opening</h2>
+<ul>
+<li><strong>Finding businesses:</strong> a request now matches word by word and other word forms, so «bakeri» finds a bakery and «bursdagskaker» finds birthday cakes.</li>
+<li><strong>Registration:</strong> specific business types such as bakeries are recognised without an organisation number, and the public changelog shows the real reason for a manual review.</li>
+<li><strong>Open index:</strong> a replaced monthly release can no longer list a business that asked to be deleted.</li>
+<li><strong>Privacy:</strong> the content of removed entries is deleted after the next monthly release, at the latest after 35 days.</li>
+</ul>
+
+</main>
+<footer>
+<div class="wrap row">
+<p>VegvisAI™ is run by Espen Brathaug, Oslo, Norway.</p>
+<p class="owner-note">* Today VegvisAI is privately owned. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles. <a href="/ownership/">See Ownership</a></p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (private until launch) · Code: Apache 2.0 · Index: ODbL · <a href="/privacy/">Privacy</a> · <a href="/press/">Press</a> · <a href="/changelog/">What's new</a> · <a href="/support/">Support</a> · <a href="/no/endringslogg/" hreflang="nb" lang="nb">Norsk</a></p>
+</div>
+</footer>
+</body>
+</html>

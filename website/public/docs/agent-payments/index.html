@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paying through AI agents: what exists and what is coming · Guides · VegvisAI</title>
+<meta name="description" content="Step 3 of agent shopping: an overview of the payment solutions and open protocols that let a customer's AI agent pay, with status and sources. Neutral, alphabetical, no recommendation.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="/docs/agent-payments/"><link rel="alternate" hreflang="nb" href="/no/guider/agentbetaling/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+<div class="wrap">
+<nav class="nav" aria-label="Main">
+<a class="brand" href="/" aria-label="VegvisAI"><svg viewBox="0 0 64 64" aria-hidden="true">
+<path d="M6 22 L22 54 L42 20" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#FFFFFF"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#0E1424"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#0E1424"/>
+</svg><span aria-hidden="true">egvisAI<sup class="tm">™</sup></span></a>
+<div class="links">
+<a href="/#how">How it works</a>
+<a href="/docs/">Guides</a>
+<a href="/why/">Background</a>
+<a href="/ownership/">Ownership</a>
+<a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="/no/guider/agentbetaling/" hreflang="nb" lang="nb">Norsk</a>
+</div>
+</nav>
+<p class="eyebrow nameline">Vegvis · <span class="ipa">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.</p>
+</div>
+</header>
+<main id="main">
+<div class="wrap docs"><nav class="docnav" aria-label="Guides"><p class="eyebrow">Guides</p><ul><li><a href="/docs/">Overview</a></li><li><a href="/docs/get-started/">Get started</a></li><li><a href="/docs/ai-readable-website/">AI-readable website</a></li><li><a href="/docs/ai-files/">llms.txt and ai-catalog.json</a></li><li><a href="/docs/webmcp/">Let AI agents use your forms (WebMCP)</a></li><li><a href="/docs/agent-checkout/">Agents fill the cart, customers pay as today</a></li><li><a href="/docs/agent-payments/" aria-current="page">Paying through AI agents: what exists and what is coming</a></li><li><a href="/docs/mcp/">Your own AI service (MCP)</a></li><li><a href="/docs/developers/">For developers</a></li><li><a href="/docs/how-we-choose/">How the guide chooses results</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code and templates on GitHub</a></p></nav><article class="prose"><p class="eyebrow">Overview · step 3 of 3</p>
+<h1>Paying through AI agents: what exists and what is coming</h1>
+<p class="lead">Payment providers and card networks are building ways for a customer's AI agent to pay on the customer's behalf, within limits the customer sets. Most of it is new or still in development. This page tells you what exists, so you can ask your own payment provider the right questions. We do not recommend any of them, and VegvisAI never takes part in payments.</p>
+
+<div class="note"><p><strong>Status 5 October 2026.</strong> This field changes every month. Listed alphabetically by name, with the source we used. Check with the provider before you decide anything.</p></div>
+
+<h2>What it means for you</h2>
+<p>Today (step 2) the agent fills the cart and the customer pays in your checkout. With agent payments, the customer gives their agent permission in advance, for example «up to 800 kroner for a birthday cake on Friday», and the agent completes the payment through your existing provider. The customer's bank or wallet still confirms who the customer is.</p>
+
+<h2>Solutions and protocols</h2>
+<table>
+<thead><tr><th>Name</th><th>Behind it</th><th>What it does</th><th>Status and source</th></tr></thead>
+<tbody>
+<tr><td>Agent Pay</td><td>Mastercard</td><td>Lets agents pay on the Mastercard network with tokens tied to the customer</td><td>A version for machine payments launched June 2026 (<a href="https://www.juniperresearch.com/resources/blog/paying-at-agentic-speed-inside-visa-mastercard-and-stripe-s-agentic-commerce-push/">Juniper Research</a>)</td></tr>
+<tr><td>Agent Payments Protocol (AP2)</td><td>Started by Google, now FIDO Alliance</td><td>An open protocol for the customer's mandate to an agent, also when the customer is not present</td><td>Version 0.2 (<a href="https://innovify.com/insights/agentic-payments-stack-2026-visa-stripe-mastercard">overview</a>)</td></tr>
+<tr><td>Agentic Commerce Protocol (ACP)</td><td>OpenAI and Stripe</td><td>Checkout inside an AI assistant, with payment tokens the shop receives</td><td>Stripe's suite for it from December 2025 (<a href="https://www.mindstudio.ai/blog/openai-stripe-agentic-commerce-protocol-new-payment-stack-builders">MindStudio</a>)</td></tr>
+<tr><td>Intelligent Commerce Connect</td><td>Visa</td><td>One entry for shops to accept agent payments across several protocols</td><td>Launched April 2026 (<a href="https://www.pymnts.com/visa/2026/visa-scales-agentic-commerce-through-stripe-protocol-collaboration/">PYMNTS</a>)</td></tr>
+<tr><td>Machine Payments Protocol (MPP)</td><td>Stripe and Tempo</td><td>Payments between agents and services over the web</td><td>Launched March 2026 (<a href="https://innovify.com/insights/agentic-payments-stack-2026-visa-stripe-mastercard">overview</a>)</td></tr>
+<tr><td>Universal Commerce Protocol (UCP) with Vipps MobilePay</td><td>Vipps MobilePay supports UCP</td><td>Vipps and card payments in AI and chat flows through a Vipps MobilePay payment handler</td><td>Documentation «under development» (<a href="https://developer.vippsmobilepay.com/docs/APIs/agentic-commerce/">Vipps MobilePay</a>)</td></tr>
+</tbody>
+</table>
+<p>For most small businesses in Norway the payment solution is Vipps MobilePay, a card terminal provider or the payment built into the web shop platform. Those are the first to ask.</p>
+
+<h2>What you can do now</h2>
+<ol>
+<li><strong>Do step 1 and 2 first.</strong> <a href="/docs/webmcp/">WebMCP forms</a> and <a href="/docs/agent-checkout/">agents filling the cart</a> work with the checkout you already have.</li>
+<li><strong>Ask your payment provider</strong> whether and when they will support payments from AI agents, which protocol they use, and what it costs.</li>
+<li><strong>Avoid locking yourself in.</strong> Several protocols compete. Prefer solutions that work with more than one assistant.</li>
+<li><strong>Keep the customer in control.</strong> The customer sets the limits and can see and stop what the agent does.</li>
+</ol>
+
+<h2>The rules still apply</h2>
+<p>An agent payment is still a sale to a consumer: the required information before the order, the right of withdrawal where it applies, and strong customer authentication by the bank or wallet. Who answers for a wrong order made by an agent is still being settled; check your provider's terms before you switch it on.</p>
+<p class="mut">This page is general information, not legal or financial advice, and not a recommendation of any provider. Names belong to their owners.</p>
+</article></div>
+</main>
+<footer>
+<div class="wrap row">
+<p>VegvisAI™ is run by Espen Brathaug, Oslo, Norway.</p>
+<p class="owner-note">* Today VegvisAI is privately owned. Our aim is a neutral owner, such as a cooperative, with the principles locked in its articles. <a href="/ownership/">See Ownership</a></p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (private until launch) · Code: Apache 2.0 · Index: ODbL · <a href="/privacy/">Privacy</a> · <a href="/press/">Press</a> · <a href="/changelog/">What's new</a> · <a href="/support/">Support</a> · <a href="/no/guider/agentbetaling/" hreflang="nb" lang="nb">Norsk</a></p>
+</div>
+</footer>
+</body>
+</html>

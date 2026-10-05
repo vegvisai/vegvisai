@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Betaling via AI-agenter: hva som finnes og hva som kommer · Guider · VegvisAI</title>
+<meta name="description" content="Steg 3 i handel via agenter: en oversikt over betalingsløsninger og åpne protokoller som lar kundens AI-agent betale, med status og kilder. Nøytralt, alfabetisk, ingen anbefaling.">
+<link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
+<link rel="alternate" hreflang="en" href="/docs/agent-payments/"><link rel="alternate" hreflang="nb" href="/no/guider/agentbetaling/">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;500&family=IBM+Plex+Mono:wght@500&display=swap">
+<link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Hopp til innholdet</a>
+<header class="top">
+<div class="wrap">
+<nav class="nav" aria-label="Hovedmeny">
+<a class="brand" href="/no/" aria-label="VegvisAI"><svg viewBox="0 0 64 64" aria-hidden="true">
+<path d="M6 22 L22 54 L42 20" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M31 20 H42 V31" stroke="#8FA8FF" stroke-width="7" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M6 22 L22 54 L42 20 L47.5 15" stroke="#F28C28" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="0.1 4.4"/>
+<path d="M55 7 V3.6" stroke="#FFFFFF" stroke-width="1.6" stroke-linecap="round"/>
+<circle cx="55" cy="2.4" r="2.2" fill="#F28C28"/>
+<rect x="47" y="7" width="16" height="14" rx="4.5" fill="#FFFFFF"/>
+<circle cx="52.3" cy="14" r="1.7" fill="#0E1424"/>
+<circle cx="57.7" cy="14" r="1.7" fill="#0E1424"/>
+</svg><span aria-hidden="true">egvisAI<sup class="tm">™</sup></span></a>
+<div class="links">
+<a href="/no/#how">Slik virker det</a>
+<a href="/no/guider/">Guider</a>
+<a href="/no/bakgrunn/">Bakgrunn</a>
+<a href="/no/eierskap/">Eierskap</a>
+<a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
+<a href="/docs/agent-payments/" hreflang="en" lang="en">English</a>
+</div>
+</nav>
+<p class="eyebrow nameline">Vegvis · <span class="ipa">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.</p>
+</div>
+</header>
+<main id="main">
+<div class="wrap docs"><nav class="docnav" aria-label="Guider"><p class="eyebrow">Guider</p><ul><li><a href="/no/guider/">Oversikt</a></li><li><a href="/no/guider/kom-i-gang/">Kom i gang</a></li><li><a href="/no/guider/ai-lesbar-nettside/">AI-lesbar nettside</a></li><li><a href="/no/guider/ai-filer/">llms.txt og ai-catalog.json</a></li><li><a href="/no/guider/webmcp/">La AI-agenter bruke skjemaene dine (WebMCP)</a></li><li><a href="/no/guider/agentkasse/">Agenter fyller handlekurven, kunden betaler som før</a></li><li><a href="/no/guider/agentbetaling/" aria-current="page">Betaling via AI-agenter: hva som finnes og hva som kommer</a></li><li><a href="/no/guider/mcp/">Din egen AI-tjeneste (MCP)</a></li><li><a href="/no/guider/utviklere/">For utviklere</a></li><li><a href="/no/guider/slik-velger-vi/">Slik velger veiviseren</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Kode og maler på GitHub</a></p></nav><article class="prose"><p class="eyebrow">Oversikt · steg 3 av 3</p>
+<h1>Betaling via AI-agenter: hva som finnes og hva som kommer</h1>
+<p class="lead">Betalingsleverandører og kortselskaper bygger løsninger der kundens AI-agent kan betale for kunden, innenfor grenser kunden selv setter. Det meste er nytt eller under utvikling. Denne siden forteller hva som finnes, så du kan stille din egen betalingsleverandør de riktige spørsmålene. Vi anbefaler ingen av dem, og VegvisAI tar aldri del i betalinger.</p>
+
+<div class="note"><p><strong>Status 5. oktober 2026.</strong> Feltet endrer seg hver måned. Listen er alfabetisk etter navn, med kilden vi brukte. Sjekk med leverandøren før du bestemmer noe.</p></div>
+
+<h2>Hva det betyr for deg</h2>
+<p>I dag (steg 2) fyller agenten handlekurven og kunden betaler i kassen din. Med betaling via agenten gir kunden agenten tillatelse på forhånd, for eksempel «inntil 800 kroner for en bursdagskake på fredag», og agenten fullfører betalingen gjennom leverandøren du allerede har. Kundens bank eller lommebok bekrefter fortsatt hvem kunden er.</p>
+
+<h2>Løsninger og protokoller</h2>
+<table>
+<thead><tr><th>Navn</th><th>Hvem står bak</th><th>Hva den gjør</th><th>Status og kilde</th></tr></thead>
+<tbody>
+<tr><td>Agent Pay</td><td>Mastercard</td><td>Lar agenter betale på Mastercard-nettet med tokener knyttet til kunden</td><td>En versjon for maskinbetalinger lansert juni 2026 (<a href="https://www.juniperresearch.com/resources/blog/paying-at-agentic-speed-inside-visa-mastercard-and-stripe-s-agentic-commerce-push/">Juniper Research</a>)</td></tr>
+<tr><td>Agent Payments Protocol (AP2)</td><td>Startet av Google, nå FIDO Alliance</td><td>En åpen protokoll for kundens fullmakt til en agent, også når kunden ikke er til stede</td><td>Versjon 0.2 (<a href="https://innovify.com/insights/agentic-payments-stack-2026-visa-stripe-mastercard">oversikt</a>)</td></tr>
+<tr><td>Agentic Commerce Protocol (ACP)</td><td>OpenAI og Stripe</td><td>Kasse inne i en AI-assistent, med betalingstokener butikken mottar</td><td>Stripes løsning for den fra desember 2025 (<a href="https://www.mindstudio.ai/blog/openai-stripe-agentic-commerce-protocol-new-payment-stack-builders">MindStudio</a>)</td></tr>
+<tr><td>Intelligent Commerce Connect</td><td>Visa</td><td>Én inngang for butikker som vil ta imot agentbetalinger på tvers av flere protokoller</td><td>Lansert april 2026 (<a href="https://www.pymnts.com/visa/2026/visa-scales-agentic-commerce-through-stripe-protocol-collaboration/">PYMNTS</a>)</td></tr>
+<tr><td>Machine Payments Protocol (MPP)</td><td>Stripe og Tempo</td><td>Betaling mellom agenter og tjenester over nettet</td><td>Lansert mars 2026 (<a href="https://innovify.com/insights/agentic-payments-stack-2026-visa-stripe-mastercard">oversikt</a>)</td></tr>
+<tr><td>Universal Commerce Protocol (UCP) med Vipps MobilePay</td><td>Vipps MobilePay støtter UCP</td><td>Vipps- og kortbetaling i AI- og chatflyter gjennom en betalingshåndterer fra Vipps MobilePay</td><td>Dokumentasjonen er «under development» (<a href="https://developer.vippsmobilepay.com/docs/APIs/agentic-commerce/">Vipps MobilePay</a>)</td></tr>
+</tbody>
+</table>
+<p>For de fleste små bedrifter i Norge er betalingsløsningen Vipps MobilePay, en leverandør av betalingsterminal eller betalingen som er bygget inn i nettbutikkplattformen. Det er dem du bør spørre først.</p>
+
+<h2>Dette kan du gjøre nå</h2>
+<ol>
+<li><strong>Gjør steg 1 og 2 først.</strong> <a href="/no/guider/webmcp/">WebMCP-skjemaer</a> og <a href="/no/guider/agentkasse/">agenter som fyller handlekurven</a> virker med kassen du allerede har.</li>
+<li><strong>Spør betalingsleverandøren din</strong> om og når de støtter betaling fra AI-agenter, hvilken protokoll de bruker, og hva det koster.</li>
+<li><strong>Unngå å låse deg.</strong> Flere protokoller konkurrerer. Velg helst løsninger som virker med mer enn én assistent.</li>
+<li><strong>La kunden ha kontrollen.</strong> Kunden setter grensene og kan se og stoppe det agenten gjør.</li>
+</ol>
+
+<h2>Reglene gjelder fortsatt</h2>
+<p>En betaling via agent er fortsatt et salg til en forbruker: de pålagte opplysningene før bestilling, angrerett der den gjelder, og sterk kundeautentisering hos banken eller lommeboken. Hvem som har ansvaret når en agent bestiller feil, er ennå ikke avklart. Sjekk vilkårene til leverandøren din før du slår det på.</p>
+<p class="mut">Denne siden er generell informasjon, ikke juridisk eller finansiell rådgivning, og ikke en anbefaling av noen leverandør. Navnene tilhører eierne sine.</p>
+</article></div>
+</main>
+<footer>
+<div class="wrap row">
+<p>VegvisAI™ drives av Espen Brathaug, Oslo, Norge.</p>
+<p class="owner-note">* I dag er VegvisAI privat eid. Målet er en nøytral eier, for eksempel et samvirke, med prinsippene låst i vedtektene. <a href="/no/eierskap/">Se Eierskap</a></p>
+<p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a> (privat til lansering) · Kode: Apache 2.0 · Indeks: ODbL · <a href="/no/personvern/">Personvern</a> · <a href="/no/presse/">Presse</a> · <a href="/no/endringslogg/">Nytt</a> · <a href="/no/stott/">Støtt oss</a> · <a href="/docs/agent-payments/" hreflang="en" lang="en">English</a></p>
+</div>
+</footer>
+</body>
+</html>

@@ -19,7 +19,10 @@
    "webmcp": "/no/guider/webmcp/",
    "mcp": "/no/guider/mcp/",
    "developers": "/no/guider/utviklere/",
-   "how-we-choose": "/no/guider/slik-velger-vi/"
+   "how-we-choose": "/no/guider/slik-velger-vi/",
+   "changelog": "/no/endringslogg/",
+   "agent-checkout": "/no/guider/agentkasse/",
+   "agent-payments": "/no/guider/agentbetaling/"
   },
   "check_path": "/sjekk/",
   "register_path": "/meld-inn/",
@@ -46,7 +49,8 @@
   "support": "Støtt oss",
   "docs_nav": "Guider",
   "on_github": "Kode og maler på GitHub",
-  "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift."
+  "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
+  "changelog": "Nytt"
  },
  "check": {
   "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",

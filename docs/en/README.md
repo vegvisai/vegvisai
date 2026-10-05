@@ -18,7 +18,15 @@ Two small files that let agents and open guides find you.](files.md) [Experiment
 
 ### Let AI agents use your forms (WebMCP)
 
-Three attributes on the forms you already have.](https://vegvis.ai/docs/webmcp/) [Level 3
+Three attributes on the forms you already have.](https://vegvis.ai/docs/webmcp/) [Experimental
+
+### Agents fill the cart, customers pay as today
+
+Search and cart for agents, your own checkout.](https://vegvis.ai/docs/agent-checkout/) [Overview
+
+### Paying through AI agents
+
+What exists and what is coming.](https://vegvis.ai/docs/agent-payments/) [Level 3
 
 ### Your own AI service (MCP)
 

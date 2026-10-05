@@ -93,6 +93,21 @@ function show(r) {
   top.append(el("div", `${P.yardstick}: ${C.profileName[r.profile]} (${C.profileSource[r.profile_source]})`, "mut"));
   out.append(top);
 
+  // The next step after the check: straight to the generator, with the address filled in.
+  const pts = Object.fromEntries((r.breakdown || []).map((b) => [b.id, b]));
+  const missing = [];
+  if (pts.identity && pts.identity.points < pts.identity.max) missing.push(P.ctaCard);
+  if (pts.ai_catalog && pts.ai_catalog.points < pts.ai_catalog.max) missing.push(P.ctaCatalog);
+  if (pts.llms_txt && pts.llms_txt.points < pts.llms_txt.max) missing.push(P.ctaLlms);
+  if (r.score !== null && missing.length && (r.profile === "business" || r.profile === "organisation")) {
+    const cta = el("div", undefined, "boks neste");
+    const list = missing.length > 1 ? `${missing.slice(0, -1).join(", ")} ${P.ctaAnd} ${missing[missing.length - 1]}` : missing[0];
+    const a = el("a", P.ctaButton, "btn btn-blue");
+    a.href = "{{path:create}}?website=" + encodeURIComponent(r.site);
+    cta.append(el("strong", P.ctaTitle), el("p", fill(P.ctaText, { missing: list })), a);
+    out.append(cta);
+  }
+
   const high = r.injection.filter((f) => f.severity !== "low");
   const low = r.injection.filter((f) => f.severity === "low");
   if (high.length) {

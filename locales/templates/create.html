@@ -133,6 +133,9 @@ import { typesFor, makeFiles } from "/felles/visittkort.js";
 const P = JSON.parse(document.getElementById("tekster").textContent), LANG = "{{_meta.code}}";
 const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
 const $ = (id) => document.getElementById(id);
+// Coming from the AI check: the website address is filled in.
+const fromCheck = new URLSearchParams(location.search).get("website");
+if (fromCheck && /^https?:\/\/[^\s"<>]+$/i.test(fromCheck)) $("website").value = fromCheck.slice(0, 300);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
 const label = (key) => P.labels[key] ?? key;
 const EU = new Set(["AT","BE","BG","CY","CZ","DE","DK","EE","GR","ES","FI","FR","HR","HU","IE","IT","LT","LU","LV","MT","NL","PL","PT","RO","SE","SI","SK"]);

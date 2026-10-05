@@ -327,7 +327,14 @@
    "noneData": "none",
    "footer": "Time: {time}. A sample, not a full review.",
    "profMedia": "News medium",
-   "noteOthers": "Other free checks measure more technical details for developers, for example Cloudflare's <a href=\"https://isitagentready.com/\">isitagentready.com</a>. This check adds yardsticks for public bodies, organisations, parties and news media, the scan for hidden instructions, plain advice, and a ready AI business card. What matters most is still your own clear website; a free Google Business Profile helps too."
+   "noteOthers": "Other free checks measure more technical details for developers, for example Cloudflare's <a href=\"https://isitagentready.com/\">isitagentready.com</a>. This check adds yardsticks for public bodies, organisations, parties and news media, the scan for hidden instructions, plain advice, and a ready AI business card. What matters most is still your own clear website; a free Google Business Profile helps too.",
+   "ctaTitle": "Next step: make the files AI assistants look for",
+   "ctaText": "Your site is missing {missing}. The free generator makes them for you in about 15 minutes, and you publish them on your own website. You own them, and nothing is paid.",
+   "ctaButton": "Make the files now",
+   "ctaCard": "an AI business card described with schema.org",
+   "ctaCatalog": "ai-catalog.json",
+   "ctaLlms": "llms.txt",
+   "ctaAnd": "and"
   },
   "register": {
    "title": "Register your business · VegvisAI",

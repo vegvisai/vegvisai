@@ -345,7 +345,14 @@
    "noneData": "ingen",
    "footer": "Tidspunkt: {time}. Stikkprøve, ikke en fullstendig gjennomgang.",
    "profMedia": "Nyhetsmedium",
-   "noteOthers": "Andre gratis sjekker måler flere tekniske detaljer for utviklere, for eksempel Cloudflares <a href=\"https://isitagentready.com/\">isitagentready.com</a>. Denne sjekken legger til målestokker for offentlige virksomheter, organisasjoner, partier og nyhetsmedier, sjekken for skjulte instrukser, enkle råd og et ferdig AI-visittkort. Det som betyr mest, er fortsatt deres egen tydelige nettside; en gratis Google-bedriftsprofil hjelper også."
+   "noteOthers": "Andre gratis sjekker måler flere tekniske detaljer for utviklere, for eksempel Cloudflares <a href=\"https://isitagentready.com/\">isitagentready.com</a>. Denne sjekken legger til målestokker for offentlige virksomheter, organisasjoner, partier og nyhetsmedier, sjekken for skjulte instrukser, enkle råd og et ferdig AI-visittkort. Det som betyr mest, er fortsatt deres egen tydelige nettside; en gratis Google-bedriftsprofil hjelper også.",
+   "ctaTitle": "Neste steg: lag filene AI-assistentene ser etter",
+   "ctaText": "Nettsiden din mangler {missing}. Den gratis generatoren lager dem for deg på rundt 15 minutter, og du legger dem ut på din egen nettside. Du eier dem, og ingenting koster noe.",
+   "ctaButton": "Lag filene nå",
+   "ctaCard": "et AI-visittkort beskrevet med schema.org",
+   "ctaCatalog": "ai-catalog.json",
+   "ctaLlms": "llms.txt",
+   "ctaAnd": "og"
   },
   "register": {
    "title": "Meld inn bedriften · VegvisAI",

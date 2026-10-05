@@ -13,6 +13,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 - Optional request form that AI agents can fill in (`toolname="send_request"`), built from the business's own request details. Off by default. GET to the business's own request page, no `toolautosubmit`.
 
 **AI check**
+- After the result, a «Make the files now» button goes straight to the generator with the address filled in, when the business description, `ai-catalog.json` or `llms.txt` is missing.
 - Lists WebMCP tools found in forms and inline scripts under «open for AI» (no points while WebMCP is experimental).
 - Scans WebMCP tool and parameter descriptions for hidden instructions to AI.
 

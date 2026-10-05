@@ -122,6 +122,7 @@ function checkTexts(lang) {
     sourceHidden: (url) => fill(c.sourceHidden, { url }),
     sourceData: (url) => fill(c.sourceData, { url }),
     sourceTitle: (url) => fill(c.sourceTitle, { url }),
+    sourceWebmcp: (url) => fill(c.sourceWebmcp, { url }),
     report: (r) => [
       fill(c.reportHead, { site: r.site, time: r.time }),
       r.score === null ? c.scoreNone : fill(c.score, { score: r.score }),
@@ -292,7 +293,18 @@ export function readPage(html) {
   const hidden = [];
   for (const k of s.matchAll(/<!--([\s\S]*?)-->/g)) hidden.push(k[1]);
   for (const k of s.matchAll(/<([a-z0-9]+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0)[^>]*>([\s\S]*?)<\/\1>/gi)) hidden.push(k[2].replace(/<[^>]+>/g, " "));
-  return { title, description, robots, canonical, metaDate, lang, h1, links, feeds, jsonld, text, hidden: hidden.join(" ") };
+  // WebMCP (draft, Chrome origin trial): forms named as tools, and tools registered in inline scripts.
+  // The descriptions are read by agents, so they are scanned for injection like the rest of the page.
+  const webmcp = { tools: [], text: [] };
+  for (const f of s.match(/<form\b[^>]*>/gi) || []) {
+    const name = attr(f, "toolname");
+    if (name) { webmcp.tools.push(name.slice(0, 80)); webmcp.text.push(attr(f, "tooldescription")); }
+  }
+  for (const k of s.matchAll(/\btoolparamdescription\s*=\s*("([^"]*)"|'([^']*)')/gi)) webmcp.text.push(decode(k[2] ?? k[3] ?? ""));
+  const inline = [...s.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((k) => k[1]).join("\n");
+  for (const k of inline.matchAll(/modelContext\s*\??\.\s*registerTool\s*\(\s*\{[\s\S]{0,400}?\bname\s*:\s*["'`]([^"'`]{1,80})["'`]/g)) webmcp.tools.push(k[1]);
+  for (const k of inline.matchAll(/modelContext\s*\??\.\s*registerTool\s*\(\s*\{[\s\S]{0,800}?\bdescription\s*:\s*["'`]([^"'`]{1,500})["'`]/g)) webmcp.text.push(k[1]);
+  return { title, description, robots, canonical, metaDate, lang, h1, links, feeds, jsonld, text, hidden: hidden.join(" "), webmcp: { tools: webmcp.tools, text: webmcp.text.filter(Boolean).join("\n") } };
 }
 
 export function jsonldObjects(blocks) {
@@ -454,7 +466,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     ai_catalog: catOk,
     mcp: isJson(mcpCard) || catalogTypes.some((x) => /mcp/i.test(x)),
     openapi: isJson(openapi) || catalogTypes.some((x) => /openapi/i.test(x)),
-    feeds: [], calendar: false, actions: [], datasets: false, search: false,
+    feeds: [], calendar: false, actions: [], datasets: false, search: false, webmcp: [],
   };
 
   // Samples: the front page and evenly spread pages from the sitemap.
@@ -487,6 +499,8 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     scan(t.sourceHidden(final), page.hidden);
     scan(t.sourceData(final), page.jsonld.join("\n"));
     scan(t.sourceTitle(final), page.title + "\n" + page.description);
+    if (page.webmcp.text) scan(t.sourceWebmcp(final), page.webmcp.text);
+    r.open.webmcp.push(...page.webmcp.tools);
     r.pages.push({
       url: final,
       status,
@@ -512,6 +526,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     .map((f) => ({ ...f, source: sanitize(f.source, 200), excerpt: sanitize(f.excerpt, 160) }));
   r.open.feeds = [...new Set(r.open.feeds)].slice(0, 5);
   r.open.actions = [...new Set(r.open.actions)].sort();
+  r.open.webmcp = [...new Set(r.open.webmcp)].slice(0, 20);
   const pageTypes = r.pages.flatMap((x) => x.jsonld_types || []);
   [r.profile, r.profile_source] = chooseProfile(profile, pageTypes, start.hostname, publicHosts, partyHosts);
   // Key pages the yardstick expects, found among the front page's links.
@@ -639,7 +654,7 @@ export function asText(r, lang = r.lang ?? "en") {
   ];
   if (r.open) {
     const o = r.open;
-    const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (k === "actions" ? `${n} (${o.actions.join(", ")})` : n));
+    const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (k === "actions" || k === "webmcp" ? `${n} (${o[k].join(", ")})` : n));
     out.push(t.openLine(names.join(", ")));
   }
   if (r.breakdown?.length) out.push(t.pointsLine(r.breakdown.map((b) => `${b.id} ${b.max ? `${b.points}/${b.max}` : t.notApplicable}`).join(", ")));

@@ -14,7 +14,11 @@ En sjekkliste for sider, strukturerte data og handlingslenker.](website.md) [Niv
 
 ### llms.txt og ai-catalog.json
 
-To små filer som lar agenter og åpne veivisere finne deg.](files.md) [Nivå 3
+To små filer som lar agenter og åpne veivisere finne deg.](files.md) [Eksperimentelt
+
+### La AI-agenter bruke skjemaene dine (WebMCP)
+
+Tre attributter på skjemaene du allerede har.](https://vegvis.ai/no/guider/webmcp/) [Nivå 3
 
 ### Din egen AI-tjeneste (MCP)
 

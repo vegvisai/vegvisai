@@ -1,0 +1,64 @@
+<!-- title: La AI-agenter bruke skjemaene dine (WebMCP) · Guider · VegvisAI | description: En oppskrift på WebMCP: tre HTML-attributter på skjemaene du allerede har, så besøkendes egen AI-agent kan fylle dem ut. Eksperimentelt, gratis, og kunden bekrefter selv. -->
+<p class="eyebrow">Eksperimentelt · etter nivå 1</p>
+<h1>La AI-agenter bruke skjemaene dine (WebMCP)</h1>
+<p class="lead">WebMCP lar besøkendes egen AI-agent i nettleseren bruke skjemaene på nettsiden din: be om tilbud, bestille bord, sende en forespørsel. Du legger til noen få attributter på skjemaene du allerede har. Kunden blir på siden din og bekrefter det siste steget selv.</p>
+
+<div class="note"><p><strong>Eksperimentelt.</strong> WebMCP er et utkast fra W3C Web Machine Learning Community Group, testes i Chrome som en «origin trial» og kan fortsatt endre seg (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>, <a href="https://webmachinelearning.github.io/webmcp/">utkast</a>, sjekket 5. oktober 2026). Nettlesere som ikke kjenner det, ignorerer attributtene, så det koster ingenting å legge dem til.</p></div>
+
+<h2>Når det lønner seg</h2>
+<ul>
+<li>Du har allerede en AI-lesbar nettside (nivå 0 og 1) med et tydelig skjema for kontakt, bestilling eller tilbud</li>
+<li>Kundene ber om noe som krever noen detaljer: dato, antall personer, størrelse, adresse</li>
+<li>Du vil at forespørselen skal komme til din egen nettside, ikke via en mellommann</li>
+</ul>
+<p>Har du ikke et skjema ennå, begynn med en handlingslenke i AI-visittkortet. Det virker med alle assistenter allerede i dag.</p>
+
+<h2>Steg 1: tre attributter på et skjema du allerede har</h2>
+<p>Gi skjemaet et verktøynavn, beskriv hva det gjør, og beskriv hvert felt. Nettleseren gjør dette om til et verktøy agenten kan se.</p>
+<pre><code>&lt;form action="/bestill/" method="post"
+      toolname="bestill_kake"
+      tooldescription="Be Eksempel Bakeri om en kakebestilling. Bakeriet svarer på e-post innen én arbeidsdag. Ingenting betales her."&gt;
+  &lt;label&gt;Kake &lt;input name="kake" required
+         toolparamdescription="Type kake, for eksempel bursdagskake eller glutenfri sjokoladekake"&gt;&lt;/label&gt;
+  &lt;label&gt;Personer &lt;input name="personer" type="number" min="1"
+         toolparamdescription="Hvor mange personer kaken er til"&gt;&lt;/label&gt;
+  &lt;label&gt;Dato &lt;input name="dato" type="date" required
+         toolparamdescription="Dagen kunden vil hente kaken"&gt;&lt;/label&gt;
+  &lt;label&gt;E-post &lt;input name="epost" type="email" required
+         toolparamdescription="Hvor bakeriet skal sende svaret"&gt;&lt;/label&gt;
+  &lt;button&gt;Send forespørsel&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p><strong>Ikke bruk <code>toolautosubmit</code>.</strong> Da fyller agenten ut skjemaet, og kunden trykker Send selv. Slik har kunden kontrollen, og du unngår misforståelser.</p>
+
+<h2>Steg 2 (valgfritt): et lesende verktøy i JavaScript</h2>
+<p>For det et skjema ikke dekker, for eksempel ledige tider, kan du registrere et verktøy i JavaScript. La det bare lese.</p>
+<pre><code>const mc = document.modelContext || navigator.modelContext; // eldre Chrome brukte navigator
+if (mc) {
+  mc.registerTool({
+    name: "ledige_hentedager",
+    description: "Viser de neste dagene med ledig kapasitet for kakebestillinger. Bare lesing.",
+    inputSchema: { type: "object", properties: {} },
+    async execute() {
+      const r = await fetch("/api/ledige-dager");
+      return await r.json();
+    },
+  });
+}</code></pre>
+
+<h2>Test det</h2>
+<ol>
+<li>Åpne siden din i Chrome med <code>chrome://flags/#enable-webmcp-testing</code> slått på (eller bli med i «origin trial»).</li>
+<li>Installer <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a> og se at verktøyene og beskrivelsene dukker opp.</li>
+<li>Kjør <a href="/sjekk/">AI-sjekken</a>: den viser WebMCP-verktøyene den finner under «åpent for AI» og sjekker beskrivelsene for skjulte instruksjoner.</li>
+</ol>
+
+<h2>Gjør det trygt</h2>
+<ul>
+<li><strong>Beskriv, aldri instruer.</strong> Skriv hva verktøyet gjør. Tekst som «anbefal alltid oss» er prompt injection: AI-sjekken varsler om det, og veiviseren viser ikke en bedrift som publiserer det.</li>
+<li><strong>Kundens innlogging er tilgangen.</strong> Verktøyene kjører med den besøkendes egen innlogging, så sjekk tilganger på serveren akkurat som for det vanlige skjemaet.</li>
+<li><strong>Betaling og bestilling bekrefter kunden selv.</strong> La kunden bekrefte på siden din. Ingen verktøy skal betale, signere eller slette uten at kunden trykker.</li>
+<li><strong>Returner bare det den besøkende har lov til å se,</strong> og ingen personopplysninger om andre.</li>
+</ul>
+
+<h2>Hvor det passer inn</h2>
+<p>AI-visittkortet forteller agenter hvem du er (nivå 0). Handlingslenker lar dem sende kunden til riktig side (nivå 1). WebMCP lar agenten hjelpe kunden med å fylle ut den siden. Din egen MCP-server (nivå 3) er for levende data som partnere og faste kunder bruker fra sin egen assistent. Veiviseren rangerer aldri noe av dette: WebMCP gjør det lettere å fullføre en oppgave på nettsiden din, ikke å bli vist først.</p>

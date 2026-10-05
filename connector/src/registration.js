@@ -140,7 +140,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
   if (unit.konkurs || unit.underAvvikling || unit.underTvangsavviklingEllerTvangsopplosning) return { status: "rejected", reasons: ["bankrupt"], domain };
 
   // Injection: a serious match in what the business publishes stops the listing.
-  const published = [card.page.text, card.page.hidden, card.page.jsonld.join("\n"), JSON.stringify(card.catalog ?? {})].join("\n");
+  const published = [card.page.text, card.page.hidden, card.page.jsonld.join("\n"), card.page.webmcp?.text ?? "", JSON.stringify(card.catalog ?? {})].join("\n");
   if (findInstructions(published).some((f) => f.severity !== "low")) return { status: "rejected", reasons: ["injection"], domain };
   if (!consent) reasons.push("no_consent");
 
@@ -204,7 +204,7 @@ async function verifyAbroad(address, country, { orgNumber = "", consent = false,
   const card = await readCard(origin, fetchFn);
   const biz = businessObject(card.objects);
   if (!card.page || !biz) return { status: "rejected", reasons: ["no_card"], domain };
-  const published = [card.page.text, card.page.hidden, card.page.jsonld.join("\n"), JSON.stringify(card.catalog ?? {})].join("\n");
+  const published = [card.page.text, card.page.hidden, card.page.jsonld.join("\n"), card.page.webmcp?.text ?? "", JSON.stringify(card.catalog ?? {})].join("\n");
   if (findInstructions(published).some((f) => f.severity !== "low")) return { status: "rejected", reasons: ["injection"], domain };
 
   const reasons = [];

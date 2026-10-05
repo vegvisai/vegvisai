@@ -69,7 +69,8 @@ export const LOCALES = {
     "calendar": "calendar (iCal)",
     "actions": "actions in schema.org",
     "datasets": "open data (Dataset)",
-    "search": "site search for agents"
+    "search": "site search for agents",
+    "webmcp": "WebMCP tools in forms or scripts"
    },
    "fields": "Structured data for products or services is missing fields: {fields}.",
    "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
@@ -79,6 +80,7 @@ export const LOCALES = {
    "skippedRobots": "robots.txt does not allow it",
    "sourcePage": "page {url}",
    "sourceHidden": "hidden text on {url}",
+   "sourceWebmcp": "WebMCP tool descriptions on {url}",
    "sourceData": "structured data on {url}",
    "sourceTitle": "title and description on {url}",
    "fieldNames": {
@@ -285,6 +287,7 @@ export const LOCALES = {
     "get-started": "/no/guider/kom-i-gang/",
     "website": "/no/guider/ai-lesbar-nettside/",
     "files": "/no/guider/ai-filer/",
+    "webmcp": "/no/guider/webmcp/",
     "mcp": "/no/guider/mcp/",
     "developers": "/no/guider/utviklere/",
     "how-we-choose": "/no/guider/slik-velger-vi/"
@@ -349,7 +352,8 @@ export const LOCALES = {
     "calendar": "kalender (iCal)",
     "actions": "handlinger i schema.org",
     "datasets": "åpne data (Dataset)",
-    "search": "søk for agenter"
+    "search": "søk for agenter",
+    "webmcp": "WebMCP-verktøy i skjemaer eller skript"
    },
    "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
    "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
@@ -359,6 +363,7 @@ export const LOCALES = {
    "skippedRobots": "robots.txt tillater ikke",
    "sourcePage": "side {url}",
    "sourceHidden": "skjult tekst på {url}",
+   "sourceWebmcp": "WebMCP-verktøybeskrivelser på {url}",
    "sourceData": "strukturerte data på {url}",
    "sourceTitle": "tittel og beskrivelse på {url}",
    "fieldNames": {

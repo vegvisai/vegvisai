@@ -25,9 +25,9 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 EN_PATHS = {
     "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/",
     "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
-    "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
+    "webmcp": "/docs/webmcp/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
-DOCS = ["docs", "get-started", "website", "files", "mcp", "developers", "how-we-choose"]
+DOCS = ["docs", "get-started", "website", "files", "webmcp", "mcp", "developers", "how-we-choose"]
 
 # Languages come from locales/<code>.json; a language is built when content/<site_dir>/ exists.
 # Internally a language is keyed by its content folder (en, no, ...). Missing texts fall back to English.

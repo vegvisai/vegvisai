@@ -16,6 +16,7 @@
    "get-started": "/no/guider/kom-i-gang/",
    "website": "/no/guider/ai-lesbar-nettside/",
    "files": "/no/guider/ai-filer/",
+   "webmcp": "/no/guider/webmcp/",
    "mcp": "/no/guider/mcp/",
    "developers": "/no/guider/utviklere/",
    "how-we-choose": "/no/guider/slik-velger-vi/"
@@ -102,7 +103,8 @@
    "calendar": "kalender (iCal)",
    "actions": "handlinger i schema.org",
    "datasets": "åpne data (Dataset)",
-   "search": "søk for agenter"
+   "search": "søk for agenter",
+   "webmcp": "WebMCP-verktøy i skjemaer eller skript"
   },
   "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
   "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
@@ -112,6 +114,7 @@
   "skippedRobots": "robots.txt tillater ikke",
   "sourcePage": "side {url}",
   "sourceHidden": "skjult tekst på {url}",
+  "sourceWebmcp": "WebMCP-verktøybeskrivelser på {url}",
   "sourceData": "strukturerte data på {url}",
   "sourceTitle": "tittel og beskrivelse på {url}",
   "fieldNames": {

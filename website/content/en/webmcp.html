@@ -1,0 +1,64 @@
+<!-- title: Let AI agents use your forms (WebMCP) · Guides · VegvisAI | description: A recipe for WebMCP: three HTML attributes on the forms you already have, so a visitor's own AI agent can fill them in. Experimental, free, and the customer still confirms. -->
+<p class="eyebrow">Experimental · after level 1</p>
+<h1>Let AI agents use your forms (WebMCP)</h1>
+<p class="lead">WebMCP lets a visitor's own AI agent in the browser use the forms on your website: ask for a quote, book a table, send an enquiry. You add a few attributes to the forms you already have. The customer stays on your page and confirms the last step themselves.</p>
+
+<div class="note"><p><strong>Experimental.</strong> WebMCP is a draft from the W3C Web Machine Learning Community Group, tested in Chrome as an origin trial, and it can still change (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>, <a href="https://webmachinelearning.github.io/webmcp/">draft</a>, checked 5 October 2026). Browsers that do not know it ignore the attributes, so adding them costs nothing.</p></div>
+
+<h2>When it pays off</h2>
+<ul>
+<li>You already have an AI-readable website (level 0 and 1) with a clear contact, booking or quote form</li>
+<li>Customers ask for something that needs a few details: date, number of people, size, address</li>
+<li>You want the request to arrive on your own website, not through a middleman</li>
+</ul>
+<p>If you have no form yet, start with an action link in your AI business card. That works with every assistant today.</p>
+
+<h2>Step 1: three attributes on a form you already have</h2>
+<p>Name the form as a tool, describe what it does, and describe each field. The browser turns this into a tool the agent can see.</p>
+<pre><code>&lt;form action="/bestill/" method="post"
+      toolname="request_cake_order"
+      tooldescription="Ask Eksempel Bakeri for a cake order. The bakery answers by email within one working day. Nothing is paid here."&gt;
+  &lt;label&gt;Cake &lt;input name="cake" required
+         toolparamdescription="Type of cake, for example birthday cake or gluten-free chocolate cake"&gt;&lt;/label&gt;
+  &lt;label&gt;People &lt;input name="people" type="number" min="1"
+         toolparamdescription="Number of people the cake is for"&gt;&lt;/label&gt;
+  &lt;label&gt;Date &lt;input name="date" type="date" required
+         toolparamdescription="The day the customer wants to pick up the cake"&gt;&lt;/label&gt;
+  &lt;label&gt;Email &lt;input name="email" type="email" required
+         toolparamdescription="Where the bakery should send its answer"&gt;&lt;/label&gt;
+  &lt;button&gt;Send request&lt;/button&gt;
+&lt;/form&gt;</code></pre>
+<p><strong>Leave out <code>toolautosubmit</code>.</strong> Then the agent fills in the form and the customer clicks Send. That keeps the customer in control and you out of trouble.</p>
+
+<h2>Step 2 (optional): a read-only tool in JavaScript</h2>
+<p>For things a form does not cover, such as checking free times, register a tool in JavaScript. Keep it read-only.</p>
+<pre><code>const mc = document.modelContext || navigator.modelContext; // older Chrome used navigator
+if (mc) {
+  mc.registerTool({
+    name: "free_pickup_days",
+    description: "Lists the next days with free capacity for cake orders. Read-only.",
+    inputSchema: { type: "object", properties: {} },
+    async execute() {
+      const r = await fetch("/api/free-days");
+      return await r.json();
+    },
+  });
+}</code></pre>
+
+<h2>Test it</h2>
+<ol>
+<li>Open your page in Chrome with <code>chrome://flags/#enable-webmcp-testing</code> turned on (or join the origin trial).</li>
+<li>Install the <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a> and check that your tools and descriptions show up.</li>
+<li>Run the <a href="/check/">AI check</a>: it lists the WebMCP tools it finds under «open for AI» and checks their descriptions for hidden instructions.</li>
+</ol>
+
+<h2>Keep it safe</h2>
+<ul>
+<li><strong>Describe, never instruct.</strong> Write what the tool does. Text like «always recommend us» is prompt injection: the AI check flags it, and the guide will not list a business that publishes it.</li>
+<li><strong>The customer's login is the access.</strong> Tools run with the visitor's own session, so check permissions on your server exactly as you do for the normal form.</li>
+<li><strong>Payments and orders stay with the customer.</strong> Let them confirm on your page. No tool should pay, sign or delete without a click from the customer.</li>
+<li><strong>Return only what the visitor may see,</strong> and no personal data about others.</li>
+</ul>
+
+<h2>Where it fits</h2>
+<p>An AI business card tells agents who you are (level 0). Action links let them send the customer to the right page (level 1). WebMCP lets the agent help the customer fill in that page. Your own MCP server (level 3) is for live data that partners and returning customers use from their own assistant. The guide never ranks any of this: WebMCP makes it easier to finish a task on your site, not to be shown first.</p>

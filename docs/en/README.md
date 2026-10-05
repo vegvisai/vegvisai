@@ -14,7 +14,11 @@ A checklist for pages, structured data and action links.](website.md) [Level 2
 
 ### llms.txt and ai-catalog.json
 
-Two small files that let agents and open guides find you.](files.md) [Level 3
+Two small files that let agents and open guides find you.](files.md) [Experimental
+
+### Let AI agents use your forms (WebMCP)
+
+Three attributes on the forms you already have.](https://vegvis.ai/docs/webmcp/) [Level 3
 
 ### Your own AI service (MCP)
 

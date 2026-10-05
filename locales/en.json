@@ -88,7 +88,8 @@
    "calendar": "calendar (iCal)",
    "actions": "actions in schema.org",
    "datasets": "open data (Dataset)",
-   "search": "site search for agents"
+   "search": "site search for agents",
+   "webmcp": "WebMCP tools in forms or scripts"
   },
   "fields": "Structured data for products or services is missing fields: {fields}.",
   "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
@@ -98,6 +99,7 @@
   "skippedRobots": "robots.txt does not allow it",
   "sourcePage": "page {url}",
   "sourceHidden": "hidden text on {url}",
+  "sourceWebmcp": "WebMCP tool descriptions on {url}",
   "sourceData": "structured data on {url}",
   "sourceTitle": "title and description on {url}",
   "fieldNames": {

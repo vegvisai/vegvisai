@@ -70,7 +70,8 @@ export const LOCALES = {
     "actions": "actions in schema.org",
     "datasets": "open data (Dataset)",
     "search": "site search for agents",
-    "webmcp": "WebMCP tools in forms or scripts"
+    "webmcp": "WebMCP tools in forms or scripts",
+    "a2a": "agent card for agent-to-agent (A2A)"
    },
    "fields": "Structured data for products or services is missing fields: {fields}.",
    "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
@@ -129,7 +130,8 @@ export const LOCALES = {
    },
    "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
    "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
-   "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}."
+   "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}.",
+   "sourceAgentCard": "the agent card (A2A)"
   },
   "check_errors": {
    "missing": "Enter a web address.",
@@ -359,7 +361,8 @@ export const LOCALES = {
     "actions": "handlinger i schema.org",
     "datasets": "åpne data (Dataset)",
     "search": "søk for agenter",
-    "webmcp": "WebMCP-verktøy i skjemaer eller skript"
+    "webmcp": "WebMCP-verktøy i skjemaer eller skript",
+    "a2a": "agentkort for agent-til-agent (A2A)"
    },
    "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
    "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
@@ -418,7 +421,8 @@ export const LOCALES = {
    },
    "robotsTraining": "robots.txt blokkerer AI-trening ({bots}). Det kan være et bevisst valg: AI-assistenter kan fortsatt lese og sitere nettstedet gjennom søkerobotene sine.",
    "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
-   "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}."
+   "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}.",
+   "sourceAgentCard": "agentkortet (A2A)"
   },
   "check_errors": {
    "missing": "Oppgi en nettadresse.",

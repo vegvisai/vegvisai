@@ -108,7 +108,8 @@
    "actions": "handlinger i schema.org",
    "datasets": "åpne data (Dataset)",
    "search": "søk for agenter",
-   "webmcp": "WebMCP-verktøy i skjemaer eller skript"
+   "webmcp": "WebMCP-verktøy i skjemaer eller skript",
+   "a2a": "agentkort for agent-til-agent (A2A)"
   },
   "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
   "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
@@ -167,7 +168,8 @@
   },
   "robotsTraining": "robots.txt blokkerer AI-trening ({bots}). Det kan være et bevisst valg: AI-assistenter kan fortsatt lese og sitere nettstedet gjennom søkerobotene sine.",
   "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
-  "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}."
+  "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}.",
+  "sourceAgentCard": "agentkortet (A2A)"
  },
  "check_errors": {
   "missing": "Oppgi en nettadresse.",

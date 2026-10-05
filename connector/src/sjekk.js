@@ -457,6 +457,20 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   const isJson = (x) => { if (x.status !== 200) return false; try { JSON.parse(x.text); return true; } catch { return false; } };
   const llmsFull = await get(root + "/llms-full.txt");
   const mcpCard = await get(root + "/.well-known/mcp.json");
+  // A2A agent card (Linux Foundation A2A protocol): the business's own agent that a customer's agent can talk to.
+  // Its name, description and skill descriptions are read by agents, so they are scanned for injection.
+  let agentCard = await get(root + "/.well-known/agent-card.json");
+  if (!isJson(agentCard)) agentCard = await get(root + "/.well-known/agent.json"); // older name
+  let agentSkills = null;
+  if (isJson(agentCard)) {
+    try {
+      const a = JSON.parse(agentCard.text);
+      if (a && typeof a.name === "string" && Array.isArray(a.skills)) {
+        agentSkills = a.skills.map((k) => String(k?.name ?? k?.id ?? "")).filter(Boolean).slice(0, 20);
+        scan(t.sourceAgentCard, [a.name, a.description, ...a.skills.flatMap((k) => [k?.name, k?.description])].filter(Boolean).join("\n"));
+      }
+    } catch { /* not an agent card */ }
+  }
   const openapi = await get(root + "/openapi.json");
   let catalogTypes = [];
   if (catOk) { try { catalogTypes = JSON.parse(cat.text).entries.map((e) => String(e.type || "")); } catch { /* checked above */ } }
@@ -465,6 +479,8 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     llms_full: isText(llmsFull),
     ai_catalog: catOk,
     mcp: isJson(mcpCard) || catalogTypes.some((x) => /mcp/i.test(x)),
+    // The skill names when the card lists them, true when an agent is only announced.
+    a2a: agentSkills?.length ? agentSkills : agentSkills !== null || catalogTypes.some((x) => /a2a/i.test(x)),
     openapi: isJson(openapi) || catalogTypes.some((x) => /openapi/i.test(x)),
     feeds: [], calendar: false, actions: [], datasets: false, search: false, webmcp: [],
   };
@@ -654,7 +670,7 @@ export function asText(r, lang = r.lang ?? "en") {
   ];
   if (r.open) {
     const o = r.open;
-    const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (k === "actions" || k === "webmcp" ? `${n} (${o[k].join(", ")})` : n));
+    const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (Array.isArray(o[k]) && ["actions", "webmcp", "a2a"].includes(k) ? `${n} (${o[k].join(", ")})` : n));
     out.push(t.openLine(names.join(", ")));
   }
   if (r.breakdown?.length) out.push(t.pointsLine(r.breakdown.map((b) => `${b.id} ${b.max ? `${b.points}/${b.max}` : t.notApplicable}`).join(", ")));

@@ -90,7 +90,8 @@
    "actions": "actions in schema.org",
    "datasets": "open data (Dataset)",
    "search": "site search for agents",
-   "webmcp": "WebMCP tools in forms or scripts"
+   "webmcp": "WebMCP tools in forms or scripts",
+   "a2a": "agent card for agent-to-agent (A2A)"
   },
   "fields": "Structured data for products or services is missing fields: {fields}.",
   "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
@@ -149,7 +150,8 @@
   },
   "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
   "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
-  "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}."
+  "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}.",
+  "sourceAgentCard": "the agent card (A2A)"
  },
  "check_errors": {
   "missing": "Enter a web address.",

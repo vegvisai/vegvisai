@@ -44,6 +44,12 @@ Most small businesses will never hire a developer to make their website AI-reada
 - Public services are free, are listed with links only, and are never ranked against businesses.
 - The platform guides and connects; it does not own the content.
 
+## Security
+
+Independently scanned by M8ven: no credential exfiltration, no sensitive file access, no obfuscation. Report a vulnerability privately: [SECURITY.md](SECURITY.md).
+
+[![M8ven Verified](https://m8ven.ai/badge/mcp/vegvisai/vegvisai?variant=verified)](https://m8ven.ai/mcp/vegvisai/vegvisai?s=readme)
+
 ## Licences
 
 | Part | Licence | File |

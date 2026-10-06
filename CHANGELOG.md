@@ -5,6 +5,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 ## Unreleased, 6 October 2026
 
 **Connector**
+- Version 1.5.1: the connector and the MCP registry entry describe a guide to businesses in any country, plus public services and parties in Norway.
 - All five tools declare `destructiveHint: false` and `idempotentHint: true` next to `readOnlyHint`, so agent directories can see they only read.
 
 **AI check**

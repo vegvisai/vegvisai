@@ -4,6 +4,9 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased, 6 October 2026
 
+**Connector**
+- All five tools declare `destructiveHint: false` and `idempotentHint: true` next to `readOnlyHint`, so agent directories can see they only read.
+
 **AI check**
 - Finds a business's own agent through the A2A agent card (`/.well-known/agent-card.json`, older `/.well-known/agent.json`) or an A2A entry in `ai-catalog.json`, lists the agent's skills under «open for AI» (no points), and scans the card's name and descriptions for hidden instructions to AI.
 

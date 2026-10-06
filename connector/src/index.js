@@ -77,7 +77,7 @@ const TOOLS = [
         municipality: { type: "string", description: "Name of a Norwegian municipality, e.g. Bodø, if the consumer needs local services" },
       },
     },
-    annotations: { readOnlyHint: true, openWorldHint: false },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
   {
     name: "find_political_party",
@@ -90,7 +90,7 @@ const TOOLS = [
         name: { type: "string", description: "Name of the party, e.g. Høyre. Leave out to list all parties in the index." },
       },
     },
-    annotations: { readOnlyHint: true, openWorldHint: false },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
   {
     name: "check_business",
@@ -103,7 +103,7 @@ const TOOLS = [
         name: { type: "string", description: "Name or part of the name, if the organisation number is not known" },
       },
     },
-    annotations: { readOnlyHint: true, openWorldHint: true },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
   },
   {
     name: "find_business",
@@ -119,7 +119,7 @@ const TOOLS = [
       },
       required: ["need"],
     },
-    annotations: { readOnlyHint: true, openWorldHint: false },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: false },
   },
   {
     name: "ai_check",
@@ -134,7 +134,7 @@ const TOOLS = [
       },
       required: ["url"],
     },
-    annotations: { readOnlyHint: true, openWorldHint: true },
+    annotations: { readOnlyHint: true, destructiveHint: false, idempotentHint: true, openWorldHint: true },
   },
 ];
 

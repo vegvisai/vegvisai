@@ -48,7 +48,7 @@ Most small businesses will never hire a developer to make their website AI-reada
 
 Independently scanned by M8ven: no credential exfiltration, no sensitive file access, no obfuscation. Report a vulnerability privately: [SECURITY.md](SECURITY.md).
 
-[![M8ven Verified](https://m8ven.ai/badge/mcp/vegvisai/vegvisai?variant=verified)](https://m8ven.ai/mcp/vegvisai/vegvisai?s=readme)
+[![M8ven Score](https://m8ven.ai/badge/mcp/vegvisai-vegvisai-qd8mjj?v=249e3916c8fbfdf41fa2e8eb960a470a&variant=verified)](https://m8ven.ai/mcp/vegvisai-vegvisai-qd8mjj?s=readme)
 
 ## Licences
 

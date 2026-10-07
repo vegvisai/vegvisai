@@ -23,7 +23,7 @@ const entryId = (v) => {
   return /^(?:[A-Z]{2}[A-Z0-9]{2,14}|web:[a-z0-9.-]{3,253})$/.test(s) ? s : "";
 };
 // Reasons that remove a listed business at the re-check; anything else keeps it.
-const REMOVE_ON = new Set(["no_card", "not_in_register", "bankrupt", "injection", "no_org_number", "org_mismatch"]);
+const REMOVE_ON = new Set(["no_card", "not_in_register", "bankrupt", "injection", "no_org_number", "org_mismatch", "org_not_on_card"]);
 
 export function storeFor(env) {
   if (env?.__store) return env.__store; // tests

@@ -1,0 +1,52 @@
+<!-- title: Legg kodebiten på nettsiden · Guider · VegvisAI | description: Hvor du limer inn schema.org-kodebiten fra den gratis generatoren i WordPress, Wix, Squarespace, Shopify og Webflow, og hvilke abonnement som tillater det. Én kodebit på forsiden er nok for å melde inn bedriften. -->
+<p class="eyebrow">Guide · rundt 10 minutter</p>
+<h1>Legg kodebiten på nettsiden</h1>
+<p class="lead"><a href="/lag/">Generatoren</a> gir deg <code>head-snippet.html</code>: en kort schema.org-beskrivelse av bedriften. Lim den inn i toppen (head) av forsiden, så kan AI-assistenter lese hvem dere er. Det er alt som trengs for å <a href="/meld-inn/">melde inn bedriften i veiviseren</a>. De andre filene er valgfrie.</p>
+
+<div class="note"><p><strong>Abonnementer endrer seg.</strong> Flere nettsidebyggere tillater egen kode bare på betalte abonnement. Det vi skriver her ble sjekket 7. oktober 2026 mot byggernes egne hjelpesider eller kjente guider. Se hjelpesiden til din nettsidebygger hvis en meny ikke er der vi sier. Produktnavnene tilhører eierne sine, og VegvisAI har ingen tilknytning til noen av dem.</p></div>
+
+<h2>WordPress (egen installasjon)</h2>
+<ol>
+<li>Installer en utvidelse som legger kode i head, for eksempel «WPCode» (Insert Headers and Footers): Utvidelser → Legg til ny.</li>
+<li>Åpne Code Snippets → Header &amp; Footer og lim inn hele kodebiten i feltet Header.</li>
+<li>Lagre. Kodebiten kommer nå på alle sider, og det er helt greit.</li>
+</ol>
+<p>På WordPress.com krever utvidelser abonnementet Business eller Commerce (eller det eldre Pro), ifølge <a href="https://www.wpbeginner.com/plugins/how-to-add-header-and-footer-code-in-wordpress/">WPBeginner</a>.</p>
+
+<h2>Wix</h2>
+<p>To måter:</p>
+<ul>
+<li><strong>Strukturerte data på siden:</strong> åpne forsiden i editoren, gå til sidens SEO-innstillinger og legg til strukturerte data. Lim inn bare det som står mellom <code>&lt;script …&gt;</code> og <code>&lt;/script&gt;</code>, siden Wix vil ha selve JSON-LD-koden. Se <a href="https://support.wix.com/en/article/adding-structured-data-to-your-site">Wix: adding structured data</a>.</li>
+<li><strong>Egen kode:</strong> i dashbordet, Innstillinger → Custom Code → Add Custom Code. Lim inn hele kodebiten, velg Head og bruk den på forsiden. Det krever en publisert side med eget domene, og dermed et betalt abonnement, ifølge <a href="https://support.wix.com/en/article/embedding-custom-code-on-your-site">Wix: embedding custom code</a>.</li>
+</ul>
+<p>Wix legger selv inn noe informasjon om bedriften når du fyller ut bedriftsinformasjonen. Kodebiten vår kan stå ved siden av.</p>
+
+<h2>Squarespace</h2>
+<ol>
+<li>Åpne innstillingene for forsiden → Advanced → Page Header Code Injection.</li>
+<li>Lim inn hele kodebiten og lagre.</li>
+</ol>
+<p>Code Injection finnes på abonnementene Core, Plus og Advanced, ikke på Basic (eldre abonnement: Business og Commerce, ikke Personal), ifølge <a href="https://www.beyondspace.studio/qanda/which-squarespace-plans-include-code-injection-in-2025">Beyond Space</a>.</p>
+
+<h2>Shopify</h2>
+<ol>
+<li>Nettbutikk → Temaer → de tre prikkene → Rediger kode.</li>
+<li>Åpne <code>layout/theme.liquid</code> og lim inn kodebiten rett før <code>&lt;/head&gt;</code>.</li>
+<li>Vil du ha den bare på forsiden, legg den inni <code>{% if template == 'index' %}</code> … <code>{% endif %}</code>.</li>
+</ol>
+<p>Ta en kopi av temaet først (Handlinger → Dupliser). En temaoppdatering kan overskrive endringen, så sjekk igjen etter en oppdatering.</p>
+
+<h2>Webflow</h2>
+<p>Sideinnstillinger for forsiden → Custom code → Inside &lt;head&gt; tag. Lim inn kodebiten og publiser. Egen kode kan kreve et betalt abonnement. Se Webflows hjelpesider.</p>
+
+<h2>Andre nettsidebyggere, eller en utvikler</h2>
+<p>Se etter «custom code», «code injection», «header code» eller «strukturerte data» i innstillingene. Har dere et webbyrå eller en utvikler, send dem kodebiten og denne setningen: «Kan dere legge dette i head på forsiden vår?»</p>
+
+<h2>Sjekk at det virker</h2>
+<ol>
+<li>Kjør <a href="/sjekk/">AI-sjekken</a> på nettsiden. Når den sier «Ser klar ut for påmelding», trykker du på knappen. Adressen er fylt inn for deg.</li>
+<li>Organisasjonsnummeret kan stå utenfor kodebiten hvis Enhetsregisteret har samme nettside. Da skriver du det i skjemaet i stedet.</li>
+</ol>
+
+<h2>Valgfritt i tillegg</h2>
+<p><code>llms.txt</code> og <code>ai-catalog.json</code> hjelper noen agenter og åpne veivisere, men du trenger dem ikke for å melde inn bedriften. Mange nettsidebyggere lar deg ikke laste opp filer i roten eller i <code>/.well-known/</code>. Se <a href="/no/guider/ai-filer/">guiden om de to filene</a> hvis din gjør det.</p>

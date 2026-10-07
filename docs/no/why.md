@@ -57,7 +57,7 @@ Vi liker konkurranse. Ekte konkurranse, der den beste bedriften får kunden ford
 **Rettigheter før reklame.** Har kunden krav på gratis hjelp, fra en offentlig tjeneste eller etter loven, sier vi det før vi viser et eneste tilbud.
 6.
 
-**Den lille bedriften skal være like lett å finne som kjeden.** Bakeriet i Bodø skal ikke trenge et markedsføringsbudsjett for å bli funnet.
+**Alle bedrifter skal kunne bli funnet på like vilkår, store som små.** Bakeriet i Bodø skal ikke trenge et markedsføringsbudsjett for å bli funnet, og kjeden skal ikke kunne kjøpe seg foran.
 7.
 
 **Vi finner ikke opp hjulet. Vi legger skinnene.** Åpne standarder: schema.org, AI Catalog, `llms.txt` og MCP.

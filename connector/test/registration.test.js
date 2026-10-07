@@ -54,6 +54,16 @@ test("missing card, wrong org. no., bankruptcy, injection and no consent are rej
   assert.equal((await verifyBusiness(ROOT, { consent: false, fetchFn: fakeFetch() })).status, "rejected");
 });
 
+test("a card without the organisation number is accepted when the register lists the same website", async () => {
+  const noOrg = card({ identifier: undefined });
+  const ok = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site: { "/ai/": noOrg } }) });
+  assert.equal(ok.status, "ok", JSON.stringify(ok.reasons));
+  assert.equal(ok.entry.org_number, ORG);
+  assert.deepEqual((await verifyBusiness(ROOT, { consent: true, fetchFn: fakeFetch({ site: { "/ai/": noOrg } }) })).reasons, ["no_org_number"]);
+  const other = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site: { "/ai/": noOrg }, brreg: unit({ hjemmeside: "annen.example.no" }) }) });
+  assert.deepEqual(other.reasons, ["org_not_on_card"]);
+});
+
 test("a domain that matches neither the register nor the card goes to manual review", async () => {
   const r = await verifyBusiness(ROOT, { consent: true, fetchFn: fakeFetch({ brreg: unit({ hjemmeside: "annen.example.no" }), site: { "/ai/": card({ url: "https://annen.example.no/" }) } }) });
   assert.equal(r.status, "manual");

@@ -6,7 +6,11 @@ Four levels, from fifteen minutes to your own AI service. Most businesses only n
 
 ### Get started: AI business card
 
-Who you are, what you do, where, and how to reach you. About 15 minutes.](get-started.md) [Level 1
+Who you are, what you do, where, and how to reach you. About 15 minutes.](get-started.md) [Level 0
+
+### Add the snippet to your website
+
+WordPress, Wix, Squarespace, Shopify and Webflow.](https://vegvis.ai/docs/add-to-your-website/) [Level 1
 
 ### AI-readable website
 

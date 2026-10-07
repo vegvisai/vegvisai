@@ -99,7 +99,17 @@ function show(r) {
   if (pts.identity && pts.identity.points < pts.identity.max) missing.push(P.ctaCard);
   if (pts.ai_catalog && pts.ai_catalog.points < pts.ai_catalog.max) missing.push(P.ctaCatalog);
   if (pts.llms_txt && pts.llms_txt.points < pts.llms_txt.max) missing.push(P.ctaLlms);
-  if (r.score !== null && missing.length && (r.profile === "business" || r.profile === "organisation")) {
+  // The site already describes the business with schema.org: offer registration with the address filled in.
+  const ready = r.score !== null && pts.identity && pts.identity.points === pts.identity.max && (r.profile === "business" || r.profile === "organisation");
+  if (ready) {
+    const box = el("div", undefined, "boks neste");
+    const a = el("a", P.readyButton, "btn btn-blue");
+    a.href = "{{path:register}}?url=" + encodeURIComponent(r.site);
+    box.append(el("strong", P.readyTitle), el("p", P.readyText), a);
+    out.append(box);
+  }
+  // When the site is ready, the two files are optional extras; the actions list still names them.
+  if (!ready && r.score !== null && missing.length && (r.profile === "business" || r.profile === "organisation")) {
     const cta = el("div", undefined, "boks neste");
     const list = missing.length > 1 ? `${missing.slice(0, -1).join(", ")} ${P.ctaAnd} ${missing[missing.length - 1]}` : missing[0];
     const a = el("a", P.ctaButton, "btn btn-blue");

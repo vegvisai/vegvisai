@@ -131,10 +131,12 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
 
   const cardOrg = orgNumberFrom(biz);
   const formOrg = digits(orgNumber);
-  if (!cardOrg) return { status: "rejected", reasons: ["no_org_number"], domain };
-  if (formOrg && formOrg !== cardOrg) return { status: "rejected", reasons: ["org_mismatch"], domain };
+  // The number may come from the form alone (option A, Espen 2026-10-07); then the register's website must be this domain.
+  const org = cardOrg || formOrg;
+  if (!org) return { status: "rejected", reasons: ["no_org_number"], domain };
+  if (cardOrg && formOrg && formOrg !== cardOrg) return { status: "rejected", reasons: ["org_mismatch"], domain };
 
-  const unit = await lookup(fetchFn, cardOrg);
+  const unit = await lookup(fetchFn, org);
   if (unit === undefined) return { status: "rejected", reasons: ["register_unavailable"], domain };
   if (!unit) return { status: "rejected", reasons: ["not_in_register"], domain };
   if (unit.konkurs || unit.underAvvikling || unit.underTvangsavviklingEllerTvangsopplosning) return { status: "rejected", reasons: ["bankrupt"], domain };
@@ -147,6 +149,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
   // Domain rule (Espen 2026-10-02): the register's website or the card's url must point to this domain.
   const registerHost = hostOf(unit.hjemmeside ? (/^https?:/i.test(unit.hjemmeside) ? unit.hjemmeside : "https://" + unit.hjemmeside) : "");
   const cardHost = hostOf(biz.url ? new URL(biz.url, card.cardUrl).href : "");
+  if (!cardOrg && registerHost !== domain) return { status: "rejected", reasons: ["org_not_on_card"], domain };
   const domainOk = registerHost === domain || cardHost === domain;
   if (!domainOk) reasons.push("domain_mismatch");
 
@@ -156,7 +159,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
   const target = action?.target?.urlTemplate ?? action?.target?.url ?? (typeof action?.target === "string" ? action.target : null);
   const a = biz.address ?? {};
   const entry = {
-    org_number: cardOrg,
+    org_number: org,
     domain,
     name: sanitize(biz.name ?? unit.navn, 200),
     url: origin + "/",

@@ -67,6 +67,9 @@
 const P = JSON.parse(document.getElementById("tekster").textContent), LANG = "{{_meta.code}}";
 const $ = (id) => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
+// Filled in from the AI check (?url=).
+const fromCheck = new URLSearchParams(location.search).get("url");
+if (fromCheck && !$("url").value) $("url").value = fromCheck.slice(0, 300);
 const land = () => ($("land").value === "OTHER" ? $("annet").value.trim().toUpperCase() : $("land").value);
 function showCountry() {
   const v = $("land").value;

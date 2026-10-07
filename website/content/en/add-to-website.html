@@ -1,0 +1,52 @@
+<!-- title: Add the snippet to your website · Guides · VegvisAI | description: Where to paste the schema.org snippet from the free generator in WordPress, Wix, Squarespace, Shopify and Webflow, and which plans allow it. One snippet on the front page is enough to register. -->
+<p class="eyebrow">Guide · about 10 minutes</p>
+<h1>Add the snippet to your website</h1>
+<p class="lead">The <a href="/create/">generator</a> gives you <code>head-snippet.html</code>: a short schema.org description of your business. Paste it into the head of your front page, and AI assistants can read who you are. That is all you need to <a href="/register/">register in the guide</a>. The other files are optional.</p>
+
+<div class="note"><p><strong>Plans change.</strong> Several website builders only allow your own code on paid plans. What we write here was checked on 7 October 2026 against the builders' own help pages or well-known guides. Check your builder's help page if a menu is not where we say. The product names belong to their owners, and VegvisAI has no ties to any of them.</p></div>
+
+<h2>WordPress (your own installation)</h2>
+<ol>
+<li>Install a plugin that adds code to the head, for example «WPCode» (Insert Headers and Footers): Plugins → Add new.</li>
+<li>Open Code Snippets → Header &amp; Footer and paste the whole snippet into the Header box.</li>
+<li>Save. The snippet now appears on every page, which is fine.</li>
+</ol>
+<p>On WordPress.com, plugins need the Business or Commerce plan (or the older Pro plan), according to <a href="https://www.wpbeginner.com/plugins/how-to-add-header-and-footer-code-in-wordpress/">WPBeginner</a>.</p>
+
+<h2>Wix</h2>
+<p>Two ways:</p>
+<ul>
+<li><strong>Structured data on the page:</strong> open the front page in the editor, go to the page's SEO settings and add structured data markup. Paste only what is between <code>&lt;script …&gt;</code> and <code>&lt;/script&gt;</code>, since Wix asks for the JSON-LD itself. See <a href="https://support.wix.com/en/article/adding-structured-data-to-your-site">Wix: adding structured data</a>.</li>
+<li><strong>Custom code:</strong> in the dashboard, Settings → Custom Code → Add Custom Code. Paste the whole snippet, place it in Head, and apply it to the front page. This needs a published site with a connected domain, and so a paid plan, according to <a href="https://support.wix.com/en/article/embedding-custom-code-on-your-site">Wix: embedding custom code</a>.</li>
+</ul>
+<p>Wix adds some local business data by itself when you fill in your business info. Our snippet can sit next to it.</p>
+
+<h2>Squarespace</h2>
+<ol>
+<li>Open the front page's settings → Advanced → Page Header Code Injection.</li>
+<li>Paste the whole snippet and save.</li>
+</ol>
+<p>Code injection is on the Core, Plus and Advanced plans, not on Basic (older plans: Business and Commerce, not Personal), according to <a href="https://www.beyondspace.studio/qanda/which-squarespace-plans-include-code-injection-in-2025">Beyond Space</a>.</p>
+
+<h2>Shopify</h2>
+<ol>
+<li>Online Store → Themes → the three dots → Edit code.</li>
+<li>Open <code>layout/theme.liquid</code> and paste the snippet just before <code>&lt;/head&gt;</code>.</li>
+<li>To show it only on the front page, wrap it: <code>{% if template == 'index' %}</code> … <code>{% endif %}</code>.</li>
+</ol>
+<p>Take a copy of the theme first (Actions → Duplicate). Theme updates can overwrite your change, so check again after an update.</p>
+
+<h2>Webflow</h2>
+<p>Page settings for the home page → Custom code → Inside &lt;head&gt; tag. Paste the snippet and publish. Custom code may need a paid site plan. See Webflow's help pages.</p>
+
+<h2>Other builders, or a developer</h2>
+<p>Look for «custom code», «code injection», «header code» or «structured data» in the settings. If you have a web agency or a developer, send them the snippet and this sentence: «Please put this in the head of our front page.»</p>
+
+<h2>Check that it worked</h2>
+<ol>
+<li>Run the <a href="/check/">AI check</a> on your website. When it says «Looks ready to register», click the button. The address is filled in for you.</li>
+<li>Norwegian businesses can leave the organisation number out of the snippet if Enhetsregisteret lists the same website, and type it in the form instead.</li>
+</ol>
+
+<h2>Optional extras</h2>
+<p><code>llms.txt</code> and <code>ai-catalog.json</code> help some agents and open guides, but you do not need them to register. Many builders do not let you upload files to the root or to <code>/.well-known/</code>. See <a href="/docs/ai-files/">the guide to the two files</a> if yours does.</p>

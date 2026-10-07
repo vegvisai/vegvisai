@@ -151,6 +151,7 @@ export const LOCALES = {
    "domain_only": "Outside Norway and the EU only the domain can be checked. A person reviews the entry.",
    "no_org_number": "The business card has no organisation number (schema.org identifier with propertyID «orgnr», or taxID).",
    "org_mismatch": "The organisation number in the form does not match the one in the business card.",
+   "org_not_on_card": "The business card has no organisation number, and Enhetsregisteret lists another website (or none). Add the organisation number to the card, or update the website in Enhetsregisteret.",
    "not_in_register": "The organisation number is not in Enhetsregisteret.",
    "bankrupt": "The register shows bankruptcy or winding-up.",
    "domain_mismatch": "Neither the website in Enhetsregisteret nor the url in the business card points to this domain. A person will check it.",
@@ -298,7 +299,8 @@ export const LOCALES = {
     "how-we-choose": "/no/guider/slik-velger-vi/",
     "changelog": "/no/endringslogg/",
     "agent-checkout": "/no/guider/agentkasse/",
-    "agent-payments": "/no/guider/agentbetaling/"
+    "agent-payments": "/no/guider/agentbetaling/",
+    "add-to-website": "/no/guider/legg-til-pa-nettsiden/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",
@@ -442,6 +444,7 @@ export const LOCALES = {
    "domain_only": "Utenfor Norge og EU kan bare domenet sjekkes. En person går gjennom oppføringen.",
    "no_org_number": "Visittkortet mangler organisasjonsnummer (schema.org identifier med propertyID «orgnr», eller taxID).",
    "org_mismatch": "Organisasjonsnummeret i skjemaet stemmer ikke med det i visittkortet.",
+   "org_not_on_card": "Visittkortet har ikke organisasjonsnummer, og Enhetsregisteret oppgir en annen nettside (eller ingen). Legg organisasjonsnummeret i visittkortet, eller oppdater nettsiden i Enhetsregisteret.",
    "not_in_register": "Organisasjonsnummeret finnes ikke i Enhetsregisteret.",
    "bankrupt": "Registeret viser konkurs eller avvikling.",
    "domain_mismatch": "Verken nettadressen i Enhetsregisteret eller url i visittkortet peker til dette domenet. En person sjekker det.",

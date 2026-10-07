@@ -289,6 +289,12 @@ export function makeCatalog(d) {
   }, null, 2) + "\n";
 }
 
+// The minimum: the schema.org description alone, to paste into the head of the existing front page.
+// Enough to register (Espen 2026-10-07, option C); the other files are optional extras.
+function makeSnippet(d) {
+  return `<script type="application/ld+json">\n${jsonInScript(jsonld(d))}\n</script>\n`;
+}
+
 // lang: language of the injection findings ("nb" on the Norwegian /lag/ page).
 export function makeFiles(form, { lang = "en" } = {}) {
   const d = normalize(form);
@@ -297,6 +303,6 @@ export function makeFiles(form, { lang = "en" } = {}) {
     data: d,
     missing,
     warnings: checkContent(d, lang),
-    files: missing.length ? null : { "index.html": makeHtml(d), "llms.txt": makeLlmsTxt(d), ".well-known/ai-catalog.json": makeCatalog(d) },
+    files: missing.length ? null : { "head-snippet.html": makeSnippet(d), "index.html": makeHtml(d), "llms.txt": makeLlmsTxt(d), ".well-known/ai-catalog.json": makeCatalog(d) },
   };
 }

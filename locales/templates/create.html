@@ -243,7 +243,8 @@ $("form").addEventListener("submit", (ev) => {
     };
     const buttons = el("div", undefined, "knapper");
     buttons.append(copy, download);
-    box.append(el("h3", name), ta, buttons);
+    const note = { "head-snippet.html": P.noteSnippet, "index.html": P.noteCard, "llms.txt": P.noteLlms, ".well-known/ai-catalog.json": P.noteCatalog }[name];
+    box.append(el("h3", name), ...(note ? [el("p", note, "mut")] : []), ta, buttons);
     output.append(box);
   }
   output.scrollIntoView({ behavior: "smooth" });

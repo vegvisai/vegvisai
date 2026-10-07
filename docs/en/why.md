@@ -57,7 +57,7 @@ We like competition. Real competition, where the best business gets the customer
 **Rights before ads.** If the customer is entitled to free help, from a public service or under the law, we say so before we show a single offer.
 6.
 
-**The small business should be as easy to find as the chain.** The bakery in Bodø should not need a marketing budget to be found.
+**Every business should be found on equal terms, large or small.** The local bakery should not need a marketing budget to be found, and the chain should not be able to buy its way to the front.
 7.
 
 **We don't reinvent the wheel. We lay the rails.** Open standards: schema.org, AI Catalog, `llms.txt` and MCP.

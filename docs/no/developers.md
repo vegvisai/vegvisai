@@ -10,7 +10,7 @@ Alt bygger på åpne standarder og åpne lisenser. Alle agenter kan lese veivise
 
 På dugnad møter naboene opp en lørdag for å fikse veien alle bruker. Ingen eier veien*, og ingen tar bompenger. Det er det vi bygger: en åpen vei mellom AI-assistentene og alle som tjener folk, fra bakeriet på hjørnet til kommunens renovasjon.
 
-De fleste små bedrifter kommer aldri til å leie inn en utvikler for å gjøre nettsiden AI-lesbar. Med åpne maler, en gratis AI-sjekk og en skill som gjør jobben for dem, trenger de ikke det. Hver pull request kan hjelpe tusenvis av bedrifter å bli funnet på rettferdige vilkår, og hjelpe folk å få ærlige svar fra sin egen AI.
+Mange bedrifter, store som små, kommer aldri til å leie inn en utvikler for å gjøre nettsiden AI-lesbar. Med åpne maler, en gratis AI-sjekk og en skill som gjør jobben for dem, trenger de ikke det. Hver pull request kan hjelpe tusenvis av bedrifter å bli funnet på rettferdige vilkår, og hjelpe folk å få ærlige svar fra sin egen AI.
 
 ### Hvorfor det er verdt tiden din
 
@@ -90,4 +90,4 @@ Veiviseren rangerer ikke. Den viser alle som kvalifiserer i tilfeldig rekkefølg
 
 ## Kildekode
 
-Byggesettet, malene, AI-sjekken, testsettet for injeksjon og connectoren ligger på [GitHub](https://github.com/vegvisai/vegvisai) (privat til lansering).
+Byggesettet, malene, AI-sjekken, testsettet for injeksjon og connectoren ligger på [GitHub](https://github.com/vegvisai/vegvisai) (åpen kildekode, Apache 2.0).

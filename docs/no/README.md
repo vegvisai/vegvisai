@@ -6,7 +6,11 @@ Fire nivåer, fra et kvarter til din egen AI-tjeneste. De fleste bedrifter treng
 
 ### Kom i gang: AI-visittkort
 
-Hvem du er, hva du gjør, hvor, og hvordan du nås. Rundt 15 minutter.](get-started.md) [Nivå 1
+Hvem du er, hva du gjør, hvor, og hvordan du nås. Rundt 15 minutter.](get-started.md) [Nivå 0
+
+### Legg kodebiten på nettsiden
+
+WordPress, Wix, Squarespace, Shopify og Webflow.](https://vegvis.ai/no/guider/legg-til-pa-nettsiden/) [Nivå 1
 
 ### AI-lesbar nettside
 

@@ -129,3 +129,10 @@ test("no WebMCP form without a request page, even when ticked", () => {
   const html = makeFiles({ ...FORM, contactPage: "", webmcp: true }).files["index.html"];
   assert.ok(!html.includes("<form"));
 });
+
+test("the head snippet holds the same schema.org description as the full card", () => {
+  const r = makeFiles(FORM);
+  const ld = (html) => JSON.parse(/<script type="application\/ld\+json">\n([\s\S]*?)\n<\/script>/.exec(html)[1]);
+  assert.deepEqual(ld(r.files["head-snippet.html"]), ld(r.files["index.html"]));
+  assert.ok(!r.files["head-snippet.html"].includes("<html"), "only the script tag");
+});

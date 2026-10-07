@@ -133,6 +133,7 @@ def render_pages(locales):
             meta, t = d["_meta"], d["pages"][page]
             paths = {p: page_path(meta, p) for p in PAGES}
             paths["howWeChoose"] = site_path(meta, "how-we-choose", "/docs/how-we-choose/")
+            paths["addToSite"] = site_path(meta, "add-to-website", "/docs/add-to-your-website/")
             t = {k: fill_paths(v, paths) for k, v in t.items()}
             others = [locales[c]["_meta"] for c in locales if c != code]
             countries = d["countries"]

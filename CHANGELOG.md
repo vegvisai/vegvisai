@@ -2,7 +2,18 @@
 
 What changed in VegvisAI, newest first. The same list is on the website: [vegvis.ai/changelog/](https://vegvis.ai/changelog/) ([Norwegian](https://vegvis.ai/no/endringslogg/)). Changes to the register itself (businesses added or removed) are in the public register changelog at [/api/endringer](https://vegvis.ai/api/endringer).
 
-## Unreleased, 6 October 2026
+## Unreleased, 6 to 7 October 2026
+
+**Registration made easier**
+- One schema.org snippet in the head of the front page is enough to register. `llms.txt` and `ai-catalog.json` are optional extras.
+- Norwegian businesses: the organisation number may be typed in the form instead of placed in the card, when Enhetsregisteret lists the same website (new reason `org_not_on_card` otherwise).
+- The generator gives a paste-ready `head-snippet.html` first, with a note on each file saying whether it is needed.
+- The AI check shows «Looks ready to register» with a button that opens the form with the address filled in, when the site already describes the business with schema.org.
+- New guide: where to paste the snippet in WordPress, Wix, Squarespace, Shopify and Webflow, with plan requirements and sources. [docs/add-to-your-website](https://vegvis.ai/docs/add-to-your-website/)
+
+**Website**
+- English pages written for businesses in any country, and for businesses of every size.
+
 
 **Connector**
 - Version 1.5.1: the connector and the MCP registry entry describe a guide to businesses in any country, plus public services and parties in Norway.

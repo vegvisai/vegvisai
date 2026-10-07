@@ -18,12 +18,12 @@ One page and two small files that tell every AI who you are, what you do and don
 
 Have these ready. Short and concrete beats long and polished.
 
-- **Name** and, in Norway, the organisation number
+- **Name** and your organisation, company or VAT number (from Norway, the UK or the EU), if you have one
 - **One sentence** on what you do
 - **What you offer**, and just as important, **what you don't**. It stops the AI from sending you the wrong customers
 - **Area**: the municipalities you serve, whether you come to the customer, and whether you deliver
 - **Opening hours**, **phone**, **email** and your **contact or booking page**
-- **Prices** you are happy to show, for example «Double room: NOK 1,350 a night, breakfast included»
+- **Prices** you are happy to show, for example «Double room: €120 a night, breakfast included»
 - **What you need to know** from a customer to answer a request, for example dates, number of guests and special needs
 
 ## Step 2: Generate the files
@@ -32,7 +32,7 @@ Pick one of two ways. Both are free.
 
 ### A. The generator in your browser
 
-Fill in the form in the [AI business card generator](https://vegvis.ai/lag/). Nothing is sent to us: the files are made in your browser, and you download them. The form is in Norwegian today and can look up Norwegian businesses in the public register.
+Fill in the form in the [AI business card generator](https://vegvis.ai/create/). Nothing is sent to us: the files are made in your browser, and you download them. It works for businesses in any country, and can fill in the details for businesses in Norway from the public register.
 
 ### B. The AI skill
 

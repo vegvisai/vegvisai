@@ -6,6 +6,7 @@
 - [VegvisAI connector](/mcp): Streamable HTTP, read-only. Tools: find_business, check_business, find_public_help, find_political_party, ai_check
 
 ## Open index (ODbL)
+- [Businesses in the guide](/businesses/) ([Norwegian](/bedrifter/)): one page per listed business, random order, never ranked, each linking to the business's own website.
 - [Businesses](/index/businesses-no.json): registered businesses that chose the open licence on their own domain. Signed monthly releases: [/index/releases.json](/index/releases.json)
 - [Public services in Norway](/index/public-no.json): state agencies by topic and the websites of all 357 municipalities. Links only.
 - [Political parties](/index/parties-no.json): the parties' own pages and programmes, alphabetical and never ranked. Not complete yet.

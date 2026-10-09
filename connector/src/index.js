@@ -3,6 +3,7 @@
 // No dependencies, no storage, no logging of content.
 // P39 step 1: content from businesses and websites is data, never instructions.
 
+import { directory, directoryPrefix, directoryUrls } from "./bedrifter.js";
 import { aiCheck, asText, safeAddress, CheckError, PROFILES } from "./sjekk.js";
 import { sanitize } from "../public/felles/injeksjon.js";
 import { tr, language } from "../public/felles/i18n.js";
@@ -404,8 +405,20 @@ function robots(origin) {
   );
 }
 
+// /sitemap.xml is an index: the website's pages (sitemap-site.xml, built by website/build.py and
+// served by the website Worker) and the platform's own pages, including the directory (P53).
 function sitemap(origin) {
-  const urls = PAGES.map((s) => `<url><loc>${origin}${s}</loc><lastmod>${UPDATED}</lastmod></url>`).join("\n");
+  const maps = ["/sitemap-site.xml", "/sitemap-platform.xml"].map((p) => `<sitemap><loc>${origin}${p}</loc></sitemap>`).join("\n");
+  return new Response(
+    `<?xml version="1.0" encoding="UTF-8"?>\n<sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${maps}\n</sitemapindex>\n`,
+    { headers: { "Content-Type": "application/xml; charset=utf-8", ...NOINDEX } }
+  );
+}
+
+async function platformSitemap(origin, env) {
+  const today = new Date().toISOString().slice(0, 10);
+  const urls = [...PAGES.map((s) => [s, UPDATED]), ...(await directoryUrls(env)).map((s) => [s, today])]
+    .map(([s, d]) => `<url><loc>${origin}${s}</loc><lastmod>${d}</lastmod></url>`).join("\n");
   return new Response(
     `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${urls}\n</urlset>\n`,
     { headers: { "Content-Type": "application/xml; charset=utf-8", ...NOINDEX } }
@@ -419,6 +432,8 @@ export default {
     if (url.pathname.startsWith("/api/")) return api(request, url, env);
     if (url.pathname === "/robots.txt") return robots(url.origin);
     if (url.pathname === "/sitemap.xml") return sitemap(url.origin);
+    if (url.pathname === "/sitemap-platform.xml") return platformSitemap(url.origin, env);
+    if (directoryPrefix(url.pathname)) return directory(request, url, env);
     if (url.pathname === "/index/businesses-no.json") return exportIndex(env);
     if (url.pathname === "/index/releases.json" || url.pathname === "/index/signing-key.json" || url.pathname.startsWith("/index/releases/")) return releases(url, env);
     return env.ASSETS.fetch(request);

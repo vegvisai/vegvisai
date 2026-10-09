@@ -4,8 +4,8 @@
 
 const PLATFORM = [
   /^\/mcp\/?$/, /^\/api\//, /^\/index\//, /^\/\.well-known\//, /^\/felles\//,
-  /^\/(sjekk|check|lag|create|meld-inn|register|eksempel|example)(\/|$)/,
-  /^\/(llms\.txt|robots\.txt|sitemap\.xml)$/,
+  /^\/(sjekk|check|lag|create|meld-inn|register|eksempel|example|bedrifter|businesses)(\/|$)/,
+  /^\/(llms\.txt|robots\.txt|sitemap\.xml|sitemap-platform\.xml)$/,
 ];
 
 export default {

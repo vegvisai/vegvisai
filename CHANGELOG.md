@@ -2,7 +2,13 @@
 
 What changed in VegvisAI, newest first. The same list is on the website: [vegvis.ai/changelog/](https://vegvis.ai/changelog/) ([Norwegian](https://vegvis.ai/no/endringslogg/)). Changes to the register itself (businesses added or removed) are in the public register changelog at [/api/endringer](https://vegvis.ai/api/endringer).
 
-## Unreleased, 6 to 7 October 2026
+## Unreleased, 6 to 9 October 2026
+
+**Businesses in the guide (9 October)**
+- New pages that AI search can find and cite: [/businesses/](https://vegvis.ai/businesses/) ([Norwegian](https://vegvis.ai/bedrifter/)) lists every listed business in random order, never ranked, and each business has its own page that links to its own website.
+- `/sitemap.xml` is now an index of the website's pages (`/sitemap-site.xml`, which also covers the guides) and the platform's pages with the directory (`/sitemap-platform.xml`).
+- «Businesses» in the menu, and the directory in `llms.txt`.
+
 
 **Registration made easier**
 - One schema.org snippet in the head of the front page is enough to register. `llms.txt` and `ai-catalog.json` are optional extras.

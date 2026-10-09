@@ -50,3 +50,7 @@
 .tool th, .tool td { text-align: left; padding: .5rem .7rem; border-bottom: 1px solid var(--line); vertical-align: top; }
 .tool td { word-break: break-word; }
 .tool th { font-family: var(--display); }
+.tool .bedrifter { list-style: none; padding: 0; margin: 1rem 0; }
+.tool .bedrifter li { border-top: 1px solid var(--line); padding: 1rem 0; }
+.tool .bedrifter h2 { margin: 0 0 .3rem; font-size: 1.2rem; }
+.tool .bedrifter p { margin: .2rem 0; }

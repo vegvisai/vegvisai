@@ -9,7 +9,8 @@
   "check_path": "/check/",
   "register_path": "/register/",
   "create_path": "/create/",
-  "country": "GB"
+  "country": "GB",
+  "directory_path": "/businesses/"
  },
  "site": {
   "skip": "Skip to content",
@@ -32,7 +33,8 @@
   "docs_nav": "Guides",
   "on_github": "Code and templates on GitHub",
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.",
-  "changelog": "What's new"
+  "changelog": "What's new",
+  "businesses": "Businesses"
  },
  "check": {
   "robots": "AI assistants cannot read or cite the site when someone asks: robots.txt blocks {bots}, which fetch pages on behalf of users. Open robots.txt to them. If the blocking is a deliberate choice, this is what it costs.",
@@ -520,6 +522,32 @@
    "noteCard": "Optional. A business card page with the same description, as the front page or for example /ai/.",
    "noteLlms": "Optional. A short overview for language models, at the root of your website (/llms.txt).",
    "noteCatalog": "Optional. Lets open guides find your services. Goes in the folder /.well-known/, which many website builders do not give access to."
+  },
+  "directory": {
+   "title": "Businesses in the guide · VegvisAI",
+   "description": "Businesses that registered themselves in the open guide VegvisAI. Never ranked, in random order, with a link to each business's own website.",
+   "h1": "Businesses in the guide",
+   "intro": "The businesses here registered themselves, and we checked their domain and their organisation, company or VAT number. Each entry links to the business's own website, where you ask, order and pay.",
+   "rules": "The order is random every time the page loads, and placement cannot be bought. <a href=\"{howWeChoose}\">How we choose</a>.",
+   "agents": "For AI assistants: the same list is in the connector at <code>https://vegvis.ai/mcp</code> and in the <a href=\"/index/businesses-no.json\">open index</a>.",
+   "count": "Businesses in the guide now: {n}",
+   "empty": "No businesses have registered yet. The guide opened on 4 October 2026.",
+   "registerCta": "Want your business here? <a href=\"{check}\">Check your website</a> and <a href=\"{register}\">register it</a>. It is free.",
+   "area": "Area",
+   "offers": "Offers",
+   "website": "Website",
+   "request": "Send a request",
+   "orgNumber": "Organisation number",
+   "inRegister": "in Enhetsregisteret",
+   "verified_domain_and_org_number": "Domain and organisation number checked {date}.",
+   "verified_domain_and_vat_number": "Domain and VAT number checked {date}.",
+   "verified_domain_and_company_number": "Domain and company number checked {date}.",
+   "verified_domain_only": "Domain checked {date}.",
+   "ownSite": "Ask, order and pay on the business's own website. VegvisAI takes no part in that.",
+   "back": "All businesses in the guide",
+   "entryTitle": "{name} · Businesses in the guide · VegvisAI",
+   "entryDescription": "{name} is registered in the open guide VegvisAI. {description}",
+   "notFound": "We found no business with this domain in the guide. It may have been removed, or it has not registered."
   }
  },
  "countries": {

@@ -23,12 +23,14 @@
    "changelog": "/no/endringslogg/",
    "agent-checkout": "/no/guider/agentkasse/",
    "agent-payments": "/no/guider/agentbetaling/",
-   "add-to-website": "/no/guider/legg-til-pa-nettsiden/"
+   "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
+   "directory": "/bedrifter/"
   },
   "check_path": "/sjekk/",
   "register_path": "/meld-inn/",
   "create_path": "/lag/",
-  "country": "NO"
+  "country": "NO",
+  "directory_path": "/bedrifter/"
  },
  "site": {
   "skip": "Hopp til innholdet",
@@ -51,7 +53,8 @@
   "docs_nav": "Guider",
   "on_github": "Kode og maler på GitHub",
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
-  "changelog": "Nytt"
+  "changelog": "Nytt",
+  "businesses": "Bedrifter"
  },
  "check": {
   "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",
@@ -540,6 +543,32 @@
    "noteCard": "Valgfritt. En egen visittkortside med samme beskrivelse, som forside eller for eksempel /ai/.",
    "noteLlms": "Valgfritt. En kort oversikt for språkmodeller, i roten av nettsiden (/llms.txt).",
    "noteCatalog": "Valgfritt. Lar åpne veivisere finne tjenestene dine. Legges i mappen /.well-known/, som mange nettsidebyggere ikke gir tilgang til."
+  },
+  "directory": {
+   "title": "Bedrifter i veiviseren · VegvisAI",
+   "description": "Bedrifter som selv har meldt seg inn i den åpne veiviseren VegvisAI. Aldri rangert, i tilfeldig rekkefølge, med lenke til bedriftens egen nettside.",
+   "h1": "Bedrifter i veiviseren",
+   "intro": "Bedriftene her har meldt seg inn selv, og vi har sjekket domenet og organisasjonsnummeret. Hver oppføring lenker til bedriftens egen nettside, der du spør, bestiller og betaler.",
+   "rules": "Rekkefølgen er tilfeldig hver gang siden lastes, og plassering kan ikke kjøpes. <a href=\"{howWeChoose}\">Slik velger vi</a>.",
+   "agents": "For AI-assistenter: den samme listen finnes i connectoren på <code>https://vegvis.ai/mcp</code> og i den <a href=\"/index/businesses-no.json\">åpne indeksen</a>.",
+   "count": "Bedrifter i veiviseren nå: {n}",
+   "empty": "Ingen bedrifter er meldt inn ennå. Veiviseren åpnet 4. oktober 2026.",
+   "registerCta": "Vil du ha bedriften din her? <a href=\"{check}\">Sjekk nettsiden</a> og <a href=\"{register}\">meld den inn</a>. Det er gratis.",
+   "area": "Område",
+   "offers": "Tilbyr",
+   "website": "Nettside",
+   "request": "Send en forespørsel",
+   "orgNumber": "Organisasjonsnummer",
+   "inRegister": "i Enhetsregisteret",
+   "verified_domain_and_org_number": "Domene og organisasjonsnummer sjekket {date}.",
+   "verified_domain_and_vat_number": "Domene og momsnummer sjekket {date}.",
+   "verified_domain_and_company_number": "Domene og foretaksnummer sjekket {date}.",
+   "verified_domain_only": "Domenet sjekket {date}.",
+   "ownSite": "Spør, bestill og betal på bedriftens egen nettside. VegvisAI tar ikke del i det.",
+   "back": "Alle bedrifter i veiviseren",
+   "entryTitle": "{name} · Bedrifter i veiviseren · VegvisAI",
+   "entryDescription": "{name} er meldt inn i den åpne veiviseren VegvisAI. {description}",
+   "notFound": "Vi fant ingen bedrift med dette domenet i veiviseren. Den kan være fjernet, eller den er ikke meldt inn."
   }
  },
  "countries": {

@@ -86,7 +86,7 @@ def attr(v):
 
 
 # page -> (template, published page name, namespace the page script reads)
-PAGES = {"check": "check", "register": "register", "create": "create"}
+PAGES = {"check": "check", "register": "register", "create": "create", "directory": "directory"}
 
 
 def website():

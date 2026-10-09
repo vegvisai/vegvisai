@@ -7,6 +7,8 @@ footer, docs sidebar) is added here so every page shares it.
 
 Usage: python3 build.py   (then: npx wrangler deploy)
 """
+import datetime
+import subprocess
 import json
 import re
 from pathlib import Path
@@ -15,6 +17,7 @@ ROOT = Path(__file__).parent
 CONTENT = ROOT / "content"
 PUBLIC = ROOT / "public"
 GITHUB = "https://github.com/vegvisai/vegvisai"
+SITE_URL = "https://vegvis.ai"
 TEST = ""  # the platform answers its own paths on the same address (src/index.js, step 14d)
 
 LOCALES_DIR = ROOT.parent / "locales"
@@ -24,7 +27,7 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
     "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/",
-    "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
+    "directory": "/businesses/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
     "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
 DOCS = ["docs", "get-started", "add-to-website", "website", "files", "webmcp", "agent-checkout", "agent-payments", "mcp", "developers", "how-we-choose"]
@@ -120,6 +123,7 @@ def shell(lang: str, title: str, description: str, body: str, *, alternates: str
 <div class="links">
 <a href="{home}#how">{t['how']}</a>
 <a href="{PAGES['docs'][lang]}">{t['guides']}</a>
+<a href="{PAGES['directory'][lang]}">{t['businesses']}</a>
 <a href="{PAGES['why'][lang]}">{t['why']}</a>
 <a href="{PAGES['ownership'][lang]}">{t['owners']}</a>
 <a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a>
@@ -157,6 +161,14 @@ def main() -> None:
             out.parent.mkdir(parents=True, exist_ok=True)
             out.write_text(layout(lang, name, title, description, body))
             built += 1
+    # The website's half of the sitemap; /sitemap.xml (from the platform Worker) points to it.
+    # lastmod is the last commit that touched the page's content file (today when it is not committed yet).
+    def lastmod(lang, name):
+        f = ROOT / "content" / lang / f"{name}.html"
+        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(f)], capture_output=True, text=True, cwd=ROOT).stdout.strip()
+        return out or datetime.date.today().isoformat()
+    urls = "\n".join(f"<url><loc>{SITE_URL}{path}</loc><lastmod>{lastmod(lang, name)}</lastmod></url>" for name, paths in PAGES.items() if name != "directory" for lang, path in paths.items() if read(lang, name))
+    (PUBLIC / "sitemap-site.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
     # The headers file follows the opening switch too.
     (PUBLIC / "_headers").write_text("/*\n" + ("" if LAUNCHED else "  X-Robots-Tag: noindex, nofollow\n") + "  X-Content-Type-Options: nosniff\n  Referrer-Policy: strict-origin-when-cross-origin\n")
     # The platform's tool pages use the same frame, so they get the same stylesheet and mark.

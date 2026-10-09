@@ -12,7 +12,8 @@ export const LOCALES = {
    "check_path": "/check/",
    "register_path": "/register/",
    "create_path": "/create/",
-   "country": "GB"
+   "country": "GB",
+   "directory_path": "/businesses/"
   },
   "check": {
    "robots": "AI assistants cannot read or cite the site when someone asks: robots.txt blocks {bots}, which fetch pages on behalf of users. Open robots.txt to them. If the blocking is a deliberate choice, this is what it costs.",
@@ -300,12 +301,14 @@ export const LOCALES = {
     "changelog": "/no/endringslogg/",
     "agent-checkout": "/no/guider/agentkasse/",
     "agent-payments": "/no/guider/agentbetaling/",
-    "add-to-website": "/no/guider/legg-til-pa-nettsiden/"
+    "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
+    "directory": "/bedrifter/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",
    "create_path": "/lag/",
-   "country": "NO"
+   "country": "NO",
+   "directory_path": "/bedrifter/"
   },
   "check": {
    "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",

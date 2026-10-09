@@ -24,6 +24,7 @@ Ha dette klart. Kort og konkret er bedre enn langt og pent.
 - **Område**: kommunene du betjener, om du kommer til kunden, og om du leverer
 - **Åpningstider**, **telefon**, **e-post** og **kontakt- eller bookingsiden** din
 - **Priser** du gjerne viser, for eksempel «Bursdagskake, 12 personer: fra 595 kr» eller «Dobbeltrom: 1 350 kr per natt med frokost»
+Prisene er eksempler på bedriftens egne priser. VegvisAI er gratis.
 - **Hva du må vite** fra en kunde for å svare på en forespørsel, for eksempel dato, antall personer og allergier, eller datoer og antall gjester
 
 ## Steg 2: Lag filene

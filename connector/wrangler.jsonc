@@ -7,7 +7,7 @@
   "assets": {
     "directory": "./public",
     "binding": "ASSETS",
-    "run_worker_first": ["/mcp", "/mcp/*", "/api/*", "/robots.txt", "/sitemap.xml", "/index/businesses-no.json", "/index/releases.json", "/index/releases/*", "/index/signing-key.json"]
+    "run_worker_first": ["/mcp", "/mcp/*", "/api/*", "/robots.txt", "/sitemap.xml", "/sitemap-platform.xml", "/bedrifter", "/bedrifter/*", "/businesses", "/businesses/*", "/index/businesses-no.json", "/index/releases.json", "/index/releases/*", "/index/signing-key.json"]
   },
   // Rate-limit (P39 trinn 3). Tellevindu 60 s. Se src/grense.js.
   "ratelimits": [

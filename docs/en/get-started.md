@@ -24,6 +24,7 @@ Have these ready. Short and concrete beats long and polished.
 - **Area**: the municipalities you serve, whether you come to the customer, and whether you deliver
 - **Opening hours**, **phone**, **email** and your **contact or booking page**
 - **Prices** you are happy to show, for example «Double room: €120 a night, breakfast included»
+The prices are examples of a business's own prices. VegvisAI is free.
 - **What you need to know** from a customer to answer a request, for example dates, number of guests and special needs
 
 ## Step 2: Generate the files

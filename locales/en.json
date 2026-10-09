@@ -34,7 +34,10 @@
   "on_github": "Code and templates on GitHub",
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> or “VAYG-vees” · is Norwegian. Veg: road. Vis: show. VegvisAI shows AI the crossroad to YOUR business.",
   "changelog": "What's new",
-  "businesses": "Businesses"
+  "businesses": "Businesses",
+  "about_link": "About us",
+  "contact_link": "Contact",
+  "work_link": "What we do"
  },
  "check": {
   "robots": "AI assistants cannot read or cite the site when someone asks: robots.txt blocks {bots}, which fetch pages on behalf of users. Open robots.txt to them. If the blocking is a deliberate choice, this is what it costs.",

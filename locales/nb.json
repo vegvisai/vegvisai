@@ -24,7 +24,8 @@
    "agent-checkout": "/no/guider/agentkasse/",
    "agent-payments": "/no/guider/agentbetaling/",
    "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
-   "directory": "/bedrifter/"
+   "directory": "/bedrifter/",
+   "contact": "/no/kontakt/"
   },
   "check_path": "/sjekk/",
   "register_path": "/meld-inn/",
@@ -54,7 +55,10 @@
   "on_github": "Kode og maler på GitHub",
   "nameline": "Vegvis · <span class=\"ipa\">/ˈʋeːɡˌʋiːs/</span> · er norsk. Veg: vei. Vis: vise. VegvisAI viser AI veikrysset til DIN bedrift.",
   "changelog": "Nytt",
-  "businesses": "Bedrifter"
+  "businesses": "Bedrifter",
+  "about_link": "Om oss",
+  "contact_link": "Kontakt",
+  "work_link": "Hva vi gjør"
  },
  "check": {
   "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",

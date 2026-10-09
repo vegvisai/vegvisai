@@ -29,7 +29,9 @@ export const PATTERNS = [
   { id: "competitors",
     re: /\b((do not|don't|never) (mention|recommend|suggest)[^.\n]{0,20}(competitors?|other (shops|stores|companies|businesses))|(ikke|aldri) (nevn|anbefal|foreslå)[^.\n]{0,20}(konkurrent(er|ene)?|andre (butikker|bedrifter|firma(er)?)))(?![\wæøåÆØÅ])/i },
   { id: "data-exfiltration",
-    re: /\b((send|forward|email|post|leak|reveal|share)\b[^.\n]{0,30}\b(user'?s?|customer'?s?|conversation|chat history|password|api key|personal data)|(send|videresend|del|avslør|lekk)\s[^.\n]{0,30}\b(brukerens|kundens|samtalen|chatloggen|passord|api-nøkkel|personopplysninger))(?![\wæøåÆØÅ])/i },
+    // A verb that moves data plus something private. «Send the customer to the right page» and «we do not ask
+    // for your email and keep no personal data» are ordinary site text (false alarms found on vegvis.ai 2026-10-10).
+    re: /\b((send|forward|leak|reveal|share|exfiltrate)\b[^.\n]{0,30}\b((user|customer)'?s?\s+(data|details|information|e-?mail|address|phone|messages|conversation|history)|conversation|chat history|passwords?|api keys?|credentials|personal data)|(send|videresend|del|avslør|lekk)\s[^.\n]{0,30}\b((brukerens|kundens)\s+(data|opplysninger|e-?post|adresse|telefon|meldinger|samtale)|samtalen|chatloggen|passord|api-nøkkel|personopplysninger))(?![\wæøåÆØÅ])/i },
   { id: "hidden-action",
     re: /\b((without|do not|don't) (telling|tell|informing|inform|asking|ask) (the )?(user|customer)|uten å (si fra|fortelle|spørre)( til)? (brukeren|kunden)|ikke (si|fortell) (det )?til (brukeren|kunden))(?![\wæøåÆØÅ])/i },
 ];

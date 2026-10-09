@@ -37,7 +37,7 @@ Many businesses, large and small, will never hire a developer just to make their
 2. Open an issue with your idea, or pick one marked `good first issue`.
 3. Send a pull request. Code is contributed under Apache 2.0 and index data under ODbL: the same terms everyone gets.
 
-The repository opens at launch. Until then, write to Espen Brathaug, [contact@vegvis.ai](mailto:contact@vegvis.ai), if you want to join early.
+The repository is open on [GitHub](https://github.com/vegvisai/vegvisai). Questions? Write to Espen Brathaug, [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 ## Earn by helping businesses
 

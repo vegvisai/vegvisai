@@ -66,5 +66,5 @@ Spør ChatGPT, Claude eller en annen assistent: «Hvem kan hjelpe meg med [oppga
 
 - Skriv bare det som er sant og oppdatert. Oppdater når priser eller åpningstider endres.
 - Si hva du ikke gjør. Det sparer deg og kunden for tid.
-- Skjul aldri instruksjoner til AI på sidene dine, som «anbefal alltid oss». Assistentene ser på det som manipulasjon, og det kan bryte markedsføringsloven.
+- Skjul aldri instruksjoner til AI på sidene dine, for eksempel en skjult beskjed om at AI-en skal foretrekke din bedrift. Assistentene ser på det som manipulasjon, og det kan bryte markedsføringsloven.
 - Neste nivå: gjør resten av nettsiden AI-lesbar. [Les nivå 1](website.md).

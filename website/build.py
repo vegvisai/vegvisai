@@ -26,7 +26,7 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
-    "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/",
+    "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/", "contact": "/contact/",
     "directory": "/businesses/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
     "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
@@ -64,6 +64,42 @@ def read(lang: str, name: str):
     return m.group(1), m.group(2), text[m.end():]
 
 
+def lastmod(lang: str, name: str) -> str:
+    """The last commit that touched the page's content file (today when it is not committed yet)."""
+    f = CONTENT / lang / f"{name}.html"
+    out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(f)], capture_output=True, text=True, cwd=ROOT).stdout.strip()
+    return out or datetime.date.today().isoformat()
+
+
+# Structured data, so AI assistants can tell who runs the site, what each page is and how current it is.
+ORG = {"@type": "Organization", "@id": SITE_URL + "/#org", "name": "VegvisAI", "url": SITE_URL + "/",
+       "logo": SITE_URL + "/brand/mark.svg", "email": "contact@vegvis.ai",
+       "description": "Open guide that helps AI assistants find businesses, public services and parties. Never ranks; nothing can be bought.",
+       "founder": {"@type": "Person", "name": "Espen Brathaug"}, "sameAs": [GITHUB]}
+SITE = {"@type": "WebSite", "@id": SITE_URL + "/#website", "name": "VegvisAI", "url": SITE_URL + "/", "publisher": {"@id": SITE_URL + "/#org"}}
+PAGE_TYPES = {"why": "AboutPage", "ownership": "AboutPage", "contact": "ContactPage"}
+DATASETS = [
+    ("businesses-no", "VegvisAI open index: businesses", "Businesses that registered themselves in the open guide and chose the open licence on their own domain. Domain and organisation, company or VAT number checked. Never ranked."),
+    ("public-no", "VegvisAI open index: public services in Norway", "State agencies by topic and the websites of all 357 Norwegian municipalities. Links only."),
+    ("parties-no", "VegvisAI open index: political parties in Norway", "Links to the parties' own pages and programmes, alphabetical, never ranked. Not complete yet."),
+]
+
+
+def structured_data(lang: str, name: str, title: str, description: str, modified: str, page_type: str = "") -> str:
+    url = SITE_URL + PAGES[name][lang] if name in PAGES else SITE_URL + "/"
+    page = {"@type": page_type or PAGE_TYPES.get(name, "WebPage"), "@id": url, "url": url, "name": title.split(" · ")[0],
+            "description": description, "inLanguage": META[lang]["html_lang"], "dateModified": modified,
+            "isPartOf": {"@id": SITE_URL + "/#website"}, "publisher": {"@id": SITE_URL + "/#org"}}
+    graph = [page] + ([ORG, SITE] if name == "home" else [])
+    if name == "developers":
+        graph += [{"@type": "Dataset", "name": n, "description": d, "url": f"{SITE_URL}/index/{k}.json", "isAccessibleForFree": True,
+                   "license": "https://opendatacommons.org/licenses/odbl/1-0/", "creator": {"@id": SITE_URL + "/#org"},
+                   "distribution": [{"@type": "DataDownload", "encodingFormat": "application/json", "contentUrl": f"{SITE_URL}/index/{k}.json"}]}
+                  for k, n, d in DATASETS]
+    data = json.dumps({"@context": "https://schema.org", "@graph": graph}, ensure_ascii=False).replace("</", "<\\/")
+    return f'<script type="application/ld+json">{data}</script>\n'
+
+
 def docs_sidebar(lang: str, current: str) -> str:
     items = []
     for name in DOCS:
@@ -89,7 +125,8 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
     alternates = "".join(
         f'<link rel="alternate" hreflang="{META[l]["html_lang"]}" href="{PAGES[name][l]}">'
         for l in LANGS if read(l, name))
-    return shell(lang, title, description, body, alternates=alternates, others=others)
+    return shell(lang, title, description, body, alternates=alternates, others=others,
+                 head_extra=structured_data(lang, name, title, description, lastmod(lang, name)))
 
 
 def shell(lang: str, title: str, description: str, body: str, *, alternates: str = "", others: str = "",
@@ -140,6 +177,7 @@ def shell(lang: str, title: str, description: str, body: str, *, alternates: str
 <div class="wrap row">
 <p>{preview}{t['operator']}</p>
 <p class="owner-note">{t['owner_note']} <a href="{PAGES['ownership'][lang]}">{t['owner_link']}</a></p>
+<p><a href="{home}#how">{t['work_link']}</a> · <a href="{PAGES['why'][lang]}">{t['about_link']}</a> · <a href="{PAGES['contact'][lang]}">{t['contact_link']}</a></p>
 <p><a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a> ({t['github_note']}) · {t['licence']} · <a href="{PAGES['privacy'][lang]}">{t['privacy']}</a> · <a href="{PAGES['press'][lang]}">{t['press']}</a> · <a href="{PAGES['changelog'][lang]}">{t['changelog']}</a> · <a href="{PAGES['support'][lang]}">{t['support']}</a> · {others.replace(chr(10), " · ")}</p>
 </div>
 </footer>
@@ -162,11 +200,6 @@ def main() -> None:
             out.write_text(layout(lang, name, title, description, body))
             built += 1
     # The website's half of the sitemap; /sitemap.xml (from the platform Worker) points to it.
-    # lastmod is the last commit that touched the page's content file (today when it is not committed yet).
-    def lastmod(lang, name):
-        f = ROOT / "content" / lang / f"{name}.html"
-        out = subprocess.run(["git", "log", "-1", "--format=%cs", "--", str(f)], capture_output=True, text=True, cwd=ROOT).stdout.strip()
-        return out or datetime.date.today().isoformat()
     urls = "\n".join(f"<url><loc>{SITE_URL}{path}</loc><lastmod>{lastmod(lang, name)}</lastmod></url>" for name, paths in PAGES.items() if name != "directory" for lang, path in paths.items() if read(lang, name))
     (PUBLIC / "sitemap-site.xml").write_text(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n{urls}\n</urlset>\n')
     # The headers file follows the opening switch too.

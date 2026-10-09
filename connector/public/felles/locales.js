@@ -302,7 +302,8 @@ export const LOCALES = {
     "agent-checkout": "/no/guider/agentkasse/",
     "agent-payments": "/no/guider/agentbetaling/",
     "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
-    "directory": "/bedrifter/"
+    "directory": "/bedrifter/",
+    "contact": "/no/kontakt/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",

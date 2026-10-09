@@ -37,7 +37,7 @@ Mange bedrifter, store som små, kommer aldri til å leie inn en utvikler for å
 2. Lag en issue med ideen din, eller ta en som er merket `good first issue`.
 3. Send en pull request. Kode bidras under Apache 2.0 og indeksdata under ODbL: de samme vilkårene alle får.
 
-Repoet åpnes ved lansering. Til da kan du skrive til Espen Brathaug, [contact@vegvis.ai](mailto:contact@vegvis.ai), hvis du vil være med tidlig.
+Repoet er åpent på [GitHub](https://github.com/vegvisai/vegvisai). Spørsmål? Skriv til Espen Brathaug, [contact@vegvis.ai](mailto:contact@vegvis.ai).
 
 ## Tjen penger på å hjelpe bedrifter
 

@@ -9,10 +9,42 @@
       "identifier": "urn:air:vegvisai:mcp:veiviser",
       "type": "application/mcp",
       "url": "/mcp",
-      "description": "Guide connector, read-only: find a business (test), Norwegian business lookup in Brønnøysund, public help, political parties, AI check of a website.",
+      "description": "Guide connector (MCP), read-only: find businesses in any country that registered themselves, check a business, find free public services and political parties in Norway, and run an AI check of a website. Never ranks; nothing can be bought.",
       "tags": [
         "guide",
+        "businesses",
+        "public-services",
         "norway"
+      ],
+      "extensions": {
+        "ai.vegvis.local-business": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:vegvisai:data:businesses",
+      "type": "application/json",
+      "url": "/index/businesses-no.json",
+      "description": "Open index (ODbL) of businesses that registered themselves and chose the open licence on their own domain. Domain and organisation, company or VAT number checked.",
+      "tags": [
+        "index",
+        "businesses"
+      ],
+      "extensions": {
+        "ai.vegvis.local-business": {
+          "index_licence": "ODbL-1.0 DbCL-1.0"
+        }
+      }
+    },
+    {
+      "identifier": "urn:air:vegvisai:data:releases",
+      "type": "application/json",
+      "url": "/index/releases.json",
+      "description": "Signed monthly releases of the business index (Ed25519), with the public key at /index/signing-key.json.",
+      "tags": [
+        "index",
+        "releases"
       ],
       "extensions": {
         "ai.vegvis.local-business": {
@@ -53,103 +85,72 @@
       }
     },
     {
-      "identifier": "urn:air:vegvisai:web:sjekk",
+      "identifier": "urn:air:vegvisai:web:businesses",
       "type": "text/html",
-      "url": "/sjekk/",
-      "description": "AI check: how does a website look to AI assistants? (Norwegian page)",
+      "url": "/businesses/",
+      "description": "Businesses in the guide: one page per listed business in random order, each linking to the business's own website (Norwegian: /bedrifter/).",
+      "tags": [
+        "businesses",
+        "directory"
+      ]
+    },
+    {
+      "identifier": "urn:air:vegvisai:web:check",
+      "type": "text/html",
+      "url": "/check/",
+      "description": "AI check: how does a website look to AI assistants? Score, points per check and concrete actions (Norwegian: /sjekk/).",
       "tags": [
         "ai-check",
         "tool"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+      ]
     },
     {
-      "identifier": "urn:air:vegvisai:web:lag",
+      "identifier": "urn:air:vegvisai:web:create",
       "type": "text/html",
-      "url": "/lag/",
-      "description": "Make an AI-readable business card in the browser (Norwegian page).",
+      "url": "/create/",
+      "description": "Make an AI-readable business card in the browser: a schema.org snippet for the front page, plus optional llms.txt and ai-catalog.json (Norwegian: /lag/).",
       "tags": [
         "business-card",
         "tool"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+      ]
     },
     {
-      "identifier": "urn:air:vegvisai:web:eksempel",
+      "identifier": "urn:air:vegvisai:web:register",
       "type": "text/html",
-      "url": "/eksempel/",
+      "url": "/register/",
+      "description": "Register a business in the open guide. Free; placement cannot be bought (Norwegian: /meld-inn/).",
       "tags": [
-        "example",
-        "business-card"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+        "registration",
+        "tool"
+      ]
     },
     {
-      "identifier": "urn:air:vegvisai:web:eksempel-gjestehus",
+      "identifier": "urn:air:vegvisai:web:docs",
       "type": "text/html",
-      "url": "/eksempel/gjestehus/",
-      "description": "Fictional example: an AI-readable business card for a guesthouse (Norwegian page).",
+      "url": "/docs/",
+      "description": "Guides: AI-readable website, the snippet in WordPress, Wix, Squarespace, Shopify and Webflow, WebMCP, agent checkout and payments, MCP (Norwegian: /no/guider/).",
       "tags": [
-        "example",
-        "business-card"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+        "guides"
+      ]
     },
     {
       "identifier": "urn:air:vegvisai:web:example",
       "type": "text/html",
       "url": "/example/",
-      "description": "Fictional English example: an AI-readable business card for a guesthouse.",
+      "description": "Fictional example: an AI-readable business card for a guesthouse (Norwegian: /eksempel/gjestehus/, bakery: /eksempel/).",
       "tags": [
         "example",
         "business-card"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
-    },
-    {
-      "identifier": "urn:air:vegvisai:web:meld-inn",
-      "type": "text/html",
-      "url": "/meld-inn/",
-      "description": "Register a business in the open guide (Norwegian page).",
-      "tags": [
-        "registration",
-        "tool"
-      ],
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+      ]
     },
     {
       "identifier": "urn:air:vegvisai:llms",
       "type": "text/plain",
       "url": "/llms.txt",
-      "extensions": {
-        "ai.vegvis.local-business": {
-          "index_licence": "ODbL-1.0 DbCL-1.0"
-        }
-      }
+      "description": "Overview of VegvisAI for language models.",
+      "tags": [
+        "overview"
+      ]
     }
   ]
 }

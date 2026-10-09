@@ -53,6 +53,7 @@ const COMMERCE_TYPES = new Set([...PRODUCT_TYPES, "Offer", "AggregateOffer", "Lo
 // Content that tells an AI what a page is: used for government and organisation sites.
 const CONTENT_TYPES = new Set([
   "Article", "NewsArticle", "BlogPosting", "Report", "ScholarlyArticle", "WebPage", "AboutPage", "ContactPage",
+  "CollectionPage", "ItemPage", "ProfilePage", "SearchResultsPage", "MedicalWebPage", // the other WebPage subtypes
   "FAQPage", "QAPage", "HowTo", "Event", "Service", "GovernmentService", "Dataset", "Legislation", "CreativeWork",
 ]);
 const GOVERNMENT_DOMAINS = /(^|\.)(kommune\.no|fylkeskommune\.no|gov|gov\.[a-z]{2}|gv\.at|gouv\.fr|bund\.de|europa\.eu|government\.se|regeringen\.se|stat\.no)$/;

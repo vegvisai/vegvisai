@@ -8,6 +8,9 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 - New pages that AI search can find and cite: [/businesses/](https://vegvis.ai/businesses/) ([Norwegian](https://vegvis.ai/bedrifter/)) lists every listed business in random order, never ranked, and each business has its own page that links to its own website.
 - `/sitemap.xml` is now an index of the website's pages (`/sitemap-site.xml`, which also covers the guides) and the platform's pages with the directory (`/sitemap-platform.xml`).
 - «Businesses» in the menu, and the directory in `llms.txt`.
+- vegvis.ai itself scores by its own AI check: Organization, WebSite and WebPage data with `dateModified` on every page, the three indexes as schema.org `Dataset`, a contact page, and `ai-catalog.json` brought up to date.
+- AI check: fewer false alarms for data exfiltration. «Send the customer to the right page» and «we do not ask for your email» no longer match; sending a customer's or user's data, the conversation, passwords or API keys still does.
+- AI check: the other WebPage subtypes (CollectionPage, ItemPage, ProfilePage, SearchResultsPage, MedicalWebPage) count as described content pages.
 
 
 **Registration made easier**

@@ -81,6 +81,8 @@ export async function directory(request, url, env) {
   const m = /<script type="application\/json" id="tekster">([\s\S]*?)<\/script>/.exec(html);
   const t = JSON.parse(m[1]);
   html = html.replace(m[0], "");
+  // The frame's own WebPage data describes the list; each page below adds the data that fits it.
+  html = html.replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>\n?/g, "");
 
   const store = storeFor(env);
   const listed = store ? (await store.listed()).map((b) => b.entry).filter((e) => e?.domain && e?.name) : [];
@@ -90,6 +92,7 @@ export async function directory(request, url, env) {
     const entries = shuffle(listed);
     const data = {
       "@context": "https://schema.org", "@type": "CollectionPage", name: t.h1, url: url.origin + prefix,
+      dateModified: new Date().toISOString().slice(0, 10),
       mainEntity: { "@type": "ItemList", itemListOrder: "https://schema.org/ItemListUnordered", numberOfItems: entries.length,
         itemListElement: entries.map((e, i) => ({ "@type": "ListItem", position: i + 1, name: e.name, url: safeUrl(e.url) ?? undefined })) },
     };
@@ -106,6 +109,7 @@ export async function directory(request, url, env) {
   const title = fill(t.entryTitle, { name: esc(e.name) });
   const description = fill(t.entryDescription, { name: esc(e.name), description: esc(e.description ?? "") }).trim();
   const data = { "@context": "https://schema.org", "@type": "WebPage", name: e.name, url: url.origin + prefix + e.domain + "/",
+    dateModified: Object.values(e.verified ?? {})[0] ?? undefined,
     about: { "@type": "Organization", name: e.name, url: safeUrl(e.url) ?? undefined } };
   html = html.replace(block, entryHtml(e, t, prefix))
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${title}</title>`)

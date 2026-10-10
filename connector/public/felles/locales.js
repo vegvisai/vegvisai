@@ -242,7 +242,8 @@ export const LOCALES = {
    },
    "toolDescription": "Send a request to {name}. The form opens {name}'s own request page with these details filled in. Nothing is paid or booked here.",
    "message": "Message",
-   "messageDescription": "What the customer needs, in their own words"
+   "messageDescription": "What the customer needs, in their own words",
+   "guideEntry": "Entry in the open guide VegvisAI, which shows whether the business is registered and checked"
   },
   "countries": {
    "NO": "Norway",
@@ -538,7 +539,8 @@ export const LOCALES = {
    },
    "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
    "message": "Melding",
-   "messageDescription": "Hva kunden trenger, med egne ord"
+   "messageDescription": "Hva kunden trenger, med egne ord",
+   "guideEntry": "Oppføring i den åpne veiviseren VegvisAI, som viser om bedriften er meldt inn og sjekket"
   },
   "countries": {
    "NO": "Norge",

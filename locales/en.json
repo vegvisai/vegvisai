@@ -266,7 +266,8 @@
   },
   "toolDescription": "Send a request to {name}. The form opens {name}'s own request page with these details filled in. Nothing is paid or booked here.",
   "message": "Message",
-  "messageDescription": "What the customer needs, in their own words"
+  "messageDescription": "What the customer needs, in their own words",
+  "guideEntry": "Entry in the open guide VegvisAI, which shows whether the business is registered and checked"
  },
  "pages": {
   "check": {
@@ -524,7 +525,9 @@
    "noteSnippet": "Minimum. Paste into the head of your front page. Holds the schema.org description of your business.",
    "noteCard": "Optional. A business card page with the same description, as the front page or for example /ai/.",
    "noteLlms": "Optional. A short overview for language models, at the root of your website (/llms.txt).",
-   "noteCatalog": "Optional. Lets open guides find your services. Goes in the folder /.well-known/, which many website builders do not give access to."
+   "noteCatalog": "Optional. Lets open guides find your services. Goes in the folder /.well-known/, which many website builders do not give access to.",
+   "guideLink": "Include a link to the business's page in the open guide (recommended)",
+   "guideLinkHelp": "One line in llms.txt and one field in ai-catalog.json show AI assistants where the business can be checked. The page says whether the business is registered. The link is not in the business card itself, and you can remove it whenever you like."
   },
   "directory": {
    "title": "Businesses in the guide · VegvisAI",

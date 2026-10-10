@@ -111,6 +111,8 @@
 <legend>{{t.licenceH}}</legend>
 <label><input type="checkbox" id="openLicence" name="openLicence" checked>{{t.licence}}</label>
 <p class="hjelp">{{t.licenceHelp}}</p>
+<label><input type="checkbox" id="guideLink" name="guideLink" checked>{{t.guideLink}}</label>
+<p class="hjelp">{{t.guideLinkHelp}}</p>
 </fieldset>
 
 <fieldset>
@@ -167,6 +169,7 @@ function readForm() {
   f.homeVisits = $("homeVisits").checked;
   f.openLicence = $("openLicence").checked;
   f.webmcp = $("webmcp").checked;
+  f.guideLink = $("guideLink").checked;
   f.country = country();
   f.text = LANG;
   return f;

@@ -287,7 +287,8 @@
   },
   "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
   "message": "Melding",
-  "messageDescription": "Hva kunden trenger, med egne ord"
+  "messageDescription": "Hva kunden trenger, med egne ord",
+  "guideEntry": "Oppføring i den åpne veiviseren VegvisAI, som viser om bedriften er meldt inn og sjekket"
  },
  "pages": {
   "check": {
@@ -546,7 +547,9 @@
    "noteSnippet": "Minimum. Lim inn i head på forsiden. Inneholder schema.org-beskrivelsen av bedriften.",
    "noteCard": "Valgfritt. En egen visittkortside med samme beskrivelse, som forside eller for eksempel /ai/.",
    "noteLlms": "Valgfritt. En kort oversikt for språkmodeller, i roten av nettsiden (/llms.txt).",
-   "noteCatalog": "Valgfritt. Lar åpne veivisere finne tjenestene dine. Legges i mappen /.well-known/, som mange nettsidebyggere ikke gir tilgang til."
+   "noteCatalog": "Valgfritt. Lar åpne veivisere finne tjenestene dine. Legges i mappen /.well-known/, som mange nettsidebyggere ikke gir tilgang til.",
+   "guideLink": "Ta med lenke til bedriftens side i den åpne veiviseren (anbefalt)",
+   "guideLinkHelp": "Én linje i llms.txt og ett felt i ai-catalog.json viser AI-assistenter hvor bedriften kan sjekkes. Siden sier om bedriften er meldt inn. Lenken står ikke i selve visittkortet, og du kan ta den bort når du vil."
   },
   "directory": {
    "title": "Bedrifter i veiviseren · VegvisAI",

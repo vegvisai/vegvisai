@@ -86,6 +86,9 @@ export function normalize(f) {
     openLicence: f.openLicence !== false && f.openLicence !== "false",
     // WebMCP (experimental, off by default): a request form on the card that the visitor's agent can fill in.
     webmcp: f.webmcp === true || f.webmcp === "true" || f.webmcp === "on",
+    // The way back to the open guide (P53 E, Espen 2026-10-10): on by default, one line in llms.txt and one
+    // field in ai-catalog.json pointing to the business's own entry page. Information, never an instruction.
+    guideLink: f.guideLink !== false && f.guideLink !== "false",
     text: LANGS.includes(f.text) ? f.text : country === "NO" ? "nb" : "en",
     currency: CURRENCIES.includes(f.currency) ? f.currency : defaultCurrency(country),
     vatId: EU.has(country) ? String(f.vatId ?? "").toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 16) : "",
@@ -233,6 +236,13 @@ ${parts.join("\n")}
 `;
 }
 
+const GUIDE = "https://vegvis.ai";
+// The business's own entry page in the open guide. It says whether the business is registered and checked.
+export function guideEntry(d) {
+  const domain = new URL(d.website).hostname.toLowerCase().replace(/^www\./, "");
+  return `${GUIDE}${d.text === "nb" ? "/bedrifter/" : "/businesses/"}${domain}/`;
+}
+
 export function makeLlmsTxt(d) {
   const t = cardText(d.text);
   const out = [`# ${d.name}`, "", `> ${d.summary}`, ""];
@@ -253,6 +263,7 @@ export function makeLlmsTxt(d) {
   if (d.orgNumber) out.push(`- ${t.org} ${d.orgNumber} ${t.orgRegister}`);
   if (d.vatId) out.push(`- ${t.vat} ${jsonld(d).vatID}`);
   if (d.companyNumber) out.push(`- ${t.company} ${d.companyNumber} (Companies House)`);
+  if (d.guideLink) out.push(`- [${t.guideEntry}](${guideEntry(d)})`);
   return out.join("\n") + "\n";
 }
 
@@ -275,6 +286,7 @@ export function makeCatalog(d) {
   if (d.companyNumber) local.company_number = d.companyNumber;
   // Shared openly in the VegvisAI index under ODbL (the database) and DbCL (this entry); remove to opt out.
   if (d.openLicence) local.index_licence = "ODbL-1.0 DbCL-1.0";
+  if (d.guideLink) local.guide_entry = guideEntry(d);
   return JSON.stringify({
     specVersion: "1.0",
     host: { displayName: d.name, identifier: domain },

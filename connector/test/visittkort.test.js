@@ -136,3 +136,20 @@ test("the head snippet holds the same schema.org description as the full card", 
   assert.deepEqual(ld(r.files["head-snippet.html"]), ld(r.files["index.html"]));
   assert.ok(!r.files["head-snippet.html"].includes("<html"), "only the script tag");
 });
+
+test("the way back to the open guide: one line in llms.txt and one field in ai-catalog.json, never in the card, removable", async () => {
+  const { findInstructions } = await import("../public/felles/injeksjon.js");
+  const { catalogProblems } = await import("../public/felles/ai-catalog.js");
+  const on = makeFiles(FORM).files;
+  const entry = JSON.parse(on[".well-known/ai-catalog.json"]).entries[0].extensions["ai.vegvis.local-business"].guide_entry;
+  assert.match(entry, /^https:\/\/vegvis\.ai\/(bedrifter|businesses)\/[a-z0-9.-]+\/$/);
+  assert.ok(!entry.includes("www."), "the domain is written as the register writes it");
+  assert.ok(on["llms.txt"].includes(entry));
+  assert.ok(!on["index.html"].includes("vegvis.ai/"), "not in the business card itself");
+  assert.ok(!on["head-snippet.html"].includes("vegvis.ai/"), "not in the snippet");
+  assert.deepEqual(findInstructions(on["llms.txt"]).filter((f) => f.severity !== "low"), [], "reads as information, not an instruction");
+  assert.deepEqual(catalogProblems(JSON.parse(on[".well-known/ai-catalog.json"])), []);
+  const off = makeFiles({ ...FORM, guideLink: false }).files;
+  assert.ok(!off["llms.txt"].includes("vegvis.ai"));
+  assert.equal(JSON.parse(off[".well-known/ai-catalog.json"]).entries[0].extensions["ai.vegvis.local-business"].guide_entry, undefined);
+});

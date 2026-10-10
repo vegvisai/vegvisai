@@ -103,7 +103,7 @@ export async function directory(request, url, env) {
   const e = /^[a-z0-9.-]{1,253}$/.test(rest) ? listed.find((x) => String(x.domain).toLowerCase() === rest) : null;
   const block = /<!--DIRECTORY-->[\s\S]*<!--\/DIRECTORY-->/;
   if (!e) {
-    html = html.replace(block, `<p><a href="${prefix}">← ${esc(t.back)}</a></p>\n<p>${esc(t.notFound)}</p>`).replace(/<meta name="robots"[^>]*>\n?/, "").replace("</head>", '<meta name="robots" content="noindex">\n</head>');
+    html = html.replace(block, `<p><a href="${prefix}">← ${esc(t.back)}</a></p>\n<p>${esc(t.notFound)}</p>\n<p>${t.registerCta}</p>`).replace(/<meta name="robots"[^>]*>\n?/, "").replace("</head>", '<meta name="robots" content="noindex">\n</head>');
     return new Response(html, { status: 404, headers: HEADERS });
   }
   const title = fill(t.entryTitle, { name: esc(e.name) });

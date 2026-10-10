@@ -4,6 +4,9 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased, 6 to 9 October 2026
 
+**The way back to the guide (10 October)**
+- The generator adds one line to `llms.txt` and the field `guide_entry` to `ai-catalog.json` with the business's own page in the open guide (`/bedrifter/<domain>/`), which shows whether the business is registered and checked. Not in the business card or the snippet. On by default, with a checkbox to leave it out.
+
 **Businesses in the guide (9 October)**
 - New pages that AI search can find and cite: [/businesses/](https://vegvis.ai/businesses/) ([Norwegian](https://vegvis.ai/bedrifter/)) lists every listed business in random order, never ranked, and each business has its own page that links to its own website.
 - `/sitemap.xml` is now an index of the website's pages (`/sitemap-site.xml`, which also covers the guides) and the platform's pages with the directory (`/sitemap-platform.xml`).

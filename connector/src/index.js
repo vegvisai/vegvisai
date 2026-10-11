@@ -159,7 +159,7 @@ function findPublicHelp({ topic, municipality }) {
     const towns = PUBLIC_INDEX.entries.filter((e) => e.level === "municipality");
     const exact = towns.filter((e) => placeKey(e.name).split(" - ").includes(wanted) || placeKey(e.name) === wanted);
     const hits = exact.length ? exact : wanted.length >= 3 ? towns.filter((e) => placeKey(e.name).includes(wanted)).slice(0, 5) : [];
-    if (hits.length) hits.forEach((e) => lines.push(`- ${e.name}: ${e.url} (${e.what})`));
+    if (hits.length) hits.forEach((e) => lines.push(`- ${e.name}: ${e.url} (${e.what})${e.forms ? `. Forms in Altinn: ${e.forms}` : ""}`));
     else lines.push(`No municipality called «${municipality}» in the index. All municipalities: https://www.norge.no/`);
   }
   if (topic || !municipality) {
@@ -167,7 +167,7 @@ function findPublicHelp({ topic, municipality }) {
     const chosen = !topic || topic === "all" ? state : state.filter((e) => e.topics.includes(topic));
     if (topic === "municipality" && !municipality) lines.push("Give the name of the municipality in the municipality field to get its website.");
     else if (!chosen.length && topic !== "municipality") lines.push(`No public services for «${topic}» in the index. Known topics: ${PUBLIC_TOPICS.join(", ")}.`);
-    chosen.forEach((e) => lines.push(`- ${e.name}: ${e.url} (${e.what})`));
+    chosen.forEach((e) => lines.push(`- ${e.name}: ${e.url} (${e.what})${e.forms ? `. Forms in Altinn: ${e.forms}` : ""}`));
   }
   lines.push("", `${PUBLIC_INDEX.notice} Open index (${PUBLIC_INDEX.licence}), updated ${PUBLIC_INDEX.updated}.`);
   return text(lines.join("\n"));

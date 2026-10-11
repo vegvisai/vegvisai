@@ -30,7 +30,11 @@ Søk og handlekurv for agenter, din egen kasse.](https://vegvis.ai/no/guider/age
 
 ### Betaling via AI-agenter
 
-Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/) [Nivå 3
+Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/) [Oversikt
+
+### Når en agent skal handle for bedriften
+
+Systembruker i Altinn: fullmakt til systemer og agenter.](https://vegvis.ai/no/guider/agenter-og-fullmakt/) [Nivå 3
 
 ### Din egen AI-tjeneste (MCP)
 

@@ -319,7 +319,8 @@ export const LOCALES = {
     "agent-payments": "/no/guider/agentbetaling/",
     "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
     "directory": "/bedrifter/",
-    "contact": "/no/kontakt/"
+    "contact": "/no/kontakt/",
+    "agent-mandate": "/no/guider/agenter-og-fullmakt/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",

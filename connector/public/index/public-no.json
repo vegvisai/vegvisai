@@ -74,6 +74,7 @@
     "family"
    ],
    "what": "Labour and welfare: unemployment benefit, sick pay, pensions, parental benefit and job seeking",
+   "forms": "https://info.altinn.no/skjemaoversikt/arbeids-og-velferdsetaten-nav/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -86,6 +87,7 @@
     "work"
    ],
    "what": "NAV services for employers: recruiting, sick leave follow-up and refunds",
+   "forms": "https://info.altinn.no/skjemaoversikt/arbeids-og-velferdsetaten-nav/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -98,6 +100,7 @@
     "general"
    ],
    "what": "Norwegian Tax Administration: tax returns, tax cards, the National Population Register and moving address",
+   "forms": "https://info.altinn.no/skjemaoversikt/skatteetaten/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -110,6 +113,7 @@
     "tax"
    ],
    "what": "Tax, VAT and reporting for businesses and organisations",
+   "forms": "https://info.altinn.no/skjemaoversikt/skatteetaten/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -250,6 +254,7 @@
     "consumer"
    ],
    "what": "Check whether a Norwegian business is registered, bankrupt or being wound up; register a business",
+   "forms": "https://info.altinn.no/skjemaoversikt/bronnoysundregistrene/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -261,6 +266,7 @@
     "business"
    ],
    "what": "Norwegian Industrial Property Office: trademarks, patents and designs",
+   "forms": "https://info.altinn.no/skjemaoversikt/patentstyret/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -274,6 +280,7 @@
     "tax"
    ],
    "what": "Norwegian Customs: importing and exporting goods, customs duty and travel allowances",
+   "forms": "https://info.altinn.no/skjemaoversikt/tolletaten/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -364,6 +371,7 @@
     "legal"
    ],
    "what": "Norwegian courts and conciliation boards: cases, deadlines and how to proceed",
+   "forms": "https://info.altinn.no/skjemaoversikt/domstolene/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -376,6 +384,7 @@
     "family"
    ],
    "what": "Norwegian Civil Affairs Authority: free legal aid, guardianship and family law",
+   "forms": "https://info.altinn.no/skjemaoversikt/statens-sivilrettsforvaltning/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -388,6 +397,7 @@
     "general"
    ],
    "what": "Norwegian Police: report crime, passports and ID cards, lost property, firearms licences",
+   "forms": "https://info.altinn.no/skjemaoversikt/politiet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -399,6 +409,7 @@
     "immigration"
    ],
    "what": "Norwegian Directorate of Immigration: residence permits, visas and citizenship",
+   "forms": "https://info.altinn.no/skjemaoversikt/utlendingsdirektoratet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -421,6 +432,7 @@
     "health"
    ],
    "what": "Norwegian Institute of Public Health: vaccines, infection control and health statistics",
+   "forms": "https://info.altinn.no/skjemaoversikt/folkehelseinstituttet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -432,6 +444,7 @@
     "health"
    ],
    "what": "Norwegian Directorate of Health: guidelines, health rights and the national health register overview",
+   "forms": "https://info.altinn.no/skjemaoversikt/helsedirektoratet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -478,6 +491,7 @@
     "welfare"
    ],
    "what": "Norwegian State Housing Bank: housing allowance and start-up loans",
+   "forms": "https://info.altinn.no/skjemaoversikt/husbanken/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -489,6 +503,7 @@
     "housing"
    ],
    "what": "Norwegian Mapping Authority: maps, property register and land registration",
+   "forms": "https://info.altinn.no/skjemaoversikt/kartverket/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -500,6 +515,7 @@
     "transport"
    ],
    "what": "Norwegian Public Roads Administration: driving licences, vehicle registration, inspections and road traffic information",
+   "forms": "https://info.altinn.no/skjemaoversikt/statens-vegvesen/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -511,6 +527,7 @@
     "transport"
    ],
    "what": "Norwegian Maritime Authority: boats, ships, seafarers and safety at sea",
+   "forms": "https://info.altinn.no/skjemaoversikt/sjofartsdirektoratet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -522,6 +539,7 @@
     "transport"
    ],
    "what": "Civil Aviation Authority: aviation rules, including drones",
+   "forms": "https://info.altinn.no/skjemaoversikt/luftfartstilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -534,6 +552,7 @@
     "consumer"
    ],
    "what": "Norwegian Food Safety Authority: food safety, animal welfare, plant health and drinking water",
+   "forms": "https://info.altinn.no/skjemaoversikt/mattilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -545,6 +564,7 @@
     "environment"
    ],
    "what": "Norwegian Environment Agency: pollution, waste, nature and hunting and fishing",
+   "forms": "https://info.altinn.no/skjemaoversikt/miljodirektoratet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -557,6 +577,7 @@
     "business"
    ],
    "what": "Norwegian Labour Inspection Authority: working conditions, working hours, pay and employment contracts",
+   "forms": "https://info.altinn.no/skjemaoversikt/arbeidstilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -570,6 +591,7 @@
     "business"
    ],
    "what": "Norwegian Data Protection Authority: privacy rights and GDPR",
+   "forms": "https://info.altinn.no/skjemaoversikt/datatilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -582,6 +604,7 @@
     "consumer"
    ],
    "what": "Financial Supervisory Authority: check whether a bank, lender or investment firm is licensed",
+   "forms": "https://info.altinn.no/skjemaoversikt/finanstilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -594,6 +617,7 @@
     "consumer"
    ],
    "what": "Norwegian Competition Authority: competition rules and price cooperation",
+   "forms": "https://info.altinn.no/skjemaoversikt/konkurransetilsynet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -605,6 +629,7 @@
     "consumer"
    ],
    "what": "Norwegian Communications Authority: telecom, broadband and postal services",
+   "forms": "https://info.altinn.no/skjemaoversikt/nasjonal-kommunikasjonsmyndighet-nkom/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -616,6 +641,7 @@
     "emergency"
    ],
    "what": "Directorate for Civil Protection: emergency preparedness, fire safety and electrical safety",
+   "forms": "https://info.altinn.no/skjemaoversikt/direktoratet-for-samfunnssikkerhet-og-beredskap/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -638,6 +664,7 @@
     "statistics"
    ],
    "what": "Statistics Norway: official statistics",
+   "forms": "https://info.altinn.no/skjemaoversikt/statistisk-sentralbyra/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
@@ -649,6 +676,7 @@
     "government"
    ],
    "what": "Elections in Norway: how, when and where to vote",
+   "forms": "https://info.altinn.no/skjemaoversikt/valgdirektoratet/",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },

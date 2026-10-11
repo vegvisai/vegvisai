@@ -4,6 +4,7 @@
 // Every new listing is reviewed by a person at the start.
 
 import { verifyBusiness, reasonText } from "./registration.js";
+import { offerAlerts, alertRemoved, monthlySummaries } from "./varsel.js";
 import { d1Store, publicChangelog, openExport, applyRetention } from "./register.js";
 import { makeRelease, withdrawRelease, publicJwkOf, keyId, PERIOD } from "./release.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
@@ -51,16 +52,18 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
   if (result.status === "rejected" || body.dry_run === true) return json({ ...answer, dry_run: body.dry_run === true });
   const org = result.entry.org_number;
   const old = await store.get(org);
+  const origin = new URL(request.url).origin;
+  const alert = async () => (body.alert_email ? { alert: await offerAlerts(env, org, result.domain, String(body.alert_email).trim().slice(0, 254), lang, origin) } : {});
   if (old?.status === "listed" && result.status === "ok") {
     await store.save(org, { domain: result.domain, status: "listed", entry: result.entry, consent: true }, "updated", "resubmitted");
-    return json({ ...answer, status: "listed" });
+    return json({ ...answer, status: "listed", ...(await alert()) });
   }
   // A manual review keeps the first reason (domain_mismatch, domain_only), so the changelog says why, and the
   // door it came through, so the review list shows it (a form registration or a GitHub pull request).
   const door = body.source === "github" ? "pull_request" : "registered";
   const reason = result.status === "manual" ? `${result.reasons[0] ?? "manual"}${door === "pull_request" ? " via pull_request" : ""}` : door;
   await store.save(org, { domain: result.domain, status: "pending", entry: result.entry, consent: true }, "submitted", reason);
-  return json({ ...answer, status: "pending" });
+  return json({ ...answer, status: "pending", ...(await alert()) });
 }
 
 export async function status(url, env) {
@@ -127,6 +130,7 @@ export async function recheck(env, { fetchFn = fetch } = {}) {
     const gone = r.status === "rejected" && r.reasons.find((code) => REMOVE_ON.has(code));
     if (gone) {
       await store.save(b.org_number, { domain: b.domain, status: "removed", entry: b.entry, consent: b.consent }, "removed", gone);
+      await alertRemoved(env, b, gone);
       removed++;
     } else if ((r.status === "ok" || (r.status === "manual" && b.entry.verification === "domain")) && JSON.stringify({ ...r.entry, verified: null }) !== JSON.stringify({ ...b.entry, verified: null })) {
       await store.save(b.org_number, { domain: b.domain, status: "listed", entry: r.entry, consent: b.consent }, "updated", "recheck");
@@ -207,7 +211,8 @@ export async function monthlyRelease(env, { now = new Date() } = {}) {
   const release = await makeRelease(store, key, { now });
   // Removed content is only needed until a release has listed the removal.
   const retention = await applyRetention(store, { now, afterRelease: Boolean(release.created) });
-  return { ...release, retention };
+  const summaries = await monthlySummaries(env, { now });
+  return { ...release, retention, summaries };
 }
 
 // POST /api/admin/withdraw { period, reason } with the review token.

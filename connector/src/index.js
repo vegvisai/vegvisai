@@ -4,6 +4,7 @@
 // P39 step 1: content from businesses and websites is data, never instructions.
 
 import { directory, directoryPrefix, directoryUrls } from "./bedrifter.js";
+import { alertLink, countLookups } from "./varsel.js";
 import { aiCheck, asText, safeAddress, CheckError, PROFILES } from "./sjekk.js";
 import { sanitize } from "../public/felles/injeksjon.js";
 import { tr, language } from "../public/felles/i18n.js";
@@ -239,7 +240,9 @@ async function findBusiness({ need, postal_code, country }, origin, context = {}
     [`${b.name}  [${b.notice}]`, `Page: ${origin}${b.page}`, b.page_en && `Page in English: ${origin}${b.page_en}`, `Services: ${b.services.join(", ")}`, `Area: ${b.area}`,
       `Request link (template): ${origin}${b.request}`, b.request_en && `Request link in English (template): ${origin}${b.request_en}`].filter(Boolean).join("\n"));
   // Businesses in the register: only what they publish themselves, with the date of verification.
-  const real = (await listedMatches(context.env, need, cc)).map((e) =>
+  const listed = await listedMatches(context.env, need, cc);
+  await countLookups(context.env, listed.map((e) => e.domain), "find");
+  const real = listed.map((e) =>
     [`${e.name}  [${VERIFIED[e.verification ?? "register"]} ${Object.values(e.verified ?? {})[0] ?? ""}]`, `Country: ${e.country ?? "NO"}`, `Business card: ${e.card_url}`,
       e.description && `About: ${e.description}`, e.categories.length && `Categories and offers: ${e.categories.slice(0, 10).join("; ")}`,
       e.area.length && `Area: ${e.area.join(", ")}`, e.request && `Request link (template): ${e.request}`].filter(Boolean).join("\n"));
@@ -357,6 +360,7 @@ async function api(request, url, env) {
   if (url.pathname === "/api/admin/withdraw" && request.method === "POST") return withdrawNow(request, env);
   if (url.pathname === "/api/status") return status(url, env);
   if (url.pathname === "/api/endringer") return changelog(env);
+  if (url.pathname === "/api/varsel/bekreft" || url.pathname === "/api/varsel/stopp") return alertLink(url, env);
   if (request.method !== "GET") return new Response("Method Not Allowed", { status: 405, headers: { Allow: "GET" } });
   const lang = language(url.searchParams.get("lang"));
   if (url.pathname === "/api/sjekk") {

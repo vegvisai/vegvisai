@@ -389,7 +389,9 @@
     "removed": "Removed.",
     "unknown": "Not registered.",
     "rejected": "Not approved yet."
-   }
+   },
+   "alertEmail": "Email for alerts (optional)",
+   "alertEmailHelp": "We only write if the website stops being readable for AI, plus a short monthly summary of how often the business was looked up. You confirm the address first and can switch it off at any time. The address is never shared and is not in the open index."
   },
   "create": {
    "title": "Make an AI business card · VegvisAI",
@@ -586,5 +588,19 @@
   "SI": "Slovenia",
   "ES": "Spain",
   "SE": "Sweden"
+ },
+ "alerts": {
+  "confirmSubject": "Confirm alerts from VegvisAI for {domain}",
+  "confirmText": "Hi!\n\nSomeone registered {domain} in the open guide VegvisAI and gave this address for alerts.\n\nConfirm that you want alerts:\n{confirm}\n\nYou will then hear from us if the website stops being readable for AI, and get a short monthly summary of how often the business was looked up. Nothing else, and never advertising.\n\nIf you do not want this, do nothing. We will delete the address.\n\nVegvisAI\nhttps://vegvis.ai",
+  "alertSubject": "{domain} has been taken out of VegvisAI",
+  "alertText": "Hi!\n\nWe check every business in the guide each week. Today {domain} was no longer in order, and it has been taken out:\n\n{reason}\n\nWhen it is fixed, you can register the business again:\n{register}\n\nThe AI check shows what is missing:\n{check}\n\nNo more alerts: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+  "monthSubject": "VegvisAI for {domain}: {month}",
+  "monthText": "Hi!\n\nThis is how {domain} was looked up in the open guide in {month}:\n\n- Found by AI assistants through the connector: {find}\n- Business page read by AI assistants and search bots: {page_ai}\n- Business page viewed by other visitors: {page}\n\nThe numbers are approximate. Bots say themselves who they are, and we keep nothing about who asked.\n\nBusiness page: {entry}\nNo more alerts: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+  "confirmed": "Thank you! Alerts for {domain} are on.",
+  "stopped": "Alerts are off, and the address is deleted.",
+  "unknownToken": "The link is no longer valid.",
+  "emailInvalid": "The email address does not look right. The registration was sent without alerts.",
+  "emailSent": "We have sent you an email. Confirm the address to get alerts.",
+  "emailUnavailable": "Email alerts are not switched on yet. The registration was sent without alerts."
  }
 }

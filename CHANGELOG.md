@@ -2,6 +2,10 @@
 
 What changed in VegvisAI, newest first. The same list is on the website: [vegvis.ai/changelog/](https://vegvis.ai/changelog/) ([Norwegian](https://vegvis.ai/no/endringslogg/)). Changes to the register itself (businesses added or removed) are in the public register changelog at [/api/endringer](https://vegvis.ai/api/endringer).
 
+## Unreleased
+
+- Lookup counts per business and month: found through the connector, business page read by AI bots, business page viewed by others. Only counts, never who asked, and never shown in public.
+
 ## v1.2.1, 11 October 2026: small fixes and privacy
 
 - Connector and register: generic schema.org types (LocalBusiness, Organization and the like) are no longer listed as offers, and offer names with commas stay whole.

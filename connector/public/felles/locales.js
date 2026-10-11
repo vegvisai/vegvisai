@@ -275,6 +275,20 @@ export const LOCALES = {
    "SI": "Slovenia",
    "ES": "Spain",
    "SE": "Sweden"
+  },
+  "alerts": {
+   "confirmSubject": "Confirm alerts from VegvisAI for {domain}",
+   "confirmText": "Hi!\n\nSomeone registered {domain} in the open guide VegvisAI and gave this address for alerts.\n\nConfirm that you want alerts:\n{confirm}\n\nYou will then hear from us if the website stops being readable for AI, and get a short monthly summary of how often the business was looked up. Nothing else, and never advertising.\n\nIf you do not want this, do nothing. We will delete the address.\n\nVegvisAI\nhttps://vegvis.ai",
+   "alertSubject": "{domain} has been taken out of VegvisAI",
+   "alertText": "Hi!\n\nWe check every business in the guide each week. Today {domain} was no longer in order, and it has been taken out:\n\n{reason}\n\nWhen it is fixed, you can register the business again:\n{register}\n\nThe AI check shows what is missing:\n{check}\n\nNo more alerts: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+   "monthSubject": "VegvisAI for {domain}: {month}",
+   "monthText": "Hi!\n\nThis is how {domain} was looked up in the open guide in {month}:\n\n- Found by AI assistants through the connector: {find}\n- Business page read by AI assistants and search bots: {page_ai}\n- Business page viewed by other visitors: {page}\n\nThe numbers are approximate. Bots say themselves who they are, and we keep nothing about who asked.\n\nBusiness page: {entry}\nNo more alerts: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+   "confirmed": "Thank you! Alerts for {domain} are on.",
+   "stopped": "Alerts are off, and the address is deleted.",
+   "unknownToken": "The link is no longer valid.",
+   "emailInvalid": "The email address does not look right. The registration was sent without alerts.",
+   "emailSent": "We have sent you an email. Confirm the address to get alerts.",
+   "emailUnavailable": "Email alerts are not switched on yet. The registration was sent without alerts."
   }
  },
  "nb": {
@@ -572,6 +586,20 @@ export const LOCALES = {
    "SI": "Slovenia",
    "ES": "Spania",
    "SE": "Sverige"
+  },
+  "alerts": {
+   "confirmSubject": "Bekreft varsler fra VegvisAI for {domain}",
+   "confirmText": "Hei!\n\nNoen meldte inn {domain} i den åpne veiviseren VegvisAI og oppga denne adressen for varsler.\n\nBekreft at du vil ha varsler:\n{confirm}\n\nDa får du beskjed hvis nettsiden slutter å være lesbar for AI, og en kort oversikt hver måned over hvor ofte bedriften ble slått opp. Ingenting annet, og aldri reklame.\n\nVil du ikke ha det, gjør du ingenting. Da sletter vi adressen.\n\nVegvisAI\nhttps://vegvis.ai",
+   "alertSubject": "{domain} er tatt ut av VegvisAI",
+   "alertText": "Hei!\n\nVi sjekker alle bedrifter i veiviseren hver uke. I dag var {domain} ikke lenger i orden, og bedriften er tatt ut:\n\n{reason}\n\nNår det er rettet, kan du melde inn bedriften på nytt:\n{register}\n\nAI-sjekken viser hva som mangler:\n{check}\n\nVil du ikke ha flere varsler: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+   "monthSubject": "VegvisAI for {domain}: {month}",
+   "monthText": "Hei!\n\nSlik ble {domain} slått opp i den åpne veiviseren i {month}:\n\n- Funnet av AI-assistenter gjennom connectoren: {find}\n- Bedriftssiden lest av AI-assistenter og søkeroboter: {page_ai}\n- Bedriftssiden vist for andre besøkende: {page}\n\nTallene er omtrentlige. Robotene oppgir selv hvem de er, og vi lagrer ingen opplysninger om hvem som spurte.\n\nBedriftssiden: {entry}\nVil du ikke ha flere varsler: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+   "confirmed": "Takk! Varsler for {domain} er slått på.",
+   "stopped": "Varslene er slått av, og adressen er slettet.",
+   "unknownToken": "Lenken er ikke gyldig lenger.",
+   "emailInvalid": "E-postadressen ser ikke riktig ut. Påmeldingen er sendt uten varsler.",
+   "emailSent": "Vi har sendt en e-post. Bekreft adressen for å få varsler.",
+   "emailUnavailable": "Varsler på e-post er ikke slått på ennå. Påmeldingen er sendt uten varsler."
   }
  }
 };

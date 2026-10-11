@@ -5,6 +5,7 @@
 // translations stay in locales/.
 import { storeFor } from "./innmelding.js";
 import { LAUNCHED } from "./launch.js";
+import { countLookups, pageKind } from "./varsel.js";
 
 const PREFIXES = { "/bedrifter/": "nb", "/businesses/": "en" };
 const HEADERS = { "Content-Type": "text/html; charset=utf-8", "Cache-Control": "public, max-age=300", ...(LAUNCHED ? {} : { "X-Robots-Tag": "noindex, nofollow" }) };
@@ -106,6 +107,7 @@ export async function directory(request, url, env) {
     html = html.replace(block, `<p><a href="${prefix}">← ${esc(t.back)}</a></p>\n<p>${esc(t.notFound)}</p>\n<p>${t.registerCta}</p>`).replace(/<meta name="robots"[^>]*>\n?/, "").replace("</head>", '<meta name="robots" content="noindex">\n</head>');
     return new Response(html, { status: 404, headers: HEADERS });
   }
+  await countLookups(env, [e.domain], pageKind(request.headers.get("User-Agent")));
   const title = fill(t.entryTitle, { name: esc(e.name) });
   const description = fill(t.entryDescription, { name: esc(e.name), description: esc(e.description ?? "") }).trim();
   const data = { "@context": "https://schema.org", "@type": "WebPage", name: e.name, url: url.origin + prefix + e.domain + "/",

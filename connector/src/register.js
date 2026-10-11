@@ -30,6 +30,21 @@ CREATE TABLE IF NOT EXISTS releases (
   key_id TEXT NOT NULL,
   withdrawn TEXT,                -- reason, when a release had to be withdrawn
   replaced_by TEXT               -- the release that replaces it
+);
+CREATE TABLE IF NOT EXISTS lookups (  -- P54: how often agents and people looked a business up, per month
+  domain TEXT NOT NULL,
+  month TEXT NOT NULL,           -- YYYY-MM
+  kind TEXT NOT NULL,            -- find (connector), page (directory page), page_ai (directory page, AI user agent)
+  n INTEGER NOT NULL DEFAULT 0,
+  PRIMARY KEY (domain, month, kind)
+);
+CREATE TABLE IF NOT EXISTS contacts ( -- P54: an address the business chose to give for alerts; never exported
+  org_number TEXT PRIMARY KEY,
+  email TEXT NOT NULL,
+  lang TEXT NOT NULL DEFAULT 'nb',
+  token TEXT NOT NULL UNIQUE,    -- in the confirm and stop links
+  confirmed_at TEXT,             -- double opt-in: no alert before the business confirms
+  created_at TEXT NOT NULL
 );`;
 
 const nowIso = () => new Date().toISOString().replace(/\.\d+Z$/, "Z");
@@ -52,6 +67,7 @@ export function d1Store(db) {
     async erase(org) {
       await db.batch([
         db.prepare("DELETE FROM businesses WHERE org_number = ?").bind(org),
+        db.prepare("DELETE FROM contacts WHERE org_number = ?").bind(org),
         db.prepare("UPDATE changes SET org_number = 'erased', personal = 1 WHERE org_number = ?").bind(org),
         db.prepare("INSERT INTO changes (at, org_number, action, reason, personal) VALUES (?, 'erased', 'erased', 'request', 1)").bind(nowIso()),
       ]);
@@ -64,6 +80,7 @@ export function d1Store(db) {
         db.prepare(`UPDATE changes SET org_number = 'erased' WHERE personal = 1 AND org_number IN (${gone})`).bind(contentBefore),
         db.prepare("DELETE FROM businesses WHERE status = 'removed' AND updated_at < ?1").bind(contentBefore),
         db.prepare("UPDATE changes SET org_number = 'erased' WHERE org_number != 'erased' AND at < ?1 AND org_number NOT IN (SELECT org_number FROM businesses)").bind(idBefore),
+        db.prepare("DELETE FROM contacts WHERE org_number NOT IN (SELECT org_number FROM businesses)"), // the alert address goes with the entry
       ]);
       return { entries: rows.meta?.changes ?? 0, ids: (personal.meta?.changes ?? 0) + (ids.meta?.changes ?? 0) };
     },
@@ -81,11 +98,29 @@ export function d1Store(db) {
     async withdrawRelease(period, reason, replacedBy) {
       await db.prepare("UPDATE releases SET withdrawn = ?, replaced_by = ? WHERE period = ? AND withdrawn IS NULL").bind(reason, replacedBy, period).run();
     },
+    async countLookups(domains, month, kind) {
+      if (!domains.length) return;
+      await db.batch(domains.map((d) => db.prepare("INSERT INTO lookups (domain, month, kind, n) VALUES (?, ?, ?, 1) ON CONFLICT(domain, month, kind) DO UPDATE SET n = n + 1").bind(d, month, kind)));
+    },
+    async lookups(domain, month) {
+      const rows = (await db.prepare("SELECT kind, n FROM lookups WHERE domain = ? AND month = ?").bind(domain, month).all()).results ?? [];
+      return Object.fromEntries(rows.map((r) => [r.kind, r.n]));
+    },
+    async saveContact(org, email, lang, token) {
+      await db.prepare("INSERT INTO contacts (org_number, email, lang, token, confirmed_at, created_at) VALUES (?1, ?2, ?3, ?4, NULL, ?5) ON CONFLICT(org_number) DO UPDATE SET email = ?2, lang = ?3, token = ?4, confirmed_at = NULL, created_at = ?5").bind(org, email, lang, token, nowIso()).run();
+    },
+    async contactByToken(token) { return db.prepare("SELECT * FROM contacts WHERE token = ?").bind(token).first(); },
+    async contactFor(org) { return db.prepare("SELECT * FROM contacts WHERE org_number = ? AND confirmed_at IS NOT NULL").bind(org).first(); },
+    async confirmContact(token) { await db.prepare("UPDATE contacts SET confirmed_at = ? WHERE token = ?").bind(nowIso(), token).run(); },
+    async deleteContact(org) { await db.prepare("DELETE FROM contacts WHERE org_number = ?").bind(org).run(); },
+    async confirmedContacts() { return (await db.prepare("SELECT * FROM contacts WHERE confirmed_at IS NOT NULL").all()).results ?? []; },
   };
 }
 
 export function memoryStore() {
   const businesses = new Map();
+  const counts = new Map();
+  const contacts = new Map();
   const log = [];
   const releases = new Map();
   return {
@@ -98,6 +133,7 @@ export function memoryStore() {
     },
     async erase(org) {
       businesses.delete(org);
+      contacts.delete(org);
       for (const c of log) if (c.org_number === org) Object.assign(c, { org_number: "erased", personal: 1 });
       log.push({ at: nowIso(), org_number: "erased", action: "erased", reason: "request", personal: 1 });
     },
@@ -110,6 +146,7 @@ export function memoryStore() {
         for (const c of log) if (c.personal && c.org_number === b.org_number) { c.org_number = "erased"; ids++; }
       }
       for (const c of log) if (c.org_number !== "erased" && c.at < idBefore && !businesses.has(c.org_number)) { c.org_number = "erased"; ids++; }
+      for (const org of [...contacts.keys()]) if (!businesses.has(org)) contacts.delete(org);
       return { entries, ids };
     },
     async listed() { return [...businesses.values()].filter((b) => b.status === "listed"); },
@@ -124,6 +161,16 @@ export function memoryStore() {
     async getRelease(period) { return releases.get(period) ?? null; },
     async saveRelease(r) { if (releases.has(r.period)) throw new Error("A release is never changed."); releases.set(r.period, { ...r }); },
     async withdrawRelease(period, reason, replacedBy) { const r = releases.get(period); if (r && !r.withdrawn) Object.assign(r, { withdrawn: reason, replaced_by: replacedBy }); },
+    async countLookups(domains, month, kind) { for (const d of domains) counts.set(`${d}|${month}|${kind}`, (counts.get(`${d}|${month}|${kind}`) ?? 0) + 1); },
+    async lookups(domain, month) {
+      return Object.fromEntries([...counts].filter(([k]) => k.startsWith(`${domain}|${month}|`)).map(([k, n]) => [k.split("|")[2], n]));
+    },
+    async saveContact(org, email, lang, token) { contacts.set(org, { org_number: org, email, lang, token, confirmed_at: null, created_at: nowIso() }); },
+    async contactByToken(token) { return [...contacts.values()].find((c) => c.token === token) ?? null; },
+    async contactFor(org) { const c = contacts.get(org); return c?.confirmed_at ? c : null; },
+    async confirmContact(token) { const c = [...contacts.values()].find((x) => x.token === token); if (c) c.confirmed_at = nowIso(); },
+    async deleteContact(org) { contacts.delete(org); },
+    async confirmedContacts() { return [...contacts.values()].filter((c) => c.confirmed_at); }
   };
 }
 

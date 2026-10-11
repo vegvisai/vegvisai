@@ -410,7 +410,9 @@
     "removed": "Fjernet.",
     "unknown": "Ikke meldt inn.",
     "rejected": "Ikke godkjent ennå."
-   }
+   },
+   "alertEmail": "E-post for varsler (valgfritt)",
+   "alertEmailHelp": "Vi sender bare beskjed hvis nettsiden slutter å være lesbar for AI, og en kort oversikt hver måned over hvor ofte bedriften ble slått opp. Du bekrefter adressen først, og kan når som helst slå det av. Adressen deles aldri og står ikke i den åpne indeksen."
   },
   "create": {
    "title": "Lag et AI-visittkort · VegvisAI",
@@ -608,5 +610,19 @@
   "SI": "Slovenia",
   "ES": "Spania",
   "SE": "Sverige"
+ },
+ "alerts": {
+  "confirmSubject": "Bekreft varsler fra VegvisAI for {domain}",
+  "confirmText": "Hei!\n\nNoen meldte inn {domain} i den åpne veiviseren VegvisAI og oppga denne adressen for varsler.\n\nBekreft at du vil ha varsler:\n{confirm}\n\nDa får du beskjed hvis nettsiden slutter å være lesbar for AI, og en kort oversikt hver måned over hvor ofte bedriften ble slått opp. Ingenting annet, og aldri reklame.\n\nVil du ikke ha det, gjør du ingenting. Da sletter vi adressen.\n\nVegvisAI\nhttps://vegvis.ai",
+  "alertSubject": "{domain} er tatt ut av VegvisAI",
+  "alertText": "Hei!\n\nVi sjekker alle bedrifter i veiviseren hver uke. I dag var {domain} ikke lenger i orden, og bedriften er tatt ut:\n\n{reason}\n\nNår det er rettet, kan du melde inn bedriften på nytt:\n{register}\n\nAI-sjekken viser hva som mangler:\n{check}\n\nVil du ikke ha flere varsler: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+  "monthSubject": "VegvisAI for {domain}: {month}",
+  "monthText": "Hei!\n\nSlik ble {domain} slått opp i den åpne veiviseren i {month}:\n\n- Funnet av AI-assistenter gjennom connectoren: {find}\n- Bedriftssiden lest av AI-assistenter og søkeroboter: {page_ai}\n- Bedriftssiden vist for andre besøkende: {page}\n\nTallene er omtrentlige. Robotene oppgir selv hvem de er, og vi lagrer ingen opplysninger om hvem som spurte.\n\nBedriftssiden: {entry}\nVil du ikke ha flere varsler: {stop}\n\nVegvisAI\nhttps://vegvis.ai",
+  "confirmed": "Takk! Varsler for {domain} er slått på.",
+  "stopped": "Varslene er slått av, og adressen er slettet.",
+  "unknownToken": "Lenken er ikke gyldig lenger.",
+  "emailInvalid": "E-postadressen ser ikke riktig ut. Påmeldingen er sendt uten varsler.",
+  "emailSent": "Vi har sendt en e-post. Bekreft adressen for å få varsler.",
+  "emailUnavailable": "Varsler på e-post er ikke slått på ennå. Påmeldingen er sendt uten varsler."
  }
 }

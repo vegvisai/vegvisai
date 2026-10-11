@@ -33,6 +33,12 @@
 <input id="url" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="{{attr:t.urlPlaceholder}}" required>
 <label for="orgnr" id="orgnr-label">{{t.labelNO}}</label>
 <input id="orgnr" type="text" placeholder="{{attr:t.placeholderNO}}">
+<!-- P54: alerts by email are hidden until email sending is switched on (Espen 2026-10-11). Remove «hidden» then. -->
+<div id="varselfelt" hidden>
+<label for="varsel">{{t.alertEmail}}</label>
+<input id="varsel" type="email" autocomplete="email" spellcheck="false">
+<p class="hjelp">{{t.alertEmailHelp}}</p>
+</div>
 <div class="samtykke">
 <input id="samtykke" type="checkbox" required>
 <label for="samtykke">{{t.consent}}</label>
@@ -88,13 +94,14 @@ $("skjema").addEventListener("submit", async (ev) => {
   $("status").textContent = P.sending;
   try {
     const res = await fetch("/api/meld-inn", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ url: $("url").value.trim(), country: land(), orgnr: $("orgnr").value, consent: $("samtykke").checked, lang: LANG }) });
+      body: JSON.stringify({ url: $("url").value.trim(), country: land(), orgnr: $("orgnr").value, consent: $("samtykke").checked, alert_email: $("varselfelt").hidden ? "" : $("varsel").value.trim(), lang: LANG }) });
     const r = await res.json();
     if (!res.ok) throw new Error(r.error || P.failed);
     const box = el("div", undefined, r.status === "rejected" ? "adv" : "ok");
     box.append(el("strong", P.status[r.status] || r.status));
     if (r.reasons.length) { const ul = el("ul"); for (const x of r.reasons) ul.append(el("li", x.text)); box.append(ul); }
     if (r.entry) box.append(el("p", `${r.entry.name} · ${r.entry.domain} · ${r.entry.org_number}`, "mut"));
+    if (r.alert) box.append(el("p", r.alert, "mut"));
     $("resultat").append(box);
     $("status").textContent = "";
   } catch (e) {

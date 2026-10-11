@@ -55,8 +55,10 @@ export async function register(request, env, { fetchFn = fetch } = {}) {
     await store.save(org, { domain: result.domain, status: "listed", entry: result.entry, consent: true }, "updated", "resubmitted");
     return json({ ...answer, status: "listed" });
   }
-  // A manual review keeps the first reason (domain_mismatch, domain_only), so the changelog says why.
-  const reason = result.status === "manual" ? result.reasons[0] ?? "manual" : body.source === "github" ? "pull_request" : "registered";
+  // A manual review keeps the first reason (domain_mismatch, domain_only), so the changelog says why, and the
+  // door it came through, so the review list shows it (a form registration or a GitHub pull request).
+  const door = body.source === "github" ? "pull_request" : "registered";
+  const reason = result.status === "manual" ? `${result.reasons[0] ?? "manual"}${door === "pull_request" ? " via pull_request" : ""}` : door;
   await store.save(org, { domain: result.domain, status: "pending", entry: result.entry, consent: true }, "submitted", reason);
   return json({ ...answer, status: "pending" });
 }
@@ -105,7 +107,12 @@ export async function pending(request, env) {
   const token = env?.ADMIN_TOKEN;
   if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
   const store = storeFor(env);
-  return json({ pending: (await store.byStatus("pending")).map((b) => ({ org_number: b.org_number, domain: b.domain, updated_at: b.updated_at, entry: b.entry })) });
+  const changes = await store.changes(1000);
+  const submitted = (org) => changes.find((c) => c.org_number === org && c.action === "submitted");
+  return json({ pending: (await store.byStatus("pending")).map((b) => {
+    const reason = submitted(b.org_number)?.reason ?? "";
+    return { org_number: b.org_number, domain: b.domain, updated_at: b.updated_at, door: reason.includes("pull_request") ? "pull_request" : "form", reason, entry: b.entry };
+  }) });
 }
 
 // Weekly re-check of every listed business, with the same checks as at registration.

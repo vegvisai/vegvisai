@@ -76,6 +76,9 @@ export function orgNumberFrom(o) {
 }
 
 const types = (o) => [].concat(o["@type"] ?? []).filter((t) => typeof t === "string");
+// Generic schema.org types say nothing about what a business offers, so they are not categories.
+const GENERIC = new Set(["thing", "organization", "localbusiness", "corporation", "onlinebusiness", "store", "place"]);
+const category = (t) => !GENERIC.has(String(t).toLowerCase());
 const names = (v) => [].concat(v ?? []).map((x) => (typeof x === "string" ? x : x?.name)).filter(Boolean);
 
 // The business object in the card: the first object with an organisation number, or the first business-like type.
@@ -165,7 +168,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
     url: origin + "/",
     card_url: card.cardUrl,
     description: sanitize(biz.description ?? "", 300),
-    categories: [...new Set([...types(biz), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
+    categories: [...new Set([...types(biz).filter(category), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
     area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
     postal_code: digits(a.postalCode).slice(0, 4) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
@@ -192,7 +195,7 @@ function cardEntry(biz, card, origin, domain) {
     url: origin + "/",
     card_url: card.cardUrl,
     description: sanitize(biz.description ?? "", 300),
-    categories: [...new Set([...types(biz), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
+    categories: [...new Set([...types(biz).filter(category), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
     area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
     postal_code: sanitize(String(a.postalCode ?? ""), 12) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,

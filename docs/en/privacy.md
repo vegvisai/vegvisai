@@ -30,7 +30,7 @@ Anyone with the right to register a business can do it, for example a web agency
 
 ## Who else handles the data
 
-- **Cloudflare** runs the website, the AI check, the connector and the register as our processor. Data can be processed outside the EEA [placeholder: transfer basis].
+- **Cloudflare** runs the website, the AI check, the connector and the register as our processor, under [Cloudflare's data processing addendum](https://www.cloudflare.com/cloudflare-customer-dpa/), which applies to all customers. Data can be processed outside the EEA, including in the United States. The basis is Cloudflare's certification under the EU-U.S. Data Privacy Framework (GDPR art. 45), with the EU standard contractual clauses as a fallback if the certification lapses (art. 46).
 - **GitHub** hosts the code, the pull requests, «Find help» and the helper list under its own terms.
 - **Brønnøysundregistrene**, the EU's VAT register **VIES** and the UK's **Companies House** are asked about organisation, VAT and company numbers; we send only the number.
 

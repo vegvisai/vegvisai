@@ -39,7 +39,7 @@ function verifiedLine(e, t) {
 function card(e, t, prefix) {
   const site = safeUrl(e.url);
   const area = (e.area ?? []).join(", ");
-  const offers = (e.categories ?? []).slice(0, 8).join(", ");
+  const offers = (e.categories ?? []).slice(0, 8).join(" · ");
   return `<li><h2><a href="${prefix}${esc(e.domain)}/">${esc(e.name)}</a></h2>
 ${e.description ? `<p>${esc(e.description)}</p>` : ""}
 <p class="mut">${area ? `${esc(t.area)}: ${esc(area)}. ` : ""}${offers ? `${esc(t.offers)}: ${esc(offers)}.` : ""}</p>
@@ -56,7 +56,7 @@ function entryHtml(e, t, prefix) {
   const site = safeUrl(e.url);
   const request = safeUrl(e.request);
   const area = (e.area ?? []).join(", ");
-  const offers = (e.categories ?? []).join(", ");
+  const offers = (e.categories ?? []).join(" · ");
   // A sole proprietorship's number is not shown, as in the public changelog (it can point to a person).
   const org = (e.country ?? "NO") === "NO" && !e.sole_proprietorship && /^\d{9}$/.test(String(e.org_number ?? ""))
     ? `<p class="mut">${esc(t.orgNumber)}: ${esc(e.org_number)} (<a href="https://data.brreg.no/enhetsregisteret/oppslag/enheter/${esc(e.org_number)}" rel="noopener">${esc(t.inRegister)}</a>)</p>` : "";

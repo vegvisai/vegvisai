@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { verifyBusiness, orgNumberFrom, vatNumberFrom, companyNumberFrom } from "../src/registration.js";
 import { memoryStore, publicChangelog, openExport } from "../src/register.js";
-import { register, review, recheck, listedMatches } from "../src/innmelding.js";
+import { register, review, recheck, listedMatches, pending } from "../src/innmelding.js";
 
 const ROOT = "https://www.butikken.example.no";
 const ORG = "912345678";
@@ -241,4 +241,23 @@ test("instructions hidden in WebMCP tool descriptions on the card stop the regis
   const r = await verifyBusiness(ROOT, { consent: true, fetchFn: fakeFetch({ site: { "/ai/": bad } }) });
   assert.equal(r.status, "rejected");
   assert.deepEqual(r.reasons, ["injection"]);
+});
+
+test("generic schema.org types are not categories; offer names keep their commas", async () => {
+  const site = { "/ai/": card({ "@type": ["Bakery", "LocalBusiness"], makesOffer: [{ "@type": "Offer", itemOffered: { "@type": "Product", name: "Kake, 12 personer" } }] }) };
+  const r = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site }) });
+  assert.ok(r.entry.categories.includes("bakery"));
+  assert.ok(!r.entry.categories.includes("localbusiness"));
+  assert.ok(r.entry.categories.includes("kake, 12 personer"));
+});
+
+test("the review list shows the door a manual entry came through", async () => {
+  const store = memoryStore();
+  const env = { __store: store, ADMIN_TOKEN: "secret" };
+  const other = fakeFetch({ brreg: unit({ hjemmeside: "annen.example.no" }), site: { "/ai/": card({ url: "https://annen.example.no/" }) } });
+  const post = (body) => new Request("https://x.example/api/meld-inn", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) });
+  await register(post({ url: ROOT, orgnr: ORG, consent: true, source: "github" }), env, { fetchFn: other });
+  const { pending: list } = await (await pending(new Request("https://x.example/api/admin/pending", { headers: { Authorization: "Bearer secret" } }), env)).json();
+  assert.equal(list[0].door, "pull_request");
+  assert.equal(list[0].reason, "domain_mismatch via pull_request");
 });

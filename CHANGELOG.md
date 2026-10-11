@@ -2,6 +2,12 @@
 
 What changed in VegvisAI, newest first. The same list is on the website: [vegvis.ai/changelog/](https://vegvis.ai/changelog/) ([Norwegian](https://vegvis.ai/no/endringslogg/)). Changes to the register itself (businesses added or removed) are in the public register changelog at [/api/endringer](https://vegvis.ai/api/endringer).
 
+## Unreleased, 11 October 2026
+
+- Connector and register: generic schema.org types (LocalBusiness, Organization and the like) are no longer listed as offers, and offer names with commas stay whole.
+- Review list: shows whether an entry came through the form or a pull request.
+- Privacy: the basis for transfers outside the EEA by Cloudflare is stated (EU-U.S. Data Privacy Framework, with the EU standard contractual clauses as fallback).
+
 ## v1.2.0, 11 October 2026: easier to register, easier to find
 
 **The way back to the guide (10 October)**

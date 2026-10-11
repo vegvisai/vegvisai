@@ -241,7 +241,7 @@ async function findBusiness({ need, postal_code, country }, origin, context = {}
   // Businesses in the register: only what they publish themselves, with the date of verification.
   const real = (await listedMatches(context.env, need, cc)).map((e) =>
     [`${e.name}  [${VERIFIED[e.verification ?? "register"]} ${Object.values(e.verified ?? {})[0] ?? ""}]`, `Country: ${e.country ?? "NO"}`, `Business card: ${e.card_url}`,
-      e.description && `About: ${e.description}`, e.categories.length && `Offers: ${e.categories.slice(0, 10).join(", ")}`,
+      e.description && `About: ${e.description}`, e.categories.length && `Categories and offers: ${e.categories.slice(0, 10).join("; ")}`,
       e.area.length && `Area: ${e.area.join(", ")}`, e.request && `Request link (template): ${e.request}`].filter(Boolean).join("\n"));
   // No ranking: everyone who qualifies is shown in random order, new for every question.
   const out = [...test, ...real].map((t) => [Math.random(), t]).sort((x, y) => x[0] - y[0]).map(([, t]) => t);

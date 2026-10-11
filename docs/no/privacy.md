@@ -30,7 +30,7 @@ Alle som har rett til å melde inn en bedrift, kan gjøre det, for eksempel et n
 
 ## Hvem andre som håndterer dataene
 
-- **Cloudflare** driver nettstedet, AI-sjekken, connectoren og registeret som vår databehandler. Data kan behandles utenfor EØS [plassholder: overføringsgrunnlag].
+- **Cloudflare** driver nettstedet, AI-sjekken, connectoren og registeret som vår databehandler, etter [Cloudflares databehandleravtale](https://www.cloudflare.com/cloudflare-customer-dpa/), som gjelder for alle kunder. Data kan behandles utenfor EØS, blant annet i USA. Grunnlaget er at Cloudflare er sertifisert under EU-U.S. Data Privacy Framework (GDPR art. 45), med EUs standard personvernbestemmelser som reserve hvis sertifiseringen faller bort (art. 46).
 - **GitHub** har koden, pull requests, «Find help» og hjelperlisten etter egne vilkår.
 - **Brønnøysundregistrene**, EUs momsregister **VIES** og Storbritannias **Companies House** spørres om organisasjons-, moms- og foretaksnumre; vi sender bare nummeret.
 

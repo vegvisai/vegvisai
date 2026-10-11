@@ -280,3 +280,26 @@ test("an A2A agent card is listed with its skills, and its descriptions are scan
   const none = await aiCheck(ROOT, { pauseMs: 0, lang: "en", fetchFn: makeFetch(goodSite) });
   assert.equal(none.open.a2a, false);
 });
+
+test("a front page that redirects to another host is checked where it lands (www.altinn.no → info.altinn.no)", async () => {
+  const seen = [];
+  const fetchFn = async (url) => {
+    const u = new URL(url);
+    seen.push(u.host);
+    if (u.host === "www.etat.example.no") {
+      const r = await makeFetch({ "/": "<html><title>Etaten</title></html>" })("https://info.etat.example.no/");
+      Object.defineProperty(r, "url", { value: "https://info.etat.example.no/" });
+      return r;
+    }
+    const site = {
+      "/robots.txt": "User-agent: *\nAllow: /\nSitemap: https://info.etat.example.no/sitemap.xml\n",
+      "/sitemap.xml": "<urlset>" + ["", "a/", "b/", "c/"].map((p) => `<url><loc>https://info.etat.example.no/${p}</loc></url>`).join("") + "</urlset>",
+      "/": "<html lang=\"nb\"><title>Etaten</title><h1>Etaten</h1></html>", "/a/": "<html><title>A</title></html>", "/b/": "<html><title>B</title></html>", "/c/": "<html><title>C</title></html>",
+    };
+    return makeFetch(site)(url);
+  };
+  const r = await aiCheck("https://www.etat.example.no", { pauseMs: 0, fetchFn });
+  assert.equal(r.site, "https://info.etat.example.no");
+  assert.equal(r.redirected_from, "https://www.etat.example.no");
+  assert.ok(r.pages.length > 1, "samples come from the landing host");
+});

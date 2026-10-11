@@ -4,6 +4,8 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Public services index: Altinn split into 11 entries by topic (starting, legal form, registration, support schemes, employment, tax, accounting, the forms catalogue, help, and English), all pointing to info.altinn.no. 53 entries for state agencies and services in all.
+- AI check: a front page that redirects to another host is checked where it lands, and the report says so (found on www.altinn.no, which redirects to info.altinn.no).
 - Lookup counts per business and month: found through the connector, business page read by AI bots, business page viewed by others. Only counts, never who asked, and never shown in public.
 
 ## v1.2.1, 11 October 2026: small fixes and privacy

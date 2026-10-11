@@ -6,7 +6,7 @@ The open index of VegvisAI (ODbL 1.0, P20). It holds links and short description
 
 | File | What |
 | --- | --- |
-| `agencies-no.json` | 44 state agencies with topics, checked by hand 2026-10-02 |
+| `agencies-no.json` | 53 state agencies and services with topics, checked by hand 2026-10-02; Altinn split into 11 topic entries 2026-10-11 |
 | `municipality-websites-no.json` | Websites for 19 municipalities that have none in Enhetsregisteret, checked by hand |
 | `build_public_index.py` | Fetches all 357 municipalities from Enhetsregisteret (NLOD) and writes `../connector/public/index/public-no.json` |
 

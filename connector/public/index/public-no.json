@@ -3,7 +3,7 @@
  "licence": "ODbL-1.0",
  "licence_url": "https://opendatacommons.org/licenses/odbl/1-0/",
  "country": "NO",
- "updated": "2026-10-02",
+ "updated": "2026-10-11",
  "notice": "Unofficial listing, not made by the organisations. Links only: public services are free, are never ranked against businesses, and no payment passes through the index.",
  "sources": [
   {
@@ -116,23 +116,128 @@
   {
    "id": "altinn",
    "name": "Altinn",
-   "url": "https://www.altinn.no/",
+   "url": "https://info.altinn.no/",
    "topics": [
     "business",
     "general"
    ],
-   "what": "Digital forms and messages between people, businesses and the public sector",
+   "what": "Digital forms and messages between people, businesses and the public sector, with guidance from many agencies",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },
   {
    "id": "altinn-starte",
    "name": "Altinn: starte og drive bedrift",
-   "url": "https://www.altinn.no/starte-og-drive/",
+   "url": "https://info.altinn.no/starte-og-drive/",
    "topics": [
     "business"
    ],
-   "what": "Guidance on starting and running a business in Norway",
+   "what": "Guidance on starting and running a business in Norway, quality-assured across agencies",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-organisasjonsform",
+   "name": "Altinn: valg av organisasjonsform",
+   "url": "https://info.altinn.no/starte-og-drive/starte/valg-av-organisasjonsform/",
+   "topics": [
+    "business"
+   ],
+   "what": "Choosing a legal form: sole proprietorship (ENK), limited company (AS), partnership and others",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-registrering",
+   "name": "Altinn: registrering av bedrift",
+   "url": "https://info.altinn.no/starte-og-drive/starte/registrering/",
+   "topics": [
+    "business"
+   ],
+   "what": "How to register a new business in Enhetsregisteret and other registers",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-stotteordninger",
+   "name": "Altinn: støtteordninger",
+   "url": "https://info.altinn.no/starte-og-drive/stotteordninger/",
+   "topics": [
+    "business",
+    "finance"
+   ],
+   "what": "Public grants, loans and guarantees for businesses, from Innovasjon Norge and other agencies",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-arbeidsforhold",
+   "name": "Altinn: arbeidsforhold",
+   "url": "https://info.altinn.no/starte-og-drive/arbeidsforhold/",
+   "topics": [
+    "business",
+    "work"
+   ],
+   "what": "Employer duties: hiring, contracts, pay, sick leave, holidays and lay-offs",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-skatt",
+   "name": "Altinn: skatt og avgift for bedrifter",
+   "url": "https://info.altinn.no/starte-og-drive/skatt-og-avgift/",
+   "topics": [
+    "business",
+    "tax"
+   ],
+   "what": "Tax, VAT and duties for businesses",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-regnskap",
+   "name": "Altinn: regnskap og revisjon",
+   "url": "https://info.altinn.no/starte-og-drive/regnskap-og-revisjon/",
+   "topics": [
+    "business",
+    "finance"
+   ],
+   "what": "Bookkeeping, annual accounts and audit duties for businesses",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-skjema",
+   "name": "Altinn: skjemaoversikt",
+   "url": "https://info.altinn.no/skjemaoversikt/",
+   "topics": [
+    "business",
+    "general"
+   ],
+   "what": "Catalogue of digital forms and services from ministries, agencies, municipalities and county authorities",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-hjelp",
+   "name": "Altinn: hjelp",
+   "url": "https://info.altinn.no/hjelp/",
+   "topics": [
+    "general"
+   ],
+   "what": "Help with logging in, roles and access rights, and submitting forms in Altinn",
+   "level": "state",
+   "source": "VegvisAI, checked by hand"
+  },
+  {
+   "id": "altinn-en",
+   "name": "Altinn: start and run a business (English)",
+   "url": "https://info.altinn.no/en/start-and-run-business/",
+   "topics": [
+    "business",
+    "immigration"
+   ],
+   "what": "Guidance in English on starting and running a business in Norway",
    "level": "state",
    "source": "VegvisAI, checked by hand"
   },

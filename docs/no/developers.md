@@ -58,7 +58,7 @@ En MCP-server som bare leser, med Streamable HTTP. Ingen registrering, ingen nø
 | `find_business` | `need`, `postal_code` | Finner innmeldte bedrifter for et behov, i tilfeldig rekkefølge. Testversjonen har også to oppdiktede eksempler: et bakeri og et gjestehus |
 | `find_political_party` | `name` (valgfri) | Lenker til norske partiers egne sider og partiprogram, alfabetisk og aldri rangert. Listen er ikke komplett ennå |
 | `check_business` | `org_number` eller `name` | Slår opp en norsk bedrift i det offentlige registeret (Brønnøysund) |
-| `find_public_help` | `topic` (f.eks. consumer, health, tax, all) og/eller `municipality` | Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 44 statlige etater og alle 357 kommuner |
+| `find_public_help` | `topic` (f.eks. consumer, health, tax, all) og/eller `municipality` | Lenker til gratis offentlige tjenester i Norge fra den åpne indeksen: 53 oppføringer for statlige etater og tjenester, og alle 357 kommuner |
 | `ai_check` | `url`, valgfri `profile`: business, government, organisation | Sjekker hvordan en nettside ser ut for AI-assistenter, med målestokken som passer: bedrift, offentlig virksomhet eller organisasjon (NGO, parti, forening). Poengsum av 100, poeng per sjekk og forbedringer. Et nettsted som ikke svarer, får ingen poengsum |
 
 Legg den til i Claude som egendefinert connector, i ChatGPT i utviklermodus, eller i en hvilken som helst MCP-klient. Instruksjonene i connectoren ber agenten spørre om sted i stedet for å gjette, og svare på brukerens språk.

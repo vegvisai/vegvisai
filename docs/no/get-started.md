@@ -19,6 +19,7 @@ Nivå 0 · start her
 Ha dette klart. Kort og konkret er bedre enn langt og pent.
 
 - **Navn** og organisasjonsnummer
+Har du ikke organisasjonsnummer ennå? Altinn forklarer [valg av organisasjonsform](https://info.altinn.no/starte-og-drive/starte/valg-av-organisasjonsform/) og [registrering](https://info.altinn.no/starte-og-drive/starte/registrering/).
 - **Én setning** om hva du gjør
 - **Hva du tilbyr**, og like viktig, **hva du ikke tilbyr**. Da sender ikke AI-en deg feil kunder
 - **Område**: kommunene du betjener, om du kommer til kunden, og om du leverer

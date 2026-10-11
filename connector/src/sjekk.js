@@ -126,6 +126,7 @@ function checkTexts(lang) {
     sourceWebmcp: (url) => fill(c.sourceWebmcp, { url }),
     report: (r) => [
       fill(c.reportHead, { site: r.site, time: r.time }),
+      ...(r.redirected_from ? [fill(c.redirected, { from: r.redirected_from })] : []),
       r.score === null ? c.scoreNone : fill(c.score, { score: r.score }),
       fill(c.yardstick, { profile: c.profileName[r.profile], source: c.profileSource[r.profile_source] }),
       "",
@@ -403,11 +404,21 @@ function datedContent(objects, metaDate) {
 // publicHosts, partyHosts: host names (without www.) from the open index of public services and of parties.
 export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new Date(), pauseMs = PAUSE_MS, lang = "en", profile = "", publicHosts, partyHosts } = {}) {
   const t = T[language(lang)];
-  const start = safeAddress(address);
-  const root = start.origin;
+  let start = safeAddress(address);
   const get = makeFetcher(fetchFn, pauseMs);
+  // A front page that redirects to another host (www.altinn.no → info.altinn.no, found 2026-10-11) is checked
+  // where it lands, since that is what an AI reads; otherwise robots, sitemap and samples miss the real site.
+  const landing = await get(start.href);
+  let redirectedFrom = null;
+  if (landing.status === 200 && landing.url) {
+    try {
+      const to = safeAddress(landing.url);
+      if (to.host !== start.host) { redirectedFrom = start.origin; start = to; }
+    } catch { /* stay on the address given */ }
+  }
+  const root = start.origin;
   const pageCount = Math.max(1, Math.min(Number(pages) || 4, 6));
-  const r = { site: root, time: now.toISOString().replace(/\.\d+Z$/, "Z"), lang: language(lang) };
+  const r = { site: root, ...(redirectedFrom ? { redirected_from: redirectedFrom } : {}), time: now.toISOString().replace(/\.\d+Z$/, "Z"), lang: language(lang) };
   const injection = [];
   const scan = (source, text) => { for (const f of findInstructions(text, lang)) injection.push({ source, ...f }); };
 

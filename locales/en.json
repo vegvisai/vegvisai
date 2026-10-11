@@ -156,7 +156,8 @@
   "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
   "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
   "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}.",
-  "sourceAgentCard": "the agent card (A2A)"
+  "sourceAgentCard": "the agent card (A2A)",
+  "redirected": "Redirected from {from}, so the site it lands on is the one checked."
  },
  "check_errors": {
   "missing": "Enter a web address.",

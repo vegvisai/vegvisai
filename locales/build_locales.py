@@ -52,7 +52,7 @@ def merged(base, own):
 
 
 # The texts the check page script needs at run time, with English filling the gaps.
-CHECK_KEYS = ("profileName", "profileSource", "keyNames", "openNames", "checkNames", "yes", "no", "noActions",
+CHECK_KEYS = ("redirected", "profileName", "profileSource", "keyNames", "openNames", "checkNames", "yes", "no", "noActions",
               "notApplicable", "robotsLine", "robotsPresent", "robotsMissing", "botsNone")
 EU = ("AT", "BE", "BG", "CY", "CZ", "DE", "DK", "EE", "GR", "ES", "FI", "FR", "HR", "HU", "IE", "IT", "LT", "LU",
       "LV", "MT", "NL", "PL", "PT", "RO", "SE", "SI", "SK")

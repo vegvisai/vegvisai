@@ -18,7 +18,7 @@ VegvisAI is an open guide that helps AI assistants such as ChatGPT, Claude, Gemi
 | Owner | Owned and run privately by Espen Brathaug, Oslo, Norway. The aim is a neutral owner, such as a cooperative | [Ownership](ownership.md) |
 | Licences | Code Apache 2.0, the index ODbL 1.0 | [GitHub](https://github.com/vegvisai/vegvisai) |
 | Ranking | None. Everyone who qualifies is shown in random order; nothing can be bought | [How the guide chooses](how-we-choose.md) |
-| Public services in the index | 44 state agencies and all 357 Norwegian municipalities, links only | Enhetsregisteret (NLOD) and the agencies' own websites |
+| Public services in the index | 53 entries for state agencies and services, and all 357 Norwegian municipalities, links only | Enhetsregisteret (NLOD) and the agencies' own websites |
 | The AI check | Five yardsticks: business, public body, organisation, political party and news medium. Score out of 100 with the points for every check | [The AI check](https://vegvis.ai/check/) |
 | Tested with | Claude, Codex (OpenAI) and Gemini (Google) as agents | Connector tests 2026-10-01 and 2026-10-02 |
 

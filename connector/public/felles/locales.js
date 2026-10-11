@@ -132,7 +132,8 @@ export const LOCALES = {
    "robotsTraining": "robots.txt blocks AI training ({bots}). That can be a deliberate choice: AI assistants can still read and cite the site through their search bots.",
    "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
    "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}.",
-   "sourceAgentCard": "the agent card (A2A)"
+   "sourceAgentCard": "the agent card (A2A)",
+   "redirected": "Redirected from {from}, so the site it lands on is the one checked."
   },
   "check_errors": {
    "missing": "Enter a web address.",
@@ -443,7 +444,8 @@ export const LOCALES = {
    "robotsTraining": "robots.txt blokkerer AI-trening ({bots}). Det kan være et bevisst valg: AI-assistenter kan fortsatt lese og sitere nettstedet gjennom søkerobotene sine.",
    "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
    "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}.",
-   "sourceAgentCard": "agentkortet (A2A)"
+   "sourceAgentCard": "agentkortet (A2A)",
+   "redirected": "Videresendt fra {from}, så det er siden den lander på som er sjekket."
   },
   "check_errors": {
    "missing": "Oppgi en nettadresse.",

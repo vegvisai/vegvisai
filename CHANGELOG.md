@@ -2,7 +2,7 @@
 
 What changed in VegvisAI, newest first. The same list is on the website: [vegvis.ai/changelog/](https://vegvis.ai/changelog/) ([Norwegian](https://vegvis.ai/no/endringslogg/)). Changes to the register itself (businesses added or removed) are in the public register changelog at [/api/endringer](https://vegvis.ai/api/endringer).
 
-## Unreleased, 6 to 9 October 2026
+## v1.2.0, 11 October 2026: easier to register, easier to find
 
 **The way back to the guide (10 October)**
 - The generator adds one line to `llms.txt` and the field `guide_entry` to `ai-catalog.json` with the business's own page in the open guide (`/bedrifter/<domain>/`), which shows whether the business is registered and checked. Not in the business card or the snippet. On by default, with a checkbox to leave it out.
@@ -15,8 +15,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 - AI check: fewer false alarms for data exfiltration. «Send the customer to the right page» and «we do not ask for your email» no longer match; sending a customer's or user's data, the conversation, passwords or API keys still does.
 - AI check: the other WebPage subtypes (CollectionPage, ItemPage, ProfilePage, SearchResultsPage, MedicalWebPage) count as described content pages.
 
-
-**Registration made easier**
+**Registration made easier (7 October)**
 - One schema.org snippet in the head of the front page is enough to register. `llms.txt` and `ai-catalog.json` are optional extras.
 - Norwegian businesses: the organisation number may be typed in the form instead of placed in the card, when Enhetsregisteret lists the same website (new reason `org_not_on_card` otherwise).
 - The generator gives a paste-ready `head-snippet.html` first, with a note on each file saying whether it is needed.
@@ -26,8 +25,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 **Website**
 - English pages written for businesses in any country, and for businesses of every size.
 
-
-**Connector**
+**Connector (6 October)**
 - Version 1.5.1: the connector and the MCP registry entry describe a guide to businesses in any country, plus public services and parties in Norway.
 - All five tools declare `destructiveHint: false` and `idempotentHint: true` next to `readOnlyHint`, so agent directories can see they only read.
 

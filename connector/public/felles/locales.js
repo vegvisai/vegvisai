@@ -241,7 +241,8 @@ export const LOCALES = {
     "Saturday": "Saturday",
     "Sunday": "Sunday"
    },
-   "toolDescription": "Send a request to {name}. The form opens {name}'s own request page with these details filled in. Nothing is paid or booked here.",
+   "toolDescription": "Fill in a request to {name} on this page. The visitor checks it and clicks Send, which opens the request page of {name} with the details filled in. This tool sends, books and pays nothing.",
+   "toolFilled": "The request form is filled in. Ask the visitor to check it and click Send. Nothing has been sent.",
    "message": "Message",
    "messageDescription": "What the customer needs, in their own words",
    "guideEntry": "Entry in the open guide VegvisAI, which shows whether the business is registered and checked"
@@ -320,7 +321,9 @@ export const LOCALES = {
     "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
     "directory": "/bedrifter/",
     "contact": "/no/kontakt/",
-    "agent-mandate": "/no/guider/agenter-og-fullmakt/"
+    "agent-mandate": "/no/guider/agenter-og-fullmakt/",
+    "blog": "/no/blogg/",
+    "blog-helpers": "/no/blogg/gjor-kundene-ai-lesbare/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",
@@ -554,7 +557,8 @@ export const LOCALES = {
     "Saturday": "lørdag",
     "Sunday": "søndag"
    },
-   "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
+   "toolDescription": "Fyll ut en forespørsel til {name} på denne siden. Den besøkende sjekker den og trykker Send, som åpner forespørselssiden til {name} med opplysningene fylt inn. Verktøyet sender, bestiller og betaler ingenting.",
+   "toolFilled": "Forespørselsskjemaet er fylt ut. Be den besøkende sjekke det og trykke Send. Ingenting er sendt.",
    "message": "Melding",
    "messageDescription": "Hva kunden trenger, med egne ord",
    "guideEntry": "Oppføring i den åpne veiviseren VegvisAI, som viser om bedriften er meldt inn og sjekket"

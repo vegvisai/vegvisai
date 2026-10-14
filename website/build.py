@@ -27,7 +27,7 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
     "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/", "contact": "/contact/",
-    "directory": "/businesses/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
+    "directory": "/businesses/", "blog": "/blog/", "blog-helpers": "/blog/make-your-clients-ai-readable/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
     "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "agent-mandate": "/docs/agent-mandate/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
 DOCS = ["docs", "get-started", "add-to-website", "website", "files", "webmcp", "agent-checkout", "agent-payments", "agent-mandate", "mcp", "developers", "how-we-choose"]
@@ -64,6 +64,15 @@ def read(lang: str, name: str):
     return m.group(1), m.group(2), text[m.end():]
 
 
+MONTHS = {"no": ["januar", "februar", "mars", "april", "mai", "juni", "juli", "august", "september", "oktober", "november", "desember"],
+          "en": ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]}
+
+
+def nice_date(iso: str, lang: str) -> str:
+    y, m, d = (int(x) for x in iso.split("-"))
+    return f"{d}. {MONTHS['no'][m - 1]} {y}" if lang == "no" else f"{d} {MONTHS['en'][m - 1]} {y}"
+
+
 def lastmod(lang: str, name: str) -> str:
     """The last commit that touched the page's content file (today when it is not committed yet)."""
     f = CONTENT / lang / f"{name}.html"
@@ -77,6 +86,8 @@ ORG = {"@type": "Organization", "@id": SITE_URL + "/#org", "name": "VegvisAI", "
        "description": "Open guide that helps AI assistants find businesses, public services and parties. Never ranks; nothing can be bought.",
        "founder": {"@type": "Person", "name": "Espen Brathaug"}, "sameAs": [GITHUB]}
 SITE = {"@type": "WebSite", "@id": SITE_URL + "/#website", "name": "VegvisAI", "url": SITE_URL + "/", "publisher": {"@id": SITE_URL + "/#org"}}
+# Blog posts and the day they were published (the post files live in content/<lang>/<name>.html).
+BLOG = {"blog-helpers": "2026-10-11"}
 PAGE_TYPES = {"why": "AboutPage", "ownership": "AboutPage", "contact": "ContactPage"}
 DATASETS = [
     ("businesses-no", "VegvisAI open index: businesses", "Businesses that registered themselves in the open guide and chose the open licence on their own domain. Domain and organisation, company or VAT number checked. Never ranked."),
@@ -90,6 +101,9 @@ def structured_data(lang: str, name: str, title: str, description: str, modified
     page = {"@type": page_type or PAGE_TYPES.get(name, "WebPage"), "@id": url, "url": url, "name": title.split(" · ")[0],
             "description": description, "inLanguage": META[lang]["html_lang"], "dateModified": modified,
             "isPartOf": {"@id": SITE_URL + "/#website"}, "publisher": {"@id": SITE_URL + "/#org"}}
+    if name in BLOG:
+        page.update({"@type": "BlogPosting", "headline": page["name"], "datePublished": BLOG[name],
+                     "author": {"@type": "Person", "name": "Espen Brathaug"}, "image": f"{SITE_URL}/brand/{'og-no' if lang == 'no' else 'og'}.png"})
     graph = [page] + ([ORG, SITE] if name == "home" else [])
     if name == "developers":
         graph += [{"@type": "Dataset", "name": n, "description": d, "url": f"{SITE_URL}/index/{k}.json", "isAccessibleForFree": True,
@@ -126,11 +140,13 @@ def layout(lang: str, name: str, title: str, description: str, body: str) -> str
         f'<link rel="alternate" hreflang="{META[l]["html_lang"]}" href="{PAGES[name][l]}">'
         for l in LANGS if read(l, name))
     return shell(lang, title, description, body, alternates=alternates, others=others,
-                 head_extra=structured_data(lang, name, title, description, lastmod(lang, name)))
+                 head_extra=structured_data(lang, name, title, description, lastmod(lang, name)),
+                 url=SITE_URL + PAGES[name][lang], og_type="article" if name in BLOG else "website")
 
 
 def shell(lang: str, title: str, description: str, body: str, *, alternates: str = "", others: str = "",
-          head_extra: str = "", css: tuple = ("/styles.css",), icon: str = "/brand/favicon.svg", html_lang: str = "") -> str:
+          head_extra: str = "", css: tuple = ("/styles.css",), icon: str = "/brand/favicon.svg", html_lang: str = "",
+          url: str = "", og_type: str = "website") -> str:
     """The page frame shared by the website and the platform's tool pages (locales/build_locales.py)."""
     t = T[lang]
     home = PAGES["home"][lang]
@@ -144,6 +160,15 @@ def shell(lang: str, title: str, description: str, body: str, *, alternates: str
 <meta name="viewport" content="width=device-width, initial-scale=1">
 {robots}<title>{title}</title>
 <meta name="description" content="{description}">
+<meta property="og:type" content="{og_type}">
+<meta property="og:site_name" content="VegvisAI">
+<meta property="og:title" content="{title.split(" · ")[0]}">
+<meta property="og:description" content="{description}">
+{f'<meta property="og:url" content="{url}">' + chr(10) if url else ""}<meta property="og:image" content="{SITE_URL}/brand/{"og-no" if lang == "no" else "og"}.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="{"nb_NO" if lang == "no" else "en_GB"}">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="{icon}" type="image/svg+xml">
 {alternates}{head_extra}
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -161,6 +186,7 @@ def shell(lang: str, title: str, description: str, body: str, *, alternates: str
 <a href="{home}#how">{t['how']}</a>
 <a href="{PAGES['docs'][lang]}">{t['guides']}</a>
 <a href="{PAGES['directory'][lang]}">{t['businesses']}</a>
+{f'<a href="{PAGES["blog"][lang]}">{t["blog"]}</a>' + chr(10) if read(lang, "blog") else ""}
 <a href="{PAGES['why'][lang]}">{t['why']}</a>
 <a href="{PAGES['ownership'][lang]}">{t['owners']}</a>
 <a class="ghlink" href="{GITHUB}">{GH_ICON}{t['github']}</a>
@@ -194,6 +220,10 @@ def main() -> None:
             if not page:
                 continue
             title, description, body = page
+            if "{{POSTS}}" in body:
+                posts = sorted(((BLOG[n], n) for n in BLOG if read(lang, n)), reverse=True)
+                items = "".join(f'<li><a href="{PAGES[n][lang]}"><strong>{read(lang, n)[0].split(" · ")[0]}</strong></a><br><small style="color: var(--subtle)">{nice_date(d, lang)}</small><br>{read(lang, n)[1]}</li>' for d, n in posts)
+                body = body.replace("{{POSTS}}", f'<ul class="posts">{items}</ul>' if items else "")
             body = body.replace("{{TEST}}", TEST).replace("{{GITHUB}}", GITHUB).replace("{{MARK}}", mark())
             out = PUBLIC / path.strip("/") / "index.html" if path != "/" else PUBLIC / "index.html"
             out.parent.mkdir(parents=True, exist_ok=True)

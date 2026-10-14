@@ -22,7 +22,7 @@ Two small files that let agents and open guides find you.](files.md) [Experiment
 
 ### Let AI agents use your forms (WebMCP)
 
-Three attributes on the forms you already have.](https://vegvis.ai/docs/webmcp/) [Experimental
+A few lines of JavaScript next to the forms you already have.](https://vegvis.ai/docs/webmcp/) [Experimental
 
 ### Agents fill the cart, customers pay as today
 

@@ -295,7 +295,7 @@ export function readPage(html) {
   const hidden = [];
   for (const k of s.matchAll(/<!--([\s\S]*?)-->/g)) hidden.push(k[1]);
   for (const k of s.matchAll(/<([a-z0-9]+)\b[^>]*(?:\bhidden\b|display\s*:\s*none|visibility\s*:\s*hidden|font-size\s*:\s*0)[^>]*>([\s\S]*?)<\/\1>/gi)) hidden.push(k[2].replace(/<[^>]+>/g, " "));
-  // WebMCP (draft, Chrome origin trial): forms named as tools, and tools registered in inline scripts.
+  // WebMCP (draft): tools registered in inline scripts, and forms named as tools (Chrome trial only, out of the draft since 2026-10-08).
   // The descriptions are read by agents, so they are scanned for injection like the rest of the page.
   const webmcp = { tools: [], text: [] };
   for (const f of s.match(/<form\b[^>]*>/gi) || []) {
@@ -304,8 +304,11 @@ export function readPage(html) {
   }
   for (const k of s.matchAll(/\btoolparamdescription\s*=\s*("([^"]*)"|'([^']*)')/gi)) webmcp.text.push(decode(k[2] ?? k[3] ?? ""));
   const inline = [...s.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script>/gi)].map((k) => k[1]).join("\n");
-  for (const k of inline.matchAll(/modelContext\s*\??\.\s*registerTool\s*\(\s*\{[\s\S]{0,400}?\bname\s*:\s*["'`]([^"'`]{1,80})["'`]/g)) webmcp.tools.push(k[1]);
-  for (const k of inline.matchAll(/modelContext\s*\??\.\s*registerTool\s*\(\s*\{[\s\S]{0,800}?\bdescription\s*:\s*["'`]([^"'`]{1,500})["'`]/g)) webmcp.text.push(k[1]);
+  // Quoted strings may hold the other quote marks («the bakery's page»), so match up to the same mark.
+  for (const k of inline.matchAll(/modelContext\s*\??\.\s*registerTool\s*\(\s*\{[\s\S]{0,400}?\bname\s*:\s*(["'`])((?:\\.|(?!\1)[^\\]){1,80}?)\1/g)) webmcp.tools.push(k[2]);
+  // Every description in a script that registers tools (the tool's and its parameters'), since agents read them all.
+  for (const script of inline.split(/(?=modelContext\s*\??\.\s*registerTool)/).slice(1))
+    for (const k of script.matchAll(/\bdescription\s*:\s*(["'`])((?:\\.|(?!\1)[^\\]){1,500}?)\1/g)) webmcp.text.push(k[2]);
   return { title, description, robots, canonical, metaDate, lang, h1, links, feeds, jsonld, text, hidden: hidden.join(" "), webmcp: { tools: webmcp.tools, text: webmcp.text.filter(Boolean).join("\n") } };
 }
 

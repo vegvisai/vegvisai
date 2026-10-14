@@ -5,8 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What's new · VegvisAI</title>
 <meta name="description" content="Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VegvisAI">
+<meta property="og:title" content="What's new">
+<meta property="og:description" content="Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.">
+<meta property="og:url" content="https://vegvis.ai/changelog/">
+<meta property="og:image" content="https://vegvis.ai/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/changelog/", "url": "https://vegvis.ai/changelog/", "name": "What's new", "description": "Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.", "inLanguage": "en", "dateModified": "2026-10-11", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
+<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/changelog/", "url": "https://vegvis.ai/changelog/", "name": "What's new", "description": "Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.", "inLanguage": "en", "dateModified": "2026-10-14", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +42,8 @@
 <a href="/#how">How it works</a>
 <a href="/docs/">Guides</a>
 <a href="/businesses/">Businesses</a>
+<a href="/blog/">Blog</a>
+
 <a href="/why/">Background</a>
 <a href="/ownership/">Ownership</a>
 <a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
@@ -46,8 +58,23 @@
 <h1>What's new</h1>
 <p class="lead">Every change to the guide, the AI check, the generator and the open index, newest first. The code and its full history are open on <a href="https://github.com/vegvisai/vegvisai">GitHub</a>. Changes to the register itself (businesses added or removed) are in the <a href="/api/endringer">public register changelog</a>.</p>
 
+<h2>14 October 2026</h2>
+<ul>
+<li><strong>WebMCP guides, clearer about annotations:</strong> <code>consequentialHint</code> and <code>untrustedContentHint</code> are signals agents may follow, not guarantees. An order or booking still needs the customer's own confirmation, and a tool must never act on text others wrote.</li>
+<li><strong>Fixed:</strong> two links on <a href="/docs/get-started/">Get started</a> and <a href="/support/">Support</a> now go to the English registration page.</li>
+</ul>
+
+<h2>13 October 2026</h2>
+<ul>
+<li><strong>Generator: the WebMCP request form now works with ChatGPT.</strong> The form gets a tool registered in JavaScript, which the built-in browser in the ChatGPT desktop app uses. The tool only fills in the form, and the visitor still clicks Send. The old form attributes are gone, since ChatGPT never read them and the draft standard dropped them on 8 October.</li>
+<li><strong>WebMCP guides rewritten:</strong> <a href="/docs/webmcp/">the WebMCP guide</a> and <a href="/docs/agent-checkout/">agent checkout</a> now lead with JavaScript tools, show who supports WebMCP today (checked 13 October), and use the draft's annotations: <code>readOnlyHint</code>, <code>untrustedContentHint</code> and <code>consequentialHint</code>. New safety advice on iframes and on switching tools off with <code>Permissions-Policy</code>.</li>
+<li><strong>AI check:</strong> reads every description in a registered WebMCP tool, parameters included, and handles names and descriptions with apostrophes.</li>
+</ul>
+
 <h2>11 October 2026</h2>
 <ul>
+<li><strong>New blog:</strong> <a href="/blog/">thoughts, news and recipes</a>. First post: how consultants and web agencies make their clients readable for AI, for free.</li>
+<li><strong>Link previews:</strong> every page now shows a title, description and image when shared on LinkedIn and elsewhere.</li>
 <li><strong>Public services:</strong> Altinn is now 11 entries by topic, from choosing a legal form to support schemes and employer duties, so an AI can send people straight to the right page.</li>
 <li><strong>AI check:</strong> a site whose front page redirects to another address is now checked where it lands.</li>
 <li><strong>Lookup counts:</strong> we count, per business and month, how often it is found through the connector and how often its page in the guide is read by AI bots and others. Only numbers, never who asked, and never shown in public. They will go to the business itself when email alerts are switched on.</li>

@@ -3,8 +3,22 @@
 <h1>Nytt i VegvisAI</h1>
 <p class="lead">Alle endringer i veiviseren, AI-sjekken, generatoren og den åpne indeksen, nyeste først. Koden og hele historikken er åpen på <a href="{{GITHUB}}">GitHub</a>. Endringer i selve registeret (bedrifter som legges til eller fjernes) står i den <a href="/api/endringer">offentlige endringsloggen for registeret</a>.</p>
 
+<h2>14. oktober 2026</h2>
+<ul>
+<li><strong>WebMCP-guidene er tydeligere om annotasjoner:</strong> <code>consequentialHint</code> og <code>untrustedContentHint</code> er signaler agenter kan følge, ikke garantier. En bestilling eller booking må fortsatt bekreftes av kunden selv, og et verktøy må aldri handle på tekst andre har skrevet.</li>
+</ul>
+
+<h2>13. oktober 2026</h2>
+<ul>
+<li><strong>Generatoren: WebMCP-skjemaet virker nå med ChatGPT.</strong> Skjemaet får et verktøy registrert i JavaScript, som den innebygde nettleseren i ChatGPT-appen på desktop bruker. Verktøyet fyller bare ut skjemaet, og den besøkende trykker Send selv. De gamle skjema-attributtene er fjernet, siden ChatGPT aldri leste dem og utkastet til standarden droppet dem 8. oktober.</li>
+<li><strong>WebMCP-guidene er skrevet om:</strong> <a href="/no/guider/webmcp/">WebMCP-guiden</a> og <a href="/no/guider/agentkasse/">agentkassen</a> bygger nå på verktøy i JavaScript, viser hvem som støtter WebMCP i dag (sjekket 13. oktober), og bruker annotasjonene fra utkastet: <code>readOnlyHint</code>, <code>untrustedContentHint</code> og <code>consequentialHint</code>. Nye sikkerhetsråd om iframes og om å slå av verktøy med <code>Permissions-Policy</code>.</li>
+<li><strong>AI-sjekken:</strong> leser alle beskrivelser i et registrert WebMCP-verktøy, også parameterne, og håndterer navn og beskrivelser med apostrof.</li>
+</ul>
+
 <h2>11. oktober 2026</h2>
 <ul>
+<li><strong>Ny blogg:</strong> <a href="/no/blogg/">tanker, nyheter og oppskrifter</a>. Første innlegg: slik gjør konsulenter og webbyråer kundene sine AI-lesbare gratis.</li>
+<li><strong>Lenker deles med bilde:</strong> alle sider har forhåndsvisning for LinkedIn og andre steder.</li>
 <li><strong>Ny guide: når en agent skal handle for bedriften.</strong> Slik gir bedriften et system eller en AI-agent fullmakt med en systembruker i Altinn, og slik holder den kontrollen. <a href="/no/guider/agenter-og-fullmakt/">Les den</a>.</li>
 <li><strong>Offentlige tjenester:</strong> 28 etater har fått lenke til skjemaene sine i Altinn, så en AI kan sende folk rett til riktig skjema.</li>
 <li><strong>Kom i gang:</strong> lenker til Altinn om valg av organisasjonsform og registrering, for deg som ikke har organisasjonsnummer ennå.</li>

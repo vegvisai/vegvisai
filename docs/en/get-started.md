@@ -54,7 +54,7 @@ Run the [AI check](https://vegvis.ai/check/) on your site. A complete business c
 
 ## Step 5: Register in the open guide
 
-Register your business with the [registration form](https://vegvis.ai/meld-inn/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
+Register your business with the [registration form](https://vegvis.ai/register/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
 
 **Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper gives no advantage in the guide: the same rules apply whether you do it yourself or pay someone. Never give a helper your passwords; give them their own login and remove it afterwards.
 

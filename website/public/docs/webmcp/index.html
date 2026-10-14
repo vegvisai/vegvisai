@@ -4,9 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Let AI agents use your forms (WebMCP) · Guides · VegvisAI</title>
-<meta name="description" content="A recipe for WebMCP: three HTML attributes on the forms you already have, so a visitor's own AI agent can fill them in. Experimental, free, and the customer still confirms.">
+<meta name="description" content="A recipe for WebMCP: a few lines of JavaScript next to the form you already have, so a visitor's own AI agent can fill it in. Experimental, free, and the customer still clicks Send.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VegvisAI">
+<meta property="og:title" content="Let AI agents use your forms (WebMCP)">
+<meta property="og:description" content="A recipe for WebMCP: a few lines of JavaScript next to the form you already have, so a visitor's own AI agent can fill it in. Experimental, free, and the customer still clicks Send.">
+<meta property="og:url" content="https://vegvis.ai/docs/webmcp/">
+<meta property="og:image" content="https://vegvis.ai/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="/docs/webmcp/"><link rel="alternate" hreflang="nb" href="/no/guider/webmcp/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/docs/webmcp/", "url": "https://vegvis.ai/docs/webmcp/", "name": "Let AI agents use your forms (WebMCP)", "description": "A recipe for WebMCP: three HTML attributes on the forms you already have, so a visitor's own AI agent can fill them in. Experimental, free, and the customer still confirms.", "inLanguage": "en", "dateModified": "2026-10-10", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
+<link rel="alternate" hreflang="en" href="/docs/webmcp/"><link rel="alternate" hreflang="nb" href="/no/guider/webmcp/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/docs/webmcp/", "url": "https://vegvis.ai/docs/webmcp/", "name": "Let AI agents use your forms (WebMCP)", "description": "A recipe for WebMCP: a few lines of JavaScript next to the form you already have, so a visitor's own AI agent can fill it in. Experimental, free, and the customer still clicks Send.", "inLanguage": "en", "dateModified": "2026-10-14", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +42,8 @@
 <a href="/#how">How it works</a>
 <a href="/docs/">Guides</a>
 <a href="/businesses/">Businesses</a>
+<a href="/blog/">Blog</a>
+
 <a href="/why/">Background</a>
 <a href="/ownership/">Ownership</a>
 <a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
@@ -44,9 +56,25 @@
 <main id="main">
 <div class="wrap docs"><nav class="docnav" aria-label="Guides"><p class="eyebrow">Guides</p><ul><li><a href="/docs/">Overview</a></li><li><a href="/docs/get-started/">Get started</a></li><li><a href="/docs/add-to-your-website/">Add the snippet to your website</a></li><li><a href="/docs/ai-readable-website/">AI-readable website</a></li><li><a href="/docs/ai-files/">llms.txt and ai-catalog.json</a></li><li><a href="/docs/webmcp/" aria-current="page">Let AI agents use your forms (WebMCP)</a></li><li><a href="/docs/agent-checkout/">Agents fill the cart, customers pay as today</a></li><li><a href="/docs/agent-payments/">Paying through AI agents: what exists and what is coming</a></li><li><a href="/docs/mcp/">Your own AI service (MCP)</a></li><li><a href="/docs/developers/">For developers</a></li><li><a href="/docs/how-we-choose/">How the guide chooses results</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code and templates on GitHub</a></p></nav><article class="prose"><p class="eyebrow">Experimental · after level 1</p>
 <h1>Let AI agents use your forms (WebMCP)</h1>
-<p class="lead">WebMCP lets a visitor's own AI agent in the browser use the forms on your website: ask for a quote, book a table, send an enquiry. You add a few attributes to the forms you already have. The customer stays on your page and confirms the last step themselves.</p>
+<p class="lead">WebMCP lets a visitor's own AI agent in the browser use the forms on your website: ask for a quote, book a table, send an enquiry. You register a tool in a few lines of JavaScript next to the form you already have. The customer stays on your page and clicks Send themselves.</p>
 
-<div class="note"><p><strong>Experimental.</strong> WebMCP is a draft from the W3C Web Machine Learning Community Group, tested in Chrome as an origin trial, and it can still change (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>, <a href="https://webmachinelearning.github.io/webmcp/">draft</a>, checked 5 October 2026). Browsers that do not know it ignore the attributes, so adding them costs nothing.</p></div>
+<div class="note"><p><strong>Experimental.</strong> WebMCP is a draft from the W3C Web Machine Learning Community Group, not a W3C standard, and it can still change (<a href="https://webmachinelearning.github.io/webmcp/">draft</a>, checked 13 October 2026). Browsers and assistants that do not know it just show your normal page, so adding it costs nothing. VegvisAI is not affiliated with OpenAI, Google, Anthropic or the W3C.</p></div>
+
+<h2>Who uses it today</h2>
+<p>Checked 13 October 2026, in alphabetical order. This changes quickly.</p>
+<table>
+<thead><tr><th>Where</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>ChatGPT</td><td>The built-in browser in the ChatGPT desktop app uses tools registered in JavaScript, since August 2026. It does not read form attributes or tools inside iframes (<a href="https://learn.chatgpt.com/docs/webmcp">OpenAI</a>).</td></tr>
+<tr><td>Chrome</td><td>Origin trial in Chrome 149 to 156, or the flag <code>chrome://flags/#enable-webmcp-testing</code>. Not in normal Chrome yet (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>).</td></tr>
+<tr><td>Claude</td><td>No support announced.</td></tr>
+<tr><td>Edge</td><td>Origin trial from Edge 150.</td></tr>
+<tr><td>Firefox</td><td>Mozilla is neutral. No support.</td></tr>
+<tr><td>Gemini</td><td>Google has said Gemini in Chrome will support it. Not available yet as far as we can see.</td></tr>
+<tr><td>Safari</td><td>The WebKit team opposes the draft, citing security, privacy and user consent.</td></tr>
+</tbody>
+</table>
+<p>So today WebMCP mostly helps visitors who use the ChatGPT desktop app. An AI-readable page (level 0 and 1) works with every assistant.</p>
 
 <h2>When it pays off</h2>
 <ul>
@@ -54,45 +82,77 @@
 <li>Customers ask for something that needs a few details: date, number of people, size, address</li>
 <li>You want the request to arrive on your own website, not through a middleman</li>
 </ul>
-<p>If you have no form yet, start with an action link in your AI business card. That works with every assistant today.</p>
+<p>If you have no form yet, start with an action link in your AI business card. That works with every assistant today. The <a href="/create/">generator</a> can also make a request form with a WebMCP tool for you.</p>
 
-<h2>Step 1: three attributes on a form you already have</h2>
-<p>Name the form as a tool, describe what it does, and describe each field. The browser turns this into a tool the agent can see.</p>
-<pre><code>&lt;form action="/bestill/" method="post"
-      toolname="request_cake_order"
-      tooldescription="Ask Eksempel Bakeri for a cake order. The bakery answers by email within one working day. Nothing is paid here."&gt;
-  &lt;label&gt;Cake &lt;input name="cake" required
-         toolparamdescription="Type of cake, for example birthday cake or gluten-free chocolate cake"&gt;&lt;/label&gt;
-  &lt;label&gt;People &lt;input name="people" type="number" min="1"
-         toolparamdescription="Number of people the cake is for"&gt;&lt;/label&gt;
-  &lt;label&gt;Date &lt;input name="date" type="date" required
-         toolparamdescription="The day the customer wants to pick up the cake"&gt;&lt;/label&gt;
-  &lt;label&gt;Email &lt;input name="email" type="email" required
-         toolparamdescription="Where the bakery should send its answer"&gt;&lt;/label&gt;
+<h2>Step 1: a tool that fills in your form</h2>
+<p>Keep the form you have. Add a script on the same page (not inside an iframe) that registers a tool. The tool only fills in the fields. The customer checks them and clicks Send.</p>
+<pre><code>&lt;form id="cake-order" action="/order/" method="post"&gt;
+  &lt;label&gt;Cake &lt;input name="cake" required&gt;&lt;/label&gt;
+  &lt;label&gt;People &lt;input name="people" type="number" min="1"&gt;&lt;/label&gt;
+  &lt;label&gt;Date &lt;input name="date" type="date" required&gt;&lt;/label&gt;
+  &lt;label&gt;Email &lt;input name="email" type="email" required&gt;&lt;/label&gt;
   &lt;button&gt;Send request&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p><strong>Leave out <code>toolautosubmit</code>.</strong> Then the agent fills in the form and the customer clicks Send. That keeps the customer in control and you out of trouble.</p>
+&lt;/form&gt;
+&lt;script&gt;
+if (typeof document.modelContext?.registerTool === "function") {
+  document.modelContext.registerTool({
+    name: "request_cake_order",
+    description: "Fill in a cake order request to Eksempel Bakeri. The customer checks it and clicks Send. Nothing is paid here.",
+    inputSchema: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        cake: { type: "string", description: "Type of cake, for example birthday cake or gluten-free chocolate cake" },
+        people: { type: "integer", minimum: 1, description: "Number of people the cake is for" },
+        date: { type: "string", format: "date", description: "The day the customer wants to pick up the cake" },
+        email: { type: "string", format: "email", description: "Where the bakery should send its answer" },
+      },
+      required: ["cake", "date"],
+    },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute(input) {
+      const form = document.getElementById("cake-order");
+      for (const k of ["cake", "people", "date", "email"]) // only the fields you declared
+        if (input[k] != null) form.elements.namedItem(k).value = String(input[k]).slice(0, 200);
+      form.scrollIntoView({ block: "center" });
+      return "The form is filled in. Ask the customer to check it and click Send.";
+    },
+  });
+}
+&lt;/script&gt;</code></pre>
+<p><strong>Let the customer click Send.</strong> Do not call <code>submit()</code> from the tool. That keeps the customer in control and you out of trouble.</p>
 
-<h2>Step 2 (optional): a read-only tool in JavaScript</h2>
-<p>For things a form does not cover, such as checking free times, register a tool in JavaScript. Keep it read-only.</p>
-<pre><code>const mc = document.modelContext || navigator.modelContext; // older Chrome used navigator
-if (mc) {
-  mc.registerTool({
+<h2>Step 2 (optional): a read-only tool</h2>
+<p>For things a form does not cover, such as checking free times, register a read-only tool and say so in <code>annotations</code>.</p>
+<pre><code>const controller = new AbortController();
+if (typeof document.modelContext?.registerTool === "function") {
+  document.modelContext.registerTool({
     name: "free_pickup_days",
     description: "Lists the next days with free capacity for cake orders. Read-only.",
     inputSchema: { type: "object", properties: {} },
+    annotations: { readOnlyHint: true },
     async execute() {
       const r = await fetch("/api/free-days");
       return await r.json();
     },
-  });
+  }, { signal: controller.signal }); // controller.abort() removes the tool again
 }</code></pre>
+<p>Annotations tell the agent what kind of tool it is. They are hints that agents may use or ignore, so check everything on your server anyway.</p>
+<ul>
+<li><code>readOnlyHint: true</code>: the tool only reads and changes nothing.</li>
+<li><code>untrustedContentHint: true</code>: the result contains text others wrote, such as reviews or customer messages, and should be treated as data, never as instructions.</li>
+<li><code>consequentialHint: true</code>: the tool does something significant or hard to undo, such as placing an order or booking. Agents can use it to ask the customer first, but nothing guarantees that they do.</li>
+</ul>
+<p>Older Chrome builds used <code>navigator.modelContext</code>. The draft now uses <code>document.modelContext</code> only.</p>
+
+<h2>Form attributes (optional extra)</h2>
+<p>Chrome's trial also lets you name a form as a tool with the HTML attributes <code>toolname</code>, <code>tooldescription</code> and <code>toolparamdescription</code>. They were taken out of the draft on 8 October 2026 while they are explored further, and ChatGPT does not read them. They do no harm, but do not rely on them. If you use them as well as a script, give the two tools different names.</p>
 
 <h2>Test it</h2>
 <ol>
-<li>Open your page in Chrome with <code>chrome://flags/#enable-webmcp-testing</code> turned on (or join the origin trial).</li>
-<li>Install the <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a> and check that your tools and descriptions show up.</li>
-<li>Run the <a href="/check/">AI check</a>: it lists the WebMCP tools it finds under «open for AI» and checks their descriptions for hidden instructions.</li>
+<li><strong>ChatGPT desktop:</strong> open your page in the app's built-in browser and choose «Site tools» in the address bar to see your tools. Then ask ChatGPT to fill in the form.</li>
+<li><strong>Chrome:</strong> turn on <code>chrome://flags/#enable-webmcp-testing</code> and install the <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a>. It lists your tools. Calling them from the inspector needs your own Gemini API key.</li>
+<li>Run the <a href="/check/">AI check</a>: it lists the WebMCP tools it finds under «open for AI» and checks every description for hidden instructions.</li>
 </ol>
 
 <h2>Keep it safe</h2>
@@ -101,7 +161,9 @@ if (mc) {
 <li><strong>The customer's login is the access.</strong> Tools run with the visitor's own session, so check permissions on your server exactly as you do for the normal form.</li>
 <li><strong>Payments and orders stay with the customer.</strong> Let them confirm on your page. No tool should pay, sign or delete without a click from the customer.</li>
 <li><strong>Return only what the visitor may see,</strong> and no personal data about others.</li>
-<li><strong>Ask only for what you need.</strong> A form that sends with <code>method="get"</code> puts the details in the web address, where they can end up in logs and browser history. Never ask for health information, national identity numbers or card details in such a form.</li>
+<li><strong>Mark text others wrote.</strong> A tool that returns reviews, messages or other text you do not control gets <code>untrustedContentHint: true</code>, so agents that follow the hint can treat a hidden instruction in a review as data. The hint is not protection in itself: how it is handled depends on the agent, so never let a tool act on what such text says.</li>
+<li><strong>Keep tools off pages that should have none.</strong> Admin and login pages can switch WebMCP off with the header <code>Permissions-Policy: tools=()</code>. Tools inside an iframe, such as a booking widget from another company, are not seen by ChatGPT.</li>
+<li><strong>Ask only for what you need.</strong> A form that sends with <code>method="get"</code> puts the details in the web address, where they can end up in logs and browser history. Never ask for health information, national identity numbers or card details in such a form. Tell the customer in your privacy policy what you do with the details.</li>
 <li><strong>Orders with payment follow the usual rules for online sales.</strong> If a tool places an order the customer must pay for, the customer must get the required information first, the order button must say clearly that the order means paying, and the right of withdrawal applies where it normally does.</li>
 </ul>
 

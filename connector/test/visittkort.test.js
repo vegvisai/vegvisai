@@ -107,12 +107,16 @@ test("the generated ai-catalog.json is valid by the AI Catalog specification", a
 });
 
 test("with WebMCP ticked, the card gets a request form agents can fill in, and still scores 100", async () => {
-  assert.ok(!makeFiles(FORM).files["index.html"].includes("toolname"), "off by default");
+  assert.ok(!makeFiles(FORM).files["index.html"].includes("registerTool"), "off by default");
   const { files } = makeFiles({ ...FORM, webmcp: true }, { lang: "nb" });
   const html = files["index.html"];
-  assert.match(html, /<form action="https:\/\/bakeri\.eksempel\.no\/bestill" method="get" toolname="send_request" tooldescription="Send en forespørsel til Eksempel Bakeri AS\./);
-  assert.match(html, /<input name="onsket_dato" toolparamdescription="Ønsket dato">/);
-  assert.ok(!html.includes("toolautosubmit"), "the visitor clicks Send");
+  assert.match(html, /<form id="send-request" action="https:\/\/bakeri\.eksempel\.no\/bestill" method="get">/);
+  assert.match(html, /<input name="onsket_dato" maxlength="300">/);
+  assert.match(html, /document\.modelContext\.registerTool\(\{\n    name: "send_request",\n    description: "Fyll ut en forespørsel til Eksempel Bakeri AS/);
+  assert.match(html, /onsket_dato: \{ type: "string", maxLength: 300, description: "Ønsket dato" \}/);
+  assert.match(html, /additionalProperties: false/);
+  assert.match(html, /consequentialHint: false/);
+  assert.ok(!/toolname|toolautosubmit|\.submit\(|requestSubmit/.test(html), "only fills in; the visitor clicks Send");
   const site = {
     "/robots.txt": "User-agent: *\nAllow: /\nSitemap: https://bakeri.eksempel.no/sitemap.xml\n",
     "/sitemap.xml": "<urlset><url><loc>https://bakeri.eksempel.no/</loc><lastmod>2026-10-01</lastmod></url></urlset>",
@@ -123,6 +127,32 @@ test("with WebMCP ticked, the card gets a request form agents can fill in, and s
   assert.equal(r.score, 100, JSON.stringify(r.actions));
   assert.deepEqual(r.open.webmcp, ["send_request"]);
   assert.deepEqual(r.injection, []);
+});
+
+test("the WebMCP tool only fills in the form: run against a stand-in document.modelContext", async () => {
+  const html = makeFiles({ ...FORM, webmcp: true }, { lang: "nb" }).files["index.html"];
+  const script = /<script>\n(\/\/ WebMCP[\s\S]*?)<\/script>/.exec(html)[1];
+  const tools = [];
+  const values = {}, calls = [];
+  const form = {
+    elements: { namedItem: (k) => (k === "onsket_dato" || k === "message" ? { set value(v) { values[k] = v; } } : null) },
+    scrollIntoView: () => calls.push("scroll"), submit: () => calls.push("submit"), requestSubmit: () => calls.push("submit"),
+  };
+  const document = { modelContext: { registerTool: (t) => tools.push(t) }, getElementById: (id) => (id === "send-request" ? form : null) };
+  new Function("document", script)(document);
+  assert.equal(tools.length, 1);
+  const [tool] = tools;
+  assert.equal(tool.name, "send_request");
+  assert.deepEqual(tool.annotations, { readOnlyHint: false, untrustedContentHint: false, consequentialHint: false });
+  assert.equal(tool.inputSchema.additionalProperties, false);
+  const out = await tool.execute({ onsket_dato: "2026-10-20".padEnd(400, "x"), message: "Bursdagskake til 12", ukjent: "ignored", 0: "ignored" });
+  assert.deepEqual(values, { onsket_dato: "2026-10-20".padEnd(300, "x"), message: "Bursdagskake til 12" }, "only declared fields, cut to their length");
+  values.onsket_dato = undefined;
+  await tool.execute({ onsket_dato: 42 });
+  assert.equal(values.onsket_dato, undefined, "only text");
+  assert.ok(calls.length && calls.every((c) => c === "scroll"), "never submits");
+  assert.match(out, /Ingenting er sendt/);
+  new Function("document", script)({}); // browsers without WebMCP: nothing happens, no error
 });
 
 test("no WebMCP form without a request page, even when ticked", () => {

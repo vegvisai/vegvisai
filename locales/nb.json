@@ -26,7 +26,9 @@
    "add-to-website": "/no/guider/legg-til-pa-nettsiden/",
    "directory": "/bedrifter/",
    "contact": "/no/kontakt/",
-   "agent-mandate": "/no/guider/agenter-og-fullmakt/"
+   "agent-mandate": "/no/guider/agenter-og-fullmakt/",
+   "blog": "/no/blogg/",
+   "blog-helpers": "/no/blogg/gjor-kundene-ai-lesbare/"
   },
   "check_path": "/sjekk/",
   "register_path": "/meld-inn/",
@@ -59,7 +61,8 @@
   "businesses": "Bedrifter",
   "about_link": "Om oss",
   "contact_link": "Kontakt",
-  "work_link": "Hva vi gjør"
+  "work_link": "Hva vi gjør",
+  "blog": "Blogg"
  },
  "check": {
   "robots": "AI-assistenter kan ikke lese eller sitere nettstedet når noen spør: robots.txt blokkerer {bots}, som henter sider på vegne av brukere. Åpne robots.txt for dem. Er blokkeringen et bevisst valg, er dette prisen.",
@@ -287,7 +290,8 @@
    "Saturday": "lørdag",
    "Sunday": "søndag"
   },
-  "toolDescription": "Send en forespørsel til {name}. Skjemaet åpner forespørselssiden til {name} med disse opplysningene fylt inn. Ingenting betales eller bestilles her.",
+  "toolDescription": "Fyll ut en forespørsel til {name} på denne siden. Den besøkende sjekker den og trykker Send, som åpner forespørselssiden til {name} med opplysningene fylt inn. Verktøyet sender, bestiller og betaler ingenting.",
+  "toolFilled": "Forespørselsskjemaet er fylt ut. Be den besøkende sjekke det og trykke Send. Ingenting er sendt.",
   "message": "Melding",
   "messageDescription": "Hva kunden trenger, med egne ord",
   "guideEntry": "Oppføring i den åpne veiviseren VegvisAI, som viser om bedriften er meldt inn og sjekket"
@@ -547,7 +551,7 @@
    "licenceHelp": "Under de åpne lisensene <a href=\"https://opendatacommons.org/licenses/odbl/1-0/\">ODbL</a> (indeksen) og <a href=\"https://opendatacommons.org/licenses/dbcl/1-0/\">DbCL</a> (oppføringen deres), så andre åpne veivisere også kan bruke det. Valget skrives inn i ai-catalog.json på deres egen nettside; bare dere kan gi eller fjerne det. Kopier andre allerede har lastet ned, kan ikke trekkes tilbake. Uten det blir dere fortsatt funnet i VegvisAI-veiviseren, men ikke i den åpne eksporten.",
    "webmcpH": "AI-agenter (eksperimentelt)",
    "webmcp": "Legg til et forespørselsskjema som AI-agenter kan fylle ut (WebMCP)",
-   "webmcpHelp": "Krever forespørselssiden over. Den besøkendes egen AI-agent fyller ut skjemaet, og den besøkende trykker Send, som åpner forespørselssiden deres med opplysningene i adressen. Be bare om det du trenger: opplysningene sendes i nettadressen, så be aldri om helseopplysninger, fødselsnummer eller kortopplysninger. WebMCP er et eksperiment i Chrome og kan endre seg; se <a href=\"/no/guider/webmcp/\">guiden</a>. Nettlesere som ikke kjenner det, ignorerer attributtene.",
+   "webmcpHelp": "Krever forespørselssiden over. Den besøkendes egen AI-agent fyller ut skjemaet, og den besøkende trykker Send, som åpner forespørselssiden deres med opplysningene i adressen. Be bare om det du trenger: opplysningene sendes i nettadressen, så be aldri om helseopplysninger, fødselsnummer eller kortopplysninger. WebMCP er et utkast og kan endre seg. I dag virker det i den innebygde nettleseren i ChatGPT-appen på desktop og i Chrome sin prøveordning. Se <a href=\"/no/guider/webmcp/\">guiden</a>. Nettlesere som ikke kjenner det, viser bare et vanlig skjema.",
    "noteSnippet": "Minimum. Lim inn i head på forsiden. Inneholder schema.org-beskrivelsen av bedriften.",
    "noteCard": "Valgfritt. En egen visittkortside med samme beskrivelse, som forside eller for eksempel /ai/.",
    "noteLlms": "Valgfritt. En kort oversikt for språkmodeller, i roten av nettsiden (/llms.txt).",

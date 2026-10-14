@@ -26,8 +26,11 @@ const cardText = (lang) => { const c = dict(lang, "card"); return { ...c, prices
 const FOLD = { æ: "ae", ø: "o", å: "a", ä: "a", ö: "o", ü: "u", ß: "ss", é: "e", è: "e" };
 const fieldName = (s) => s.toLowerCase().replace(/[æøåäöüßéè]/g, (c) => FOLD[c]).replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "").slice(0, 30) || "detail";
 
-// The WebMCP request form: a GET form to the business's own request page. No toolautosubmit, so the
-// visitor clicks Send. Only made when the business ticks the box and has a request page.
+// The WebMCP request form: a plain GET form to the business's own request page, and a tool registered
+// with document.modelContext.registerTool() that only fills it in. The visitor checks it and clicks Send.
+// Imperative only: the draft dropped the form attributes on 2026-10-08, and ChatGPT never read them.
+// Only made when the business ticks the box and has a request page.
+const js = (s) => JSON.stringify(String(s)).replace(/</g, "\\u003c");
 function requestForm(d, t) {
   if (!d.webmcp || !d.contactPage) return "";
   const used = new Set(["message"]);
@@ -35,14 +38,37 @@ function requestForm(d, t) {
     let n = fieldName(info), i = 2;
     while (used.has(n)) n = `${fieldName(info).slice(0, 27)}_${i++}`;
     used.add(n);
-    return `<p><label>${esc(info)} <input name="${n}" toolparamdescription="${esc(info)}"></label></p>`;
+    return { name: n, info };
   });
+  const props = [...fields.map((x) => `      ${x.name}: { type: "string", maxLength: 300, description: ${js(x.info)} },`),
+    `      message: { type: "string", maxLength: 1000, description: ${js(t.messageDescription)} },`];
   return [
-    `<form action="${esc(d.contactPage)}" method="get" toolname="send_request" tooldescription="${esc(t.toolDescription(d.name))}">`,
-    ...fields,
-    `<p><label>${t.message} <textarea name="message" toolparamdescription="${esc(t.messageDescription)}"></textarea></label></p>`,
+    `<form id="send-request" action="${esc(d.contactPage)}" method="get">`,
+    ...fields.map((x) => `<p><label>${esc(x.info)} <input name="${x.name}" maxlength="300"></label></p>`),
+    `<p><label>${t.message} <textarea name="message" maxlength="1000"></textarea></label></p>`,
     `<p><button type="submit">${t.send}</button></p>`,
     `</form>`,
+    `<script>`,
+    `// WebMCP (experimental): the visitor's own AI agent may fill in the form above. It never sends it.`,
+    `if (typeof document.modelContext?.registerTool === "function") {`,
+    `  document.modelContext.registerTool({`,
+    `    name: "send_request",`,
+    `    description: ${js(t.toolDescription(d.name))},`,
+    `    inputSchema: { type: "object", additionalProperties: false, properties: {`,
+    ...props,
+    `    } },`,
+    `    annotations: { readOnlyHint: false, untrustedContentHint: false, consequentialHint: false },`,
+    `    async execute(input) {`,
+    `      const form = document.getElementById("send-request");`,
+    `      // Only the declared fields, only text, cut to the declared length.`,
+    `      const limits = { ${[...fields.map((x) => `${x.name}: 300`), "message: 1000"].join(", ")} };`,
+    `      for (const [k, max] of Object.entries(limits)) if (typeof input?.[k] === "string") form.elements.namedItem(k).value = input[k].slice(0, max);`,
+    `      form.scrollIntoView({ block: "center" });`,
+    `      return ${js(t.toolFilled)};`,
+    `    },`,
+    `  });`,
+    `}`,
+    `</script>`,
   ].join("\n");
 }
 const MAX_LENGTH = { short: 120, sentence: 300, line: 160, url: 300 };

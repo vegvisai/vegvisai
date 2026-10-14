@@ -118,7 +118,7 @@ def framed(site, page_html, meta, others_html, path="/", template=None):
     ld += '\n<script type="application/ld+json">' + json.dumps(page, ensure_ascii=False).replace("</", "<\\/") + "</script>"
     return site.shell(frame_lang, title, description, body, alternates=alternates, others=others_html,
                       head_extra=ld, css=("/felles/site.css", "/felles/tools.css"), icon="/felles/favicon.svg",
-                      html_lang=meta["html_lang"])
+                      html_lang=meta["html_lang"], url=SITE + path)
 
 
 def write_platform_switch():

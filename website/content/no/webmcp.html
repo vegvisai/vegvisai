@@ -1,9 +1,25 @@
-<!-- title: La AI-agenter bruke skjemaene dine (WebMCP) · Guider · VegvisAI | description: En oppskrift på WebMCP: tre HTML-attributter på skjemaene du allerede har, så besøkendes egen AI-agent kan fylle dem ut. Eksperimentelt, gratis, og kunden bekrefter selv. -->
+<!-- title: La AI-agenter bruke skjemaene dine (WebMCP) · Guider · VegvisAI | description: En oppskrift på WebMCP: noen linjer JavaScript ved siden av skjemaet du allerede har, så besøkendes egen AI-agent kan fylle det ut. Eksperimentelt, gratis, og kunden trykker Send selv. -->
 <p class="eyebrow">Eksperimentelt · etter nivå 1</p>
 <h1>La AI-agenter bruke skjemaene dine (WebMCP)</h1>
-<p class="lead">WebMCP lar besøkendes egen AI-agent i nettleseren bruke skjemaene på nettsiden din: be om tilbud, bestille bord, sende en forespørsel. Du legger til noen få attributter på skjemaene du allerede har. Kunden blir på siden din og bekrefter det siste steget selv.</p>
+<p class="lead">WebMCP lar besøkendes egen AI-agent i nettleseren bruke skjemaene på nettsiden din: be om tilbud, bestille bord, sende en forespørsel. Du registrerer et verktøy med noen linjer JavaScript ved siden av skjemaet du allerede har. Kunden blir på siden din og trykker Send selv.</p>
 
-<div class="note"><p><strong>Eksperimentelt.</strong> WebMCP er et utkast fra W3C Web Machine Learning Community Group, testes i Chrome som en «origin trial» og kan fortsatt endre seg (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>, <a href="https://webmachinelearning.github.io/webmcp/">utkast</a>, sjekket 5. oktober 2026). Nettlesere som ikke kjenner det, ignorerer attributtene, så det koster ingenting å legge dem til.</p></div>
+<div class="note"><p><strong>Eksperimentelt.</strong> WebMCP er et utkast fra W3C Web Machine Learning Community Group, ikke en W3C-standard, og det kan fortsatt endre seg (<a href="https://webmachinelearning.github.io/webmcp/">utkast</a>, sjekket 13. oktober 2026). Nettlesere og assistenter som ikke kjenner det, viser bare den vanlige siden din, så det koster ingenting å legge det til. VegvisAI har ingen tilknytning til OpenAI, Google, Anthropic eller W3C.</p></div>
+
+<h2>Hvem bruker det i dag</h2>
+<p>Sjekket 13. oktober 2026, i alfabetisk rekkefølge. Dette endrer seg raskt.</p>
+<table>
+<thead><tr><th>Hvor</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>ChatGPT</td><td>Den innebygde nettleseren i ChatGPT-appen på desktop bruker verktøy registrert i JavaScript, siden august 2026. Den leser ikke skjema-attributter eller verktøy inne i iframes (<a href="https://learn.chatgpt.com/docs/webmcp">OpenAI</a>).</td></tr>
+<tr><td>Chrome</td><td>Prøveordning («origin trial») i Chrome 149 til 156, eller flagget <code>chrome://flags/#enable-webmcp-testing</code>. Ikke i vanlig Chrome ennå (<a href="https://developer.chrome.com/docs/ai/webmcp">Chrome</a>).</td></tr>
+<tr><td>Claude</td><td>Ingen støtte varslet.</td></tr>
+<tr><td>Edge</td><td>Prøveordning fra Edge 150.</td></tr>
+<tr><td>Firefox</td><td>Mozilla er nøytrale. Ingen støtte.</td></tr>
+<tr><td>Gemini</td><td>Google har sagt at Gemini i Chrome skal støtte det. Ikke tilgjengelig ennå, så vidt vi kan se.</td></tr>
+<tr><td>Safari</td><td>WebKit-teamet er imot utkastet og viser til sikkerhet, personvern og samtykke.</td></tr>
+</tbody>
+</table>
+<p>I dag hjelper WebMCP altså mest besøkende som bruker ChatGPT-appen på desktop. En AI-lesbar side (nivå 0 og 1) virker med alle assistenter.</p>
 
 <h2>Når det lønner seg</h2>
 <ul>
@@ -11,45 +27,77 @@
 <li>Kundene ber om noe som krever noen detaljer: dato, antall personer, størrelse, adresse</li>
 <li>Du vil at forespørselen skal komme til din egen nettside, ikke via en mellommann</li>
 </ul>
-<p>Har du ikke et skjema ennå, begynn med en handlingslenke i AI-visittkortet. Det virker med alle assistenter allerede i dag.</p>
+<p>Har du ikke et skjema ennå, begynn med en handlingslenke i AI-visittkortet. Det virker med alle assistenter allerede i dag. <a href="/lag/">Generatoren</a> kan også lage et forespørselsskjema med et WebMCP-verktøy for deg.</p>
 
-<h2>Steg 1: tre attributter på et skjema du allerede har</h2>
-<p>Gi skjemaet et verktøynavn, beskriv hva det gjør, og beskriv hvert felt. Nettleseren gjør dette om til et verktøy agenten kan se.</p>
-<pre><code>&lt;form action="/bestill/" method="post"
-      toolname="bestill_kake"
-      tooldescription="Be Eksempel Bakeri om en kakebestilling. Bakeriet svarer på e-post innen én arbeidsdag. Ingenting betales her."&gt;
-  &lt;label&gt;Kake &lt;input name="kake" required
-         toolparamdescription="Type kake, for eksempel bursdagskake eller glutenfri sjokoladekake"&gt;&lt;/label&gt;
-  &lt;label&gt;Personer &lt;input name="personer" type="number" min="1"
-         toolparamdescription="Hvor mange personer kaken er til"&gt;&lt;/label&gt;
-  &lt;label&gt;Dato &lt;input name="dato" type="date" required
-         toolparamdescription="Dagen kunden vil hente kaken"&gt;&lt;/label&gt;
-  &lt;label&gt;E-post &lt;input name="epost" type="email" required
-         toolparamdescription="Hvor bakeriet skal sende svaret"&gt;&lt;/label&gt;
+<h2>Steg 1: et verktøy som fyller ut skjemaet ditt</h2>
+<p>Behold skjemaet du har. Legg til et skript på samme side (ikke inne i en iframe) som registrerer et verktøy. Verktøyet fyller bare ut feltene. Kunden sjekker dem og trykker Send.</p>
+<pre><code>&lt;form id="kakebestilling" action="/bestill/" method="post"&gt;
+  &lt;label&gt;Kake &lt;input name="kake" required&gt;&lt;/label&gt;
+  &lt;label&gt;Personer &lt;input name="personer" type="number" min="1"&gt;&lt;/label&gt;
+  &lt;label&gt;Dato &lt;input name="dato" type="date" required&gt;&lt;/label&gt;
+  &lt;label&gt;E-post &lt;input name="epost" type="email" required&gt;&lt;/label&gt;
   &lt;button&gt;Send forespørsel&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p><strong>Ikke bruk <code>toolautosubmit</code>.</strong> Da fyller agenten ut skjemaet, og kunden trykker Send selv. Slik har kunden kontrollen, og du unngår misforståelser.</p>
+&lt;/form&gt;
+&lt;script&gt;
+if (typeof document.modelContext?.registerTool === "function") {
+  document.modelContext.registerTool({
+    name: "bestill_kake",
+    description: "Fyll ut en forespørsel om kake til Eksempel Bakeri. Kunden sjekker den og trykker Send. Ingenting betales her.",
+    inputSchema: {
+      type: "object",
+      additionalProperties: false,
+      properties: {
+        kake: { type: "string", description: "Type kake, for eksempel bursdagskake eller glutenfri sjokoladekake" },
+        personer: { type: "integer", minimum: 1, description: "Hvor mange personer kaken er til" },
+        dato: { type: "string", format: "date", description: "Dagen kunden vil hente kaken" },
+        epost: { type: "string", format: "email", description: "Hvor bakeriet skal sende svaret" },
+      },
+      required: ["kake", "dato"],
+    },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute(input) {
+      const form = document.getElementById("kakebestilling");
+      for (const k of ["kake", "personer", "dato", "epost"]) // bare feltene du har deklarert
+        if (input[k] != null) form.elements.namedItem(k).value = String(input[k]).slice(0, 200);
+      form.scrollIntoView({ block: "center" });
+      return "Skjemaet er fylt ut. Be kunden sjekke det og trykke Send.";
+    },
+  });
+}
+&lt;/script&gt;</code></pre>
+<p><strong>La kunden trykke Send.</strong> Ikke kall <code>submit()</code> fra verktøyet. Slik har kunden kontrollen, og du unngår misforståelser.</p>
 
-<h2>Steg 2 (valgfritt): et lesende verktøy i JavaScript</h2>
-<p>For det et skjema ikke dekker, for eksempel ledige tider, kan du registrere et verktøy i JavaScript. La det bare lese.</p>
-<pre><code>const mc = document.modelContext || navigator.modelContext; // eldre Chrome brukte navigator
-if (mc) {
-  mc.registerTool({
+<h2>Steg 2 (valgfritt): et verktøy som bare leser</h2>
+<p>For det et skjema ikke dekker, for eksempel ledige tider, kan du registrere et verktøy som bare leser, og si det i <code>annotations</code>.</p>
+<pre><code>const controller = new AbortController();
+if (typeof document.modelContext?.registerTool === "function") {
+  document.modelContext.registerTool({
     name: "ledige_hentedager",
     description: "Viser de neste dagene med ledig kapasitet for kakebestillinger. Bare lesing.",
     inputSchema: { type: "object", properties: {} },
+    annotations: { readOnlyHint: true },
     async execute() {
       const r = await fetch("/api/ledige-dager");
       return await r.json();
     },
-  });
+  }, { signal: controller.signal }); // controller.abort() removes the tool again
 }</code></pre>
+<p>Annotasjoner forteller agenten hva slags verktøy det er. De er hint som agenter kan bruke eller overse, så sjekk alt på serveren likevel.</p>
+<ul>
+<li><code>readOnlyHint: true</code>: verktøyet bare leser og endrer ingenting.</li>
+<li><code>untrustedContentHint: true</code>: svaret inneholder tekst andre har skrevet, som omtaler eller kundemeldinger, og skal behandles som data, aldri som instruksjoner.</li>
+<li><code>consequentialHint: true</code>: verktøyet gjør noe viktig eller vanskelig å angre, som å bestille eller booke. Agenter kan bruke det til å spørre kunden først, men ingenting garanterer at de gjør det.</li>
+</ul>
+<p>Eldre versjoner av Chrome brukte <code>navigator.modelContext</code>. Utkastet bruker nå bare <code>document.modelContext</code>.</p>
+
+<h2>Skjema-attributter (valgfritt ekstra)</h2>
+<p>Chrome sin prøveordning lar deg også gi et skjema et verktøynavn med HTML-attributtene <code>toolname</code>, <code>tooldescription</code> og <code>toolparamdescription</code>. De ble tatt ut av utkastet 8. oktober 2026 mens de utforskes videre, og ChatGPT leser dem ikke. De skader ikke, men ikke stol på dem. Bruker du dem i tillegg til et skript, gi de to verktøyene ulike navn.</p>
 
 <h2>Test det</h2>
 <ol>
-<li>Åpne siden din i Chrome med <code>chrome://flags/#enable-webmcp-testing</code> slått på (eller bli med i «origin trial»).</li>
-<li>Installer <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a> og se at verktøyene og beskrivelsene dukker opp.</li>
-<li>Kjør <a href="/sjekk/">AI-sjekken</a>: den viser WebMCP-verktøyene den finner under «åpent for AI» og sjekker beskrivelsene for skjulte instruksjoner.</li>
+<li><strong>ChatGPT på desktop:</strong> åpne siden i appens innebygde nettleser og velg «Site tools» i adressefeltet for å se verktøyene. Be så ChatGPT fylle ut skjemaet.</li>
+<li><strong>Chrome:</strong> slå på <code>chrome://flags/#enable-webmcp-testing</code> og installer <a href="https://chromewebstore.google.com/detail/webmcp-model-context-tool/gbpdfapgefenggkahomfgkhfehlcenpd">Model Context Tool Inspector</a>. Den viser verktøyene dine. For å kalle dem fra inspektøren trenger du din egen API-nøkkel til Gemini.</li>
+<li>Kjør <a href="/sjekk/">AI-sjekken</a>: den viser WebMCP-verktøyene den finner under «åpent for AI» og sjekker alle beskrivelsene for skjulte instruksjoner.</li>
 </ol>
 
 <h2>Gjør det trygt</h2>
@@ -58,7 +106,9 @@ if (mc) {
 <li><strong>Kundens innlogging er tilgangen.</strong> Verktøyene kjører med den besøkendes egen innlogging, så sjekk tilganger på serveren akkurat som for det vanlige skjemaet.</li>
 <li><strong>Betaling og bestilling bekrefter kunden selv.</strong> La kunden bekrefte på siden din. Ingen verktøy skal betale, signere eller slette uten at kunden trykker.</li>
 <li><strong>Returner bare det den besøkende har lov til å se,</strong> og ingen personopplysninger om andre.</li>
-<li><strong>Be bare om det du trenger.</strong> Et skjema som sender med <code>method="get"</code>, legger opplysningene i nettadressen, der de kan havne i logger og nettleserhistorikk. Be aldri om helseopplysninger, fødselsnummer eller kortopplysninger i et slikt skjema.</li>
+<li><strong>Merk tekst andre har skrevet.</strong> Et verktøy som returnerer omtaler, meldinger eller annen tekst du ikke styrer, får <code>untrustedContentHint: true</code>, slik at agenter som følger hintet, kan lese en skjult instruksjon i en omtale som data. Hintet er ingen beskyttelse i seg selv: hvordan det håndteres, avhenger av agenten, så la aldri et verktøy handle på det slik tekst sier.</li>
+<li><strong>Hold verktøy borte fra sider som ikke skal ha dem.</strong> Admin- og innloggingssider kan slå av WebMCP med headeren <code>Permissions-Policy: tools=()</code>. Verktøy inne i en iframe, for eksempel en bookingmodul fra et annet firma, ser ikke ChatGPT.</li>
+<li><strong>Be bare om det du trenger.</strong> Et skjema som sender med <code>method="get"</code>, legger opplysningene i nettadressen, der de kan havne i logger og nettleserhistorikk. Be aldri om helseopplysninger, fødselsnummer eller kortopplysninger i et slikt skjema. Fortell i personvernerklæringen hva du gjør med opplysningene.</li>
 <li><strong>Bestilling med betaling følger de vanlige reglene for netthandel.</strong> Legger et verktøy inn en bestilling kunden må betale for, skal kunden få de pålagte opplysningene først, bestillingsknappen skal si tydelig at bestillingen forplikter til å betale, og angreretten gjelder der den ellers gjelder.</li>
 </ul>
 

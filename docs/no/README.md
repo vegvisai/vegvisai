@@ -22,7 +22,7 @@ To små filer som lar agenter og åpne veivisere finne deg.](files.md) [Eksperim
 
 ### La AI-agenter bruke skjemaene dine (WebMCP)
 
-Tre attributter på skjemaene du allerede har.](https://vegvis.ai/no/guider/webmcp/) [Eksperimentelt
+Noen linjer JavaScript ved siden av skjemaene du allerede har.](https://vegvis.ai/no/guider/webmcp/) [Eksperimentelt
 
 ### Agenter fyller handlekurven, kunden betaler som før
 

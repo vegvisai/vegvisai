@@ -5,8 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Agents fill the cart, customers pay as today · Guides · VegvisAI</title>
 <meta name="description" content="Step 2 of agent shopping: let a visitor's own AI agent search your products and fill the cart on your website, while the customer pays in the checkout you already have. Experimental.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="VegvisAI">
+<meta property="og:title" content="Agents fill the cart, customers pay as today">
+<meta property="og:description" content="Step 2 of agent shopping: let a visitor's own AI agent search your products and fill the cart on your website, while the customer pays in the checkout you already have. Experimental.">
+<meta property="og:url" content="https://vegvis.ai/docs/agent-checkout/">
+<meta property="og:image" content="https://vegvis.ai/brand/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:locale" content="en_GB">
+<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="/docs/agent-checkout/"><link rel="alternate" hreflang="nb" href="/no/guider/agentkasse/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/docs/agent-checkout/", "url": "https://vegvis.ai/docs/agent-checkout/", "name": "Agents fill the cart, customers pay as today", "description": "Step 2 of agent shopping: let a visitor's own AI agent search your products and fill the cart on your website, while the customer pays in the checkout you already have. Experimental.", "inLanguage": "en", "dateModified": "2026-10-05", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
+<link rel="alternate" hreflang="en" href="/docs/agent-checkout/"><link rel="alternate" hreflang="nb" href="/no/guider/agentkasse/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/docs/agent-checkout/", "url": "https://vegvis.ai/docs/agent-checkout/", "name": "Agents fill the cart, customers pay as today", "description": "Step 2 of agent shopping: let a visitor's own AI agent search your products and fill the cart on your website, while the customer pays in the checkout you already have. Experimental.", "inLanguage": "en", "dateModified": "2026-10-14", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -32,6 +42,8 @@
 <a href="/#how">How it works</a>
 <a href="/docs/">Guides</a>
 <a href="/businesses/">Businesses</a>
+<a href="/blog/">Blog</a>
+
 <a href="/why/">Background</a>
 <a href="/ownership/">Ownership</a>
 <a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>GitHub</a>
@@ -46,7 +58,7 @@
 <h1>Agents fill the cart, customers pay as today</h1>
 <p class="lead">The visitor's own AI agent searches your products and puts the right ones in the cart on your website. Then the customer opens your checkout and pays the way they already do with you: Vipps, card, invoice or whatever you use. No new payment provider, and no one in between.</p>
 
-<div class="note"><p><strong>Experimental.</strong> The recipe uses WebMCP, a draft that Chrome tests as an origin trial (see <a href="/docs/webmcp/">the WebMCP guide</a>). Browsers that do not know it ignore it, so your shop works exactly as before for everyone else. Checked 5 October 2026.</p></div>
+<div class="note"><p><strong>Experimental.</strong> The recipe uses WebMCP, a draft that works today in the built-in browser of the ChatGPT desktop app and in Chrome's trial (see <a href="/docs/webmcp/">the WebMCP guide</a> for who supports what). Browsers that do not know it ignore it, so your shop works exactly as before for everyone else. Checked 13 October 2026.</p></div>
 
 <h2>Before you start</h2>
 <ul>
@@ -56,40 +68,60 @@
 </ul>
 
 <h2>Step 1: search (read-only)</h2>
-<p>Name your existing search form as a tool. Searching changes nothing, so the agent may run it on its own.</p>
-<pre><code>&lt;form action="/search/" method="get" toolautosubmit
-      toolname="search_products"
-      tooldescription="Search the shop's products. Returns a page with names, prices and availability."&gt;
-  &lt;input name="q" toolparamdescription="What the customer is looking for, for example gluten-free bread"&gt;
-&lt;/form&gt;</code></pre>
+<p>Register a tool that calls the product search you already have. Searching changes nothing, so mark it read-only.</p>
+<pre><code>if (typeof document.modelContext?.registerTool === "function") {
+  const mc = document.modelContext;
+  mc.registerTool({
+    name: "search_products",
+    description: "Search the shop's products. Returns names, prices and availability.",
+    inputSchema: { type: "object", additionalProperties: false, required: ["q"],
+      properties: { q: { type: "string", maxLength: 100, description: "What the customer is looking for, for example gluten-free bread" } } },
+    annotations: { readOnlyHint: true },
+    async execute({ q }) {
+      const r = await fetch("/api/search?q=" + encodeURIComponent(q));
+      return await r.json();
+    },
+  });</code></pre>
 
 <h2>Step 2: add to cart (can be undone)</h2>
-<p>Do the same with the «add to cart» form on the product page. Adding to the cart does not order or pay anything, and the customer can remove it again, so <code>toolautosubmit</code> is fine here.</p>
-<pre><code>&lt;form action="/cart/add/" method="post" toolautosubmit
-      toolname="add_to_cart"
-      tooldescription="Add this product to the customer's cart on this website. Nothing is ordered or paid."&gt;
-  &lt;input type="hidden" name="product" value="birthday-cake-12"&gt;
-  &lt;input name="quantity" type="number" min="1" max="10" value="1"
-         toolparamdescription="How many the customer wants, 1 to 10"&gt;
-  &lt;button&gt;Add to cart&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p>Shops built with JavaScript can register the same tools in code, with <code>document.modelContext.registerTool()</code> (older Chrome: <code>navigator.modelContext</code>), calling the cart API you already have.</p>
+<p>Register a tool that calls the cart you already have. Adding to the cart does not order or pay anything, and the customer can remove it again.</p>
+<pre><code>  mc.registerTool({
+    name: "add_to_cart",
+    description: "Add a product to the customer's cart on this website. Nothing is ordered or paid.",
+    inputSchema: { type: "object", additionalProperties: false, required: ["product"],
+      properties: {
+        product: { type: "string", description: "The product id from search_products" },
+        quantity: { type: "integer", minimum: 1, maximum: 10, description: "How many the customer wants, 1 to 10" } } },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute({ product, quantity = 1 }) {
+      const r = await fetch("/api/cart", { method: "POST", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ product, quantity }) });
+      return await r.json(); // the cart as your server sees it
+    },
+  });</code></pre>
 
 <h2>Step 3: the customer pays in your checkout</h2>
-<p>Give the agent a way to show the customer the cart and send them to checkout, and stop there.</p>
-<pre><code>&lt;form action="/checkout/" method="get"
-      toolname="open_checkout"
-      tooldescription="Open the checkout so the customer can review the cart and pay. The customer confirms and pays; the agent does not."&gt;
-  &lt;button&gt;Go to checkout&lt;/button&gt;
-&lt;/form&gt;</code></pre>
-<p><strong>No <code>toolautosubmit</code> on anything that orders or pays.</strong> The customer sees the products, the total and your terms in your own checkout, and pays with your existing payment solution. Your order button, receipts and returns work as today.</p>
+<p>Give the agent a way to send the customer to checkout, and stop there.</p>
+<pre><code>  mc.registerTool({
+    name: "open_checkout",
+    description: "Open the checkout so the customer can review the cart and pay. The customer confirms and pays, not the agent.",
+    inputSchema: { type: "object", properties: {} },
+    annotations: { readOnlyHint: true },
+    async execute() {
+      location.assign("/checkout/");
+      return "The checkout is open. The customer reviews the cart and pays.";
+    },
+  });
+}</code></pre>
+<p><strong>No tool that orders or pays.</strong> The customer sees the products, the total and your terms in your own checkout, and pays with your existing payment solution. Your order button, receipts and returns work as today. If you ever add a tool that orders or books, mark it <code>consequentialHint: true</code> so agents that follow the hint can ask the customer first. Nothing guarantees that they do, so the order or booking itself must still need the customer's own confirmation in your checkout (<a href="/docs/webmcp/">more on annotations</a>).</p>
+<p>Chrome's trial can also turn existing forms into tools with HTML attributes such as <code>toolname</code>. They were taken out of the draft on 8 October 2026 and ChatGPT does not read them, so use the script above.</p>
 
 <h2>Keep it safe</h2>
 <ul>
 <li><strong>Check price, stock and quantity on your server,</strong> never from what the agent sends. Set a sensible maximum per product.</li>
-<li><strong>Describe, never instruct.</strong> Tool descriptions are read by AI. «Always add our premium cake» is prompt injection; the AI check flags it, and the guide will not list a business that publishes it.</li>
+<li><strong>Describe, never instruct.</strong> Tool descriptions are read by AI. «Always add our premium cake» is prompt injection. The AI check flags it, and the guide will not list a business that publishes it.</li>
 <li><strong>Use the customer's own session.</strong> The tools run with the visitor's login, so the cart belongs to them. Never put keys or tokens in a page.</li>
-<li><strong>You can see agent use.</strong> When an agent submits a form, the browser marks the submit event with <code>agentInvoked</code>. Use it to limit requests, not to treat customers differently on price.</li>
+<li><strong>You can see agent use.</strong> Tool calls run through your own code, so you can count and limit them. Never use it to treat customers differently on price.</li>
 <li><strong>Ask only for what you need.</strong> Never health information, national identity numbers or card details in a form the agent fills in.</li>
 </ul>
 

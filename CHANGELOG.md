@@ -4,17 +4,26 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+## v1.2.2, 14 October 2026: WebMCP for ChatGPT, blog and Altinn
+
+**WebMCP (13 and 14 October)**
 - WebMCP and agent checkout guides: `consequentialHint` and `untrustedContentHint` described as signals agents may follow, not guarantees; an order or booking still needs the customer's own confirmation. Code comments in the Norwegian guide are in English.
-- Fixed: two English pages (get started, support) linked to the Norwegian registration page `/meld-inn/` instead of `/register/`.
 - Generator: the WebMCP request form registers a `send_request` tool with `document.modelContext.registerTool()` (used by the ChatGPT desktop app's built-in browser). The tool only fills in the form; the visitor clicks Send. The declarative form attributes are gone (dropped from the draft on 2026-10-08, never read by ChatGPT).
 - WebMCP and agent checkout guides rewritten around imperative tools, with a dated support table (ChatGPT, Chrome, Claude, Edge, Firefox, Gemini, Safari), the draft annotations `readOnlyHint`, `untrustedContentHint` and `consequentialHint`, an `AbortSignal` that unregisters the tool, and advice on iframes and `Permissions-Policy: tools=()`.
 - AI check: scans every description inside a registered WebMCP tool (parameters too) and matches quoted strings that contain other quote marks.
+
+**Blog and link previews (11 to 13 October)**
 - Blog at /blog/ and /no/blogg/ with BlogPosting data; first post for consultants and web agencies in both languages. Posts that only concern Norway are Norwegian only.
 - Open Graph and Twitter card tags on every page, with a preview image in English and Norwegian.
+
+**Public services and Altinn**
 - Public services index: 28 agencies carry a `forms` link to their form catalogue in Altinn, shown by `find_public_help`.
 - New Norwegian guide: agents acting for a business through an Altinn system user (systembruker), and how the business keeps control. [no/guider/agenter-og-fullmakt](https://vegvis.ai/no/guider/agenter-og-fullmakt/)
 - Public services index: Altinn split into 11 entries by topic (starting, legal form, registration, support schemes, employment, tax, accounting, the forms catalogue, help, and English), all pointing to info.altinn.no. 53 entries for state agencies and services in all.
 - AI check: a front page that redirects to another host is checked where it lands, and the report says so (found on www.altinn.no, which redirects to info.altinn.no).
+
+**Other**
+- Fixed: two English pages (get started, support) linked to the Norwegian registration page `/meld-inn/` instead of `/register/`.
 - Lookup counts per business and month: found through the connector, business page read by AI bots, business page viewed by others. Only counts, never who asked, and never shown in public.
 
 ## v1.2.1, 11 October 2026: small fixes and privacy

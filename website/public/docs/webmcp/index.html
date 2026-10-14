@@ -117,9 +117,10 @@ if (typeof document.modelContext?.registerTool === "function") {
       form.scrollIntoView({ block: "center" });
       return "The form is filled in. Ask the customer to check it and click Send.";
     },
-  });
+  }).catch((e) => console.warn("WebMCP:", e));
 }
 &lt;/script&gt;</code></pre>
+<p><code>registerTool()</code> returns a promise. It is rejected if the name is already taken, the description is empty or the page has switched WebMCP off, so catch it as above.</p>
 <p><strong>Let the customer click Send.</strong> Do not call <code>submit()</code> from the tool. That keeps the customer in control and you out of trouble.</p>
 
 <h2>Step 2 (optional): a read-only tool</h2>
@@ -135,7 +136,7 @@ if (typeof document.modelContext?.registerTool === "function") {
       const r = await fetch("/api/free-days");
       return await r.json();
     },
-  }, { signal: controller.signal }); // controller.abort() removes the tool again
+  }, { signal: controller.signal }).catch((e) => console.warn("WebMCP:", e)); // controller.abort() removes the tool again
 }</code></pre>
 <p>Annotations tell the agent what kind of tool it is. They are hints that agents may use or ignore, so check everything on your server anyway.</p>
 <ul>

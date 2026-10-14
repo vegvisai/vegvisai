@@ -62,9 +62,10 @@ if (typeof document.modelContext?.registerTool === "function") {
       form.scrollIntoView({ block: "center" });
       return "Skjemaet er fylt ut. Be kunden sjekke det og trykke Send.";
     },
-  });
+  }).catch((e) => console.warn("WebMCP:", e));
 }
 &lt;/script&gt;</code></pre>
+<p><code>registerTool()</code> gir et løfte («promise») tilbake. Det avvises hvis navnet allerede er tatt, beskrivelsen er tom eller siden har slått av WebMCP, så fang det opp som over.</p>
 <p><strong>La kunden trykke Send.</strong> Ikke kall <code>submit()</code> fra verktøyet. Slik har kunden kontrollen, og du unngår misforståelser.</p>
 
 <h2>Steg 2 (valgfritt): et verktøy som bare leser</h2>
@@ -80,7 +81,7 @@ if (typeof document.modelContext?.registerTool === "function") {
       const r = await fetch("/api/ledige-dager");
       return await r.json();
     },
-  }, { signal: controller.signal }); // controller.abort() removes the tool again
+  }, { signal: controller.signal }).catch((e) => console.warn("WebMCP:", e)); // controller.abort() removes the tool again
 }</code></pre>
 <p>Annotasjoner forteller agenten hva slags verktøy det er. De er hint som agenter kan bruke eller overse, så sjekk alt på serveren likevel.</p>
 <ul>

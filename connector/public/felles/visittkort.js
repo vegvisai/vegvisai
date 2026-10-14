@@ -51,7 +51,8 @@ function requestForm(d, t) {
     `<script>`,
     `// WebMCP (experimental): the visitor's own AI agent may fill in the form above. It never sends it.`,
     `if (typeof document.modelContext?.registerTool === "function") {`,
-    `  document.modelContext.registerTool({`,
+    `  // registerTool() returns a promise that rejects if, for example, the page blocks WebMCP or the name is taken.`,
+    `  Promise.resolve(document.modelContext.registerTool({`,
     `    name: "send_request",`,
     `    description: ${js(t.toolDescription(d.name))},`,
     `    inputSchema: { type: "object", additionalProperties: false, properties: {`,
@@ -66,7 +67,7 @@ function requestForm(d, t) {
     `      form.scrollIntoView({ block: "center" });`,
     `      return ${js(t.toolFilled)};`,
     `    },`,
-    `  });`,
+    `  })).catch((e) => console.warn("WebMCP: send_request was not registered", e));`,
     `}`,
     `</script>`,
   ].join("\n");

@@ -81,7 +81,7 @@
       const r = await fetch("/api/search?q=" + encodeURIComponent(q));
       return await r.json();
     },
-  });</code></pre>
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre>
 
 <h2>Step 2: add to cart (can be undone)</h2>
 <p>Register a tool that calls the cart you already have. Adding to the cart does not order or pay anything, and the customer can remove it again.</p>
@@ -98,7 +98,7 @@
         body: JSON.stringify({ product, quantity }) });
       return await r.json(); // the cart as your server sees it
     },
-  });</code></pre>
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre>
 
 <h2>Step 3: the customer pays in your checkout</h2>
 <p>Give the agent a way to send the customer to checkout, and stop there.</p>
@@ -111,7 +111,7 @@
       location.assign("/checkout/");
       return "The checkout is open. The customer reviews the cart and pays.";
     },
-  });
+  }).catch((e) => console.warn("WebMCP:", e));
 }</code></pre>
 <p><strong>No tool that orders or pays.</strong> The customer sees the products, the total and your terms in your own checkout, and pays with your existing payment solution. Your order button, receipts and returns work as today. If you ever add a tool that orders or books, mark it <code>consequentialHint: true</code> so agents that follow the hint can ask the customer first. Nothing guarantees that they do, so the order or booking itself must still need the customer's own confirmation in your checkout (<a href="/docs/webmcp/">more on annotations</a>).</p>
 <p>Chrome's trial can also turn existing forms into tools with HTML attributes such as <code>toolname</code>. They were taken out of the draft on 8 October 2026 and ChatGPT does not read them, so use the script above.</p>

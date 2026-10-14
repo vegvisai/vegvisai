@@ -4,6 +4,8 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- WebMCP: the generator's request form and the guide examples catch a rejected `registerTool()` promise (taken name, empty description, `tools` policy off) and log a warning instead of an uncaught error.
+
 ## v1.2.2, 14 October 2026: WebMCP for ChatGPT, blog and Altinn
 
 **WebMCP (13 and 14 October)**

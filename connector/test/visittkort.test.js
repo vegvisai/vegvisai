@@ -112,7 +112,7 @@ test("with WebMCP ticked, the card gets a request form agents can fill in, and s
   const html = files["index.html"];
   assert.match(html, /<form id="send-request" action="https:\/\/bakeri\.eksempel\.no\/bestill" method="get">/);
   assert.match(html, /<input name="onsket_dato" maxlength="300">/);
-  assert.match(html, /document\.modelContext\.registerTool\(\{\n    name: "send_request",\n    description: "Fyll ut en forespørsel til Eksempel Bakeri AS/);
+  assert.match(html, /Promise\.resolve\(document\.modelContext\.registerTool\(\{\n    name: "send_request",\n    description: "Fyll ut en forespørsel til Eksempel Bakeri AS/);
   assert.match(html, /onsket_dato: \{ type: "string", maxLength: 300, description: "Ønsket dato" \}/);
   assert.match(html, /additionalProperties: false/);
   assert.match(html, /consequentialHint: false/);
@@ -153,6 +153,12 @@ test("the WebMCP tool only fills in the form: run against a stand-in document.mo
   assert.ok(calls.length && calls.every((c) => c === "scroll"), "never submits");
   assert.match(out, /Ingenting er sendt/);
   new Function("document", script)({}); // browsers without WebMCP: nothing happens, no error
+  const warnings = [];
+  new Function("document", "console", script)(
+    { modelContext: { registerTool: () => Promise.reject(new DOMException("blocked", "NotAllowedError")) } },
+    { warn: (...a) => warnings.push(a) });
+  await new Promise((r) => setTimeout(r));
+  assert.equal(warnings.length, 1, "a rejected registerTool() is caught and logged");
 });
 
 test("no WebMCP form without a request page, even when ticked", () => {

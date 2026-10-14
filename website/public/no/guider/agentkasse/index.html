@@ -81,7 +81,7 @@
       const r = await fetch("/api/sok?q=" + encodeURIComponent(q));
       return await r.json();
     },
-  });</code></pre>
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre>
 
 <h2>Steg 2: legg i handlekurven (kan angres)</h2>
 <p>Registrer et verktøy som kaller handlekurven du allerede har. Å legge noe i kurven bestiller eller betaler ingenting, og kunden kan fjerne det igjen.</p>
@@ -98,7 +98,7 @@
         body: JSON.stringify({ produkt, antall }) });
       return await r.json(); // handlekurven slik serveren din ser den
     },
-  });</code></pre>
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre>
 
 <h2>Steg 3: kunden betaler i kassen din</h2>
 <p>Gi agenten en måte å sende kunden til kassen, og stopp der.</p>
@@ -111,7 +111,7 @@
       location.assign("/kasse/");
       return "Kassen er åpen. Kunden ser over handlekurven og betaler.";
     },
-  });
+  }).catch((e) => console.warn("WebMCP:", e));
 }</code></pre>
 <p><strong>Ingen verktøy som bestiller eller betaler.</strong> Kunden ser produktene, totalprisen og vilkårene dine i din egen kasse, og betaler med betalingsløsningen du allerede har. Bestillingsknappen, kvitteringer og retur virker som i dag. Legger du en gang til et verktøy som bestiller eller booker, merk det med <code>consequentialHint: true</code>, slik at agenter som følger hintet, kan spørre kunden først. Ingenting garanterer at de gjør det, så selve bestillingen eller bookingen må fortsatt kreve at kunden bekrefter i kassen din (<a href="/no/guider/webmcp/">mer om annotasjoner</a>).</p>
 <p>Chrome sin prøveordning kan også gjøre eksisterende skjemaer om til verktøy med HTML-attributter som <code>toolname</code>. De ble tatt ut av utkastet 8. oktober 2026, og ChatGPT leser dem ikke, så bruk skriptet over.</p>

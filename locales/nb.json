@@ -579,6 +579,8 @@
    "verified_domain_and_vat_number": "Domene og momsnummer sjekket {date}.",
    "verified_domain_and_company_number": "Domene og foretaksnummer sjekket {date}.",
    "verified_domain_only": "Domenet sjekket {date}.",
+   "openForAi": "Åpent for AI-agenter",
+   "openWebmcp": "WebMCP-verktøy",
    "ownSite": "Spør, bestill og betal på bedriftens egen nettside. VegvisAI tar ikke del i det.",
    "back": "Alle bedrifter i veiviseren",
    "entryTitle": "{name} · Bedrifter i veiviseren · VegvisAI",

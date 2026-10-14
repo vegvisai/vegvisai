@@ -36,6 +36,7 @@ The agent is told that the order means nothing, so it can choose with the user o
 | Size, turnover or number of locations | Small and large are equal |
 | Who joined first | Early users get better terms, never better placement |
 | Which supplier a business uses | No lock-in to any vendor |
+| What a business offers AI agents (booking, ordering, tools) | Shown as information about the service, taken from the business's own website. It never decides who is shown or in which order |
 
 ## 4. Removal
 

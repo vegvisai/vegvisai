@@ -4,6 +4,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Index: new field `open_for_ai` per business, read from its own domain: schema.org actions with an https target, WebMCP tool names on the card page, and MCP, A2A and OpenAPI entries in ai-catalog.json. Shown in `find_business` (with a note that it is a fact, not a quality measure), in the open export and on the business pages. It never affects the random order.
 - WebMCP: the generator's request form and the guide examples catch a rejected `registerTool()` promise (taken name, empty description, `tools` policy off) and log a warning instead of an uncaught error.
 
 ## v1.2.2, 14 October 2026: WebMCP for ChatGPT, blog and Altinn

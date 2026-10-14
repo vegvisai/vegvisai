@@ -53,6 +53,15 @@ function listHtml(entries, t, prefix) {
   return `${count}\n<ul class="bedrifter">\n${entries.map((e) => card(e, t, prefix)).join("\n")}\n</ul>\n<p>${t.registerCta}</p>`;
 }
 
+// What the business's own domain offers AI agents (P56): links to its own systems, never a ranking signal.
+function openForAiHtml(o, t) {
+  if (!o) return "";
+  const items = [...(o.actions ?? []).filter((a) => safeUrl(a.url)).map((a) => `<a href="${esc(a.url.replace(/\{[^}]*\}/g, ""))}" rel="noopener">${esc(a.type)}</a> (${esc(new URL(a.url).hostname)})`),
+    o.webmcp?.length && `${esc(t.openWebmcp)} (${esc(o.webmcp.join(", "))})`,
+    ...[["mcp", "MCP"], ["a2a", "A2A"], ["openapi", "OpenAPI"]].filter(([k]) => safeUrl(o[k])).map(([k, n]) => `<a href="${esc(o[k])}" rel="noopener">${n}</a> (${esc(new URL(o[k]).hostname)})`)].filter(Boolean);
+  return items.length ? `<p><strong>${esc(t.openForAi)}:</strong> ${items.join(" · ")}</p>` : "";
+}
+
 function entryHtml(e, t, prefix) {
   const site = safeUrl(e.url);
   const request = safeUrl(e.request);
@@ -66,6 +75,7 @@ function entryHtml(e, t, prefix) {
 ${e.description ? `<p>${esc(e.description)}</p>` : ""}
 ${area ? `<p><strong>${esc(t.area)}:</strong> ${esc(area)}</p>` : ""}
 ${offers ? `<p><strong>${esc(t.offers)}:</strong> ${esc(offers)}</p>` : ""}
+${openForAiHtml(e.open_for_ai, t)}
 ${site ? `<p><a class="btn btn-blue" href="${esc(site)}" rel="noopener">${esc(t.website)}: ${esc(e.domain)}</a>${request ? ` <a class="btn" href="${esc(request.replace(/\{[^}]*\}/g, ""))}" rel="noopener">${esc(t.request)}</a>` : ""}</p>` : ""}
 <p class="mut">${esc(t.ownSite)}</p>
 <p class="mut">${verifiedLine(e, t)}</p>

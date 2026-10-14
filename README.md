@@ -25,7 +25,7 @@ The business card always lives on the business's own domain. The index only hold
 | [`docs/`](docs/) | Guides in English and Norwegian: get started, AI-readable website, AI files, MCP, developers | Apache 2.0 |
 | [`skills/ai-lesbar-nettside/`](skills/ai-lesbar-nettside/) | Agent skill `ai-lesbar-nettside` that interviews a business and makes its AI business card, with templates in `maler/` | Apache 2.0 |
 | [`connector/`](connector/) | The guide: web pages, AI check, business card generator and a read-only MCP connector on Cloudflare Workers | Apache 2.0 |
-| [`index/`](index/) | Builds the open index of public services in Norway (44 state agencies and all 357 municipalities) and the list of political parties (unofficial listings, alphabetical, never ranked) | Code Apache 2.0, data ODbL |
+| [`index/`](index/) | Builds the open index of public services in Norway (53 entries for state agencies and services, and all 357 municipalities) and the list of political parties (unofficial listings, alphabetical, never ranked) | Code Apache 2.0, data ODbL |
 | [`connector/public/index/`](connector/public/index/) | The built index (`public-no.json`) | ODbL 1.0 |
 | [`tools/ai-check/`](tools/ai-check/) | Test set for prompt injection, used by the AI check | Apache 2.0 |
 | [`website/`](website/) | Landing page and guides as a website | Apache 2.0 |

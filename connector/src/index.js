@@ -233,6 +233,14 @@ async function checkBusiness({ org_number, name }) {
 
 const VERIFIED = { register: "verified domain and company number in the national register", vat: "verified domain and EU VAT number (VIES)", domain: "verified domain only" };
 
+// What the business's own domain offers agents, as it publishes it. Says nothing about quality or order.
+function openForAiText(o) {
+  if (!o) return null;
+  const parts = [...(o.actions ?? []).map((a) => `${a.type} ${a.url}`), o.webmcp?.length && `WebMCP tools on the business card page (${o.webmcp.join(", ")})`,
+    o.mcp && `MCP server ${o.mcp}`, o.a2a && `A2A agent ${o.a2a}`, o.openapi && `OpenAPI ${o.openapi}`].filter(Boolean);
+  return parts.length ? `Open for AI agents (published by the business): ${parts.join("; ")}` : null;
+}
+
 async function findBusiness({ need, postal_code, country }, origin, context = {}) {
   const n = (need || "").toLowerCase();
   const cc = String(country ?? "").toUpperCase().slice(0, 2);
@@ -245,12 +253,13 @@ async function findBusiness({ need, postal_code, country }, origin, context = {}
   const real = listed.map((e) =>
     [`${e.name}  [${VERIFIED[e.verification ?? "register"]} ${Object.values(e.verified ?? {})[0] ?? ""}]`, `Country: ${e.country ?? "NO"}`, `Business card: ${e.card_url}`,
       e.description && `About: ${e.description}`, e.categories.length && `Categories and offers: ${e.categories.slice(0, 10).join("; ")}`,
-      e.area.length && `Area: ${e.area.join(", ")}`, e.request && `Request link (template): ${e.request}`].filter(Boolean).join("\n"));
+      e.area.length && `Area: ${e.area.join(", ")}`, e.request && `Request link (template): ${e.request}`, openForAiText(e.open_for_ai)].filter(Boolean).join("\n"));
   // No ranking: everyone who qualifies is shown in random order, new for every question.
   const out = [...test, ...real].map((t) => [Math.random(), t]).sort((x, y) => x[0] - y[0]).map(([, t]) => t);
   if (!out.length) return text("No businesses in the guide for this need yet.");
   if (!postal_code) out.push("The user has not given a place. Ask where they need the help before you suggest a business or prepare a request; do not assume the area of a result is where the user is.");
   out.push("The order is random and means nothing: the guide does not rank, and placement cannot be bought. Choose with the user on what matters to them.");
+  if (listed.some((e) => e.open_for_ai)) out.push("«Open for AI agents» says what a business offers on its own website (booking, ordering, tools). It describes the service, not its quality, and it never affects who is shown or the order. VegvisAI charges nothing for it; the business publishes it on its own website. Every business can also be reached through its request link or website. Choose with the user on what they need.");
   return data(out.join("\n\n"));
 }
 

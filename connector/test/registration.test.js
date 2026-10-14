@@ -85,7 +85,7 @@ test("form, review, changelog, export and the re-check work together", async () 
 
   const exp = await openExport(store);
   assert.equal(exp.entries.length, 1);
-  assert.deepEqual(Object.keys(exp.entries[0]).sort(), ["area", "card_url", "categories", "country", "description", "domain", "name", "org_number", "postal_code", "request", "url"]);
+  assert.deepEqual(Object.keys(exp.entries[0]).sort(), ["area", "card_url", "categories", "country", "description", "domain", "name", "open_for_ai", "org_number", "postal_code", "request", "url"]);
 
   // The card disappears: the re-check removes the business and logs a neutral reason.
   const r = await recheck(env, { fetchFn: fakeFetch({ site: { "/.well-known/ai-catalog.json": undefined, "/ai/": undefined } }) });
@@ -260,4 +260,46 @@ test("the review list shows the door a manual entry came through", async () => {
   const { pending: list } = await (await pending(new Request("https://x.example/api/admin/pending", { headers: { Authorization: "Bearer secret" } }), env)).json();
   assert.equal(list[0].door, "pull_request");
   assert.equal(list[0].reason, "domain_mismatch via pull_request");
+});
+
+test("open_for_ai lists what the business's own domain offers agents, https links only", async () => {
+  const plain = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch() });
+  assert.deepEqual(plain.entry.open_for_ai, { actions: [{ type: "OrderAction", url: ROOT + "/bestill/?kake={kake}" }], webmcp: [], mcp: null, a2a: null, openapi: null });
+  const rich = card({ potentialAction: [
+    { "@type": "ReserveAction", target: { urlTemplate: "https://booking.example.com/butikken?dato={dato}" } },
+    { "@type": "SearchAction", target: "/sok?q={q}" },
+    { "@type": "ReadAction", target: "/" },
+    { "@type": "PayAction", target: "http://insecure.example.no/pay" },
+    { "@type": "OrderAction" },
+  ] }).replace("</body>", `<script>document.modelContext.registerTool({ name: "send_request", description: "Fill in a request." });</script></body>`);
+  const cat = JSON.stringify({ specVersion: "1.0", entries: [
+    { type: "text/html", url: ROOT + "/ai/" },
+    { type: "application/mcp+json", url: "https://mcp.booking.example.com/butikken" },
+    { type: "a2a-agent-card", url: "javascript:alert(1)" },
+  ] });
+  const r = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site: { "/ai/": rich, "/.well-known/ai-catalog.json": cat } }) });
+  assert.deepEqual(r.entry.open_for_ai, {
+    actions: [{ type: "ReserveAction", url: "https://booking.example.com/butikken?dato={dato}" }],
+    webmcp: ["send_request"], mcp: "https://mcp.booking.example.com/butikken", a2a: null, openapi: null,
+  });
+  const none = card({ potentialAction: undefined });
+  const n = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch({ site: { "/ai/": none } }) });
+  assert.equal(n.entry.open_for_ai, null);
+});
+
+test("find_business shows open_for_ai as a fact, with the note that it is not a ranking", async () => {
+  const { default: worker } = await import("../src/index.js");
+  const r = await verifyBusiness(ROOT, { orgNumber: ORG, consent: true, fetchFn: fakeFetch() });
+  const store = memoryStore();
+  await store.save(ORG, { domain: r.domain, status: "listed", entry: r.entry, consent: true }, "listed", "test");
+  const call = async (env) => (await (await worker.fetch(new Request("https://veiviser-test.example/mcp", {
+    method: "POST", headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ jsonrpc: "2.0", id: 1, method: "tools/call", params: { name: "find_business", arguments: { need: "bursdagskake", postal_code: "0150" } } }),
+  }), env)).json()).result.content[0].text;
+  const out = await call({ __store: store });
+  assert.match(out, /Open for AI agents \(published by the business\): OrderAction https:\/\/www\.butikken\.example\.no\/bestill\//);
+  assert.match(out, /describes the service, not its quality, and it never affects who is shown or the order/);
+  const bare = memoryStore();
+  await bare.save(ORG, { domain: r.domain, status: "listed", entry: { ...r.entry, open_for_ai: null }, consent: true }, "listed", "test");
+  assert.doesNotMatch(await call({ __store: bare }), /Open for AI agents/);
 });

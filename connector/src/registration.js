@@ -104,6 +104,30 @@ async function readCard(origin, fetchFn) {
   return { catalog, cardUrl: page.url, page: parsed, objects: jsonldObjects(parsed.jsonld) };
 }
 
+// What the business's own domain offers AI agents beyond reading (P56, Espen 2026-10-14): schema.org actions
+// with a target, WebMCP tools on the card page, and MCP, A2A and OpenAPI entries in ai-catalog.json. Only https
+// links, as the business publishes them; the guide shows it and never ranks by it.
+const NOT_SERVICES = new Set(["SearchAction", "ReadAction"]);
+export function openForAi(objects, card) {
+  const https = (u, base) => { try { const x = new URL(String(u), base); return x.protocol === "https:" ? x.href : null; } catch { return null; } };
+  const actions = objects.flatMap((o) => [].concat(o.potentialAction ?? [])).flatMap((a) => {
+    const type = [].concat(a?.["@type"] ?? []).map((t) => String(t).replace(/^.*[/:#]/, "")).find((t) => /^[A-Za-z]{1,40}Action$/.test(t) && !NOT_SERVICES.has(t));
+    const target = a?.target?.urlTemplate ?? a?.target?.url ?? (typeof a?.target === "string" ? a.target : null);
+    const url = type && target && https(target, card.cardUrl);
+    return url ? [{ type, url: sanitize(url, 500) }] : [];
+  });
+  const entries = card.catalog?.entries ?? [];
+  const link = (re) => entries.filter((e) => re.test(String(e.type ?? ""))).map((e) => https(e.url, card.cardUrl)).filter(Boolean).map((u) => sanitize(u, 500))[0] ?? null;
+  const out = {
+    actions: [...new Map(actions.map((a) => [a.type + a.url, a])).values()].slice(0, 5),
+    webmcp: [...new Set(card.page?.webmcp?.tools ?? [])].map((n) => sanitize(n, 80)).filter(Boolean).slice(0, 10),
+    mcp: link(/mcp/i),
+    a2a: link(/a2a/i),
+    openapi: link(/openapi/i),
+  };
+  return out.actions.length || out.webmcp.length || out.mcp || out.a2a || out.openapi ? out : null;
+}
+
 // The export licence, given on the business's own domain (P46, Espen 2026-10-03): ODbL or DbCL named in
 // the ai-catalog.json extension (index_licence) or as schema.org license in the card.
 const OPEN = /odbl|dbcl|opendatacommons\.org\/licenses\/(odbl|dbcl)/i;
@@ -172,6 +196,7 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
     area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
     postal_code: digits(a.postalCode).slice(0, 4) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
+    open_for_ai: openForAi(card.objects, card),
     sole_proprietorship: unit.organisasjonsform?.kode === "ENK",
     open_licence: openLicence(card, biz),
     country: "NO",
@@ -199,6 +224,7 @@ function cardEntry(biz, card, origin, domain) {
     area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
     postal_code: sanitize(String(a.postalCode ?? ""), 12) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
+    open_for_ai: openForAi(card.objects, card),
   };
 }
 

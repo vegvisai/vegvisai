@@ -554,6 +554,8 @@
    "verified_domain_and_vat_number": "Domain and VAT number checked {date}.",
    "verified_domain_and_company_number": "Domain and company number checked {date}.",
    "verified_domain_only": "Domain checked {date}.",
+   "openForAi": "Open for AI agents",
+   "openWebmcp": "WebMCP tools",
    "ownSite": "Ask, order and pay on the business's own website. VegvisAI takes no part in that.",
    "back": "All businesses in the guide",
    "entryTitle": "{name} · Businesses in the guide · VegvisAI",

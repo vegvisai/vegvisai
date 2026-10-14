@@ -217,7 +217,7 @@ export const LICENCE = {
 // The open export (ODbL, DbCL for the entries): only listed businesses that chose the open licence on
 // their own domain, and only fields the business publishes itself.
 export async function openExport(store, { now = new Date() } = {}) {
-  const FIELDS = ["org_number", "country", "domain", "name", "url", "card_url", "description", "categories", "area", "postal_code", "request"];
+  const FIELDS = ["org_number", "country", "domain", "name", "url", "card_url", "description", "categories", "area", "postal_code", "request", "open_for_ai"];
   const entries = (await store.listed()).filter(exportable)
     .map((b) => Object.fromEntries(FIELDS.map((k) => [k, clean(b.entry[k] ?? (k === "country" ? "NO" : null))])))
     .sort((a, b) => a.org_number.localeCompare(b.org_number));

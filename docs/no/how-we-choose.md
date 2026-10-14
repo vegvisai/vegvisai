@@ -36,6 +36,7 @@ Agenten får beskjed om at rekkefølgen ikke betyr noe, så den kan velge sammen
 | Størrelse, omsetning eller antall avdelinger | Små og store er likestilt |
 | Hvem som kom først | Tidlige brukere får bedre vilkår, aldri bedre plassering |
 | Hvilken leverandør en bedrift bruker | Ingen binding til noen leverandør |
+| Hva en bedrift tilbyr AI-agenter (booking, bestilling, verktøy) | Vises som informasjon om tjenesten, hentet fra bedriftens egen nettside. Det avgjør aldri hvem som vises eller i hvilken rekkefølge |
 
 ## 4. Fjerning
 

@@ -356,8 +356,7 @@
    "description": "Register your business in the open guide. We read the AI business card on your own domain and check it in a public register where we can. Free, and ranking cannot be bought.",
    "test": "Technical test. Not a launch.",
    "h1": "Register your business",
-   "intro": "Does your website describe the business with schema.org? Then it can be registered in the open guide, so AI assistants that do not know you yet can find their way to you. One snippet in the head of your front page is enough. It is free, and placement cannot be bought.",
-   "noCard": "Not yet? <a href=\"{create}\">Make the snippet here</a> in about fifteen minutes, and see <a href=\"{addToSite}\">where to paste it</a> in WordPress, Wix, Squarespace or Shopify. The <a href=\"{check}\">AI check</a> tells you whether your website is ready.",
+   "intro": "Get your business into the open guide in three steps, so AI assistants that do not know you yet can find their way to you. It is free, takes about 20 minutes, and placement cannot be bought.",
    "country": "Country",
    "euGroup": "EU (VAT number checked in VIES)",
    "gbOption": "{name} (company number in Companies House)",
@@ -394,7 +393,18 @@
     "rejected": "Not approved yet."
    },
    "alertEmail": "Email for alerts (optional)",
-   "alertEmailHelp": "We only write if the website stops being readable for AI, plus a short monthly summary of how often the business was looked up. You confirm the address first and can switch it off at any time. The address is never shared and is not in the open index."
+   "alertEmailHelp": "We only write if the website stops being readable for AI, plus a short monthly summary of how often the business was looked up. You confirm the address first and can switch it off at any time. The address is never shared and is not in the open index.",
+   "stepCheck": "<strong>Check</strong> your website below. In 5 to 15 seconds you see whether AI can already read who you are.",
+   "stepCreate": "<strong>Make the card</strong> if something is missing. <a href=\"{create}\">The generator</a> makes one snippet in about fifteen minutes, and <a href=\"{addToSite}\">this guide</a> shows where to paste it in WordPress, Wix, Squarespace or Shopify.",
+   "stepRegister": "<strong>Register</strong> with the form. We check the card and the public register, and a person approves new entries.",
+   "quickH2": "Check your website",
+   "quickButton": "Check",
+   "quickChecking": "Checking the website. This takes 5 to 15 seconds.",
+   "quickReady": "Looks ready. The address is filled in below: choose the country and register.",
+   "quickNotReady": "Not quite yet. The front page does not describe the business with schema.org, so there is nothing for us to register.",
+   "quickNotReadyButton": "Make the card",
+   "quickFromCheck": "Checked in the AI check: looks ready.",
+   "formH2": "Register"
   },
   "create": {
    "title": "Make an AI business card · VegvisAI",
@@ -556,7 +566,7 @@
    "verified_domain_only": "Domain checked {date}.",
    "openForAi": "Open for AI agents",
    "openWebmcp": "WebMCP tools",
-   "ownSite": "Ask, order and pay on the business's own website. VegvisAI takes no part in that.",
+   "ownSite": "Ask, order and pay on the business's own website, with the business's own payment solution. VegvisAI never handles the money.",
    "back": "All businesses in the guide",
    "entryTitle": "{name} · Businesses in the guide · VegvisAI",
    "entryDescription": "{name} is registered in the open guide VegvisAI. {description}",

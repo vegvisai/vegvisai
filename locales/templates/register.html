@@ -16,8 +16,21 @@
 {{testBanner}}
 <h1>{{t.h1}}</h1>
 <p>{{t.intro}}</p>
-<p class="mut">{{t.noCard}}</p>
+<ol class="steg">
+<li>{{t.stepCheck}}</li>
+<li>{{t.stepCreate}}</li>
+<li>{{t.stepRegister}}</li>
+</ol>
 
+<h2>{{t.quickH2}}</h2>
+<form id="sjekkskjema">
+<label for="sjekkurl">{{t.url}}</label>
+<input id="sjekkurl" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="{{attr:t.urlPlaceholder}}" required>
+<button id="sjekkknapp">{{t.quickButton}}</button>
+</form>
+<div id="sjekksvar" aria-live="polite"></div>
+
+<h2>{{t.formH2}}</h2>
 <form id="skjema">
 <label for="land">{{t.country}}</label>
 <select id="land">
@@ -48,7 +61,8 @@
 <p id="status" class="mut" aria-live="polite"></p>
 <div id="resultat"></div>
 
-<h2>{{t.whatH2}}</h2>
+<details>
+<summary>{{t.whatH2}}</summary>
 <ol>
 <li>{{t.step1}}</li>
 <li>{{t.step2}}</li>
@@ -57,6 +71,7 @@
 <li>{{t.step5}}</li>
 </ol>
 <p class="mut">{{t.privacy}}</p>
+</details>
 
 <h2>{{t.statusH2}}</h2>
 <form id="statusskjema">
@@ -73,9 +88,45 @@
 const P = JSON.parse(document.getElementById("tekster").textContent), LANG = "{{_meta.code}}";
 const $ = (id) => document.getElementById(id);
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
-// Filled in from the AI check (?url=).
+// Funnel count without personal data: only the event name is sent, never the address (/api/e/).
+const ping = (name) => { try { fetch("/api/e/" + name, { method: "POST", keepalive: true }).catch(() => {}); } catch { /* counting is optional */ } };
+// Filled in from the AI check (?url=), which has already found the site ready.
 const fromCheck = new URLSearchParams(location.search).get("url");
-if (fromCheck && !$("url").value) $("url").value = fromCheck.slice(0, 300);
+if (fromCheck && !$("url").value) {
+  $("url").value = $("sjekkurl").value = fromCheck.slice(0, 300);
+  $("sjekksvar").replaceChildren(el("p", P.quickFromCheck, "ok"));
+}
+
+// Step 1 on this page: the same AI check, and the form filled in when the site is ready.
+$("sjekkskjema").addEventListener("submit", async (ev) => {
+  ev.preventDefault();
+  const address = $("sjekkurl").value.trim();
+  $("sjekkknapp").disabled = true;
+  $("sjekksvar").replaceChildren(el("p", P.quickChecking, "mut"));
+  try {
+    const res = await fetch("/api/sjekk?lang=" + LANG + "&url=" + encodeURIComponent(address));
+    const r = await res.json();
+    if (!res.ok) throw new Error(r.error || P.failed);
+    const id = (r.breakdown || []).find((b) => b.id === "identity");
+    const ready = r.score !== null && id && id.points === id.max && (r.profile === "business" || r.profile === "organisation");
+    ping(ready ? "register-check-ready" : "register-check-not-ready");
+    if (ready) {
+      $("url").value = r.site || address;
+      $("sjekksvar").replaceChildren(el("p", P.quickReady, "ok"));
+      $("land").focus();
+    } else {
+      const a = el("a", P.quickNotReadyButton, "btn btn-blue");
+      a.href = "{{path:create}}?website=" + encodeURIComponent(r.site || address);
+      const box = el("div", undefined, "adv");
+      box.append(el("p", P.quickNotReady), a);
+      $("sjekksvar").replaceChildren(box);
+    }
+  } catch (e) {
+    $("sjekksvar").replaceChildren(el("p", e.message, "mut"));
+  } finally {
+    $("sjekkknapp").disabled = false;
+  }
+});
 const land = () => ($("land").value === "OTHER" ? $("annet").value.trim().toUpperCase() : $("land").value);
 function showCountry() {
   const v = $("land").value;

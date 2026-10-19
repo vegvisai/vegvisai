@@ -63,6 +63,7 @@ const P = T.page, C = T.check, LANG = document.documentElement.lang;
 const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
 const cap = (s) => s.charAt(0).toUpperCase() + s.slice(1);
 const $ = (id) => document.getElementById(id);
+const ping = (name) => { try { fetch("/api/e/" + name, { method: "POST", keepalive: true }).catch(() => {}); } catch { /* counting is optional */ } };
 const el = (tag, text, cls) => { const e = document.createElement(tag); if (text !== undefined) e.textContent = text; if (cls) e.className = cls; return e; };
 const yesNo = (b) => (b ? C.yes : C.no);
 
@@ -102,10 +103,13 @@ function show(r) {
   if (pts.llms_txt && pts.llms_txt.points < pts.llms_txt.max) missing.push(P.ctaLlms);
   // The site already describes the business with schema.org: offer registration with the address filled in.
   const ready = r.score !== null && pts.identity && pts.identity.points === pts.identity.max && (r.profile === "business" || r.profile === "organisation");
+  // Funnel count without personal data: only the event name is sent, never the address (/api/e/).
+  if (r.score !== null && (r.profile === "business" || r.profile === "organisation")) ping(ready ? "check-ready" : "check-not-ready");
   if (ready) {
     const box = el("div", undefined, "boks neste");
     const a = el("a", P.readyButton, "btn btn-blue");
     a.href = "{{path:register}}?url=" + encodeURIComponent(r.site);
+    a.addEventListener("click", () => ping("check-register-click"));
     box.append(el("strong", P.readyTitle), el("p", P.readyText), a);
     out.append(box);
   }

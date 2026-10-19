@@ -360,7 +360,16 @@ const JSON_HEADERS = { "Cache-Control": "no-store", ...NOINDEX };
 const tooMany = (message) =>
   Response.json({ error: message }, { status: 429, headers: { ...JSON_HEADERS, "Retry-After": String(RETRY_SECONDS) } });
 
+export const FUNNEL_EVENTS = new Set(["check-ready", "check-not-ready", "check-register-click", "register-check-ready", "register-check-not-ready"]);
+function funnelEvent(request, url) {
+  if (request.method !== "POST") return new Response(null, { status: 405, headers: { Allow: "POST" } });
+  const ok = FUNNEL_EVENTS.has(url.pathname.slice("/api/e/".length));
+  return new Response(null, { status: ok ? 204 : 404, headers: { "Cache-Control": "no-store", ...NOINDEX } });
+}
+
 async function api(request, url, env) {
+  // Funnel events without personal data: nothing is stored or read; Cloudflare's aggregated analytics counts the requests by path.
+  if (url.pathname.startsWith("/api/e/")) return funnelEvent(request, url);
   if (url.pathname === "/api/meld-inn" && request.method === "POST") return register(request, env);
   if (url.pathname === "/api/admin/review" && request.method === "POST") return review(request, env);
   if (url.pathname === "/api/admin/pending") return pending(request, env);

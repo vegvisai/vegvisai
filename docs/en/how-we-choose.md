@@ -10,7 +10,7 @@ The guide does not rank. It finds who can help with what you asked, and shows th
 
 ## 1. Who can be shown
 
-Since 2026-10-02 these checks run when a business registers and again every week, and a person reviews every new entry before it is shown. A business or organisation is shown only when all of these are true:
+Since 2026-10-02 these checks run when a business registers and again every week. At the start, a person also reviews every new entry before it is shown. A business or organisation is shown only when all of these are true:
 
 - **It can help.** The need matches the services and categories in its own AI business card.
 - **It serves the place.** The area in its card covers where the help is needed. Today the guide shows the area to the agent, which checks it with the user and asks for the place instead of guessing; automatic filtering by place comes later.

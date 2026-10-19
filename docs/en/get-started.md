@@ -24,7 +24,7 @@ Have these ready. Short and concrete beats long and polished.
 - **Area**: the municipalities you serve, whether you come to the customer, and whether you deliver
 - **Opening hours**, **phone**, **email** and your **contact or booking page**
 - **Prices** you are happy to show, for example «Double room: €120 a night, breakfast included»
-The prices are examples of a business's own prices. VegvisAI is free.
+The prices are examples of a business's own prices. Getting listed and the toolkit are free; paid help is optional.
 - **What you need to know** from a customer to answer a request, for example dates, number of guests and special needs
 
 ## Step 2: Generate the files
@@ -54,7 +54,7 @@ Run the [AI check](https://vegvis.ai/check/) on your site. A complete business c
 
 ## Step 5: Register in the open guide
 
-Register your business with the [registration form](https://vegvis.ai/register/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
+Register your business with the [registration form](https://vegvis.ai/register/): your web address and organisation number. The guide reads the card on your own domain, checks the organisation number in the public register, and at the start a person reviews the entry before it is shown. Then AI assistants that do not know you yet can find their way to your card. It is free, and placement cannot be bought.
 
 **Stuck?** Ask for help with the form «Find help» on [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). A developer from the open helper list can do it for you, free or for a fee you agree with them. VegvisAI takes no cut, and using a helper gives no advantage in the guide: the same rules apply whether you do it yourself or pay someone. Never give a helper your passwords; give them their own login and remove it afterwards.
 

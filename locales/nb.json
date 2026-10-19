@@ -380,8 +380,7 @@
    "description": "Meld inn bedriften i den åpne veiviseren. Vi leser AI-visittkortet på deres eget domene og sjekker organisasjonsnummeret i Enhetsregisteret. Gratis, og rangering kan ikke kjøpes.",
    "test": "Teknisk test. Ikke en lansering.",
    "h1": "Meld inn bedriften",
-   "intro": "Beskriver nettsiden bedriften med schema.org? Da kan den meldes inn i den åpne veiviseren, så AI-assistenter som ikke kjenner dere fra før, finner veien til dere. Én kodebit i toppen av forsiden er nok. Det er gratis, og plassering kan ikke kjøpes.",
-   "noCard": "Har dere ikke det ennå? <a href=\"{create}\">Lag kodebiten her</a> på et kvarter, og se <a href=\"{addToSite}\">hvor du limer den inn</a> i WordPress, Wix, Squarespace eller Shopify. <a href=\"{check}\">AI-sjekken</a> sier om nettsiden er klar.",
+   "intro": "Få bedriften inn i den åpne veiviseren i tre steg, så AI-assistenter som ikke kjenner dere fra før, finner veien til dere. Det er gratis, tar rundt 20 minutter, og plassering kan ikke kjøpes.",
    "country": "Land",
    "euGroup": "EU (momsnummer sjekkes i VIES)",
    "gbOption": "{name} (foretaksnummer i Companies House)",
@@ -418,7 +417,18 @@
     "rejected": "Ikke godkjent ennå."
    },
    "alertEmail": "E-post for varsler (valgfritt)",
-   "alertEmailHelp": "Vi sender bare beskjed hvis nettsiden slutter å være lesbar for AI, og en kort oversikt hver måned over hvor ofte bedriften ble slått opp. Du bekrefter adressen først, og kan når som helst slå det av. Adressen deles aldri og står ikke i den åpne indeksen."
+   "alertEmailHelp": "Vi sender bare beskjed hvis nettsiden slutter å være lesbar for AI, og en kort oversikt hver måned over hvor ofte bedriften ble slått opp. Du bekrefter adressen først, og kan når som helst slå det av. Adressen deles aldri og står ikke i den åpne indeksen.",
+   "stepCheck": "<strong>Sjekk</strong> nettsiden under. På 5 til 15 sekunder ser du om AI allerede kan lese hvem dere er.",
+   "stepCreate": "<strong>Lag visittkortet</strong> hvis noe mangler. <a href=\"{create}\">Generatoren</a> lager én kodebit på et kvarter, og <a href=\"{addToSite}\">denne guiden</a> viser hvor du limer den inn i WordPress, Wix, Squarespace eller Shopify.",
+   "stepRegister": "<strong>Meld inn</strong> med skjemaet. Vi sjekker visittkortet og registeret, og en person godkjenner nye oppføringer.",
+   "quickH2": "Sjekk nettsiden",
+   "quickButton": "Sjekk",
+   "quickChecking": "Sjekker nettsiden. Det tar 5 til 15 sekunder.",
+   "quickReady": "Ser klar ut. Adressen er fylt inn under: velg land og meld inn.",
+   "quickNotReady": "Ikke helt ennå. Forsiden beskriver ikke bedriften med schema.org, så det er ingenting for oss å melde inn.",
+   "quickNotReadyButton": "Lag visittkortet",
+   "quickFromCheck": "Sjekket i AI-sjekken: ser klar ut.",
+   "formH2": "Meld inn"
   },
   "create": {
    "title": "Lag et AI-visittkort · VegvisAI",
@@ -581,7 +591,7 @@
    "verified_domain_only": "Domenet sjekket {date}.",
    "openForAi": "Åpent for AI-agenter",
    "openWebmcp": "WebMCP-verktøy",
-   "ownSite": "Spør, bestill og betal på bedriftens egen nettside. VegvisAI tar ikke del i det.",
+   "ownSite": "Spør, bestill og betal på bedriftens egen nettside, med bedriftens egen betalingsløsning. VegvisAI håndterer aldri pengene.",
    "back": "Alle bedrifter i veiviseren",
    "entryTitle": "{name} · Bedrifter i veiviseren · VegvisAI",
    "entryDescription": "{name} er meldt inn i den åpne veiviseren VegvisAI. {description}",

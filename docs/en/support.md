@@ -4,7 +4,7 @@ Support
 
 # Help keep the road open
 
-VegvisAI is free, open source and run in spare time. Here is how you can help, with money or without.
+The guide and the toolkit are free, open source and run in spare time. Here is how you can help, with money or without.
 
 ## Without money
 

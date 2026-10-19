@@ -10,7 +10,7 @@ Veiviseren rangerer ikke. Den finner hvem som kan hjelpe med det du spurte om, o
 
 ## 1. Hvem kan vises
 
-Siden 02.10.2026 kjører disse kontrollene når en bedrift melder seg inn og på nytt hver uke, og en person går gjennom hver ny oppføring før den vises. En bedrift eller organisasjon vises bare når alt dette stemmer:
+Siden 02.10.2026 kjører disse kontrollene når en bedrift melder seg inn og på nytt hver uke. I starten går en person også gjennom hver ny oppføring før den vises. En bedrift eller organisasjon vises bare når alt dette stemmer:
 
 - **Den kan hjelpe.** Behovet passer med tjenestene og kategoriene i dens eget AI-visittkort.
 - **Den dekker stedet.** Området i visittkortet dekker der hjelpen trengs. I dag viser veiviseren området til agenten, som sjekker det med brukeren og spør om stedet i stedet for å gjette; automatisk filtrering på sted kommer senere.

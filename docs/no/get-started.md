@@ -25,7 +25,7 @@ Har du ikke organisasjonsnummer ennå? Altinn forklarer [valg av organisasjonsfo
 - **Område**: kommunene du betjener, om du kommer til kunden, og om du leverer
 - **Åpningstider**, **telefon**, **e-post** og **kontakt- eller bookingsiden** din
 - **Priser** du gjerne viser, for eksempel «Bursdagskake, 12 personer: fra 595 kr» eller «Dobbeltrom: 1 350 kr per natt med frokost»
-Prisene er eksempler på bedriftens egne priser. VegvisAI er gratis.
+Prisene er eksempler på bedriftens egne priser. Oppføringen og verktøyene er gratis, og betalt hjelp er valgfritt.
 - **Hva du må vite** fra en kunde for å svare på en forespørsel, for eksempel dato, antall personer og allergier, eller datoer og antall gjester
 
 ## Steg 2: Lag filene
@@ -55,7 +55,7 @@ Kjør [AI-sjekken](https://vegvis.ai/sjekk/) på nettsiden din. Et komplett visi
 
 ## Steg 5: Meld inn bedriften i den åpne veiviseren
 
-Meld inn bedriften i [påmeldingsskjemaet](https://vegvis.ai/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og en person går gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
+Meld inn bedriften i [påmeldingsskjemaet](https://vegvis.ai/meld-inn/): nettadressen og organisasjonsnummeret. Veiviseren leser visittkortet på deres eget domene, sjekker organisasjonsnummeret i det offentlige registeret, og i starten går en person gjennom oppføringen før den vises. Da finner AI-assistenter som ikke kjenner dere fra før, veien til kortet. Det er gratis, og plassering kan ikke kjøpes.
 
 **Står du fast?** Be om hjelp med skjemaet «Find help» på [GitHub](https://github.com/vegvisai/vegvisai/issues/new?template=find-help.yml). En utvikler fra den åpne hjelperlisten kan gjøre det for deg, gratis eller mot en pris dere avtaler. VegvisAI tar ingen andel, og en hjelper gir ingen fordel i veiviseren: reglene er de samme om dere gjør det selv eller betaler noen. Gi aldri en hjelper passordene deres; gi hjelperen egen innlogging og fjern den etterpå.
 

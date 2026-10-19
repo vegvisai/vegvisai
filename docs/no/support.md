@@ -4,7 +4,7 @@ Støtt oss
 
 # Hjelp oss å holde veien åpen
 
-VegvisAI er gratis, åpen kildekode og drives på fritiden. Her er hvordan du kan hjelpe, med eller uten penger.
+Veiviseren og verktøyene er gratis, åpen kildekode og drives på fritiden. Her er hvordan du kan hjelpe, med eller uten penger.
 
 ## Uten penger
 

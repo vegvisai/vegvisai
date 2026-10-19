@@ -4,6 +4,10 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Wording: what is free (getting listed and the toolkit), «never handles the money» on the agent payments guide, «never takes over the sale or the money» on the front page, and manual review of new entries «at the start» on How we choose and Get started.
+- Business pages: «VegvisAI takes no part in that» is now «with the business's own payment solution. VegvisAI never handles the money», so the text stays true when agents or hosted modules help with the order.
+- Registration page: three steps first (check, make the card, register), an AI check at the top that fills in the form when the site is ready, and «What happens» folded away.
+- Funnel events without personal data: `POST /api/e/<step>` (five known step names, 204, nothing stored, no address sent) from the AI check and the registration page, counted from aggregated Cloudflare analytics.
 - Index: new field `open_for_ai` per business, read from its own domain: schema.org actions with an https target, WebMCP tool names on the card page, and MCP, A2A and OpenAPI entries in ai-catalog.json. Shown in `find_business` (with a note that it is a fact, not a quality measure), in the open export and on the business pages. It never affects the random order.
 - WebMCP: the generator's request form and the guide examples catch a rejected `registerTool()` promise (taken name, empty description, `tools` policy off) and log a warning instead of an uncaught error.
 

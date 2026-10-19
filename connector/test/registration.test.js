@@ -303,3 +303,15 @@ test("find_business shows open_for_ai as a fact, with the note that it is not a 
   await bare.save(ORG, { domain: r.domain, status: "listed", entry: { ...r.entry, open_for_ai: null }, consent: true }, "listed", "test");
   assert.doesNotMatch(await call({ __store: bare }), /Open for AI agents/);
 });
+
+test("funnel events: known names answer 204 and store nothing, unknown names 404, GET is refused", async () => {
+  const { default: worker } = await import("../src/index.js");
+  const post = (name) => worker.fetch(new Request("https://veiviser-test.example/api/e/" + name, { method: "POST" }), {});
+  for (const name of ["check-ready", "check-not-ready", "check-register-click", "register-check-ready", "register-check-not-ready"]) {
+    const r = await post(name);
+    assert.equal(r.status, 204, name);
+    assert.equal(await r.text(), "");
+  }
+  assert.equal((await post("https%3A%2F%2Fexample.no")).status, 404, "no addresses, only known event names");
+  assert.equal((await worker.fetch(new Request("https://veiviser-test.example/api/e/check-ready"), {})).status, 405);
+});

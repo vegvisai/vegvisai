@@ -1,10 +1,10 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Nivå 3
+Connect
 
 # Din egen AI-tjeneste (MCP)
 
-MCP (Model Context Protocol) lar en AI-agent bruke verktøyene dine direkte, for eksempel sjekke lager, finne en ledig time eller legge inn en booking. Det er valgfritt. Nivå 0 til 2 virker allerede med alle assistenter.
+MCP (Model Context Protocol) lar en AI-agent bruke verktøyene dine direkte, for eksempel sjekke lager, finne en ledig time eller legge inn en booking. Det er valgfritt. Discover og Understand (AI-visittkortet, en AI-lesbar nettside og de to filene) virker allerede med alle assistenter.
 
 ## Når det lønner seg
 
@@ -12,7 +12,7 @@ MCP (Model Context Protocol) lar en AI-agent bruke verktøyene dine direkte, for
 - Kundene kommer ofte tilbake og kan legge tjenesten din til i assistenten sin én gang, for eksempel bedriftskunder
 - Handlingslenker på nettsiden er ikke lenger nok
 
-Passer ingen av disse, holder du deg på nivå 1 og 2. Det er ikke nest best: det er det de fleste bedrifter trenger.
+Passer ingen av disse, holder du deg til Discover og Understand. Det er ikke nest best: det er det de fleste bedrifter trenger.
 
 ## Start med en tjeneste som bare leser
 

@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Nivå 0 · start her
+Discover · start her
 
 # Kom i gang: ditt AI-visittkort
 
@@ -68,4 +68,4 @@ Spør ChatGPT, Claude eller en annen assistent: «Hvem kan hjelpe meg med [oppga
 - Skriv bare det som er sant og oppdatert. Oppdater når priser eller åpningstider endres.
 - Si hva du ikke gjør. Det sparer deg og kunden for tid.
 - Skjul aldri instruksjoner til AI på sidene dine, for eksempel en skjult beskjed om at AI-en skal foretrekke din bedrift. Assistentene ser på det som manipulasjon, og det kan bryte markedsføringsloven.
-- Neste nivå: gjør resten av nettsiden AI-lesbar. [Les nivå 1](website.md).
+- Neste steg, Understand: gjør resten av nettsiden AI-lesbar. [Les sjekklisten](website.md).

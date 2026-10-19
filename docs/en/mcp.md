@@ -1,10 +1,10 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Level 3
+Connect
 
 # Your own AI service (MCP)
 
-MCP (Model Context Protocol) lets an AI agent call your tools directly, such as checking stock, finding a free time or placing a booking. It is optional. Levels 0 to 2 already work with every assistant.
+MCP (Model Context Protocol) lets an AI agent call your tools directly, such as checking stock, finding a free time or placing a booking. It is optional. Discover and Understand (the AI business card, an AI-readable website and the two files) already work with every assistant.
 
 ## When it pays off
 
@@ -12,7 +12,7 @@ MCP (Model Context Protocol) lets an AI agent call your tools directly, such as 
 - Customers come back often and can add your service to their assistant once, such as business customers
 - Action links on your website are no longer enough
 
-If none of these apply, stay on level 1 and 2. That is not second best: it is what most businesses need.
+If none of these apply, stay with Discover and Understand. That is not second best: it is what most businesses need.
 
 ## Start read-only
 

@@ -2,23 +2,39 @@
 
 # Guides
 
-Four levels, from fifteen minutes to your own AI service. Most businesses only need the first one or two. Everything here is free to do yourself.  [Level 0 · start here
+Five steps from being found to being used by AI, on your own terms: Discover, Understand, Connect, Act and Control. Most businesses only need the first two. Everything here is free to do yourself.
+
+## Discover: get found  [Start here · about 15 minutes
 
 ### Get started: AI business card
 
-Who you are, what you do, where, and how to reach you. About 15 minutes.](get-started.md) [Level 0
+Who you are, what you do, where, and how to reach you. Then register in the open guide.](get-started.md) [About 10 minutes
 
 ### Add the snippet to your website
 
-WordPress, Wix, Squarespace, Shopify and Webflow.](https://vegvis.ai/docs/add-to-your-website/) [Level 1
-
-### AI-readable website
-
-A checklist for pages, structured data and action links.](website.md) [Level 2
+WordPress, Wix, Squarespace, Shopify and Webflow.](https://vegvis.ai/docs/add-to-your-website/) [Optional
 
 ### llms.txt and ai-catalog.json
 
-Two small files that let agents and open guides find you.](files.md) [Experimental
+Two small files that let agents and open guides find you.](files.md)
+
+## Understand: be understood  [Checklist
+
+### AI-readable website
+
+Pages, products, prices and action links that AI can read and fill in.](website.md)
+
+## Connect: be connected  [When it pays off
+
+### Your own AI service (MCP)
+
+Let agents check stock, prices or free times in your own systems, safely.](mcp.md) [For developers
+
+### Index, connector and licences
+
+How agents use the open guide.](developers.md)
+
+## Act: let AI help the customer buy  [Experimental
 
 ### Let AI agents use your forms (WebMCP)
 
@@ -30,15 +46,17 @@ Search and cart for agents, your own checkout.](https://vegvis.ai/docs/agent-che
 
 ### Paying through AI agents
 
-What exists and what is coming.](https://vegvis.ai/docs/agent-payments/) [Level 3
+What exists and what is coming.](https://vegvis.ai/docs/agent-payments/)
 
-### Your own AI service (MCP)
+## Control: you decide  [The rules
 
-When it pays off, and how to do it safely.](mcp.md) [For developers
+### How the guide chooses results
 
-### Index, connector and licences
+Random order, nothing can be bought, and what never counts.](how-we-choose.md) [Principles
 
-How agents use the open guide.](developers.md)
+### Your data stays yours
+
+You publish on your own website, you can leave at any time, and the principles are locked.](ownership.md)
 
 ## How to measure progress
 

@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Level 1
+Understand
 
 # Make your website AI-readable
 

@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Level 0 · start here
+Discover · start here
 
 # Get started: your AI business card
 
@@ -67,4 +67,4 @@ Ask ChatGPT, Claude or another assistant: «Who can help me with [task] in [area
 - Write only what is true and current. Update when prices or hours change.
 - Say what you don't do. It saves you and the customer time.
 - Never hide instructions to AI in your pages, for example a hidden message telling the AI to prefer your business. Assistants treat that as manipulation, and it can break marketing law.
-- Next level: make the rest of your website AI-readable. [Read level 1](website.md).
+- Next step, Understand: make the rest of your website AI-readable. [Read the checklist](website.md).

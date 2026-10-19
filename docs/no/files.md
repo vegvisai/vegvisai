@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Nivå 2
+Discover · valgfritt
 
 # llms.txt og ai-catalog.json
 

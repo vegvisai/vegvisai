@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Level 2
+Discover · optional
 
 # llms.txt and ai-catalog.json
 

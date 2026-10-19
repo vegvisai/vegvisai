@@ -2,23 +2,39 @@
 
 # Guider
 
-Fire nivåer, fra et kvarter til din egen AI-tjeneste. De fleste bedrifter trenger bare det første eller de to første. Alt her kan du gjøre selv, gratis.  [Nivå 0 · start her
+Fem steg fra å bli funnet til å bli brukt av AI, på dine egne premisser: Discover, Understand, Connect, Act og Control. De fleste bedrifter trenger bare de to første. Alt her kan du gjøre selv, gratis.
+
+## Discover: bli funnet  [Start her · rundt 15 minutter
 
 ### Kom i gang: AI-visittkort
 
-Hvem du er, hva du gjør, hvor, og hvordan du nås. Rundt 15 minutter.](get-started.md) [Nivå 0
+Hvem du er, hva du gjør, hvor, og hvordan du nås. Meld deretter inn bedriften i den åpne veiviseren.](get-started.md) [Rundt 10 minutter
 
 ### Legg kodebiten på nettsiden
 
-WordPress, Wix, Squarespace, Shopify og Webflow.](https://vegvis.ai/no/guider/legg-til-pa-nettsiden/) [Nivå 1
-
-### AI-lesbar nettside
-
-En sjekkliste for sider, strukturerte data og handlingslenker.](website.md) [Nivå 2
+WordPress, Wix, Squarespace, Shopify og Webflow.](https://vegvis.ai/no/guider/legg-til-pa-nettsiden/) [Valgfritt
 
 ### llms.txt og ai-catalog.json
 
-To små filer som lar agenter og åpne veivisere finne deg.](files.md) [Eksperimentelt
+To små filer som lar agenter og åpne veivisere finne deg.](files.md)
+
+## Understand: bli forstått  [Sjekkliste
+
+### AI-lesbar nettside
+
+Sider, produkter, priser og handlingslenker som AI kan lese og fylle ut.](website.md)
+
+## Connect: bli koblet til  [Når det lønner seg
+
+### Din egen AI-tjeneste (MCP)
+
+La agenter sjekke lager, priser eller ledige tider i dine egne systemer, på en trygg måte.](mcp.md) [For utviklere
+
+### Indeks, connector og lisenser
+
+Hvordan agenter bruker den åpne veiviseren.](developers.md)
+
+## Act: la AI hjelpe kunden å handle  [Eksperimentelt
 
 ### La AI-agenter bruke skjemaene dine (WebMCP)
 
@@ -30,19 +46,21 @@ Søk og handlekurv for agenter, din egen kasse.](https://vegvis.ai/no/guider/age
 
 ### Betaling via AI-agenter
 
-Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/) [Oversikt
+Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/)
+
+## Control: du bestemmer  [Oversikt
 
 ### Når en agent skal handle for bedriften
 
-Systembruker i Altinn: fullmakt til systemer og agenter.](https://vegvis.ai/no/guider/agenter-og-fullmakt/) [Nivå 3
+Systembruker i Altinn: fullmakt til systemer og agenter.](https://vegvis.ai/no/guider/agenter-og-fullmakt/) [Reglene
 
-### Din egen AI-tjeneste (MCP)
+### Slik velger veiviseren
 
-Når det lønner seg, og hvordan du gjør det trygt.](mcp.md) [For utviklere
+Tilfeldig rekkefølge, ingenting kan kjøpes, og hva som aldri teller.](how-we-choose.md) [Prinsipper
 
-### Indeks, connector og lisenser
+### Dataene dine er dine
 
-Hvordan agenter bruker den åpne veiviseren.](developers.md)
+Du publiserer på din egen nettside, du kan gå når du vil, og prinsippene er låst.](ownership.md)
 
 ## Slik måler du fremgangen
 

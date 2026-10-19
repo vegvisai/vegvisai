@@ -1,6 +1,6 @@
 <!-- Generated from website/content. Edit the website fragment, not this file. -->
 
-Nivå 1
+Understand
 
 # Gjør nettsiden din AI-lesbar
 

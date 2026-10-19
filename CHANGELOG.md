@@ -4,6 +4,7 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Guides and front page organised in five steps, Discover, Understand, Connect, Act and Control (D-U-C-A-C), instead of levels 0 to 3.
 - Wording: what is free (getting listed and the toolkit), «never handles the money» on the agent payments guide, «never takes over the sale or the money» on the front page, and manual review of new entries «at the start» on How we choose and Get started.
 - Business pages: «VegvisAI takes no part in that» is now «with the business's own payment solution. VegvisAI never handles the money», so the text stays true when agents or hosted modules help with the order.
 - Registration page: three steps first (check, make the card, register), an AI check at the top that fills in the form when the site is ready, and «What happens» folded away.

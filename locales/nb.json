@@ -125,6 +125,7 @@
   },
   "fields": "Strukturerte data for produkter eller tjenester mangler felt: {fields}.",
   "priceText": "Merk opp produkter eller tjenester med schema.org (Product, Service og Offer). Pris står som vanlig tekst på {n} av {m} sider, så informasjonen finnes; den mangler bare struktur.",
+  "noPrices": "AI-assistenter kan få spørsmål med budsjett, for eksempel «elektriker til under 1000 kr timen». Vi fant ingen priser eller prisnivå på sidene vi sjekket. Vis priser, fra-priser eller timepris, eller legg inn priceRange (for eksempel «kr 500 til 1500») i schema.org-beskrivelsen av bedriften. Dette endrer ikke poengsummen.",
   "llms": "Valgfritt: legg ut /llms.txt med en kort oversikt for språkmodeller. Noen assistenter leser den; Google sier den kan overses, så den teller lite.",
   "catalog": "Publiser /.well-known/ai-catalog.json, så åpne veivisere finner tjenestene deres.",
   "injection": "Se over {n} tekstbiter som ligner mønstre som ofte brukes for å gi instrukser til AI-assistenter. Et treff sier ingenting om hensikt; er teksten ikke ment for leserne, kan den fjernes.",
@@ -526,7 +527,17 @@
     "prices": "priser",
     "areas": "område",
     "hoursNote": "åpningstider",
-    "requestInfo": "hva dere trenger å vite"
+    "requestInfo": "hva dere trenger å vite",
+    "profiles": "profiler",
+    "orgNumber": "organisasjonsnummer",
+    "street": "gateadresse",
+    "postalCode": "postnummer",
+    "city": "sted",
+    "phone": "telefon",
+    "email": "e-post",
+    "opens": "åpner",
+    "closes": "stenger",
+    "days": "dager"
    },
    "_example": {
     "country": "NO",
@@ -567,7 +578,17 @@
    "noteLlms": "Valgfritt. En kort oversikt for språkmodeller, i roten av nettsiden (/llms.txt).",
    "noteCatalog": "Valgfritt. Lar åpne veivisere finne tjenestene dine. Legges i mappen /.well-known/, som mange nettsidebyggere ikke gir tilgang til.",
    "guideLink": "Ta med lenke til bedriftens side i den åpne veiviseren (anbefalt)",
-   "guideLinkHelp": "Én linje i llms.txt og ett felt i ai-catalog.json viser AI-assistenter hvor bedriften kan sjekkes. Siden sier om bedriften er meldt inn. Lenken står ikke i selve visittkortet, og du kan ta den bort når du vil."
+   "guideLinkHelp": "Én linje i llms.txt og ett felt i ai-catalog.json viser AI-assistenter hvor bedriften kan sjekkes. Siden sier om bedriften er meldt inn. Lenken står ikke i selve visittkortet, og du kan ta den bort når du vil.",
+   "pasteH": "Har du bare en Facebook-side?",
+   "pasteIntro": "Kopier teksten fra «Om»-delen på bedriftens egen side, for eksempel på Facebook eller Instagram, og lim den inn her. Teksten leses bare i nettleseren din. Vi henter ingenting fra Facebook, og ingenting sendes til oss.",
+   "pasteLabel": "Tekst fra bedriftens egen side",
+   "pasteButton": "Fyll ut fra teksten",
+   "pasteDone": "Fylte ut: {fields}. Bare tomme felt er fylt ut. Se over alt før du lager filene.",
+   "pasteNone": "Fant ingenting vi kunne fylle ut. Fyll ut skjemaet for hånd.",
+   "pasteDomain": "Visittkortet må ligge på et eget domene, for eksempel dittfirma.no, fordi veiviseren sjekker domenet. En Facebook-adresse kan ikke brukes som nettside, men den blir tatt med som lenke. Har du ikke eget domene ennå, kan visittkortet (index.html) være hele nettsiden. Flere tilbyr i dag gratis publisering av en enkel side, for eksempel (alfabetisk) Cloudflare Pages, GitHub Pages og Netlify. VegvisAI har ingen avtale med dem og får ingenting for å nevne dem. Sjekk vilkårene deres selv.",
+   "profiles": "Profiler på andre plattformer (én per linje)",
+   "profilesHelp": "For eksempel Facebook eller Instagram. Blir lenket fra visittkortet (schema.org sameAs), men aldri brukt som nettside.",
+   "pasteHelpOffer": "<strong>Vil du ha hjelp?</strong> I starten hjelper vi noen få bedrifter gratis med å publisere visittkortet på eget domene. Domenet kjøper og eier bedriften selv. Hjelpen gir ingen bedre plassering i veiviseren. Skriv til <a href=\"mailto:contact@vegvis.ai?subject=Hjelp%20med%20visittkort\" id=\"helpMail\">contact@vegvis.ai</a>."
   },
   "directory": {
    "title": "Bedrifter i veiviseren · VegvisAI",
@@ -595,7 +616,18 @@
    "back": "Alle bedrifter i veiviseren",
    "entryTitle": "{name} · Bedrifter i veiviseren · VegvisAI",
    "entryDescription": "{name} er meldt inn i den åpne veiviseren VegvisAI. {description}",
-   "notFound": "Vi fant ingen bedrift med dette domenet i veiviseren. Den kan være fjernet, eller den er ikke meldt inn."
+   "notFound": "Vi fant ingen bedrift med dette domenet i veiviseren. Den kan være fjernet, eller den er ikke meldt inn.",
+   "byPlace": "Etter sted",
+   "byService": "Etter tjeneste",
+   "placeH1": "Bedrifter i {place}",
+   "serviceH1": "Bedrifter som tilbyr {service}",
+   "servicePlaceH1": "{service} i {place}",
+   "facetTitle": "{h1} · Bedrifter i veiviseren · VegvisAI",
+   "facetDescription": "{h1}: bedrifter som selv har meldt seg inn i den åpne veiviseren VegvisAI. Tilfeldig rekkefølge, aldri rangert, med lenke til bedriftens egen nettside.",
+   "facetNote": "Gruppert etter stedene og tjenestene bedriftene selv har oppgitt. En bedrift som dekker et større område, kan stå bare under det området.",
+   "servicesHere": "Tjenester i {place}",
+   "placesForService": "Steder for {service}",
+   "facetNotFound": "Ingen bedrift i veiviseren oppgir dette stedet eller denne tjenesten ennå."
   }
  },
  "countries": {

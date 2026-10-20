@@ -16,7 +16,10 @@ const PAUSE_MS = 500;
 const MAX_BYTES = 2_000_000;
 const TIMEOUT_MS = 8000;
 const MAX_REQUESTS = 18;
-const READABLE_CHARS = 300; // visible text without JavaScript for a page to count as readable
+const READABLE_CHARS = 300;
+// Amounts in common currencies, before or after the number: «595 kr», «kr 595», «fra 500,-», «€25», «25 EUR».
+const PRICE_TEXT = /(NOK|SEK|DKK|EUR|GBP|USD|kr\.?|€|£|\$)\s?\d|\d\s?(kr\b|,-|€|£|NOK|SEK|DKK|EUR|GBP|USD)/;
+const PRICE_LINK = /\b(priser?|prisliste|timepris|price|prices|pricing|tariffs?|rates)\b/i; // visible text without JavaScript for a page to count as readable
 
 const AI_BOTS = {
   "GPTBot": "OpenAI, training",
@@ -547,8 +550,9 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
       lang: Boolean(page.lang),
       h1: page.h1,
       links: r.pages.length === 0 ? page.links.slice(0, 400) : undefined, // the front page only
-      price_as_text: /(NOK|kr\.?)\s?\d|\d\s?(kr|,-)/.test(page.text),
+      price_as_text: PRICE_TEXT.test(page.text),
       structured_price: /"(price|lowPrice)"/.test(page.jsonld.join(" ")),
+      price_range: /"priceRange"\s*:\s*"[^"]+"/.test(page.jsonld.join(" ")),
     });
   }
   // The same finding can come from several pages; show each pattern once per source.
@@ -562,6 +566,8 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   [r.profile, r.profile_source] = chooseProfile(profile, pageTypes, start.hostname, publicHosts, partyHosts);
   // Key pages the yardstick expects, found among the front page's links.
   const frontLinks = r.pages[0]?.links ?? [];
+  // A link to a price page counts as prices shown, even when that page was not in the sample.
+  r.price_page = frontLinks.some((l) => PRICE_LINK.test(l.text) || PRICE_LINK.test(l.href));
   if (r.pages[0]) delete r.pages[0].links;
   r.key_pages = KEY_PAGES[r.profile] && r.pages[0]?.status === 200
     ? Object.fromEntries(Object.entries(KEY_PAGES[r.profile]).map(([k, re]) => [k, frontLinks.some((l) => re.test(l.text) || re.test(l.href))]))
@@ -639,6 +645,9 @@ export function assess(r, lang = "en") {
       add("offers", 0, 25);
       actions.push(t.priceText(withPriceText.length, pages.length));
     } else add("offers", 0, 0); // no offers or prices in the sample: the check does not apply
+    // Agents often ask with a budget (Espen 2026-10-20, after the Meta Muse demo): say so when no price or price level
+    // shows anywhere. Advice only, no points, since some businesses only quote on request.
+    if (!withOffers.length && !pages.some((s) => s.price_as_text || s.structured_price || s.price_range) && !r.price_page) actions.push(t.noPrices);
   } else {
     // Public bodies, organisations and parties: typed, dated content pages (the front page is not counted) …
     const content = pages.slice(1);

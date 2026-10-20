@@ -4,6 +4,15 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+## v1.3.0, 20 October 2026: places and services, price advice, Facebook-only businesses, five steps
+
+**Places, prices and Facebook pages (20 October)**
+- Business pages by place and service: `/businesses/place/<place>/`, `/businesses/service/<service>/` and `/businesses/service/<service>/<place>/` (Norwegian `/bedrifter/sted/…`, `/bedrifter/tjeneste/…`), from the places and services the businesses gave themselves. Random order inside, alphabetical lists of places and services, canonical and hreflang links, and every page in the sitemap.
+- AI check: advice (no points) when a business site shows no prices, price level, `priceRange` or link to a price page. Amounts in EUR, GBP, USD, SEK and DKK are recognised as well as NOK, so such prices as plain text now get the structured-price advice and can lower the score.
+- Generator: fill in the form from text pasted from the business's own page (for example its Facebook «About» section), parsed in the browser only; nothing is fetched from any platform. New field for profiles on other platforms, linked with schema.org `sameAs`; a platform address typed as the website is kept as a profile, never used as the website. An offer of free help for a few businesses at the start (contact@vegvis.ai), counted with the funnel event `create-help-click`. Neutral wording about free hosts (no agreement, check their terms).
+- Privacy page: rows for the generator (runs in the browser only) and for email to contact@vegvis.ai.
+
+**Five steps, wording and open for AI agents (14 to 19 October)**
 - Guides and front page organised in five steps, Discover, Understand, Connect, Act and Control (D-U-C-A-C), instead of levels 0 to 3.
 - Wording: what is free (getting listed and the toolkit), «never handles the money» on the agent payments guide, «never takes over the sale or the money» on the front page, and manual review of new entries «at the start» on How we choose and Get started.
 - Business pages: «VegvisAI takes no part in that» is now «with the business's own payment solution. VegvisAI never handles the money», so the text stays true when agents or hosted modules help with the order.

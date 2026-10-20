@@ -101,6 +101,7 @@
   },
   "fields": "Structured data for products or services is missing fields: {fields}.",
   "priceText": "Mark up products or services with schema.org (Product, Service and Offer). Prices appear as plain text on {n} of {m} pages, so the information exists; it only lacks structure.",
+  "noPrices": "AI assistants can be asked with a budget, for example «an electrician under 50 euros an hour». We found no prices or price level on the pages we checked. Show prices, «from» prices or an hourly rate, or add priceRange (for example «€50 to €150») to the schema.org description of the business. This does not change the score.",
   "llms": "Optional: publish /llms.txt with a short overview for language models. Some assistants read it; Google says it can be ignored, so it weighs little.",
   "catalog": "Publish /.well-known/ai-catalog.json so open guides can find your services.",
   "injection": "Check {n} passages that match patterns often used to give instructions to AI assistants. A match says nothing about intent; if the text is not meant for readers, remove it.",
@@ -502,7 +503,17 @@
     "prices": "prices",
     "areas": "area",
     "hoursNote": "opening hours",
-    "requestInfo": "what you need to know"
+    "requestInfo": "what you need to know",
+    "profiles": "profiles",
+    "orgNumber": "organisation number",
+    "street": "street address",
+    "postalCode": "postcode",
+    "city": "town or city",
+    "phone": "phone",
+    "email": "email",
+    "opens": "opens",
+    "closes": "closes",
+    "days": "days"
    },
    "_example": {
     "country": "GB",
@@ -542,7 +553,17 @@
    "noteLlms": "Optional. A short overview for language models, at the root of your website (/llms.txt).",
    "noteCatalog": "Optional. Lets open guides find your services. Goes in the folder /.well-known/, which many website builders do not give access to.",
    "guideLink": "Include a link to the business's page in the open guide (recommended)",
-   "guideLinkHelp": "One line in llms.txt and one field in ai-catalog.json show AI assistants where the business can be checked. The page says whether the business is registered. The link is not in the business card itself, and you can remove it whenever you like."
+   "guideLinkHelp": "One line in llms.txt and one field in ai-catalog.json show AI assistants where the business can be checked. The page says whether the business is registered. The link is not in the business card itself, and you can remove it whenever you like.",
+   "pasteH": "Only have a Facebook page?",
+   "pasteIntro": "Copy the text from the «About» section of the business's own page, for example on Facebook or Instagram, and paste it here. The text is only read in your browser. We fetch nothing from Facebook, and nothing is sent to us.",
+   "pasteLabel": "Text from the business's own page",
+   "pasteButton": "Fill in from the text",
+   "pasteDone": "Filled in: {fields}. Only empty fields were filled in. Check everything before you make the files.",
+   "pasteNone": "Found nothing to fill in. Fill in the form by hand.",
+   "pasteDomain": "The business card has to live on a domain of your own, for example yourbusiness.com, because the guide checks the domain. A Facebook address cannot be used as the website, but it is included as a link. If you do not have a domain yet, the business card (index.html) can be the whole website. Several services currently publish a simple page for free, for example (alphabetically) Cloudflare Pages, GitHub Pages and Netlify. VegvisAI has no agreement with them and gets nothing for naming them. Check their terms yourself.",
+   "profiles": "Profiles on other platforms (one per line)",
+   "profilesHelp": "For example Facebook or Instagram. Linked from the business card (schema.org sameAs), never used as the website.",
+   "pasteHelpOffer": "<strong>Want help?</strong> At the start we help a few businesses for free to publish the business card on their own domain. The business buys and owns the domain itself. The help gives no better placement in the guide. Write to <a href=\"mailto:contact@vegvis.ai?subject=Help%20with%20business%20card\" id=\"helpMail\">contact@vegvis.ai</a>."
   },
   "directory": {
    "title": "Businesses in the guide · VegvisAI",
@@ -570,7 +591,18 @@
    "back": "All businesses in the guide",
    "entryTitle": "{name} · Businesses in the guide · VegvisAI",
    "entryDescription": "{name} is registered in the open guide VegvisAI. {description}",
-   "notFound": "We found no business with this domain in the guide. It may have been removed, or it has not registered."
+   "notFound": "We found no business with this domain in the guide. It may have been removed, or it has not registered.",
+   "byPlace": "By place",
+   "byService": "By service",
+   "placeH1": "Businesses in {place}",
+   "serviceH1": "Businesses that offer {service}",
+   "servicePlaceH1": "{service} in {place}",
+   "facetTitle": "{h1} · Businesses in the guide · VegvisAI",
+   "facetDescription": "{h1}: businesses that registered themselves in the open guide VegvisAI. Random order, never ranked, each linking to the business's own website.",
+   "facetNote": "Grouped by the places and services the businesses gave themselves. A business that serves a wider area may only be listed under that area.",
+   "servicesHere": "Services in {place}",
+   "placesForService": "Places for {service}",
+   "facetNotFound": "No business in the guide lists this place or service yet."
   }
  },
  "countries": {

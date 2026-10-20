@@ -104,6 +104,11 @@ export function parsePrice(l) {
   return { name, price: Number.isFinite(price) ? price.toFixed(2) : null, from, text: `${name}: ${value}` };
 }
 
+// Profiles on platforms the business does not own. They are linked (schema.org sameAs), never used as the website:
+// the card has to live on the business's own domain, which the guide checks (P23).
+const PLATFORMS = /(^|\.)(facebook\.com|fb\.com|fb\.me|instagram\.com|linkedin\.com|tiktok\.com|x\.com|twitter\.com|youtube\.com|threads\.net|finn\.no|gulesider\.no|google\.com|g\.page)$/i;
+const isPlatform = (u) => { try { return PLATFORMS.test(new URL(u).hostname); } catch { return false; } };
+
 // Sanitises the form into a fixed set of fields.
 export function normalize(f) {
   const country = /^[A-Z]{2}$/.test(String(f.country ?? "").toUpperCase()) ? String(f.country).toUpperCase() : "NO";
@@ -123,7 +128,7 @@ export function normalize(f) {
     type: TYPES_EN[f.type] ? f.type : "LocalBusiness",
     name: sanitize(f.name, MAX_LENGTH.short),
     orgNumber: country === "NO" ? String(f.orgNumber ?? "").replace(/\D/g, "").slice(0, 9) : "",
-    website: webAddress(f.website),
+    website: isPlatform(webAddress(f.website)) ? "" : webAddress(f.website),
     summary: sanitize(f.summary, MAX_LENGTH.sentence),
     services: lines(f.services),
     notOffered: lines(f.notOffered, 10),
@@ -145,6 +150,9 @@ export function normalize(f) {
     languages: list(f.languages).map((s) => s.toLowerCase()).filter((s) => /^[a-z]{2,3}(-[a-z]{2})?$/.test(s)),
     contactPage: webAddress(f.contactPage),
     requestInfo: lines(f.requestInfo, 10),
+    // A platform address typed as the website is kept as a profile instead.
+    profiles: [...new Set([...lines(f.profiles, 10), ...(isPlatform(webAddress(f.website)) ? [f.website] : [])]
+      .map(webAddress).filter((u) => u.startsWith("https://")))].slice(0, 10),
   };
   if (!d.languages.length) d.languages = [d.text];
   return d;
@@ -180,6 +188,7 @@ function jsonld(d) {
   if (d.vatId) o.vatID = d.vatId.startsWith(d.country === "GR" ? "EL" : d.country) ? d.vatId : (d.country === "GR" ? "EL" : d.country) + d.vatId;
   if (d.phone) o.telephone = d.phone;
   if (d.email) o.email = d.email;
+  if (d.profiles.length) o.sameAs = d.profiles;
   if (d.street || d.city)
     o.address = { "@type": "PostalAddress", streetAddress: d.street || undefined, postalCode: d.postalCode || undefined, addressLocality: d.city || undefined, addressCountry: d.country };
   if (d.areas.length) o.areaServed = d.areas.map((n) => ({ "@type": "Place", name: n }));
@@ -229,6 +238,7 @@ export function makeHtml(d) {
       d.contactPage ? `<li><a href="${esc(d.contactPage)}">${t.send}</a></li>` : "",
       d.email ? `<li>${t.email}: <a href="mailto:${esc(d.email)}">${esc(d.email)}</a></li>` : "",
       d.phone ? `<li>${t.phone}: <a href="tel:${esc(d.phone.replace(/\s/g, ""))}">${esc(d.phone)}</a></li>` : "",
+      ...d.profiles.map((u) => `<li><a href="${esc(u)}" rel="me">${esc(new URL(u).hostname.replace(/^www\./, ""))}</a></li>`),
     ].join("")}</ul>`,
     requestForm(d, t),
     hoursText(d) || place || d.areas.length ? `<h2>${t.where}</h2>` : "",
@@ -286,7 +296,7 @@ export function makeLlmsTxt(d) {
   if (d.email) out.push(`- ${t.email}: ${d.email}`);
   if (d.phone) out.push(`- ${t.phone}: ${d.phone}`);
   if (d.requestInfo.length) out.push("", t.includeLine + d.requestInfo.join("; ") + ".");
-  out.push("", `## ${t.about}`, `- [${t.website}](${d.website})`);
+  out.push("", `## ${t.about}`, `- [${t.website}](${d.website})`, ...d.profiles.map((u) => `- [${new URL(u).hostname.replace(/^www\./, "")}](${u})`));
   if (d.orgNumber) out.push(`- ${t.org} ${d.orgNumber} ${t.orgRegister}`);
   if (d.vatId) out.push(`- ${t.vat} ${jsonld(d).vatID}`);
   if (d.companyNumber) out.push(`- ${t.company} ${d.companyNumber} (Companies House)`);
@@ -344,4 +354,88 @@ export function makeFiles(form, { lang = "en" } = {}) {
     warnings: checkContent(d, lang),
     files: missing.length ? null : { "head-snippet.html": makeSnippet(d), "index.html": makeHtml(d), "llms.txt": makeLlmsTxt(d), ".well-known/ai-catalog.json": makeCatalog(d) },
   };
+}
+
+// Fills in the form from text the business copies from its own page elsewhere, for example the «About» section
+// of its Facebook page (Espen 2026-10-20). Runs in the browser on pasted text only: nothing is fetched from any
+// platform, and nothing is sent to us. Returns form values; the page fills only empty fields, and the business
+// checks everything before the files are made.
+const DAY_WORDS = [
+  ["Monday", /^(man(dag)?|mon(day)?|må(ndag)?)$/i], ["Tuesday", /^(tir(sdag)?|tue(s(day)?)?|tis(dag)?)$/i],
+  ["Wednesday", /^(ons(dag)?|wed(nesday)?)$/i], ["Thursday", /^(tor(sdag)?|thu(rs(day)?)?)$/i],
+  ["Friday", /^(fre(dag)?|fri(day)?)$/i], ["Saturday", /^(lør(dag)?|lor(dag)?|sat(urday)?)$/i], ["Sunday", /^(søn(dag)?|son(dag)?|sun(day)?)$/i],
+];
+const dayOf = (w) => DAY_WORDS.find(([, re]) => re.test(w.replace(/\.$/, "")))?.[0];
+const AMOUNT = /(NOK|SEK|DKK|EUR|GBP|USD|kr\.?|€|£|\$)\s?\d|\d\s?(kr\b|,-|€|£|NOK|SEK|DKK|EUR|GBP|USD)/i;
+
+export function fromPastedText(text) {
+  const all = String(text ?? "").slice(0, 20000);
+  const rows = all.split(/\r?\n/).map((l) => l.replace(/\s+/g, " ").trim()).filter(Boolean);
+  const v = {};
+  const used = new Set();
+  const take = (i) => used.add(i);
+
+  const email = /[^\s@<>"(),;:]+@[^\s@<>"(),;:]+\.[a-z]{2,}/i.exec(all);
+  if (email) v.email = email[0].replace(/[.]+$/, "");
+  const urls = [...all.matchAll(/\b(?:https?:\/\/|www\.)[^\s<>"]+/gi)].map((m) => webAddress(m[0].replace(/[.,)]+$/, ""))).filter(Boolean);
+  const own = urls.find((u) => !isPlatform(u));
+  if (own) v.website = own;
+  const profiles = [...new Set(urls.filter(isPlatform))];
+  if (profiles.length) v.profiles = profiles.join("\n");
+  const org = /org(?:anisasjons)?\.?\s*(?:nr|nummer|no)?\.?\s*:?\s*(\d{3}\s?\d{3}\s?\d{3})\b/i.exec(all);
+  if (org) v.orgNumber = org[1].replace(/\s/g, "");
+
+  rows.forEach((l, i) => {
+    // A phone number: 8 or more digits, not the organisation number.
+    const phone = /(\+?\d[\d ]{6,16}\d)/.exec(l);
+    if (!v.phone && phone && phone[1].replace(/\D/g, "").length >= 8 && !/org/i.test(l) && !AMOUNT.test(l) && !/\d{1,2}[:.]\d{2}/.test(l)) { v.phone = phone[1].trim(); take(i); }
+    // «Storgata 1, 8006 Bodø» or «8006 Bodø» on its own line.
+    const addr = /^(?:(.*?\d+\s?[a-z]?)\s*,\s*)?(\d{4})\s+(\p{Lu}[\p{L} -]{1,40})$/u.exec(l);
+    if (!v.postalCode && addr) {
+      v.postalCode = addr[2]; v.city = addr[3].trim(); take(i);
+      if (addr[1]) v.street = addr[1].trim();
+      else if (i > 0 && /\p{L}.*\d/u.test(rows[i - 1]) && rows[i - 1].length < 60 && !AMOUNT.test(rows[i - 1])) { v.street = rows[i - 1]; take(i - 1); }
+    }
+    // Opening hours: «Man–fre 08:00–16:00».
+    const hours = /(\d{1,2})[:.](\d{2})\s*(?:-|–|til|to)\s*(\d{1,2})[:.](\d{2})/i.exec(l);
+    if (hours && !v.opens) {
+      const pad = (h, m) => `${h.padStart(2, "0")}:${m}`;
+      v.opens = pad(hours[1], hours[2]); v.closes = pad(hours[3], hours[4]); take(i);
+      const words = l.slice(0, hours.index).split(/[\s,]+/).filter(Boolean);
+      const range = /(\p{L}+)\.?\s*(?:-|–|til|to)\s*(\p{L}+)\.?$/iu.exec(l.slice(0, hours.index).trim());
+      const W = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+      if (range && dayOf(range[1]) && dayOf(range[2])) {
+        const a = W.indexOf(dayOf(range[1])), b = W.indexOf(dayOf(range[2]));
+        if (a <= b) v.days = W.slice(a, b + 1).join(",");
+      } else {
+        const days = words.map((w) => w.split(/[-–]/)).flat().map(dayOf).filter(Boolean);
+        if (days.length) v.days = [...new Set(days)].join(",");
+      }
+    } else if (hours) { v.hoursNote = [v.hoursNote, l].filter(Boolean).join(". ").slice(0, 160); take(i); }
+  });
+
+  // Prices: lines with an amount, as «name: price».
+  const prices = [], services = [];
+  rows.forEach((l, i) => {
+    if (used.has(i) || /@|https?:\/\/|www\./i.test(l)) return;
+    const bullet = /^[•\-*✓✔▪·]\s*/.test(l);
+    const clean = l.replace(/^[•\-*✓✔▪·]\s*/, "");
+    if (AMOUNT.test(clean) && clean.length <= 120) {
+      if (clean.includes(":")) prices.push(clean);
+      else {
+        const m = /^(.*?)\s*(?:-|–)?\s*((?:fra|from)?\s*(?:NOK|SEK|DKK|EUR|GBP|USD|kr\.?|€|£|\$)?\s?\d[\d\s.,]*\s?(?:kr|,-|€|£|NOK|SEK|DKK|EUR|GBP|USD)?\.?)$/i.exec(clean);
+        prices.push(m && m[1] ? `${m[1]}: ${m[2].trim()}` : clean);
+      }
+      take(i);
+    } else if (bullet && clean.length <= 80) { services.push(clean); take(i); }
+  });
+  if (prices.length) v.prices = prices.slice(0, 20).join("\n");
+  if (services.length) v.services = services.slice(0, 20).join("\n");
+
+  // The summary: the first sentence-like line that is not contact details.
+  const summary = rows.find((l, i) => !used.has(i) && l.length >= 20 && /\p{L}{3}/u.test(l) && !/@|https?:\/\/|www\./i.test(l));
+  if (summary) v.summary = sanitize(summary, MAX_LENGTH.sentence);
+  // The name: a short first line without digits or addresses, when it is not the summary.
+  if (rows[0] && !used.has(0) && rows[0] !== summary && rows[0].length <= 60 && !/\d|@|https?:\/\/|www\./i.test(rows[0])) v.name = sanitize(rows[0], MAX_LENGTH.short);
+  return v;
 }

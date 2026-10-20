@@ -16,7 +16,7 @@
 <meta property="og:locale" content="en_GB">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/changelog/", "url": "https://vegvis.ai/changelog/", "name": "What's new", "description": "Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.", "inLanguage": "en", "dateModified": "2026-10-19", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
+<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/changelog/", "url": "https://vegvis.ai/changelog/", "name": "What's new", "description": "Every change to the VegvisAI guide, the AI check, the generator and the open index since launch, with dates.", "inLanguage": "en", "dateModified": "2026-10-20", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +57,14 @@
 <p class="eyebrow">Changelog</p>
 <h1>What's new</h1>
 <p class="lead">Every change to the guide, the AI check, the generator and the open index, newest first. The code and its full history are open on <a href="https://github.com/vegvisai/vegvisai">GitHub</a>. Changes to the register itself (businesses added or removed) are in the <a href="/api/endringer">public register changelog</a>.</p>
+
+<h2>20 October 2026</h2>
+<ul>
+<li><strong>Businesses by place and service:</strong> the <a href="/businesses/">business pages</a> now have a page per place, per service and per service in a place, for example <code>/businesses/service/bakery/bergen/</code>, because AI assistants usually ask for «a service in a place». The groups come from what the businesses gave themselves, the order inside is still random, and the lists of places and services are alphabetical.</li>
+<li><strong>AI check, price level:</strong> a business site with no prices or price level on the checked pages now gets advice to show prices, «from» prices or an hourly rate, or to add <code>priceRange</code>. AI assistants are often asked with a budget. It does not change the score. Prices in euros, pounds, dollars and Swedish and Danish kronor are now recognised as well as Norwegian kroner, so sites with such prices as plain text get the same advice about structured prices as Norwegian sites, which can lower the score.</li>
+<li><strong>Privacy page:</strong> new rows for the generator (nothing you fill in or paste is sent to us) and for email to contact@vegvis.ai.</li>
+<li><strong>Generator, only a Facebook page:</strong> the <a href="/create/">generator</a> can fill in the form from text you copy from the business's own page, for example the «About» section on Facebook. The text is read only in your browser; nothing is fetched from Facebook and nothing is sent to us. Profiles on Facebook, Instagram and similar platforms are linked from the card (schema.org <code>sameAs</code>), but never used as the website, since the card has to live on your own domain. At the start we help a few businesses for free to publish the card on a domain they buy and own themselves; write to contact@vegvis.ai.</li>
+</ul>
 
 <h2>19 October 2026</h2>
 <ul>

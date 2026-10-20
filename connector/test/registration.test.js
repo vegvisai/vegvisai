@@ -307,7 +307,7 @@ test("find_business shows open_for_ai as a fact, with the note that it is not a 
 test("funnel events: known names answer 204 and store nothing, unknown names 404, GET is refused", async () => {
   const { default: worker } = await import("../src/index.js");
   const post = (name) => worker.fetch(new Request("https://veiviser-test.example/api/e/" + name, { method: "POST" }), {});
-  for (const name of ["check-ready", "check-not-ready", "check-register-click", "register-check-ready", "register-check-not-ready"]) {
+  for (const name of ["check-ready", "check-not-ready", "check-register-click", "register-check-ready", "register-check-not-ready", "create-help-click"]) {
     const r = await post(name);
     assert.equal(r.status, 204, name);
     assert.equal(await r.text(), "");

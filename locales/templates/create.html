@@ -20,6 +20,16 @@
 <h1>{{t.h1}}</h1>
 <p>{{t.intro}}</p>
 <p><button type="button" class="sek" id="example">{{t.exampleButton}}</button></p>
+<details id="pasteBox">
+<summary>{{t.pasteH}}</summary>
+<p>{{t.pasteIntro}}</p>
+<label for="pasted">{{t.pasteLabel}}</label>
+<textarea id="pasted" maxlength="20000" rows="8"></textarea>
+<p><button type="button" class="sek" id="fillFromText">{{t.pasteButton}}</button></p>
+<p class="hjelp" id="pasteStatus" aria-live="polite"></p>
+<p class="hjelp">{{t.pasteDomain}}</p>
+<p class="hjelp">{{t.pasteHelpOffer}}</p>
+</details>
 
 <form id="form" novalidate>
 <fieldset>
@@ -102,6 +112,9 @@
 </div>
 <label for="contactPage">{{t.contactPage}}</label>
 <input id="contactPage" name="contactPage" inputmode="url">
+<label for="profiles">{{t.profiles}}</label>
+<textarea id="profiles" name="profiles" rows="2"></textarea>
+<p class="hjelp">{{t.profilesHelp}}</p>
 <label for="requestInfo">{{t.requestInfo}}</label>
 <textarea id="requestInfo" name="requestInfo" placeholder="{{attr:t.requestInfoPlaceholder}}"></textarea>
 <p class="hjelp">{{t.requiredHelp}}</p>
@@ -130,7 +143,7 @@
 <script type="application/json" id="tekster">{{texts}}</script>
 <script type="module">
 // Business card generator in the page's language; the texts come from locales/.
-import { typesFor, makeFiles } from "/felles/visittkort.js";
+import { typesFor, makeFiles, fromPastedText } from "/felles/visittkort.js";
 
 const P = JSON.parse(document.getElementById("tekster").textContent), LANG = "{{_meta.code}}";
 const fill = (s, v) => String(s).replace(/\{(\w+)\}/g, (m, k) => (k in v ? String(v[k]) : m));
@@ -205,6 +218,26 @@ $("example").addEventListener("click", () => {
   for (const box of document.querySelectorAll("input[name=days]")) box.checked = open.has(box.value);
   $("availability").disabled = $("offerType").value !== "Product";
 });
+
+// From text the business pastes from its own page elsewhere: fills only empty fields, nothing is fetched or sent.
+$("fillFromText").addEventListener("click", () => {
+  const v = fromPastedText($("pasted").value);
+  const filled = [];
+  for (const [k, x] of Object.entries(v)) {
+    if (k === "days") {
+      const boxes = [...document.querySelectorAll("input[name=days]")];
+      if (boxes.some((b) => b.checked)) continue;
+      const open = new Set(x.split(","));
+      for (const b of boxes) b.checked = open.has(b.value);
+      filled.push(k);
+    } else if ($(k) && !$(k).value.trim()) { $(k).value = x; filled.push(k); }
+  }
+  if (v.orgNumber && filled.includes("orgNumber") && country() !== "NO") { $("orgNumber").value = ""; filled.splice(filled.indexOf("orgNumber"), 1); }
+  $("pasteStatus").textContent = filled.length ? fill(P.pasteDone, { fields: filled.map(label).join(", ") }) : P.pasteNone;
+});
+
+// Interest in help with publishing, counted without personal data: only the event name is sent (/api/e/).
+$("helpMail")?.addEventListener("click", () => { try { fetch("/api/e/create-help-click", { method: "POST", keepalive: true }).catch(() => {}); } catch { /* counting is optional */ } });
 
 $("form").addEventListener("submit", (ev) => {
   ev.preventDefault();

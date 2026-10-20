@@ -16,7 +16,7 @@
 <meta property="og:locale" content="nb_NO">
 <meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="/brand/favicon.svg" type="image/svg+xml">
-<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/no/endringslogg/", "url": "https://vegvis.ai/no/endringslogg/", "name": "Nytt i VegvisAI", "description": "Alle endringer i veiviseren, AI-sjekken, generatoren og den åpne indeksen siden lanseringen, med dato.", "inLanguage": "nb", "dateModified": "2026-10-19", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
+<link rel="alternate" hreflang="en" href="/changelog/"><link rel="alternate" hreflang="nb" href="/no/endringslogg/"><script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "WebPage", "@id": "https://vegvis.ai/no/endringslogg/", "url": "https://vegvis.ai/no/endringslogg/", "name": "Nytt i VegvisAI", "description": "Alle endringer i veiviseren, AI-sjekken, generatoren og den åpne indeksen siden lanseringen, med dato.", "inLanguage": "nb", "dateModified": "2026-10-20", "isPartOf": {"@id": "https://vegvis.ai/#website"}, "publisher": {"@id": "https://vegvis.ai/#org"}}]}</script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,6 +57,14 @@
 <p class="eyebrow">Endringslogg</p>
 <h1>Nytt i VegvisAI</h1>
 <p class="lead">Alle endringer i veiviseren, AI-sjekken, generatoren og den åpne indeksen, nyeste først. Koden og hele historikken er åpen på <a href="https://github.com/vegvisai/vegvisai">GitHub</a>. Endringer i selve registeret (bedrifter som legges til eller fjernes) står i den <a href="/api/endringer">offentlige endringsloggen for registeret</a>.</p>
+
+<h2>20. oktober 2026</h2>
+<ul>
+<li><strong>Bedrifter etter sted og tjeneste:</strong> <a href="/bedrifter/">bedriftssidene</a> har nå en side per sted, per tjeneste og per tjeneste på et sted, for eksempel <code>/bedrifter/tjeneste/bakeri/bergen/</code>, fordi AI-assistenter som regel spør etter «en tjeneste et sted». Gruppene kommer fra det bedriftene selv har oppgitt, rekkefølgen inni er fortsatt tilfeldig, og listene over steder og tjenester er alfabetiske.</li>
+<li><strong>AI-sjekken, prisnivå:</strong> en bedriftsside uten priser eller prisnivå på sidene vi sjekker, får nå råd om å vise priser, fra-priser eller timepris, eller å legge inn <code>priceRange</code>. AI-assistenter får ofte spørsmål med budsjett. Det endrer ikke poengsummen. Priser i euro, pund, dollar og svenske og danske kroner blir nå gjenkjent i tillegg til norske kroner. Sider med slike priser i ren tekst får derfor samme råd om strukturerte priser som norske sider, og det kan senke poengsummen.</li>
+<li><strong>Personvernsiden:</strong> nye rader for generatoren (ingenting du fyller ut eller limer inn, sendes til oss) og for e-post til contact@vegvis.ai.</li>
+<li><strong>Generatoren, bare Facebook-side:</strong> <a href="/lag/">generatoren</a> kan fylle ut skjemaet fra tekst du kopierer fra bedriftens egen side, for eksempel «Om»-delen på Facebook. Teksten leses bare i nettleseren din. Vi henter ingenting fra Facebook, og ingenting sendes til oss. Profiler på Facebook, Instagram og lignende blir lenket fra visittkortet (schema.org <code>sameAs</code>), men aldri brukt som nettside, siden kortet må ligge på ditt eget domene. I starten hjelper vi noen få bedrifter gratis med å publisere kortet på et domene de kjøper og eier selv. Skriv til contact@vegvis.ai.</li>
+</ul>
 
 <h2>19. oktober 2026</h2>
 <ul>

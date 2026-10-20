@@ -2,7 +2,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import { readFileSync } from "node:fs";
 import { memoryStore } from "../src/register.js";
-import { directory, directoryPrefix, directoryUrls } from "../src/bedrifter.js";
+import { directory, directoryPrefix, directoryUrls, slug } from "../src/bedrifter.js";
 
 const ORIGIN = "https://vegvis.ai";
 const assets = { fetch: async (req) => {
@@ -76,5 +76,61 @@ test("a path without the trailing slash is redirected", async () => {
 
 test("the sitemap lists the directory and every listed entry", async () => {
   const urls = await directoryUrls(await env([entry("bakeri.example.no", "Bakeriet AS")]));
-  assert.deepEqual(urls.sort(), ["/bedrifter/", "/bedrifter/bakeri.example.no/", "/businesses/", "/businesses/bakeri.example.no/"]);
+  assert.deepEqual(urls.sort(), ["/bedrifter/", "/bedrifter/bakeri.example.no/", "/bedrifter/sted/oslo/", "/bedrifter/tjeneste/bakery/",
+    "/bedrifter/tjeneste/bakery/oslo/", "/bedrifter/tjeneste/bursdagskake/", "/bedrifter/tjeneste/bursdagskake/oslo/",
+    "/businesses/", "/businesses/bakeri.example.no/", "/businesses/place/oslo/", "/businesses/service/bakery/",
+    "/businesses/service/bakery/oslo/", "/businesses/service/bursdagskake/", "/businesses/service/bursdagskake/oslo/"]);
+});
+
+test("slugs are readable and stable", () => {
+  assert.equal(slug("Bodø"), "bodo");
+  assert.equal(slug("Ålesund"), "alesund");
+  assert.equal(slug("Hele Norge"), "hele-norge");
+  assert.equal(slug("  Rør & Varme  "), "ror-varme");
+  assert.equal(slug("<script>"), "script");
+});
+
+test("a place page lists the businesses there in random order and links services in that place", async () => {
+  const e = await env([entry("bakeri.example.no", "Bakeriet AS", { area: ["Bodø"] }), entry("kafe.example.no", "Kafeen AS", { area: ["Oslo"], categories: ["kafe"] })]);
+  const res = await get("/bedrifter/sted/bodo/", e);
+  const html = await res.text();
+  assert.equal(res.status, 200);
+  assert.match(html, /<h1>Bedrifter i Bodø<\/h1>/);
+  assert.match(html, /Bakeriet AS/);
+  assert.doesNotMatch(html, /Kafeen AS/);
+  assert.match(html, /ItemListUnordered/);
+  assert.match(html, /tilfeldig/);
+  assert.match(html, /href="\/bedrifter\/tjeneste\/bursdagskake\/bodo\/"/);
+  assert.match(html, /rel="canonical" href="https:\/\/vegvis\.ai\/bedrifter\/sted\/bodo\/"/);
+  assert.match(html, /hreflang="en" href="https:\/\/vegvis\.ai\/businesses\/place\/bodo\/"/);
+});
+
+test("a service page and a service-in-place page work in English", async () => {
+  const e = await env([entry("bakeri.example.no", "Bakeriet AS", { area: ["Oslo", "Bergen"] }), entry("kafe.example.no", "Kafeen AS", { area: ["Bergen"], categories: ["cafe"] })]);
+  const service = await (await get("/businesses/service/bakery/", e)).text();
+  assert.match(service, /Businesses that offer bakery/);
+  assert.match(service, /href="\/businesses\/service\/bakery\/bergen\/"/);
+  const both = await get("/businesses/service/bakery/bergen/", e);
+  const html = await both.text();
+  assert.equal(both.status, 200);
+  assert.match(html, /<h1>bakery in Bergen<\/h1>/);
+  assert.match(html, /Bakeriet AS/);
+  assert.doesNotMatch(html, /Kafeen AS/);
+});
+
+test("the list links places and services, alphabetically; unknown facets answer 404", async () => {
+  const e = await env([entry("bakeri.example.no", "Bakeriet AS", { area: ["Tromsø", "Bergen"] })]);
+  const html = await (await get("/bedrifter/", e)).text();
+  assert.match(html, /Etter sted:<\/strong> <a href="\/bedrifter\/sted\/bergen\/">Bergen<\/a> \(1\) · <a href="\/bedrifter\/sted\/tromso\/">Tromsø<\/a>/);
+  assert.match(html, /Etter tjeneste:/);
+  for (const path of ["/bedrifter/sted/oslo/", "/bedrifter/tjeneste/sykkel/", "/bedrifter/tjeneste/bakery/oslo/", "/bedrifter/sted/bergen/x/", "/bedrifter/sted/<b>/"]) {
+    assert.equal((await get(path, e)).status, 404, path);
+  }
+});
+
+test("place and service names from businesses are escaped", async () => {
+  const e = await env([entry("x.example.no", "X AS", { area: ["<b>Oslo</b>"], categories: ["\"><img src=x>"] })]);
+  const html = await (await get("/bedrifter/sted/b-oslo-b/", e)).text();
+  assert.doesNotMatch(html, /<b>Oslo/);
+  assert.doesNotMatch(html, /<img src=x/);
 });

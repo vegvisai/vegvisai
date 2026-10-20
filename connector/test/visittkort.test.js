@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { makeFiles, parsePrice, EXTENSION } from "../public/felles/visittkort.js";
+import { makeFiles, parsePrice, EXTENSION, fromPastedText } from "../public/felles/visittkort.js";
 import * as check from "../src/sjekk.js";
 
 // src/sjekk.js is being translated separately; accept both the old and the new export name.
@@ -188,4 +188,52 @@ test("the way back to the open guide: one line in llms.txt and one field in ai-c
   const off = makeFiles({ ...FORM, guideLink: false }).files;
   assert.ok(!off["llms.txt"].includes("vegvis.ai"));
   assert.equal(JSON.parse(off[".well-known/ai-catalog.json"]).entries[0].extensions["ai.vegvis.local-business"].guide_entry, undefined);
+});
+
+test("text pasted from the business's own Facebook page fills in the form", () => {
+  const v = fromPastedText(`Eksempel Frisør
+Vi er en liten frisørsalong midt i Bodø sentrum med god tid til hver kunde.
+Eksempelgata 12
+8006 Bodø
++47 00 00 00 00
+post@frisor.eksempel.no
+www.frisor.eksempel.no
+https://www.facebook.com/eksempelfrisor
+Man–fre 09:00–17:00
+Lørdag 10:00–14:00
+Org.nr. 912 345 678
+• Herreklipp
+• Farging
+Herreklipp 450 kr
+Dameklipp: fra 650 kr`);
+  assert.equal(v.name, "Eksempel Frisør");
+  assert.match(v.summary, /^Vi er en liten frisørsalong/);
+  assert.equal(v.street, "Eksempelgata 12");
+  assert.equal(v.postalCode, "8006");
+  assert.equal(v.city, "Bodø");
+  assert.equal(v.phone, "+47 00 00 00 00");
+  assert.equal(v.email, "post@frisor.eksempel.no");
+  assert.equal(v.website, "https://www.frisor.eksempel.no/");
+  assert.equal(v.profiles, "https://www.facebook.com/eksempelfrisor");
+  assert.equal(v.orgNumber, "912345678");
+  assert.deepEqual([v.opens, v.closes, v.days], ["09:00", "17:00", "Monday,Tuesday,Wednesday,Thursday,Friday"]);
+  assert.equal(v.hoursNote, "Lørdag 10:00–14:00");
+  assert.equal(v.services, "Herreklipp\nFarging");
+  assert.equal(v.prices, "Herreklipp: 450 kr\nDameklipp: fra 650 kr");
+  // English, with a day range inside the line and a pound price.
+  const en = fromPastedText("Open Mon-Sat 9.00-17.30\nCut and blow-dry £35");
+  assert.equal(en.days, "Monday,Tuesday,Wednesday,Thursday,Friday,Saturday");
+  assert.equal(en.prices, "Cut and blow-dry: £35");
+  assert.deepEqual(fromPastedText(""), {});
+});
+
+test("a platform address is never the website: it becomes a profile linked with sameAs", () => {
+  const r = makeFiles({ ...FORM, website: "https://www.facebook.com/eksempelbakeri" });
+  assert.deepEqual(r.missing, ["website"]);
+  const ok = makeFiles({ ...FORM, profiles: "https://www.facebook.com/eksempelbakeri\njavascript:alert(1)\nhttps://www.instagram.com/eksempelbakeri/" });
+  const html = ok.files["index.html"];
+  assert.match(html, /"sameAs": \[\n\s+"https:\/\/www\.facebook\.com\/eksempelbakeri",\n\s+"https:\/\/www\.instagram\.com\/eksempelbakeri\/"/);
+  assert.match(html, /rel="me">facebook\.com</);
+  assert.doesNotMatch(html, /javascript:/);
+  assert.match(ok.files["llms.txt"], /- \[instagram\.com\]\(https:\/\/www\.instagram\.com\/eksempelbakeri\/\)/);
 });

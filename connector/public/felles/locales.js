@@ -134,7 +134,13 @@ export const LOCALES = {
    "robotsTrainingAlso": "robots.txt also blocks AI training ({bots}). That part can be a deliberate choice and costs 5 points.",
    "robotsMedia": "For a news medium, blocking is often a deliberate choice to protect the journalism. You can let the search and user bots in, so assistants can cite and link to your articles, and still block training: {bots}.",
    "sourceAgentCard": "the agent card (A2A)",
-   "redirected": "Redirected from {from}, so the site it lands on is the one checked."
+   "redirected": "Redirected from {from}, so the site it lands on is the one checked.",
+   "platformsLine": "Platforms found: {list}. Information only, does not change the score.",
+   "platformKinds": {
+    "booking": "booking",
+    "shop": "online shop",
+    "site": "website"
+   }
   },
   "check_errors": {
    "missing": "Enter a web address.",
@@ -451,7 +457,13 @@ export const LOCALES = {
    "robotsTrainingAlso": "robots.txt blokkerer også AI-trening ({bots}). Den delen kan være et bevisst valg og koster 5 poeng.",
    "robotsMedia": "For et nyhetsmedium er blokkering ofte et bevisst valg for å beskytte journalistikken. Dere kan slippe inn søke- og brukerrobotene, så assistentene kan sitere og lenke til artiklene, og fortsatt blokkere trening: {bots}.",
    "sourceAgentCard": "agentkortet (A2A)",
-   "redirected": "Videresendt fra {from}, så det er siden den lander på som er sjekket."
+   "redirected": "Videresendt fra {from}, så det er siden den lander på som er sjekket.",
+   "platformsLine": "Plattformer funnet: {list}. Bare informasjon, påvirker ikke poengsummen.",
+   "platformKinds": {
+    "booking": "booking",
+    "shop": "nettbutikk",
+    "site": "nettside"
+   }
   },
   "check_errors": {
    "missing": "Oppgi en nettadresse.",

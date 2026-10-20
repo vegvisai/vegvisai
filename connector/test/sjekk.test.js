@@ -339,3 +339,13 @@ test("a front page that redirects to another host is checked where it lands (www
   assert.equal(r.redirected_from, "https://www.etat.example.no");
   assert.ok(r.pages.length > 1, "samples come from the landing host");
 });
+
+test("booking, shop and site platforms are found and listed, without points", async () => {
+  const page = `<html lang=nb><head><title>Salong</title><meta name=description content=x><script src="https://cdn.shopify.com/s/x.js"></script></head><body><h1>Salong</h1><a href="https://calendly.com/salong/time">Bestill time</a></body></html>`;
+  const r = await aiCheck(ROOT, { pauseMs: 0, profile: "business", lang: "nb", fetchFn: makeFetch({ "/": page }) });
+  assert.deepEqual(r.platforms, [{ name: "Calendly", kind: "booking" }, { name: "Shopify", kind: "shop" }]);
+  assert.match(asText(r), /Plattformer funnet: Calendly \(booking\), Shopify \(nettbutikk\)/);
+  assert.ok(!r.breakdown.some((b) => b.id.includes("platform")));
+  const none = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(goodSite) });
+  assert.deepEqual(none.platforms, []);
+});

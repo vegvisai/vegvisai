@@ -21,6 +21,11 @@ const entryUrl = (domain, lang) => `${SITE}${language(lang) === "nb" ? "/bedrift
 export async function countLookups(env, domains, kind) {
   try { await storeFor(env)?.countLookups([...new Set(domains)].filter(Boolean), month(), kind); } catch { /* counts are best effort */ }
 }
+// One count per check and platform found, so we see which booking and shop platforms are common (Espen 2026-10-20).
+export async function countPlatforms(env, platforms) {
+  await countLookups(env, (platforms ?? []).map((p) => `platform:${p.name}`), "check");
+}
+
 export const pageKind = (userAgent) => (AI_UA.test(String(userAgent ?? "")) ? "page_ai" : "page");
 
 async function send(env, to, subject, text) {

@@ -19,6 +19,22 @@ const MAX_REQUESTS = 18;
 const READABLE_CHARS = 300;
 // Amounts in common currencies, before or after the number: «595 kr», «kr 595», «fra 500,-», «€25», «25 EUR».
 const PRICE_TEXT = /(NOK|SEK|DKK|EUR|GBP|USD|kr\.?|€|£|\$)\s?\d|\d\s?(kr\b|,-|€|£|NOK|SEK|DKK|EUR|GBP|USD)/;
+// Ready-made booking, shop and site platforms, known by the addresses of their scripts and links
+// (Espen 2026-10-20): counted per month without the site's address, to see which platforms are worth an MCP
+// connection or a guide. Shown in the report as a fact, never scored. Easy to extend.
+export const PLATFORMS = [
+  ["Acuity Scheduling", "booking", /acuityscheduling\.com/i], ["Bokadirekt", "booking", /bokadirekt\.se/i],
+  ["Booksy", "booking", /booksy\.com/i], ["Calendly", "booking", /calendly\.com/i], ["Fresha", "booking", /fresha\.com/i],
+  ["OpenTable", "booking", /opentable\.(com|no|co\.uk)/i], ["ResDiary", "booking", /resdiary\.com/i],
+  ["Setmore", "booking", /setmore\.com/i], ["SimplyBook.me", "booking", /simplybook\.(me|it)/i],
+  ["SuperSaaS", "booking", /supersaas\.com/i], ["TheFork", "booking", /thefork\.[a-z.]+/i], ["Timely", "booking", /gettimely\.com/i],
+  ["Mystore", "shop", /mystore\.no/i], ["Shopify", "shop", /cdn\.shopify\.com|\.myshopify\.com/i],
+  ["WooCommerce", "shop", /wp-content\/plugins\/woocommerce/i],
+  ["Squarespace", "site", /static1\.squarespace\.com/i], ["Webflow", "site", /assets\.website-files\.com|cdn\.prod\.website-files\.com/i],
+  ["Wix", "site", /static\.wixstatic\.com|parastorage\.com/i], ["WordPress", "site", /\/wp-content\/|\/wp-includes\//i],
+];
+export const platformsIn = (html) => PLATFORMS.filter(([, , re]) => re.test(String(html ?? ""))).map(([name, kind]) => ({ name, kind }));
+
 const PRICE_LINK = /\b(priser?|prisliste|timepris|price|prices|pricing|tariffs?|rates)\b/i; // visible text without JavaScript for a page to count as readable
 
 const AI_BOTS = {
@@ -140,6 +156,7 @@ function checkTexts(lang) {
     filesLine: (llms, catalog) => fill(c.filesLine, { llms, catalog }),
     pagesLine: (n) => fill(c.pagesLine, { n }),
     pointsLine: (points) => fill(c.pointsLine, { points }),
+    platformsLine: (list) => fill(c.platformsLine, { list }),
   };
 }
 const T = new Proxy({}, { get: (_, lang) => checkTexts(lang) });
@@ -512,6 +529,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     sample.push(...candidates.filter((_, i) => i % step === 0).slice(0, pageCount - 1));
   }
   r.pages = [];
+  r.platforms = [];
   for (const url of sample) {
     if (r.robots.exists && !rp.canFetch(UA, url)) {
       r.pages.push({ url, skipped: t.skippedRobots });
@@ -535,6 +553,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     scan(t.sourceTitle(final), page.title + "\n" + page.description);
     if (page.webmcp.text) scan(t.sourceWebmcp(final), page.webmcp.text);
     r.open.webmcp.push(...page.webmcp.tools);
+    for (const p of platformsIn(html)) if (!r.platforms.some((x) => x.name === p.name)) r.platforms.push(p);
     r.pages.push({
       url: final,
       status,
@@ -697,6 +716,7 @@ export function asText(r, lang = r.lang ?? "en") {
     const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (Array.isArray(o[k]) && ["actions", "webmcp", "a2a"].includes(k) ? `${n} (${o[k].join(", ")})` : n));
     out.push(t.openLine(names.join(", ")));
   }
+  if (r.platforms?.length) out.push(t.platformsLine(r.platforms.map((p) => `${p.name} (${t.platformKinds[p.kind] ?? p.kind})`).join(", ")));
   if (r.breakdown?.length) out.push(t.pointsLine(r.breakdown.map((b) => `${b.id} ${b.max ? `${b.points}/${b.max}` : t.notApplicable}`).join(", ")));
   if (r.injection.length) {
     out.push("", t.injectionHead);

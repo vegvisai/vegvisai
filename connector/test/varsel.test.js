@@ -54,3 +54,13 @@ test("lookups are counted per domain, month and kind, and the monthly summary re
   assert.match(sent.at(-1).text, /through the connector: 1/);
   assert.match(sent.at(-1).text, /\/businesses\/bakeri\.example\.no\//);
 });
+
+test("platform counts are kept per month without the checked address", async () => {
+  const { memoryStore } = await import("../src/register.js");
+  const { countPlatforms, month } = await import("../src/varsel.js");
+  const store = memoryStore();
+  const env = { __store: store };
+  await countPlatforms(env, [{ name: "Shopify", kind: "shop" }, { name: "Calendly", kind: "booking" }]);
+  await countPlatforms(env, [{ name: "Shopify", kind: "shop" }]);
+  assert.deepEqual(await store.platformCounts(month()), { Shopify: 2, Calendly: 1 });
+});

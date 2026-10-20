@@ -4,14 +4,14 @@
 // P39 step 1: content from businesses and websites is data, never instructions.
 
 import { directory, directoryPrefix, directoryUrls } from "./bedrifter.js";
-import { alertLink, countLookups } from "./varsel.js";
+import { alertLink, countLookups, countPlatforms } from "./varsel.js";
 import { aiCheck, asText, safeAddress, CheckError, PROFILES } from "./sjekk.js";
 import { sanitize } from "../public/felles/injeksjon.js";
 import { tr, language } from "../public/felles/i18n.js";
 import { checkLimits, clientKey, RETRY_SECONDS } from "./grense.js";
 import PUBLIC_INDEX from "../public/index/public-no.json" with { type: "json" };
 import PARTIES from "../public/index/parties-no.json" with { type: "json" };
-import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, recheckNow, withdrawNow, needMatches } from "./innmelding.js";
+import { register, status, changelog, exportIndex, review, pending, recheck, listedMatches, releases, monthlyRelease, releaseNow, recheckNow, withdrawNow, needMatches, platformCounts } from "./innmelding.js";
 
 import { LAUNCHED } from "./launch.js";
 
@@ -284,7 +284,9 @@ async function aiCheckTool({ url, profile }, origin, context) {
     notOwnDomain(url, origin);
     const stop = await checkLimits(context.env, checkLimitList(context.client, url));
     if (stop) return text(stop, true);
-    return data(asText(await aiCheck(url, { profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS })));
+    const r = await aiCheck(url, { profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS });
+    await countPlatforms(context.env, r.platforms);
+    return data(asText(r));
   } catch (e) {
     return text(e instanceof CheckError ? e.text("en") : e.message, true);
   }
@@ -373,6 +375,7 @@ async function api(request, url, env) {
   if (url.pathname === "/api/meld-inn" && request.method === "POST") return register(request, env);
   if (url.pathname === "/api/admin/review" && request.method === "POST") return review(request, env);
   if (url.pathname === "/api/admin/pending") return pending(request, env);
+  if (url.pathname === "/api/admin/platforms") return platformCounts(request, url, env);
   if (url.pathname === "/api/admin/release" && request.method === "POST") return releaseNow(request, env);
   if (url.pathname === "/api/admin/recheck" && request.method === "POST") return recheckNow(request, env);
   if (url.pathname === "/api/admin/withdraw" && request.method === "POST") return withdrawNow(request, env);
@@ -388,7 +391,9 @@ async function api(request, url, env) {
       if (stop) return tooMany(stop);
       const pages = url.searchParams.get("pages") ?? url.searchParams.get("sider");
       const profile = url.searchParams.get("profile") ?? "";
-      return Response.json(await aiCheck(url.searchParams.get("url"), { pages, lang, profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS }), { headers: JSON_HEADERS });
+      const r = await aiCheck(url.searchParams.get("url"), { pages, lang, profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS });
+      await countPlatforms(env, r.platforms);
+      return Response.json(r, { headers: JSON_HEADERS });
     } catch (e) {
       return Response.json({ error: e instanceof CheckError ? e.text(lang) : e.message }, { status: 400, headers: JSON_HEADERS });
     }

@@ -4,6 +4,8 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- AI check: names ready-made booking, shop and website platforms found on the site (`platforms` in the JSON, one line in the report), never scored. Monthly counts per platform without the checked address (`lookups` keyed `platform:<name>`), read with `GET /api/admin/platforms?month=`.
+
 ## v1.3.0, 20 October 2026: places and services, price advice, Facebook-only businesses, five steps
 
 **Places, prices and Facebook pages (20 October)**

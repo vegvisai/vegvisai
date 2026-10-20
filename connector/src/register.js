@@ -102,6 +102,11 @@ export function d1Store(db) {
       if (!domains.length) return;
       await db.batch(domains.map((d) => db.prepare("INSERT INTO lookups (domain, month, kind, n) VALUES (?, ?, ?, 1) ON CONFLICT(domain, month, kind) DO UPDATE SET n = n + 1").bind(d, month, kind)));
     },
+    // Platforms found by the AI check: the same table, keyed «platform:<name>», never the checked address.
+    async platformCounts(month) {
+      const rows = (await db.prepare("SELECT domain, n FROM lookups WHERE month = ? AND kind = 'check' AND domain LIKE 'platform:%'").bind(month).all()).results ?? [];
+      return Object.fromEntries(rows.map((r) => [r.domain.slice(9), r.n]));
+    },
     async lookups(domain, month) {
       const rows = (await db.prepare("SELECT kind, n FROM lookups WHERE domain = ? AND month = ?").bind(domain, month).all()).results ?? [];
       return Object.fromEntries(rows.map((r) => [r.kind, r.n]));
@@ -162,6 +167,9 @@ export function memoryStore() {
     async saveRelease(r) { if (releases.has(r.period)) throw new Error("A release is never changed."); releases.set(r.period, { ...r }); },
     async withdrawRelease(period, reason, replacedBy) { const r = releases.get(period); if (r && !r.withdrawn) Object.assign(r, { withdrawn: reason, replaced_by: replacedBy }); },
     async countLookups(domains, month, kind) { for (const d of domains) counts.set(`${d}|${month}|${kind}`, (counts.get(`${d}|${month}|${kind}`) ?? 0) + 1); },
+    async platformCounts(month) {
+      return Object.fromEntries([...counts].filter(([k]) => k.startsWith("platform:") && k.endsWith(`|${month}|check`)).map(([k, n]) => [k.split("|")[0].slice(9), n]));
+    },
     async lookups(domain, month) {
       return Object.fromEntries([...counts].filter(([k]) => k.startsWith(`${domain}|${month}|`)).map(([k, n]) => [k.split("|")[2], n]));
     },

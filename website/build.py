@@ -27,7 +27,7 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 # name -> English path. Docs pages are listed in DOCS order for the sidebar.
 EN_PATHS = {
     "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/", "contact": "/contact/",
-    "directory": "/businesses/", "blog": "/blog/", "blog-helpers": "/blog/make-your-clients-ai-readable/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
+    "directory": "/businesses/", "blog": "/blog/", "blog-helpers": "/blog/make-your-clients-ai-readable/", "blog-agents": "/blog/open-to-ai-agents/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
     "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "agent-test": "/docs/test-with-ai-agents/", "agent-mandate": "/docs/agent-mandate/", "agent-rules": "/docs/rules-for-ai-agents/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
 DOCS = ["docs", "get-started", "add-to-website", "website", "files", "webmcp", "agent-checkout", "agent-payments", "agent-test", "agent-rules", "agent-mandate", "mcp", "developers", "how-we-choose"]
@@ -87,7 +87,7 @@ ORG = {"@type": "Organization", "@id": SITE_URL + "/#org", "name": "VegvisAI", "
        "founder": {"@type": "Person", "name": "Espen Brathaug"}, "sameAs": [GITHUB]}
 SITE = {"@type": "WebSite", "@id": SITE_URL + "/#website", "name": "VegvisAI", "url": SITE_URL + "/", "publisher": {"@id": SITE_URL + "/#org"}}
 # Blog posts and the day they were published (the post files live in content/<lang>/<name>.html).
-BLOG = {"blog-helpers": "2026-10-11"}
+BLOG = {"blog-helpers": "2026-10-11", "blog-agents": "2026-10-21"}
 PAGE_TYPES = {"why": "AboutPage", "ownership": "AboutPage", "contact": "ContactPage"}
 DATASETS = [
     ("businesses-no", "VegvisAI open index: businesses", "Businesses that registered themselves in the open guide and chose the open licence on their own domain. Domain and organisation, company or VAT number checked. Never ranked."),

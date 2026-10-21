@@ -348,7 +348,8 @@ export const LOCALES = {
     "blog": "/no/blogg/",
     "blog-helpers": "/no/blogg/gjor-kundene-ai-lesbare/",
     "agent-test": "/no/guider/test-med-ai-agenter/",
-    "agent-rules": "/no/guider/regler-for-ai-agenter/"
+    "agent-rules": "/no/guider/regler-for-ai-agenter/",
+    "blog-agents": "/no/blogg/apen-for-ai-agenter/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",

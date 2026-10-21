@@ -4,6 +4,8 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Blog: «Open to AI agents doesn't mean open to everything» (`/blog/open-to-ai-agents/`, `/no/blogg/apen-for-ai-agenter/`).
+
 ## v1.4.0, 21 October 2026: agents that get stopped, platforms, rules and tests for agents
 
 - AI check: recognises bot protection or blocks on automated visits (403/429, challenge pages; Cloudflare, Akamai, DataDome, HUMAN, Imperva, AWS WAF) and says so instead of a plain «could not be measured» (`wall` on the page, no score when the front page is walled; walled pages are left out of the score). Always with the check's own user agent.

@@ -4,6 +4,8 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+## v1.4.1, 21 October 2026: blog post on agents
+
 - Blog: «Open to AI agents doesn't mean open to everything» (`/blog/open-to-ai-agents/`, `/no/blogg/apen-for-ai-agenter/`).
 
 ## v1.4.0, 21 October 2026: agents that get stopped, platforms, rules and tests for agents

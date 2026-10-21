@@ -35,6 +35,26 @@ export const PLATFORMS = [
 ];
 export const platformsIn = (html) => PLATFORMS.filter(([, , re]) => re.test(String(html ?? ""))).map(([name, kind]) => ({ name, kind }));
 
+// Bot protection can stop AI assistants before robots.txt matters: Zillow welcomes agents and Walmart works with Meta,
+// yet both blocked some by accident (Greg Isenberg, October 2026). Recognised from the answer to our own, honest
+// user agent; we never pretend to be another bot, since protection that checks IP ranges would block that anyway.
+const BOT_WALLS = [
+  ["Cloudflare", /_cf_chl_opt|\/cdn-cgi\/challenge-platform|<title>\s*(Just a moment|Attention Required)/i],
+  ["Akamai", /errors\.edgesuite\.net|<title>\s*Access Denied\s*<\/title>[\s\S]{0,800}Reference/i],
+  ["DataDome", /captcha-delivery\.com/i],
+  ["HUMAN (PerimeterX)", /px-captcha|perimeterx/i],
+  ["Imperva", /_Incapsula_Resource|Incapsula incident/i],
+  ["AWS WAF", /awswaf|aws-waf-token/i],
+];
+export function botWall(status, headers, text) {
+  if (headers?.get?.("cf-mitigated") === "challenge") return "Cloudflare";
+  const named = BOT_WALLS.find(([, re]) => re.test(String(text ?? "")))?.[0];
+  // A normal page may load a protection script, so a 200 only counts as a wall when it is a challenge page.
+  if (status === 200) return named && /<title>\s*(Just a moment|Attention Required|Access Denied)|captcha-delivery\.com|px-captcha/i.test(text) && String(text).length < 30000 ? named : null;
+  if (named && [401, 403, 405, 429, 503].includes(status)) return named;
+  return [403, 429].includes(status) ? "unknown" : null;
+}
+
 const PRICE_LINK = /\b(priser?|prisliste|timepris|price|prices|pricing|tariffs?|rates)\b/i; // visible text without JavaScript for a page to count as readable
 
 const AI_BOTS = {
@@ -157,6 +177,13 @@ function checkTexts(lang) {
     pagesLine: (n) => fill(c.pagesLine, { n }),
     pointsLine: (points) => fill(c.pointsLine, { points }),
     platformsLine: (list) => fill(c.platformsLine, { list }),
+    botWall: (status, wall) => fill(c.botWall, { status, wall: wall === "unknown" ? c.botWallUnknown : wall }),
+    botWallPages: (n, m, wall) => fill(c.botWallPages, { n, m, wall: wall === "unknown" ? c.botWallUnknown : wall }),
+    tasksLine: (k) => fill(c.tasksLine, {
+      learn: k.learn ? c.yes : c.no,
+      ask: k.ask.length ? k.ask.map((x) => c.taskWays[x] ?? x).join(", ") : c.taskNone,
+      act: k.act.length ? k.act.map((x) => c.taskWays[x] ?? x).join(", ") : c.taskActNone,
+    }),
   };
 }
 const T = new Proxy({}, { get: (_, lang) => checkTexts(lang) });
@@ -197,7 +224,8 @@ function makeFetcher(fetchFn, pauseMs = PAUSE_MS) {
       });
       const final = r.url || url;
       try { safeAddress(final); } catch { return { status: 0, text: "", url: final }; }
-      return { status: r.status, text: r.ok ? await readLimited(r) : "", url: final };
+      const body = await readLimited(r);
+      return { status: r.status, text: r.ok ? body : "", url: final, wall: botWall(r.status, r.headers, body) };
     } catch {
       return { status: 0, text: "", url };
     }
@@ -302,6 +330,9 @@ export function readPage(html) {
   const links = [...s.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/gi)].slice(0, 600)
     .map((m) => ({ href: attr(m[1], "href"), text: decode(m[2].replace(/<[^>]+>/g, " ")).replace(/\s+/g, " ").trim() }))
     .filter((l) => l.href && !l.href.startsWith("#") && !/^(mailto|tel|javascript):/i.test(l.href));
+  // Ways to reach the business that an agent can hand the customer: mailto and tel links, and forms that take a message.
+  const reach = { email: /<a\b[^>]*href\s*=\s*["']?mailto:/i.test(s), phone: /<a\b[^>]*href\s*=\s*["']?tel:/i.test(s),
+    form: [...s.matchAll(/<form\b[\s\S]*?<\/form>/gi)].some((f) => /<textarea\b|type\s*=\s*["']?email/i.test(f[0])) };
   const jsonld = [];
   const reLd = /<script\b([^>]*)>([\s\S]*?)<\/script>/gi;
   let m;
@@ -329,7 +360,7 @@ export function readPage(html) {
   // Every description in a script that registers tools (the tool's and its parameters'), since agents read them all.
   for (const script of inline.split(/(?=modelContext\s*\??\.\s*registerTool)/).slice(1))
     for (const k of script.matchAll(/\bdescription\s*:\s*(["'`])((?:\\.|(?!\1)[^\\]){1,500}?)\1/g)) webmcp.text.push(k[2]);
-  return { title, description, robots, canonical, metaDate, lang, h1, links, feeds, jsonld, text, hidden: hidden.join(" "), webmcp: { tools: webmcp.tools, text: webmcp.text.filter(Boolean).join("\n") } };
+  return { title, description, robots, canonical, metaDate, lang, h1, links, reach, feeds, jsonld, text, hidden: hidden.join(" "), webmcp: { tools: webmcp.tools, text: webmcp.text.filter(Boolean).join("\n") } };
 }
 
 export function jsonldObjects(blocks) {
@@ -432,6 +463,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   // A front page that redirects to another host (www.altinn.no → info.altinn.no, found 2026-10-11) is checked
   // where it lands, since that is what an AI reads; otherwise robots, sitemap and samples miss the real site.
   const landing = await get(start.href);
+  let wall = landing.wall ?? null;
   let redirectedFrom = null;
   if (landing.status === 200 && landing.url) {
     try {
@@ -535,7 +567,7 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
       r.pages.push({ url, skipped: t.skippedRobots });
       continue;
     }
-    const { status, text: html, url: final } = await get(url);
+    const { status, text: html, url: final, wall: pageWall } = await get(url);
     const page = readPage(html);
     const objects = jsonldObjects(page.jsonld);
     const allTypes = new Set(objects.flatMap((o) => [...types(o)]));
@@ -554,9 +586,14 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
     if (page.webmcp.text) scan(t.sourceWebmcp(final), page.webmcp.text);
     r.open.webmcp.push(...page.webmcp.tools);
     for (const p of platformsIn(html)) if (!r.platforms.some((x) => x.name === p.name)) r.platforms.push(p);
+    const ld = page.jsonld.join(" ");
+    const dataEmail = /"email"\s*:\s*"[^"]+"/.test(ld), dataPhone = /"telephone"\s*:\s*"[^"]+"/.test(ld);
+    if (r.pages.length === 0) r.reach = { ...page.reach, dataEmail, dataPhone };
+    else if (r.reach) { r.reach.dataEmail ||= dataEmail; r.reach.dataPhone ||= dataPhone; }
     r.pages.push({
       url: final,
       status,
+      ...(pageWall || (r.pages.length === 0 && wall) ? { wall: pageWall || wall } : {}),
       title: sanitize(page.title, 120),
       description: Boolean(page.description.trim()),
       noindex: page.robots.includes("noindex"),
@@ -588,11 +625,32 @@ export async function aiCheck(address, { pages = 4, fetchFn = fetch, now = new D
   // A link to a price page counts as prices shown, even when that page was not in the sample.
   r.price_page = frontLinks.some((l) => PRICE_LINK.test(l.text) || PRICE_LINK.test(l.href));
   if (r.pages[0]) delete r.pages[0].links;
+  r.agent_tasks = r.profile === "business" && r.pages[0]?.status === 200 && !r.pages[0].wall ? agentTasks(r, frontLinks) : null;
   r.key_pages = KEY_PAGES[r.profile] && r.pages[0]?.status === 200
     ? Object.fromEntries(Object.entries(KEY_PAGES[r.profile]).map(([k, re]) => [k, frontLinks.some((l) => re.test(l.text) || re.test(l.href))]))
     : null;
   [r.score, r.actions, r.breakdown] = assess(r, lang);
   return r;
+}
+
+// What a customer's agent can get done on the site, along the trust ladder: learn about the business, ask it, and
+// book or order (Greg Isenberg: research, prepare, pay; October 2026). Paying stays in the business's own checkout.
+// Information only, never points: not every business books or sells online.
+const ACT_LINK = /\b(bestill|bestilling|timebestilling|book|booking|reserv\w*|order|handlekurv|cart|kj[øo]p|buy|checkout|kasse)\b/i;
+const CONTACT_LINK = /\b(kontakt|contact)/i;
+function agentTasks(r, frontLinks) {
+  const front = r.pages[0];
+  const learn = front.readable && r.pages.some((s) => s.status === 200 && s.jsonld_types.some((x) => BUSINESS_TYPES.has(x)));
+  const reach = r.reach ?? {};
+  const ask = [reach.email || reach.dataEmail ? "email" : null, reach.phone || reach.dataPhone ? "phone" : null, reach.form ? "form" : null,
+    frontLinks.some((l) => CONTACT_LINK.test(l.text) || CONTACT_LINK.test(l.href)) ? "contact_page" : null].filter(Boolean);
+  const act = [
+    ...r.platforms.filter((p) => p.kind !== "site").map((p) => p.name),
+    ...(r.open.actions.length ? ["actions"] : []),
+    ...(r.open.webmcp.length ? ["webmcp"] : []),
+    ...(frontLinks.some((l) => ACT_LINK.test(l.text)) ? ["link"] : []),
+  ];
+  return { learn, ask, act };
 }
 
 // Returns [score, actions, breakdown]. score is null when the website could not be measured.
@@ -603,12 +661,13 @@ export function assess(r, lang = "en") {
   const actions = [];
   const breakdown = [];
   const add = (id, points, max) => breakdown.push({ id, points, max });
-  const pages = r.pages.filter((s) => s.status === 200);
+  const pages = r.pages.filter((s) => s.status === 200 && !s.wall);
   const high = r.injection.filter((f) => f.severity !== "low");
   const low = r.injection.filter((f) => f.severity === "low");
 
   // Without a readable front page there is nothing fair to score.
   const front = r.pages[0];
+  if (front?.wall) return [null, [t.botWall(front.status, front.wall)], []];
   if (!front || front.status !== 200) {
     return [null, [t.unreachable(front?.status || 0)], []];
   }
@@ -690,6 +749,10 @@ export function assess(r, lang = "en") {
   if (r.ai_files["ai-catalog.json valid"]) add("ai_catalog", 5, 5);
   else { add("ai_catalog", 0, 5); actions.push(t.catalog); }
 
+  const walled = r.pages.filter((s) => s.wall);
+  if (walled.length) actions.push(t.botWallPages(walled.length, r.pages.length, walled[0].wall));
+  if (r.agent_tasks && !r.agent_tasks.ask.length) actions.push(t.noContact);
+
   // Injection findings do not change the score, but serious ones come first.
   if (high.length) actions.unshift(t.injection(high.length));
   if (low.length) actions.push(t.zeroWidth(low.length));
@@ -716,6 +779,7 @@ export function asText(r, lang = r.lang ?? "en") {
     const names = Object.entries(t.openNames).filter(([k]) => (Array.isArray(o[k]) ? o[k].length : o[k])).map(([k, n]) => (Array.isArray(o[k]) && ["actions", "webmcp", "a2a"].includes(k) ? `${n} (${o[k].join(", ")})` : n));
     out.push(t.openLine(names.join(", ")));
   }
+  if (r.agent_tasks) out.push(t.tasksLine(r.agent_tasks));
   if (r.platforms?.length) out.push(t.platformsLine(r.platforms.map((p) => `${p.name} (${t.platformKinds[p.kind] ?? p.kind})`).join(", ")));
   if (r.breakdown?.length) out.push(t.pointsLine(r.breakdown.map((b) => `${b.id} ${b.max ? `${b.points}/${b.max}` : t.notApplicable}`).join(", ")));
   if (r.injection.length) {

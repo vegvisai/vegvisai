@@ -164,6 +164,16 @@ function show(r) {
     out.append(op);
     out.append(el("p", P.openNote, "mut"));
   }
+  if (r.agent_tasks) {
+    const k = r.agent_tasks, way = (x) => C.taskWays[x] || x;
+    out.append(el("h2", P.tasksH2));
+    const tt = el("table");
+    for (const [label, v] of [[P.tasksLearn, yesNo(k.learn)], [P.tasksAsk, k.ask.map(way).join(", ") || C.taskNone], [P.tasksAct, k.act.map(way).join(", ") || C.taskActNone]]) {
+      const tr = el("tr"); tr.append(el("td", label), el("td", v)); tt.append(tr);
+    }
+    out.append(tt);
+    out.append(el("p", P.tasksNote, "mut"));
+  }
 
   out.append(el("h2", P.actionsH2));
   const ol = el("ol");

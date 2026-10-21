@@ -58,6 +58,15 @@
 <h1>What's new</h1>
 <p class="lead">Every change to the guide, the AI check, the generator and the open index, newest first. The code and its full history are open on <a href="https://github.com/vegvisai/vegvisai">GitHub</a>. Changes to the register itself (businesses added or removed) are in the <a href="/api/endringer">public register changelog</a>.</p>
 
+<h2>21 October 2026</h2>
+<ul>
+<li><strong>AI check, bot protection:</strong> when the website answers with what looks like bot protection or a block on automated visits, the check says so instead of only «could not be measured», and names the provider when it can tell (for example Cloudflare). The same protection can stop AI assistants that fetch the page when someone asks, even when <code>robots.txt</code> lets them in. Our check always says openly who it is; it never pretends to be another bot.</li>
+<li><strong>AI check, possible ways for a customer's agent:</strong> for businesses, the report shows the signs it finds that an agent can learn about the business, ask it (email, phone, form or contact page) and book or order (booking or shop platforms, schema.org actions, WebMCP tools, booking or order links). It does not test that they work with a given assistant, it is information only and does not change the score. A site with no way to reach the business gets advice to add one.</li>
+<li><strong>New guide: <a href="/docs/test-with-ai-agents/">test with AI agents</a>.</strong> Ten typical customer questions, two or three assistants, and a table of where they find you and where they stop, with the usual causes and fixes.</li>
+<li><strong>New guide: <a href="/docs/rules-for-ai-agents/">rules for AI agents</a>.</strong> A template for saying what agents may do on your website: read, prepare, and nothing binding without the customer, and how to back it up.</li>
+<li><strong>Agent checkout:</strong> <a href="/docs/agent-checkout/">the guide</a> now covers what to do when something goes wrong: wrong quantity, a retry that doubles the cart, sold out or a new price, old carts and two orders from one click.</li>
+</ul>
+
 <h2>20 October 2026</h2>
 <ul>
 <li><strong>AI check, platforms:</strong> the report now names ready-made booking, shop and website platforms it finds on the site, such as Calendly, Shopify or WordPress. It is information only and does not change the score. Each month we count how many checks find each platform, without the address, to learn which platforms are worth a guide or a connection.</li>

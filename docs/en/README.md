@@ -46,9 +46,17 @@ Search and cart for agents, your own checkout.](https://vegvis.ai/docs/agent-che
 
 ### Paying through AI agents
 
-What exists and what is coming.](https://vegvis.ai/docs/agent-payments/)
+What exists and what is coming.](https://vegvis.ai/docs/agent-payments/) [Recipe · about an hour
 
-## Control: you decide  [The rules
+### Test with AI agents
+
+Ten typical customer questions, two or three assistants, and where they stop.](https://vegvis.ai/docs/test-with-ai-agents/)
+
+## Control: you decide  [Template
+
+### Rules for AI agents
+
+Say what agents may do: read, prepare, nothing binding without the customer.](https://vegvis.ai/docs/rules-for-ai-agents/) [The rules
 
 ### How the guide chooses results
 
@@ -60,7 +68,7 @@ You publish on your own website, you can leave at any time, and the principles a
 
 ## How to measure progress
 
-Run the free [AI check](https://vegvis.ai/check/) before and after. It reads your site the way an AI assistant does and gives a score out of 100 with concrete fixes. A complete AI business card scores 100.
+Run the free [AI check](https://vegvis.ai/check/) before and after. It reads your site the way an AI assistant does and gives a score out of 100 with concrete fixes. A complete AI business card scores 100. Then ask the assistants themselves: [test with AI agents](https://vegvis.ai/docs/test-with-ai-agents/).
 
 ## Words explained
 

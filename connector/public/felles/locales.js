@@ -140,7 +140,23 @@ export const LOCALES = {
     "booking": "booking",
     "shop": "online shop",
     "site": "website"
-   }
+   },
+   "botWall": "The website could not be measured: the front page answered our check with status {status} from what looks like bot protection ({wall}). Our check says openly who it is. The same protection can stop AI assistants that fetch the page when someone asks, even when robots.txt lets them in. If you want AI assistants to read the site, let them through in the protection settings, for example the settings for AI bots and bot fight mode in Cloudflare, and test with the assistants yourself: https://vegvis.ai/docs/test-with-ai-agents/. No score is given.",
+   "botWallUnknown": "an unknown provider, or a block on automated visits",
+   "botWallPages": "{n} of {m} checked pages answered with what looks like bot protection ({wall}). AI assistants that fetch those pages when someone asks may be stopped too, even when robots.txt lets them in. The pages are left out of the score. Test with the assistants yourself: https://vegvis.ai/docs/test-with-ai-agents/.",
+   "noContact": "We found no email address, phone number, contact form or contact page that an AI assistant can give the customer. Add email and telephone to the schema.org description of the business, or link to a contact page from the front page. This does not change the score.",
+   "tasksLine": "Possible ways for a customer's agent, found on the site: learn about the business: {learn}; ask: {ask}; book, order or other actions: {act}. We have not tested that they work with a given AI assistant. Information only, does not change the score.",
+   "taskWays": {
+    "email": "email",
+    "phone": "phone",
+    "form": "form",
+    "contact_page": "contact page",
+    "actions": "actions in schema.org",
+    "webmcp": "WebMCP tools",
+    "link": "booking or order link"
+   },
+   "taskNone": "nothing found",
+   "taskActNone": "nothing found (fine if you do not book or sell online)"
   },
   "check_errors": {
    "missing": "Enter a web address.",
@@ -330,7 +346,9 @@ export const LOCALES = {
     "contact": "/no/kontakt/",
     "agent-mandate": "/no/guider/agenter-og-fullmakt/",
     "blog": "/no/blogg/",
-    "blog-helpers": "/no/blogg/gjor-kundene-ai-lesbare/"
+    "blog-helpers": "/no/blogg/gjor-kundene-ai-lesbare/",
+    "agent-test": "/no/guider/test-med-ai-agenter/",
+    "agent-rules": "/no/guider/regler-for-ai-agenter/"
    },
    "check_path": "/sjekk/",
    "register_path": "/meld-inn/",
@@ -463,7 +481,23 @@ export const LOCALES = {
     "booking": "booking",
     "shop": "nettbutikk",
     "site": "nettside"
-   }
+   },
+   "botWall": "Nettstedet kunne ikke måles: forsiden svarte sjekken vår med status {status} fra det som ser ut som botvern ({wall}). Sjekken vår sier åpent hvem den er. Det samme vernet kan stoppe AI-assistenter som henter siden når noen spør, selv om robots.txt slipper dem inn. Vil du at AI-assistenter skal lese nettstedet, slipp dem gjennom i innstillingene for vernet, for eksempel innstillingene for AI-boter og «bot fight mode» i Cloudflare, og test selv med assistentene: https://vegvis.ai/no/guider/test-med-ai-agenter/. Ingen poeng gis.",
+   "botWallUnknown": "ukjent leverandør, eller en sperre mot automatiske besøk",
+   "botWallPages": "{n} av {m} sjekkede sider svarte med det som ser ut som botvern ({wall}). AI-assistenter som henter de sidene når noen spør, kan også bli stoppet, selv om robots.txt slipper dem inn. Sidene er holdt utenfor poengsummen. Test selv med assistentene: https://vegvis.ai/no/guider/test-med-ai-agenter/.",
+   "noContact": "Vi fant ingen e-postadresse, telefonnummer, kontaktskjema eller kontaktside som en AI-assistent kan gi kunden. Legg inn email og telephone i schema.org-beskrivelsen av bedriften, eller lenk til en kontaktside fra forsiden. Dette endrer ikke poengsummen.",
+   "tasksLine": "Mulige veier for kundens agent, funnet på nettstedet: lese om bedriften: {learn}; spørre: {ask}; booke, bestille eller andre handlinger: {act}. Vi har ikke testet at de virker med en bestemt AI-assistent. Bare informasjon, påvirker ikke poengsummen.",
+   "taskWays": {
+    "email": "e-post",
+    "phone": "telefon",
+    "form": "skjema",
+    "contact_page": "kontaktside",
+    "actions": "handlinger i schema.org",
+    "webmcp": "WebMCP-verktøy",
+    "link": "lenke til booking eller bestilling"
+   },
+   "taskNone": "ingenting funnet",
+   "taskActNone": "ingenting funnet (helt greit hvis dere ikke booker eller selger på nett)"
   },
   "check_errors": {
    "missing": "Oppgi en nettadresse.",

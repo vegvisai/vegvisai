@@ -70,6 +70,31 @@
 <li><strong>Be bare om det du trenger.</strong> Aldri helseopplysninger, fødselsnummer eller kortopplysninger i et skjema agenten fyller ut.</li>
 </ul>
 
+<h2>Når noe går galt</h2>
+<p>Agenter gjør feil, og handlekurver endrer seg. Planlegg for disse tilfellene før den første kunden møter dem:</p>
+<ul>
+<li><strong>Feil antall.</strong> En agent kan lese 50 der kunden sa 5. Sett et maksimum per produkt i verktøyet og på serveren, og vis antall og totalsum tydelig i kassen, der kunden bekrefter.</li>
+<li><strong>Et nytt forsøk som dobler handlekurven.</strong> Agenter kaller noen ganger et verktøy to ganger. La verktøyet sette antallet i stedet for å legge til, så samme kall to ganger gir samme handlekurv:
+<pre><code>  mc.registerTool({
+    name: "sett_antall_i_kurv",
+    description: "Sett hvor mange av et produkt som ligger i kundens handlekurv på denne nettsiden. 0 fjerner det. Ingenting bestilles eller betales.",
+    inputSchema: { type: "object", additionalProperties: false, required: ["produkt", "antall"],
+      properties: {
+        produkt: { type: "string", description: "Produkt-id fra sok_produkter" },
+        antall: { type: "integer", minimum: 0, maximum: 10, description: "Hvor mange kunden vil ha, 0 til 10" } } },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute({ produkt, antall }) {
+      const r = await fetch("/api/kurv", { method: "PUT", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ produkt, antall }) });
+      return await r.json(); // handlekurven og eventuelle problemer, slik serveren ser dem
+    },
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre></li>
+<li><strong>Utsolgt eller ny pris.</strong> Lager og priser kan endre seg mellom søket og kassen. La serveren svare med handlekurven slik den er nå og en kort, saklig liste over problemer, for eksempel <code>{"problems": [{"product": "kake-17", "problem": "out_of_stock"}]}</code>, så agenten kan si det til kunden. Kassen viser alltid gjeldende pris.</li>
+<li><strong>En gammel handlekurv.</strong> Hvis handlekurver utløper, si det i svaret i stedet for å feile stille, og la kunden starte på nytt i kassen.</li>
+<li><strong>To bestillinger fra ett klikk.</strong> Bestillingen skjer i kassen din, så beskytt den der: slå av bestillingsknappen etter første klikk, og la serveren avvise den samme bestillingen to ganger på kort tid.</li>
+<li><strong>Feilmeldinger er data.</strong> Svar med korte fakta, aldri instrukser til agenten, og aldri interne detaljer som stakkspor.</li>
+</ul>
+
 <h2>Reglene for netthandel gjelder fortsatt</h2>
 <p>Bestillingen skjer i kassen din, så pliktene dine er de samme: de pålagte opplysningene før bestilling, en bestillingsknapp som sier tydelig at bestillingen forplikter til å betale, kvittering, og angrerett der den gjelder. Agenten hjelper bare kunden dit.</p>
 <p class="mut">Denne guiden er generell veiledning, ikke juridisk rådgivning. Du bestemmer selv hva din egen nettside gjør.</p>

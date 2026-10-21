@@ -54,7 +54,7 @@
 </div>
 </header>
 <main id="main">
-<div class="wrap docs"><nav class="docnav" aria-label="Guides"><p class="eyebrow">Guides</p><ul><li><a href="/docs/">Overview</a></li><li><a href="/docs/get-started/">Get started</a></li><li><a href="/docs/add-to-your-website/">Add the snippet to your website</a></li><li><a href="/docs/ai-readable-website/">AI-readable website</a></li><li><a href="/docs/ai-files/">llms.txt and ai-catalog.json</a></li><li><a href="/docs/webmcp/">Let AI agents use your forms (WebMCP)</a></li><li><a href="/docs/agent-checkout/" aria-current="page">Agents fill the cart, customers pay as today</a></li><li><a href="/docs/agent-payments/">Paying through AI agents: what exists and what is coming</a></li><li><a href="/docs/mcp/">Your own AI service (MCP)</a></li><li><a href="/docs/developers/">For developers</a></li><li><a href="/docs/how-we-choose/">How the guide chooses results</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code and templates on GitHub</a></p></nav><article class="prose"><p class="eyebrow">Act · experimental · step 2 of 3</p>
+<div class="wrap docs"><nav class="docnav" aria-label="Guides"><p class="eyebrow">Guides</p><ul><li><a href="/docs/">Overview</a></li><li><a href="/docs/get-started/">Get started</a></li><li><a href="/docs/add-to-your-website/">Add the snippet to your website</a></li><li><a href="/docs/ai-readable-website/">AI-readable website</a></li><li><a href="/docs/ai-files/">llms.txt and ai-catalog.json</a></li><li><a href="/docs/webmcp/">Let AI agents use your forms (WebMCP)</a></li><li><a href="/docs/agent-checkout/" aria-current="page">Agents fill the cart, customers pay as today</a></li><li><a href="/docs/agent-payments/">Paying through AI agents: what exists and what is coming</a></li><li><a href="/docs/test-with-ai-agents/">Test with AI agents</a></li><li><a href="/docs/rules-for-ai-agents/">Rules for AI agents</a></li><li><a href="/docs/mcp/">Your own AI service (MCP)</a></li><li><a href="/docs/developers/">For developers</a></li><li><a href="/docs/how-we-choose/">How the guide chooses results</a></li></ul><p><a class="ghlink" href="https://github.com/vegvisai/vegvisai"><svg class="gh" viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>Code and templates on GitHub</a></p></nav><article class="prose"><p class="eyebrow">Act · experimental · step 2 of 3</p>
 <h1>Agents fill the cart, customers pay as today</h1>
 <p class="lead">The visitor's own AI agent searches your products and puts the right ones in the cart on your website. Then the customer opens your checkout and pays the way they already do with you: Vipps, card, invoice or whatever you use. No new payment provider, and no one in between.</p>
 
@@ -123,6 +123,31 @@
 <li><strong>Use the customer's own session.</strong> The tools run with the visitor's login, so the cart belongs to them. Never put keys or tokens in a page.</li>
 <li><strong>You can see agent use.</strong> Tool calls run through your own code, so you can count and limit them. Never use it to treat customers differently on price.</li>
 <li><strong>Ask only for what you need.</strong> Never health information, national identity numbers or card details in a form the agent fills in.</li>
+</ul>
+
+<h2>When something goes wrong</h2>
+<p>Agents make mistakes, and carts change. Plan for these cases before the first customer meets them:</p>
+<ul>
+<li><strong>Wrong quantity.</strong> An agent can read 50 where the customer said 5. Set a maximum per product in the tool and on your server, and show quantity and total clearly in checkout, where the customer confirms.</li>
+<li><strong>A retry that doubles the cart.</strong> Agents sometimes call a tool twice. Let the tool set the quantity instead of adding to it, so the same call twice gives the same cart:
+<pre><code>  mc.registerTool({
+    name: "set_cart_quantity",
+    description: "Set how many of a product are in the customer's cart on this website. 0 removes it. Nothing is ordered or paid.",
+    inputSchema: { type: "object", additionalProperties: false, required: ["product", "quantity"],
+      properties: {
+        product: { type: "string", description: "The product id from search_products" },
+        quantity: { type: "integer", minimum: 0, maximum: 10, description: "How many the customer wants, 0 to 10" } } },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute({ product, quantity }) {
+      const r = await fetch("/api/cart", { method: "PUT", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ product, quantity }) });
+      return await r.json(); // the cart, plus any problems, as your server sees it
+    },
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre></li>
+<li><strong>Sold out or a new price.</strong> Stock and prices can change between the search and checkout. Let your server answer with the cart as it is now and a short, factual list of problems, for example <code>{"problems": [{"product": "cake-17", "problem": "out_of_stock"}]}</code>, so the agent can tell the customer. Checkout always shows the current price.</li>
+<li><strong>An old cart.</strong> If carts expire, say so in the answer instead of failing silently, and let the customer start again in checkout.</li>
+<li><strong>Two orders from one click.</strong> The order is placed in your checkout, so protect it there: disable the order button after the first click, and let your server refuse the same order twice in a short time.</li>
+<li><strong>Error messages are data.</strong> Return short facts, never instructions to the agent, and never internal details such as stack traces.</li>
 </ul>
 
 <h2>The rules for online sales still apply</h2>

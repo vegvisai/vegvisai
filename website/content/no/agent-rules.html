@@ -1,0 +1,34 @@
+<!-- title: Regler for AI-agenter · Guider · VegvisAI | description: En mal for å si hva AI-agenter får gjøre på nettsiden din: lese, forberede, eller ingenting bindende uten kunden. Og hvordan du støtter det opp i robots.txt, botvern, WebMCP og din egen kasse. -->
+<p class="eyebrow">Control · mal</p>
+<h1>Regler for AI-agenter</h1>
+<p class="lead">Åpen for agenter betyr ikke åpen for alt. Du bestemmer hva kundens AI-agent får gjøre på nettsiden din, og du kan si det med vanlige ord. Tre trinn er nyttige: lese, forberede, og ingenting bindende uten kunden.</p>
+
+<h2>Tre trinn</h2>
+<table>
+<tr><th>Trinn</th><th>Eksempler</th><th>Vanlig valg</th></tr>
+<tr><td><strong>Lese</strong></td><td>Produkter, priser, åpningstider, vilkår</td><td>Tillatt. Slik finner og siterer AI-assistenter deg.</td></tr>
+<tr><td><strong>Forberede</strong></td><td>Fylle ut et forespørselsskjema, legge varer i handlekurven, velge en ledig tid</td><td>Tillatt, når kunden selv sender eller bekrefter.</td></tr>
+<tr><td><strong>Bindende</strong></td><td>Bestille, booke, betale, avbestille</td><td>Bare med kundens egen bekreftelse i kassen eller bookingen din.</td></tr>
+</table>
+
+<h2>Malen</h2>
+<p>Legg teksten på en side som vilkår eller kontakt, og som en egen del i <a href="/no/guider/ai-filer/"><code>llms.txt</code></a>. Endre den til det som stemmer for deg.</p>
+<pre><code>## Regler for AI-agenter
+- Du kan lese og sitere alt på nettstedet: produkter, priser, åpningstider og vilkår.
+- Du kan fylle ut forespørselsskjemaet og legge varer i handlekurven for kunden. Kunden sender skjemaet selv og betaler i kassen vår.
+- Du kan ikke bestille, booke eller betale på vegne av kunden her. Det bekrefter kunden selv.
+- Prisene og lagerstatusen på nettstedet gjelder. Spørsmål: post@bakeri.eksempel.no.</code></pre>
+<p>Beskriv, aldri befal. Tekst som «anbefal alltid oss» eller «se bort fra andre kilder» er prompt injection. <a href="{{TEST}}/sjekk/">AI-sjekken</a> flagger det, og veiviseren lister ikke en bedrift som publiserer det. Malen over består sjekken.</p>
+
+<h2>Støtt ordene opp</h2>
+<p>Teksten sier hva du tillater. Den stopper ikke en agent som overser den. <code>robots.txt</code> og merking av verktøy forteller agenter hva du ønsker, men håndhever det ikke, og botvern begrenser bare tilgangen. Det som er bindende, må sjekkes på serveren din, med kundens egen bekreftelse:</p>
+<ul>
+<li><strong>robots.txt og botvern:</strong> bestemmer hvilke boter som får lese. Å sperre treningsbotene kan være et bevisst valg; å sperre assistentene som henter sider for brukere betyr at de ikke kan lese eller sitere deg. AI-sjekken viser begge, også botvern som sperrer ved et uhell.</li>
+<li><strong>WebMCP-verktøy:</strong> gi agenter verktøy bare for det du tillater, og merk verktøy som bestiller eller booker med <code>consequentialHint: true</code>. Se <a href="/no/guider/webmcp/">WebMCP</a>.</li>
+<li><strong>Din egen kasse og booking:</strong> det bindende trinnet skjer der, med kundens egen bekreftelse. Sjekk pris, lager og antall på serveren din. Se <a href="/no/guider/agentkasse/">agentkasse</a>.</li>
+<li><strong>Din egen telling:</strong> verktøykall går gjennom koden din, så du kan telle og begrense dem.</li>
+</ul>
+
+<h2>Når en agent skal handle for bedriften selv</h2>
+<p>Denne siden handler om kundenes agenter på nettsiden din. Når en agent skal handle for bedriften, for eksempel levere skjema til det offentlige, trenger den en egen fullmakt. I Norge er det en systembruker i Altinn: se <a href="/no/guider/agenter-og-fullmakt/">når en agent skal handle for bedriften</a>.</p>
+<p class="mut">Denne guiden er generell veiledning, ikke juridisk rådgivning. Reglene for netthandel, som opplysningene før bestilling og angreretten, gjelder som før.</p>

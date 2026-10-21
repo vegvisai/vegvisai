@@ -349,3 +349,39 @@ test("booking, shop and site platforms are found and listed, without points", as
   const none = await aiCheck(ROOT, { pauseMs: 0, fetchFn: makeFetch(goodSite) });
   assert.deepEqual(none.platforms, []);
 });
+
+test("bot protection on the front page gives no score and says so, without pretending to be another bot", async () => {
+  const seen = [];
+  const fetchFn = async (url, opts) => {
+    seen.push(opts?.headers?.["User-Agent"]);
+    if (new URL(url).pathname === "/") return new Response("<html><head><title>Just a moment...</title></head><body><script src=\"/cdn-cgi/challenge-platform/x.js\"></script></body></html>", { status: 403, headers: { "cf-mitigated": "challenge" } });
+    return makeFetch(goodSite)(url);
+  };
+  const r = await aiCheck(ROOT, { pauseMs: 0, lang: "nb", fetchFn });
+  assert.equal(r.score, null);
+  assert.equal(r.pages[0].wall, "Cloudflare");
+  assert.match(r.actions[0], /botvern \(Cloudflare\)/);
+  assert.ok(seen.every((ua) => ua === undefined || ua.startsWith("VegvisAI-check/")));
+});
+
+test("a plain 403 counts as an unknown block, a 404 or a normal page with a protection script does not", async () => {
+  const { botWall } = await import("../src/sjekk.js");
+  assert.equal(botWall(403, new Headers(), "Forbidden"), "unknown");
+  assert.equal(botWall(404, new Headers(), "Not found"), null);
+  assert.equal(botWall(200, new Headers(), "<html><title>Bakeri</title><script src=\"https://js.captcha-delivery.com/x.js\"></script>" + "x".repeat(40000)), null);
+  assert.equal(botWall(503, new Headers(), "<p>Incapsula incident ID: 1</p>"), "Imperva");
+});
+
+test("agent tasks: learn, ask and act are listed for businesses, without points", async () => {
+  const r = await aiCheck(ROOT, { pauseMs: 0, lang: "nb", fetchFn: makeFetch(goodSite) });
+  assert.equal(r.agent_tasks.learn, true);
+  assert.ok(r.agent_tasks.ask.includes("phone") && !r.agent_tasks.ask.includes("email"), JSON.stringify(r.agent_tasks)); // the card has a telephone, no email
+  assert.equal(r.score, 100);
+  assert.match(asText(r), /Mulige veier for kundens agent, funnet på nettstedet: lese om bedriften: ja/);
+  const bare = `<html lang=nb><head><title>Salong</title><meta name=description content=x></head><body><h1>Salong</h1><p>${"Tekst ".repeat(80)}</p><a href="https://calendly.com/salong">Bestill time</a></body></html>`;
+  const b = await aiCheck(ROOT, { pauseMs: 0, profile: "business", lang: "nb", fetchFn: makeFetch({ "/": bare }) });
+  assert.deepEqual(b.agent_tasks.ask, []);
+  assert.deepEqual(b.agent_tasks.act, ["Calendly", "link"]);
+  assert.ok(b.actions.some((a) => a.includes("ingen e-postadresse")));
+  assert.ok(!b.breakdown.some((x) => /task|contact/.test(x.id)));
+});

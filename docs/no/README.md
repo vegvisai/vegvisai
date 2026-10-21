@@ -46,9 +46,17 @@ Søk og handlekurv for agenter, din egen kasse.](https://vegvis.ai/no/guider/age
 
 ### Betaling via AI-agenter
 
-Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/)
+Hva som finnes og hva som kommer.](https://vegvis.ai/no/guider/agentbetaling/) [Oppskrift · rundt en time
 
-## Control: du bestemmer  [Oversikt
+### Test med AI-agenter
+
+Ti typiske spørsmål fra kunder, to eller tre assistenter, og hvor de stopper.](https://vegvis.ai/no/guider/test-med-ai-agenter/)
+
+## Control: du bestemmer  [Mal
+
+### Regler for AI-agenter
+
+Si hva agenter får gjøre: lese, forberede, ingenting bindende uten kunden.](https://vegvis.ai/no/guider/regler-for-ai-agenter/) [Oversikt
 
 ### Når en agent skal handle for bedriften
 
@@ -64,7 +72,7 @@ Du publiserer på din egen nettside, du kan gå når du vil, og prinsippene er l
 
 ## Slik måler du fremgangen
 
-Kjør den gratis [AI-sjekken](https://vegvis.ai/sjekk/) før og etter. Den leser nettsiden din slik en AI-assistent gjør, og gir en poengsum av 100 med konkrete forbedringer. Et komplett AI-visittkort får 100.
+Kjør den gratis [AI-sjekken](https://vegvis.ai/sjekk/) før og etter. Den leser nettsiden din slik en AI-assistent gjør, og gir en poengsum av 100 med konkrete forbedringer. Et komplett AI-visittkort får 100. Spør så assistentene selv: [test med AI-agenter](https://vegvis.ai/no/guider/test-med-ai-agenter/).
 
 ## Ord og uttrykk
 

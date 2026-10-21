@@ -4,6 +4,11 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+## v1.4.0, 21 October 2026: agents that get stopped, platforms, rules and tests for agents
+
+- AI check: recognises bot protection or blocks on automated visits (403/429, challenge pages; Cloudflare, Akamai, DataDome, HUMAN, Imperva, AWS WAF) and says so instead of a plain «could not be measured» (`wall` on the page, no score when the front page is walled; walled pages are left out of the score). Always with the check's own user agent.
+- AI check: `agent_tasks` for businesses (learn, ask, act along the trust ladder) as a report line and a table on `/check/`, never scored; advice when there is no email, phone, form or contact page.
+- Guides: «Test with AI agents» (`/docs/test-with-ai-agents/`, `/no/guider/test-med-ai-agenter/`) and «Rules for AI agents» (`/docs/rules-for-ai-agents/`, `/no/guider/regler-for-ai-agenter/`); agent checkout gets a section on failures (quantity, retries with `set_cart_quantity`, stock and price changes, expired carts, double orders).
 - AI check: names ready-made booking, shop and website platforms found on the site (`platforms` in the JSON, one line in the report), never scored. Monthly counts per platform without the checked address (`lookups` keyed `platform:<name>`), read with `GET /api/admin/platforms?month=`.
 
 ## v1.3.0, 20 October 2026: places and services, price advice, Facebook-only businesses, five steps

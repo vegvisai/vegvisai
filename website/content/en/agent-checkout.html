@@ -70,6 +70,31 @@
 <li><strong>Ask only for what you need.</strong> Never health information, national identity numbers or card details in a form the agent fills in.</li>
 </ul>
 
+<h2>When something goes wrong</h2>
+<p>Agents make mistakes, and carts change. Plan for these cases before the first customer meets them:</p>
+<ul>
+<li><strong>Wrong quantity.</strong> An agent can read 50 where the customer said 5. Set a maximum per product in the tool and on your server, and show quantity and total clearly in checkout, where the customer confirms.</li>
+<li><strong>A retry that doubles the cart.</strong> Agents sometimes call a tool twice. Let the tool set the quantity instead of adding to it, so the same call twice gives the same cart:
+<pre><code>  mc.registerTool({
+    name: "set_cart_quantity",
+    description: "Set how many of a product are in the customer's cart on this website. 0 removes it. Nothing is ordered or paid.",
+    inputSchema: { type: "object", additionalProperties: false, required: ["product", "quantity"],
+      properties: {
+        product: { type: "string", description: "The product id from search_products" },
+        quantity: { type: "integer", minimum: 0, maximum: 10, description: "How many the customer wants, 0 to 10" } } },
+    annotations: { readOnlyHint: false, consequentialHint: false },
+    async execute({ product, quantity }) {
+      const r = await fetch("/api/cart", { method: "PUT", headers: { "content-type": "application/json" },
+        body: JSON.stringify({ product, quantity }) });
+      return await r.json(); // the cart, plus any problems, as your server sees it
+    },
+  }).catch((e) => console.warn("WebMCP:", e));</code></pre></li>
+<li><strong>Sold out or a new price.</strong> Stock and prices can change between the search and checkout. Let your server answer with the cart as it is now and a short, factual list of problems, for example <code>{"problems": [{"product": "cake-17", "problem": "out_of_stock"}]}</code>, so the agent can tell the customer. Checkout always shows the current price.</li>
+<li><strong>An old cart.</strong> If carts expire, say so in the answer instead of failing silently, and let the customer start again in checkout.</li>
+<li><strong>Two orders from one click.</strong> The order is placed in your checkout, so protect it there: disable the order button after the first click, and let your server refuse the same order twice in a short time.</li>
+<li><strong>Error messages are data.</strong> Return short facts, never instructions to the agent, and never internal details such as stack traces.</li>
+</ul>
+
 <h2>The rules for online sales still apply</h2>
 <p>The order is placed in your checkout, so your duties stay the same: the required information before the order, an order button that says clearly that the order means paying, receipts, and the right of withdrawal where it applies. The agent only helps the customer get there.</p>
 <p class="mut">This guide is general guidance, not legal advice. You decide what your own website does.</p>

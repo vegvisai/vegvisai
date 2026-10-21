@@ -28,9 +28,9 @@ LAUNCHED = json.loads((ROOT.parent / "launch.json").read_text()).get("launched")
 EN_PATHS = {
     "home": "/", "why": "/why/", "ownership": "/ownership/", "privacy": "/privacy/", "press": "/press/", "support": "/support/", "changelog": "/changelog/", "contact": "/contact/",
     "directory": "/businesses/", "blog": "/blog/", "blog-helpers": "/blog/make-your-clients-ai-readable/", "docs": "/docs/", "get-started": "/docs/get-started/", "website": "/docs/ai-readable-website/", "files": "/docs/ai-files/",
-    "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "agent-mandate": "/docs/agent-mandate/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
+    "add-to-website": "/docs/add-to-your-website/", "webmcp": "/docs/webmcp/", "agent-checkout": "/docs/agent-checkout/", "agent-payments": "/docs/agent-payments/", "agent-test": "/docs/test-with-ai-agents/", "agent-mandate": "/docs/agent-mandate/", "agent-rules": "/docs/rules-for-ai-agents/", "mcp": "/docs/mcp/", "developers": "/docs/developers/", "how-we-choose": "/docs/how-we-choose/",
 }
-DOCS = ["docs", "get-started", "add-to-website", "website", "files", "webmcp", "agent-checkout", "agent-payments", "agent-mandate", "mcp", "developers", "how-we-choose"]
+DOCS = ["docs", "get-started", "add-to-website", "website", "files", "webmcp", "agent-checkout", "agent-payments", "agent-test", "agent-rules", "agent-mandate", "mcp", "developers", "how-we-choose"]
 
 # Languages come from locales/<code>.json; a language is built when content/<site_dir>/ exists.
 # Internally a language is keyed by its content folder (en, no, ...). Missing texts fall back to English.

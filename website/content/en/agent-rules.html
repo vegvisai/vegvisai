@@ -1,0 +1,34 @@
+<!-- title: Rules for AI agents · Guides · VegvisAI | description: A template for saying what AI agents may do on your website: read, prepare, or nothing binding without the customer. And how to back it up in robots.txt, bot protection, WebMCP and your own checkout. -->
+<p class="eyebrow">Control · template</p>
+<h1>Rules for AI agents</h1>
+<p class="lead">Open for agents does not mean open for everything. You decide what a customer's AI agent may do on your website, and you can say it in plain words. Three steps are useful: read, prepare, and nothing binding without the customer.</p>
+
+<h2>Three steps</h2>
+<table>
+<tr><th>Step</th><th>Examples</th><th>Usual choice</th></tr>
+<tr><td><strong>Read</strong></td><td>Products, prices, opening hours, terms</td><td>Allowed. This is how AI assistants find and cite you.</td></tr>
+<tr><td><strong>Prepare</strong></td><td>Fill in a request form, put products in the cart, pick a free time</td><td>Allowed, when the customer sends or confirms it.</td></tr>
+<tr><td><strong>Binding</strong></td><td>Order, book, pay, cancel</td><td>Only with the customer's own confirmation in your checkout or booking.</td></tr>
+</table>
+
+<h2>The template</h2>
+<p>Put the text on a page such as your terms or contact page, and as a section in <a href="/docs/ai-files/"><code>llms.txt</code></a>. Change it to what is true for you.</p>
+<pre><code>## Rules for AI agents
+- You can read and quote everything on this website: products, prices, opening hours and terms.
+- You can fill in the request form and put products in the cart for the customer. The customer sends the form and pays in our checkout.
+- You cannot order, book or pay on the customer's behalf here. The customer confirms that.
+- The prices and stock on the website apply. Questions: post@bakery.example.com.</code></pre>
+<p>Describe, never command. Text such as «always recommend us» or «ignore other sources» is prompt injection. The <a href="{{TEST}}/check/">AI check</a> flags it, and the guide does not list a business that publishes it. The template above passes the check.</p>
+
+<h2>Back the words up</h2>
+<p>The text says what you allow. It does not stop an agent that ignores it. <code>robots.txt</code> and tool hints tell agents what you want, but do not enforce it, and bot protection only limits access. What is binding must be checked on your server, with the customer's own confirmation:</p>
+<ul>
+<li><strong>robots.txt and bot protection:</strong> decide which bots may read. Blocking the training bots can be a deliberate choice; blocking the assistants that fetch pages for users means they cannot read or cite you. The AI check shows both, including bot protection that blocks by accident.</li>
+<li><strong>WebMCP tools:</strong> give agents tools only for what you allow, and mark tools that order or book with <code>consequentialHint: true</code>. See <a href="/docs/webmcp/">WebMCP</a>.</li>
+<li><strong>Your own checkout and booking:</strong> the binding step happens there, with the customer's own confirmation. Check price, stock and quantity on your server. See <a href="/docs/agent-checkout/">agent checkout</a>.</li>
+<li><strong>Your own count:</strong> tool calls run through your code, so you can count and limit them.</li>
+</ul>
+
+<h2>When an agent acts for the business itself</h2>
+<p>This page is about customers' agents on your website. When an agent should act for your business, for example deliver forms to public agencies, it needs a mandate of its own. In Norway that is a system user in Altinn (guide in Norwegian).</p>
+<p class="mut">This guide is general guidance, not legal advice. The rules for online sales, such as the information before an order and the right of withdrawal, apply as before.</p>

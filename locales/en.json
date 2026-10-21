@@ -165,7 +165,23 @@
    "booking": "booking",
    "shop": "online shop",
    "site": "website"
-  }
+  },
+  "botWall": "The website could not be measured: the front page answered our check with status {status} from what looks like bot protection ({wall}). Our check says openly who it is. The same protection can stop AI assistants that fetch the page when someone asks, even when robots.txt lets them in. If you want AI assistants to read the site, let them through in the protection settings, for example the settings for AI bots and bot fight mode in Cloudflare, and test with the assistants yourself: https://vegvis.ai/docs/test-with-ai-agents/. No score is given.",
+  "botWallUnknown": "an unknown provider, or a block on automated visits",
+  "botWallPages": "{n} of {m} checked pages answered with what looks like bot protection ({wall}). AI assistants that fetch those pages when someone asks may be stopped too, even when robots.txt lets them in. The pages are left out of the score. Test with the assistants yourself: https://vegvis.ai/docs/test-with-ai-agents/.",
+  "noContact": "We found no email address, phone number, contact form or contact page that an AI assistant can give the customer. Add email and telephone to the schema.org description of the business, or link to a contact page from the front page. This does not change the score.",
+  "tasksLine": "Possible ways for a customer's agent, found on the site: learn about the business: {learn}; ask: {ask}; book, order or other actions: {act}. We have not tested that they work with a given AI assistant. Information only, does not change the score.",
+  "taskWays": {
+   "email": "email",
+   "phone": "phone",
+   "form": "form",
+   "contact_page": "contact page",
+   "actions": "actions in schema.org",
+   "webmcp": "WebMCP tools",
+   "link": "booking or order link"
+  },
+  "taskNone": "nothing found",
+  "taskActNone": "nothing found (fine if you do not book or sell online)"
  },
  "check_errors": {
   "missing": "Enter a web address.",
@@ -356,7 +372,12 @@
    "ctaCard": "an AI business card described with schema.org",
    "ctaCatalog": "ai-catalog.json",
    "ctaLlms": "llms.txt",
-   "ctaAnd": "and"
+   "ctaAnd": "and",
+   "tasksH2": "Possible ways for a customer's agent",
+   "tasksLearn": "Learn about the business",
+   "tasksAsk": "Ask or contact",
+   "tasksAct": "Book, order or other actions",
+   "tasksNote": "Information only, it does not change the score. These are signs we found on the pages, not a test that they work with a given AI assistant; that can only be tested with the assistant itself, see the guide «Test with AI agents». The customer confirms and pays in your own booking or checkout."
   },
   "register": {
    "title": "Register your business · VegvisAI",

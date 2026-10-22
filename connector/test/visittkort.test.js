@@ -237,3 +237,29 @@ test("a platform address is never the website: it becomes a profile linked with 
   assert.doesNotMatch(html, /javascript:/);
   assert.match(ok.files["llms.txt"], /- \[instagram\.com\]\(https:\/\/www\.instagram\.com\/eksempelbakeri\/\)/);
 });
+
+test("a US address gets its state, a formatted ZIP and a US place line (P64)", async () => {
+  const { normalize, makeFiles } = await import("../public/felles/visittkort.js");
+  const d = normalize({ country: "US", name: "Example Bakery", website: "https://bakery.example.com", summary: "Bread and cakes in Portland.",
+    street: "123 Main St", city: "Portland", region: "oregon", postalCode: "97201 1234", phone: "(503) 555-0100" });
+  assert.equal(d.region, "OR");
+  assert.equal(d.postalCode, "97201-1234");
+  assert.equal(d.phone, "(503) 555-0100");
+  const r = makeFiles(d, { lang: "en" });
+  const html = r.files["index.html"];
+  assert.match(html, /123 Main St, Portland, OR 97201-1234/);
+  assert.match(html, /"addressRegion":\s*"OR"/);
+  assert.match(html, /href="tel:5035550100"/);
+  assert.equal(normalize({ country: "NO", region: "Nordland", postalCode: "8006" }).region, "Nordland");
+});
+
+test("pasted US text fills in the state, ZIP, phone and country", async () => {
+  const { fromPastedText } = await import("../public/felles/visittkort.js");
+  const v = fromPastedText("Example Bakery\nFresh bread every morning.\n123 Main St, Portland, OR 97201\nCall us at (503) 555-0100\nhttps://bakery.example.com");
+  assert.equal(v.region, "OR");
+  assert.equal(v.postalCode, "97201");
+  assert.equal(v.city, "Portland");
+  assert.equal(v.street, "123 Main St");
+  assert.equal(v.country, "US");
+  assert.equal(v.phone, "(503) 555-0100");
+});

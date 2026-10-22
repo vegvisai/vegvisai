@@ -483,6 +483,7 @@
    "street": "Street address",
    "postalCode": "Postcode",
    "city": "Town or city",
+   "region": "State or region",
    "areas": "Areas you cover (comma between)",
    "areasPlaceholder": "York, Leeds",
    "homeVisits": "We come to the customer",
@@ -536,11 +537,13 @@
     "street": "street address",
     "postalCode": "postcode",
     "city": "town or city",
+    "region": "state or region",
     "phone": "phone",
     "email": "email",
     "opens": "opens",
     "closes": "closes",
-    "days": "days"
+    "days": "days",
+    "country": "country"
    },
    "_example": {
     "country": "GB",
@@ -635,6 +638,7 @@
  "countries": {
   "NO": "Norway",
   "GB": "United Kingdom",
+  "US": "United States",
   "AT": "Austria",
   "BE": "Belgium",
   "BG": "Bulgaria",

@@ -38,6 +38,7 @@
 <select id="country" name="country">
 {{option:NO}}
 {{option:GB}}
+{{option:US}}
 <optgroup label="{{attr:t.euGroup}}">
 {{euOptions}}
 </optgroup>
@@ -87,6 +88,7 @@
 <div class="rad">
 <div><label for="postalCode">{{t.postalCode}}</label><input id="postalCode" name="postalCode" maxlength="12" autocomplete="postal-code"></div>
 <div><label for="city">{{t.city}}</label><input id="city" name="city" maxlength="60"></div>
+<div><label for="region">{{t.region}}</label><input id="region" name="region" maxlength="40" autocomplete="address-level1"></div>
 </div>
 <input type="hidden" id="municipalityNumber" name="municipalityNumber">
 <label for="areas">{{t.areas}}</label>
@@ -221,8 +223,10 @@ $("example").addEventListener("click", () => {
 
 // From text the business pastes from its own page elsewhere: fills only empty fields, nothing is fetched or sent.
 $("fillFromText").addEventListener("click", () => {
-  const v = fromPastedText($("pasted").value);
+  const { country: pastedCountry, ...v } = fromPastedText($("pasted").value);
   const filled = [];
+  // A US address in the text sets the country, unless the business already typed a Norwegian organisation number.
+  if (pastedCountry && $("country").value !== pastedCountry && !$("orgNumber").value.trim()) { $("country").value = pastedCountry; showCountry(); filled.push("country"); }
   for (const [k, x] of Object.entries(v)) {
     if (k === "days") {
       const boxes = [...document.querySelectorAll("input[name=days]")];

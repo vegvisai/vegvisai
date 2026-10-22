@@ -28,8 +28,15 @@ export const PLATFORMS = [
   ["OpenTable", "booking", /opentable\.(com|no|co\.uk)/i], ["ResDiary", "booking", /resdiary\.com/i],
   ["Setmore", "booking", /setmore\.com/i], ["SimplyBook.me", "booking", /simplybook\.(me|it)/i],
   ["SuperSaaS", "booking", /supersaas\.com/i], ["TheFork", "booking", /thefork\.[a-z.]+/i], ["Timely", "booking", /gettimely\.com/i],
+  // Common in the US (P64, 2026-10-21): salons and studios, trades, restaurants.
+  ["Housecall Pro", "booking", /housecallpro\.com/i], ["Jobber", "booking", /getjobber\.com/i],
+  ["Mindbody", "booking", /mindbodyonline\.com|healcode\.com/i], ["Resy", "booking", /resy\.com/i],
+  ["Square Appointments", "booking", /squareup\.com\/appointments|book\.squareup\.com/i], ["Tock", "booking", /exploretock\.com/i],
+  ["Vagaro", "booking", /vagaro\.com/i],
   ["Mystore", "shop", /mystore\.no/i], ["Shopify", "shop", /cdn\.shopify\.com|\.myshopify\.com/i],
   ["WooCommerce", "shop", /wp-content\/plugins\/woocommerce/i],
+  ["Square Online", "shop", /\.square\.site\b|editmysite\.com/i], ["Toast", "shop", /toasttab\.com/i],
+  ["GoDaddy Website Builder", "site", /img\d\.wsimg\.com|\.godaddysites\.com/i],
   ["Squarespace", "site", /static1\.squarespace\.com/i], ["Webflow", "site", /assets\.website-files\.com|cdn\.prod\.website-files\.com/i],
   ["Wix", "site", /static\.wixstatic\.com|parastorage\.com/i], ["WordPress", "site", /\/wp-content\/|\/wp-includes\//i],
 ];

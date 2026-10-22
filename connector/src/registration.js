@@ -207,6 +207,15 @@ async function verifyNorwegian(address, { orgNumber = "", consent = false, fetch
   return { status, reasons, domain, entry };
 }
 
+// US places carry their state (P64): Portland, OR and Portland, ME must not share a page in the guide.
+// The city alone in areaServed gets the same state, so a business is not listed under both «Portland» and «Portland, OR».
+function areaNames(biz) {
+  const a = biz.address ?? {};
+  const us = /^(US|USA|United States)$/i.test(String(a.addressCountry?.name ?? a.addressCountry ?? "")) && /^[A-Z]{2}$/.test(String(a.addressRegion ?? ""));
+  const withState = (n) => (us && String(n).toLowerCase() === String(a.addressLocality ?? "").toLowerCase() ? `${n}, ${a.addressRegion}` : n);
+  return [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(withState(n), 80)))].slice(0, 20);
+}
+
 // The entry fields that come from the business's own card, the same for every country.
 function cardEntry(biz, card, origin, domain) {
   const catalogEntry = (card.catalog?.entries ?? []).find((e) => /text\/html/i.test(e.type ?? ""));
@@ -221,7 +230,7 @@ function cardEntry(biz, card, origin, domain) {
     card_url: card.cardUrl,
     description: sanitize(biz.description ?? "", 300),
     categories: [...new Set([...types(biz).filter(category), ...(catalogEntry?.tags ?? []), ...offers].map((t) => sanitize(String(t), 80).toLowerCase()).filter(Boolean))].slice(0, 30),
-    area: [...new Set([...names(biz.areaServed), a.addressLocality].filter(Boolean).map((n) => sanitize(n, 80)))].slice(0, 20),
+    area: areaNames(biz),
     postal_code: sanitize(String(a.postalCode ?? ""), 12) || null,
     request: target ? new URL(target.replace(/[{}]/g, (c) => (c === "{" ? "%7B" : "%7D")), card.cardUrl).href.replace(/%7B/g, "{").replace(/%7D/g, "}") : null,
     open_for_ai: openForAi(card.objects, card),

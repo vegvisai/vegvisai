@@ -4,6 +4,11 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+- Privacy page: says what is counted in aggregate without personal data (page views and countries, help-button clicks, platforms found by the AI check, lookups per business and month) instead of «no analytics».
+- Generator: `region` field (schema.org `addressRegion`; US state codes, also from the full name), US ZIP (5 or 9 digits) and phone formats, US address and phone from pasted text (sets the country to US). Registration: US places get the state (`Portland, OR`, page `/businesses/place/portland-or/`), also for a city alone in `areaServed`.
+- AI check: platforms Housecall Pro, Jobber, Mindbody, Resy, Square Appointments, Tock, Vagaro (booking), Square Online, Toast (shop), GoDaddy Website Builder (site).
+- Stats: page views and AI checks per visitor country (`stats.py --only countries`).
+
 ## v1.4.1, 21 October 2026: blog post on agents
 
 - Blog: «Open to AI agents doesn't mean open to everything» (`/blog/open-to-ai-agents/`, `/no/blogg/apen-for-ai-agenter/`).

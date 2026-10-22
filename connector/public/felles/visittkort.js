@@ -109,6 +109,28 @@ export function parsePrice(l) {
 const PLATFORMS = /(^|\.)(facebook\.com|fb\.com|fb\.me|instagram\.com|linkedin\.com|tiktok\.com|x\.com|twitter\.com|youtube\.com|threads\.net|finn\.no|gulesider\.no|google\.com|g\.page)$/i;
 const isPlatform = (u) => { try { return PLATFORMS.test(new URL(u).hostname); } catch { return false; } };
 
+// US states and DC (P64, Espen 2026-10-21): a US address needs its state, and agents ask «a plumber in Portland, OR».
+const US_STATES = { AL: "Alabama", AK: "Alaska", AZ: "Arizona", AR: "Arkansas", CA: "California", CO: "Colorado", CT: "Connecticut", DE: "Delaware",
+  DC: "District of Columbia", FL: "Florida", GA: "Georgia", HI: "Hawaii", ID: "Idaho", IL: "Illinois", IN: "Indiana", IA: "Iowa", KS: "Kansas",
+  KY: "Kentucky", LA: "Louisiana", ME: "Maine", MD: "Maryland", MA: "Massachusetts", MI: "Michigan", MN: "Minnesota", MS: "Mississippi",
+  MO: "Missouri", MT: "Montana", NE: "Nebraska", NV: "Nevada", NH: "New Hampshire", NJ: "New Jersey", NM: "New Mexico", NY: "New York",
+  NC: "North Carolina", ND: "North Dakota", OH: "Ohio", OK: "Oklahoma", OR: "Oregon", PA: "Pennsylvania", RI: "Rhode Island", SC: "South Carolina",
+  SD: "South Dakota", TN: "Tennessee", TX: "Texas", UT: "Utah", VT: "Vermont", VA: "Virginia", WA: "Washington", WV: "West Virginia",
+  WI: "Wisconsin", WY: "Wyoming" };
+// A state or region as given; for the US the two-letter code, also when the full name is typed.
+function region(value, country) {
+  const s = sanitize(value, 40);
+  if (country !== "US") return s;
+  if (US_STATES[s.toUpperCase()]) return s.toUpperCase();
+  return Object.keys(US_STATES).find((k) => US_STATES[k].toLowerCase() === s.toLowerCase()) ?? s;
+}
+function postalCode(value, country) {
+  const digits = String(value ?? "").replace(/\D/g, "");
+  if (country === "NO") return digits.slice(0, 4);
+  if (country === "US") return digits.length >= 9 ? `${digits.slice(0, 5)}-${digits.slice(5, 9)}` : digits.slice(0, 5);
+  return sanitize(value, 12);
+}
+
 // Sanitises the form into a fixed set of fields.
 export function normalize(f) {
   const country = /^[A-Z]{2}$/.test(String(f.country ?? "").toUpperCase()) ? String(f.country).toUpperCase() : "NO";
@@ -136,12 +158,13 @@ export function normalize(f) {
     offerType: f.offerType === "Service" ? "Service" : "Product",
     availability: ["InStock", "PreOrder"].includes(f.availability) ? f.availability : "PreOrder",
     street: sanitize(f.street, MAX_LENGTH.short),
-    postalCode: country === "NO" ? String(f.postalCode ?? "").replace(/\D/g, "").slice(0, 4) : sanitize(f.postalCode, 12),
+    postalCode: postalCode(f.postalCode, country),
     city: sanitize(f.city, 60),
+    region: region(f.region, country),
     municipalityNumber: String(f.municipalityNumber ?? "").replace(/\D/g, "").slice(0, 4),
     areas: list(f.areas),
     homeVisits: Boolean(f.homeVisits),
-    phone: sanitize(f.phone, 30).replace(/[^\d+ ]/g, ""),
+    phone: sanitize(f.phone, 30).replace(/[^\d+ ()\-.]/g, "").trim(),
     email: /^[^\s@<>"]+@[^\s@<>"]+\.[^\s@<>"]+$/.test(sanitize(f.email, 120)) ? sanitize(f.email, 120) : "",
     days: WEEK.filter((k) => (f.days || []).includes(k)),
     opens: /^\d{2}:\d{2}$/.test(f.opens) ? f.opens : "",
@@ -190,7 +213,7 @@ function jsonld(d) {
   if (d.email) o.email = d.email;
   if (d.profiles.length) o.sameAs = d.profiles;
   if (d.street || d.city)
-    o.address = { "@type": "PostalAddress", streetAddress: d.street || undefined, postalCode: d.postalCode || undefined, addressLocality: d.city || undefined, addressCountry: d.country };
+    o.address = { "@type": "PostalAddress", streetAddress: d.street || undefined, postalCode: d.postalCode || undefined, addressLocality: d.city || undefined, addressRegion: d.region || undefined, addressCountry: d.country };
   if (d.areas.length) o.areaServed = d.areas.map((n) => ({ "@type": "Place", name: n }));
   o.availableLanguage = d.languages;
   if (d.days.length && d.opens && d.closes)
@@ -222,10 +245,16 @@ function hoursText(d) {
   return t.join(". ");
 }
 
+// «Storgata 1, 8006 Bodø» in Norway and most of Europe, «123 Main St, Portland, OR 97201» in the US.
+function placeText(d) {
+  if (d.country === "US") return [d.street, d.city, [d.region, d.postalCode].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+  return [d.street, [d.postalCode, d.city].filter(Boolean).join(" "), d.region].filter(Boolean).join(", ");
+}
+
 export function makeHtml(d) {
   const t = cardText(d.text);
   const ul = (xs) => `<ul>${xs.map((x) => `<li>${esc(x)}</li>`).join("")}</ul>`;
-  const place = [d.street, [d.postalCode, d.city].filter(Boolean).join(" ")].filter(Boolean).join(", ");
+  const place = placeText(d);
   const parts = [
     `<h1>${esc(d.name)}</h1>`,
     `<p>${esc(d.summary)}</p>`,
@@ -237,7 +266,7 @@ export function makeHtml(d) {
     `<ul>${[
       d.contactPage ? `<li><a href="${esc(d.contactPage)}">${t.send}</a></li>` : "",
       d.email ? `<li>${t.email}: <a href="mailto:${esc(d.email)}">${esc(d.email)}</a></li>` : "",
-      d.phone ? `<li>${t.phone}: <a href="tel:${esc(d.phone.replace(/\s/g, ""))}">${esc(d.phone)}</a></li>` : "",
+      d.phone ? `<li>${t.phone}: <a href="tel:${esc(d.phone.replace(/[^\d+]/g, ""))}">${esc(d.phone)}</a></li>` : "",
       ...d.profiles.map((u) => `<li><a href="${esc(u)}" rel="me">${esc(new URL(u).hostname.replace(/^www\./, ""))}</a></li>`),
     ].join("")}</ul>`,
     requestForm(d, t),
@@ -388,6 +417,14 @@ export function fromPastedText(text) {
   rows.forEach((l, i) => {
     // A phone number: 8 or more digits, not the organisation number.
     const phone = /(\+?\d[\d ]{6,16}\d)/.exec(l);
+    const usPhone = /(\(\d{3}\)\s?|\b\d{3}[\s.-])\d{3}[\s.-]\d{4}\b/.exec(l);
+    if (!v.phone && usPhone && !/org/i.test(l)) { v.phone = usPhone[0].trim(); take(i); }
+    // «123 Main St, Portland, OR 97201»: city, two-letter state and ZIP.
+    const us = /^(?:(.*?\d+[^,]*?)\s*,\s*)?(\p{Lu}[\p{L} .'-]{1,40}),\s*([A-Z]{2})\s+(\d{5}(?:-\d{4})?)$/u.exec(l);
+    if (!v.postalCode && us && US_STATES[us[3]]) {
+      v.postalCode = us[4]; v.city = us[2].trim(); v.region = us[3]; v.country = "US"; take(i);
+      if (us[1]) v.street = us[1].trim();
+    }
     if (!v.phone && phone && phone[1].replace(/\D/g, "").length >= 8 && !/org/i.test(l) && !AMOUNT.test(l) && !/\d{1,2}[:.]\d{2}/.test(l)) { v.phone = phone[1].trim(); take(i); }
     // «Storgata 1, 8006 Bodø» or «8006 Bodø» on its own line.
     const addr = /^(?:(.*?\d+\s?[a-z]?)\s*,\s*)?(\d{4})\s+(\p{Lu}[\p{L} -]{1,40})$/u.exec(l);

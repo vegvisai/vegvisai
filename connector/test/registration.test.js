@@ -315,3 +315,10 @@ test("funnel events: known names answer 204 and store nothing, unknown names 404
   assert.equal((await post("https%3A%2F%2Fexample.no")).status, 404, "no addresses, only known event names");
   assert.equal((await worker.fetch(new Request("https://veiviser-test.example/api/e/check-ready"), {})).status, 405);
 });
+
+test("a US place carries its state, also when areaServed names the city alone (P64)", async () => {
+  const card = `<html><head><title>Example Bakery</title><script type="application/ld+json">${JSON.stringify({ "@context": "https://schema.org", "@type": "Bakery", name: "Example Bakery", url: "https://bakery.example.com/", description: "Bread in Portland.", address: { "@type": "PostalAddress", addressLocality: "Portland", addressRegion: "OR", postalCode: "97201", addressCountry: "US" }, areaServed: [{ "@type": "Place", name: "Portland" }, { "@type": "Place", name: "Beaverton" }] })}</script></head><body><h1>Example Bakery</h1></body></html>`;
+  const fetchFn = async (url) => new URL(url).pathname === "/" ? new Response(card, { status: 200 }) : new Response("", { status: 404 });
+  const r = await verifyBusiness("https://bakery.example.com", { country: "US", consent: true, fetchFn });
+  assert.deepEqual(r.entry.area, ["Portland, OR", "Beaverton"]);
+});

@@ -3,8 +3,15 @@
 <h1>Nytt i VegvisAI</h1>
 <p class="lead">Alle endringer i veiviseren, AI-sjekken, generatoren og den åpne indeksen, nyeste først. Koden og hele historikken er åpen på <a href="{{GITHUB}}">GitHub</a>. Endringer i selve registeret (bedrifter som legges til eller fjernes) står i den <a href="/api/endringer">offentlige endringsloggen for registeret</a>.</p>
 
+<h2>22. oktober 2026</h2>
+<ul>
+<li><strong>Personvern:</strong> <a href="/no/personvern/">personvernsiden</a> sier nå hva vi teller samlet, uten personopplysninger (sidevisninger og land, klikk på hjelpeknappen, plattformer AI-sjekken finner, oppslag per bedrift og måned), i stedet for «ingen analyse».</li>
+</ul>
+
 <h2>21. oktober 2026</h2>
 <ul>
+<li><strong>Generatoren og bedriftssidene, adresser i USA:</strong> <a href="/lag/">generatoren</a> har et felt for delstat eller region (schema.org <code>addressRegion</code>), formaterer amerikanske postnumre og telefonnumre, og leser en amerikansk adresse og et telefonnummer fra innlimt tekst. Steder i USA får delstaten med i veiviseren, så Portland i Oregon og Portland i Maine får hver sin side.</li>
+<li><strong>AI-sjekken, flere plattformer:</strong> nevner også Housecall Pro, Jobber, Mindbody, Resy, Square Appointments, Square Online, Toast, Tock, Vagaro og nettsidebyggeren til GoDaddy. Bare informasjon, påvirker ikke poengsummen.</li>
 <li><strong>Blogg:</strong> <a href="/no/blogg/apen-for-ai-agenter/">Åpen for AI-agenter betyr ikke åpen for alt</a>, om hva en vanlig bedrift kan gjøre når store nettbutikker stenger eller åpner for agenter.</li>
 <li><strong>AI-sjekken, botvern:</strong> når nettstedet svarer med det som ser ut som botvern eller en sperre mot automatiske besøk, sier sjekken det i stedet for bare «kunne ikke måles», og nevner leverandøren når den kan se det (for eksempel Cloudflare). Det samme vernet kan stoppe AI-assistenter som henter siden når noen spør, selv om <code>robots.txt</code> slipper dem inn. Sjekken vår sier alltid åpent hvem den er; den later aldri som den er en annen bot.</li>
 <li><strong>AI-sjekken, mulige veier for kundens agent:</strong> for bedrifter viser rapporten tegnene den finner på at en agent kan lese om bedriften, spørre den (e-post, telefon, skjema eller kontaktside) og booke eller bestille (booking- eller butikkplattformer, handlinger i schema.org, WebMCP-verktøy, lenker til booking eller bestilling). Den tester ikke at de virker med en bestemt assistent, det er bare informasjon og endrer ikke poengsummen. Et nettsted uten noen måte å nå bedriften på får råd om å legge inn en.</li>

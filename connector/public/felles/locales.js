@@ -273,6 +273,7 @@ export const LOCALES = {
   "countries": {
    "NO": "Norway",
    "GB": "United Kingdom",
+   "US": "United States",
    "AT": "Austria",
    "BE": "Belgium",
    "BG": "Bulgaria",
@@ -615,6 +616,7 @@ export const LOCALES = {
   "countries": {
    "NO": "Norge",
    "GB": "Storbritannia",
+   "US": "USA",
    "AT": "Østerrike",
    "BE": "Belgia",
    "BG": "Bulgaria",

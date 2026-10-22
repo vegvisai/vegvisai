@@ -3,8 +3,15 @@
 <h1>What's new</h1>
 <p class="lead">Every change to the guide, the AI check, the generator and the open index, newest first. The code and its full history are open on <a href="{{GITHUB}}">GitHub</a>. Changes to the register itself (businesses added or removed) are in the <a href="/api/endringer">public register changelog</a>.</p>
 
+<h2>22 October 2026</h2>
+<ul>
+<li><strong>Privacy:</strong> the <a href="/privacy/">privacy page</a> now says what we count in aggregate, without personal data (page views and countries, clicks on the help button, platforms found by the AI check, lookups per business and month), instead of «no analytics».</li>
+</ul>
+
 <h2>21 October 2026</h2>
 <ul>
+<li><strong>Generator and business pages, US addresses:</strong> the <a href="/create/">generator</a> has a state or region field (schema.org <code>addressRegion</code>), formats US ZIP codes and phone numbers, and reads a US address and phone number from pasted text. Places in the US carry their state in the guide, so Portland, Oregon and Portland, Maine get separate pages.</li>
+<li><strong>AI check, more platforms:</strong> also names Housecall Pro, Jobber, Mindbody, Resy, Square Appointments, Square Online, Toast, Tock, Vagaro and GoDaddy's website builder. Information only, it does not change the score.</li>
 <li><strong>Blog:</strong> <a href="/blog/open-to-ai-agents/">Open to AI agents doesn't mean open to everything</a>, on what an ordinary business can do when big shops close or open up to agents.</li>
 <li><strong>AI check, bot protection:</strong> when the website answers with what looks like bot protection or a block on automated visits, the check says so instead of only «could not be measured», and names the provider when it can tell (for example Cloudflare). The same protection can stop AI assistants that fetch the page when someone asks, even when <code>robots.txt</code> lets them in. Our check always says openly who it is; it never pretends to be another bot.</li>
 <li><strong>AI check, possible ways for a customer's agent:</strong> for businesses, the report shows the signs it finds that an agent can learn about the business, ask it (email, phone, form or contact page) and book or order (booking or shop platforms, schema.org actions, WebMCP tools, booking or order links). It does not test that they work with a given assistant, it is information only and does not change the score. A site with no way to reach the business gets advice to add one.</li>

@@ -510,6 +510,7 @@
    "street": "Gateadresse",
    "postalCode": "Postnummer",
    "city": "Poststed",
+   "region": "Delstat eller region",
    "areas": "Områder dere dekker (komma mellom)",
    "areasPlaceholder": "Bodø, Fauske",
    "homeVisits": "Vi kommer hjem til kunden",
@@ -563,11 +564,13 @@
     "street": "gateadresse",
     "postalCode": "postnummer",
     "city": "sted",
+    "region": "delstat eller region",
     "phone": "telefon",
     "email": "e-post",
     "opens": "åpner",
     "closes": "stenger",
-    "days": "dager"
+    "days": "dager",
+    "country": "land"
    },
    "_example": {
     "country": "NO",
@@ -663,6 +666,7 @@
  "countries": {
   "NO": "Norge",
   "GB": "Storbritannia",
+  "US": "USA",
   "AT": "Østerrike",
   "BE": "Belgia",
   "BG": "Bulgaria",

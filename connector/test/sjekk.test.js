@@ -385,3 +385,10 @@ test("agent tasks: learn, ask and act are listed for businesses, without points"
   assert.ok(b.actions.some((a) => a.includes("ingen e-postadresse")));
   assert.ok(!b.breakdown.some((x) => /task|contact/.test(x.id)));
 });
+
+test("common US booking, shop and site platforms are recognised (P64)", async () => {
+  const { platformsIn } = await import("../src/sjekk.js");
+  const html = `<a href="https://www.vagaro.com/salon">Book</a><a href="https://order.toasttab.com/online/x">Order</a><a href="https://clienthub.getjobber.com/booking/x">Request</a><img src="https://img1.wsimg.com/isteam/x.jpg">`;
+  assert.deepEqual(platformsIn(html).map((p) => p.name).sort(), ["GoDaddy Website Builder", "Jobber", "Toast", "Vagaro"]);
+  assert.deepEqual(platformsIn("<p>Visit us in Toaster Falls</p>"), []);
+});

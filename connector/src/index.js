@@ -285,7 +285,7 @@ async function aiCheckTool({ url, profile }, origin, context) {
     const stop = await checkLimits(context.env, checkLimitList(context.client, url));
     if (stop) return text(stop, true);
     const r = await aiCheck(url, { profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS });
-    await countPlatforms(context.env, r.platforms);
+    await countPlatforms(context.env, r.platforms, "mcp");
     return data(asText(r));
   } catch (e) {
     return text(e instanceof CheckError ? e.text("en") : e.message, true);
@@ -392,7 +392,7 @@ async function api(request, url, env) {
       const pages = url.searchParams.get("pages") ?? url.searchParams.get("sider");
       const profile = url.searchParams.get("profile") ?? "";
       const r = await aiCheck(url.searchParams.get("url"), { pages, lang, profile, publicHosts: PUBLIC_HOSTS, partyHosts: PARTY_HOSTS });
-      await countPlatforms(env, r.platforms);
+      await countPlatforms(env, r.platforms, "web");
       return Response.json(r, { headers: JSON_HEADERS });
     } catch (e) {
       return Response.json({ error: e instanceof CheckError ? e.text(lang) : e.message }, { status: 400, headers: JSON_HEADERS });

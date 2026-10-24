@@ -64,3 +64,16 @@ test("platform counts are kept per month without the checked address", async () 
   await countPlatforms(env, [{ name: "Shopify", kind: "shop" }]);
   assert.deepEqual(await store.platformCounts(month()), { Shopify: 2, Calendly: 1 });
 });
+
+test("checks are counted per channel, apart from the platforms", async () => {
+  const { memoryStore } = await import("../src/register.js");
+  const { countPlatforms, month } = await import("../src/varsel.js");
+  const store = memoryStore();
+  const env = { __store: store };
+  await countPlatforms(env, [{ name: "Wix", kind: "site" }], "web");
+  await countPlatforms(env, [], "mcp");
+  await countPlatforms(env, [], "mcp");
+  assert.deepEqual(await store.platformCounts(month()), { Wix: 1 });
+  assert.equal((await store.lookups("channel:web", month())).check, 1);
+  assert.equal((await store.lookups("channel:mcp", month())).check, 2);
+});

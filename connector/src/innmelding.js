@@ -118,12 +118,14 @@ export async function pending(request, env) {
   }) });
 }
 
-// GET /api/admin/platforms?month=YYYY-MM with the review token: how many checks found each platform.
+// GET /api/admin/platforms?month=YYYY-MM with the review token: how many checks found each platform, and checks per channel (web page or connector).
 export async function platformCounts(request, url, env) {
   const token = env?.ADMIN_TOKEN;
   if (!token || request.headers.get("Authorization") !== `Bearer ${token}`) return json({ error: "Not allowed." }, 401);
   const m = /^\d{4}-\d{2}$/.test(url.searchParams.get("month") ?? "") ? url.searchParams.get("month") : new Date().toISOString().slice(0, 7);
-  return json({ month: m, platforms: await storeFor(env).platformCounts(m) });
+  const store = storeFor(env);
+  const channels = Object.fromEntries(await Promise.all(["web", "mcp"].map(async (c) => [c, (await store.lookups(`channel:${c}`, m)).check ?? 0])));
+  return json({ month: m, platforms: await store.platformCounts(m), checks: channels });
 }
 
 // Weekly re-check of every listed business, with the same checks as at registration.

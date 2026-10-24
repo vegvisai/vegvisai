@@ -11,7 +11,7 @@ const SITE = "https://vegvis.ai";
 const FROM = { email: "varsel@vegvis.ai", name: "VegvisAI" };
 const EMAIL = /^[^\s@<>"]{1,64}@[a-z0-9.-]{1,253}\.[a-z]{2,}$/i;
 // AI assistants and their search bots, as they name themselves in the user agent.
-const AI_UA = /GPTBot|OAI-SearchBot|ChatGPT-User|ClaudeBot|Claude-User|Claude-SearchBot|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Googlebot|Bingbot|Applebot|Amazonbot|meta-externalagent|DuckAssistBot|MistralAI-User|cohere-ai|CCBot/i;
+const AI_UA = /GPTBot|OAI-SearchBot|ChatGPT-User|ClaudeBot|Claude-User|Claude-SearchBot|anthropic-ai|PerplexityBot|Perplexity-User|Google-Extended|Googlebot|Bingbot|Applebot|Amazonbot|meta-externalagent|meta-externalfetcher|meta-webindexer|DuckAssistBot|MistralAI-User|cohere-ai|CCBot/i;
 
 export const month = (d = new Date()) => d.toISOString().slice(0, 7);
 const token = () => [...crypto.getRandomValues(new Uint8Array(24))].map((b) => b.toString(16).padStart(2, "0")).join("");
@@ -22,8 +22,9 @@ export async function countLookups(env, domains, kind) {
   try { await storeFor(env)?.countLookups([...new Set(domains)].filter(Boolean), month(), kind); } catch { /* counts are best effort */ }
 }
 // One count per check and platform found, so we see which booking and shop platforms are common (Espen 2026-10-20).
-export async function countPlatforms(env, platforms) {
-  await countLookups(env, (platforms ?? []).map((p) => `platform:${p.name}`), "check");
+// `channel` («web» or «mcp») also counts the check itself, so checks through the connector show up (review 2026-10-23).
+export async function countPlatforms(env, platforms, channel) {
+  await countLookups(env, [...(platforms ?? []).map((p) => `platform:${p.name}`), ...(channel ? [`channel:${channel}`] : [])], "check");
 }
 
 export const pageKind = (userAgent) => (AI_UA.test(String(userAgent ?? "")) ? "page_ai" : "page");

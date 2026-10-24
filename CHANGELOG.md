@@ -4,6 +4,12 @@ What changed in VegvisAI, newest first. The same list is on the website: [vegvis
 
 ## Unreleased
 
+## v1.5.1, 24 October 2026: counts per channel, Meta crawlers, privacy list
+
+- Lookup counts: Meta's `meta-webindexer` and `meta-externalfetcher` count as AI visits on business pages.
+- Check counts: one number per month for AI checks through the website and API (`channel:web`) and through the connector (`channel:mcp`), never the checked address. `/api/admin/platforms` returns them as `checks`.
+- Privacy page: lists every aggregate count (funnel steps on the check, generator and registration pages, platforms, checks per channel, lookups per business).
+
 ## v1.5.0, 22 October 2026: US addresses and platforms, privacy wording
 
 - Privacy page: says what is counted in aggregate without personal data (page views and countries, help-button clicks, platforms found by the AI check, lookups per business and month) instead of «no analytics».
